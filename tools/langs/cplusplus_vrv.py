@@ -169,7 +169,7 @@ public:
 {methods}
     ///@}}
 
-protected:
+private:
 {members}
 /* include <{attNameLower}> */
 }};
