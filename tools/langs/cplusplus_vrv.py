@@ -33,6 +33,7 @@ DEFAULTS_IMPL_TEMPLATE = """m_{attNameLowerJoined}{attTypeName} = {attDefault};"
     
 READS_IMPL_TEMPLATE = """if (element.attribute("{attNameLower}")) {{
         this->Set{attNameUpper}({converterRead}(element.attribute("{attNameLower}").value()));
+        element.remove_attribute("{attNameLower}");
         hasAttribute = true;
     }}"""
     
