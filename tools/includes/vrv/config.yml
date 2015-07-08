@@ -40,6 +40,9 @@ defaults:
     data_KEYSIGNATURE:
         default: KEYSIGNATURE_NONE
         converters: [StrToKeySignature, KeySignatureToStr]
+    data_LAYERSCHEME:
+        default: LAYERSCHEME_NONE
+        converters: [StrToLayerscheme, LayerschemeToStr]
     data_LIGATURE:
         default: LIGATURE_NONE
         converters: [StrToLigature, LigatureToStr]
@@ -190,6 +193,15 @@ modules:
             # att.slashcount
             slash: 
                 type: char
+            # att.staffDef.vis
+            grid.show:
+                type: data_BOOLEAN
+            layerscheme:
+                type: data_LAYERSCHEME
+            # lines.color: TODO
+            lines.visible:
+                type: data_BOOLEAN
+            # spacing: TODO
             # att.staffident
             staff: 
                 type: int
