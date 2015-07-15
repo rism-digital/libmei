@@ -37,6 +37,9 @@ defaults:
     data_FONTWEIGHT:
         default: FONTWEIGHT_NONE
         converters: [StrToFontweight, FontweightToStr]
+    data_FUNC:
+        default: FUNC_NONE
+        converters: [StrToFunc, FuncToStr]
     data_KEYSIGNATURE:
         default: KEYSIGNATURE_NONE
         converters: [StrToKeySignature, KeySignatureToStr]
@@ -100,6 +103,9 @@ modules:
             # att.accidental
             accid: 
                 type: data_ACCIDENTAL_EXPLICIT
+            # att.accid.log
+            func:
+                type: data_FUNC
             # att.augmentdots
             dots:
                 type: char            
