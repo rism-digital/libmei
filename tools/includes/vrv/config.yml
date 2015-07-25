@@ -79,6 +79,9 @@ defaults:
     data_PROLATIO:
         default: PROLATIO_NONE
         converters: [StrToProlatio, ProlatioToStr]
+    data_STAFFREL:
+        default: STAFFREL_NONE
+        converters: [StrToStaffRel, StaffRelToStr]
     data_STEMDIRECTION:
         default: STEMDIRECTION_NONE
         converters: [StrToStemDirection, StemDirectionToStr]
@@ -196,6 +199,9 @@ modules:
             # att.pitch
             pname: 
                 type: data_PITCHNAME
+            # att.placement
+            place:
+                type: data_STAFFREL
             # att.slashcount
             slash: 
                 type: char
