@@ -40,6 +40,9 @@ defaults:
     data_FUNC:
         default: FUNC_NONE
         converters: [StrToFunc, FuncToStr]
+    data_GRACE:
+        default: GRACE_NONE
+        converters: [StrToGrace, GraceToStr]
     data_KEYSIGNATURE:
         default: KEYSIGNATURE_NONE
         converters: [StrToKeySignature, KeySignatureToStr]
@@ -253,6 +256,11 @@ modules:
                 type: data_FONTSTYLE
             fontweight: 
                 type: data_FONTWEIGHT
+    cmn:
+        attributes:
+            # att.graced
+            grace:
+                type: data_GRACE
     mensural:
         attributes:
             # att.note.log.mensural
