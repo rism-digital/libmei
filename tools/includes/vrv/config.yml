@@ -162,6 +162,11 @@ modules:
                 type: data_PITCHNAME
             key.sig: 
                 type: data_KEYSIGNATURE
+            # att.keySigDefault.vis
+            key.sig.show:
+                type: data_BOOLEAN
+            key.sig.showchange:
+                type: data_BOOLEAN
             # att.lineloc
             line: 
                 type: char
