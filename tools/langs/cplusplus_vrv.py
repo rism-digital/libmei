@@ -50,14 +50,41 @@ CHECKERS_IMPL_TEMPLATE = """bool Att{attGroupNameUpper}::Has{attNameUpper}( )
 """
 
 #
+# These templates the list of enum for att classes ids
+#
+
+ENUM_GRP_START = """
+    
+#ifndef __VRV_ATT_CLASSES_H__
+#define __VRV_ATT_CLASSES_H__
+
+//----------------------------------------------------------------------------
+
+namespace vrv {
+    
+enum AttClassId {
+    ATT_CLASS_min = 0,
+"""
+
+ENUM_GRP_END = """    ATT_CLASS_max
+};
+
+} // vrv namespace
+
+#endif  // __VRV_ATT_CLASSES_H__
+
+"""
+
+#
 # These templates generate a module level static method for setting attribute on an unspcified Object
 #
 
 SETTERS_IMPL_TEMPLATE_START = """bool Att::Set{moduleNameCap}( Object *element, std::string attrType, std::string attrValue ) {{
 """
 
-SETTERS_IMPL_TEMPLATE_GRP_START = """    if (dynamic_cast<Att{attGroupNameUpper}*>(element) ) {{
+SETTERS_IMPL_TEMPLATE_GRP_START = """    if (element->HasAttClass( {attId} ) ) {{
         Att{attGroupNameUpper} *att = dynamic_cast<Att{attGroupNameUpper}*>(element);
+        assert( att );
 """
 
 SETTERS_IMPL_TEMPLATE = """        if (attrType == "{attNameLowerJoined}{attTypeName}") {{
@@ -82,8 +109,9 @@ SETTERS_IMPL_TEMPLATE_END = """
 GETTERS_IMPL_TEMPLATE_START = """void Att::Get{moduleNameCap}( Object *element, ArrayOfStrAttr *attributes ) {{
 """
 
-GETTERS_IMPL_TEMPLATE_GRP_START = """    if (dynamic_cast<Att{attGroupNameUpper}*>(element) ) {{
+GETTERS_IMPL_TEMPLATE_GRP_START = """    if (element->HasAttClass( {attId} ) ) {{
         Att{attGroupNameUpper} *att = dynamic_cast<Att{attGroupNameUpper}*>(element);
+        assert( att );
 """
 
 GETTERS_IMPL_TEMPLATE = """        if (att->Has{attNameUpper}()) {{
@@ -109,6 +137,10 @@ CLASSES_IMPL_TEMPLATE = """{license}
 
 //----------------------------------------------------------------------------
 
+#include <assert.h>
+
+//----------------------------------------------------------------------------
+
 #include "object.h"
 
 /* #include_block */
@@ -125,6 +157,7 @@ CLASSES_HEAD_TEMPLATE = """{license}
 #define __VRV_{moduleNameCaps}_H__
 
 #include "att.h"
+#include "att_classes.h"
 #include "pugixml.hpp"
 
 //----------------------------------------------------------------------------
@@ -386,6 +419,8 @@ def __create_att_classes(schema, outdir, includes_dir):
     # Header
     ###########################################################################
     lg.debug("Creating Mixin Headers.")
+    enum = ""
+    
     for module, atgroup in sorted(schema.attribute_group_structure.iteritems()):
         fullout = ""
         classes = ""
@@ -426,6 +461,7 @@ def __create_att_classes(schema, outdir, includes_dir):
                 "attNameLower": "att{0}".format(att)
             }
             classes += MIXIN_CLASS_HEAD_TEMPLATE.format(**clsubstr)
+            enum += "\tATT_{0},\n".format(schema.cc(schema.strpatt(gp)).upper())
         
         tplvars = {
             "includes": "",
@@ -464,9 +500,12 @@ def __create_att_classes(schema, outdir, includes_dir):
             reads = ""
             writes = ""
             checkers = ""
-            setters += SETTERS_IMPL_TEMPLATE_GRP_START.format(**{ "attGroupNameUpper": schema.cc(schema.strpatt(gp)) })
-            getters += GETTERS_IMPL_TEMPLATE_GRP_START.format(**{ "attGroupNameUpper": schema.cc(schema.strpatt(gp)) })
-
+            setters += SETTERS_IMPL_TEMPLATE_GRP_START.format(**{
+                                                              "attGroupNameUpper": schema.cc(schema.strpatt(gp)),
+                                                              "attId": "ATT_{0}".format(schema.cc(schema.strpatt(gp)).upper()) })
+            getters += GETTERS_IMPL_TEMPLATE_GRP_START.format(**{
+                                                              "attGroupNameUpper": schema.cc(schema.strpatt(gp)),
+                                                              "attId": "ATT_{0}".format(schema.cc(schema.strpatt(gp)).upper()) })
 
             for att in atts:
                 if len(att.split("|")) > 1:
@@ -534,6 +573,18 @@ def __create_att_classes(schema, outdir, includes_dir):
         fmi.write(GETTERS_IMPL_TEMPLATE_END.format(**tplvars))
         fmi.close()
         lg.debug("\tCreated atts_{0}.cpp".format(module.lower()))
+
+    lg.debug("Writing classes enum")
+    ########################################################################### 
+    # Classes enum
+    ###########################################################################
+    fmi = open(os.path.join(outdir, "att_classes.h".format(module.lower())), 'w')
+    fmi.write(LICENSE)
+    fmi.write(ENUM_GRP_START)
+    fmi.write(enum)
+    fmi.write(ENUM_GRP_END)
+    fmi.close()
+    lg.debug("\tCreated atts_{0}.cpp".format(module.lower()))
 
 def parse_includes(file_dir, includes_dir):
     lg.debug("Parsing includes")
