@@ -67,12 +67,18 @@ defaults:
     data_MODUSMINOR:
         default: MODUSMINOR_NONE
         converters: [StrToModusminor, ModusminorToStr]
+    data_NUMFORMAT:
+        default: NUMFORMAT_NONE
+        converters: [StrToNumformat, NumformatToStr]
     data_OCTAVE_DIS:
         default: OCTAVE_DIS_NONE
         converters: [StrToOctaveDis, OctaveDisToStr]
     data_ORIENTATION:
         default: ORIENTATION_NONE
         converters: [StrToOrientation, OrientationToStr]
+    data_PERCENT:
+        default: 0
+        converters: [StrToPercent, PercentToStr]
     data_PITCHNAME:
         default: PITCHNAME_NONE
         converters: [StrToPitchName, PitchNameToStr]
@@ -210,6 +216,9 @@ modules:
             # att.placement
             place:
                 type: data_STAFFREL
+            # att.scalable
+            scale:
+                type: data_PERCENT
             # att.slashcount
             slash: 
                 type: char
@@ -266,6 +275,20 @@ modules:
             # att.graced
             grace:
                 type: data_GRACE
+            # att.numberplacement
+            num.place:
+                type: data_PLACE
+            num.visible:
+                type: data_BOOLEAN
+            # att.tuplet.vis
+            bracket.place:
+                type: data_PLACE
+            bracket.visible:
+                type: data_BOOLEAN
+            dur.visible:
+                type: data_BOOLEAN
+            num.format:
+                type: data_NUMFORMAT
     mensural:
         attributes:
             # att.note.log.mensural
