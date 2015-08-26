@@ -28,6 +28,9 @@ defaults:
     data_CON:
         default: CON_NONE
         converters: [StrToCon, ConToStr]
+    data_CURVEDIR: 
+        default: CURVEDIR_NONE
+        converters: [StrToCurvedir, CurvedirToStr]
     data_DURATION:
         default: DURATION_NONE
         converters: [StrToDur, DurToStr]
@@ -97,6 +100,9 @@ defaults:
     data_STEMPOSITION:
         default: STEMPOSITION_NONE
         converters: [StrToStemPosition, StemPositionToStr]
+    data_SYMBOL:
+        default: SYMBOL_NONE
+        converters: [StrToSymbol, SymbolToStr]
     data_TIE:
         default: TIE_NONE
         converters: [StrToTie, TieToStr]
@@ -143,6 +149,9 @@ modules:
             # att.clefshape
             shape: 
                 type: data_CLEFSHAPE
+            # att.curvature
+            curvedir:
+                type: data_CURVEDIR
             # att.duration.musical
             dur: 
                 type: data_DURATION
@@ -202,6 +211,9 @@ modules:
             # att.meterSigDefault.vis
             meter.sym: 
                 type: data_METERSIGN
+            # att.multinummeasures
+            multi.number:
+                type: data_BOOLEAN
             # att.octave
             oct: 
                 type: char
@@ -231,6 +243,12 @@ modules:
             lines.visible:
                 type: data_BOOLEAN
             # spacing: TODO
+            # att.staffgroupingsym
+            symbol:
+                type: data_SYMBOL
+            # att.staffGrp.vis
+            barthru:
+                type: data_BOOLEAN
             # att.staffident
             staff: 
                 type: int
