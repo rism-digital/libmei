@@ -19,6 +19,9 @@ defaults:
     data_BARRENDITION: 
         default: BARRENDITION_NONE
         converters: [StrToBarRendition, BarRenditionToStr]
+    data_BEATRPT_REND: 
+        default: BEATRPT_REND_NONE
+        converters: [StrToBeatrptRend, BeatrptRendToStr]
     data_BOOLEAN: 
         default: BOOLEAN_NONE
         converters: [StrToBool, BoolToStr]
@@ -150,6 +153,8 @@ modules:
             shape: 
                 type: data_CLEFSHAPE
             # att.curvature
+            bulge:
+                type: double
             curvedir:
                 type: data_CURVEDIR
             # att.duration.musical
@@ -290,6 +295,10 @@ modules:
                 type: data_FONTWEIGHT
     cmn:
         attributes:
+            # att.beatRpt.vis
+            rend:
+                type: data_BEATRPT_REND
+                default: BEATRPT_REND_NONE
             # att.graced
             grace:
                 type: data_GRACE
