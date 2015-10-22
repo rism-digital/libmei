@@ -351,17 +351,24 @@ def vrv_getatttype(schema, module, aname, includes_dir = ""):
             return ("int", "Int")
         elif el[0] == "decimal":
             return ("double", "Dbl")
+    ref = schema.xpath("//tei:attDef[@ident=$name]/tei:datatype/rng:ref/@name", name=aname, namespaces=TEI_NS)
+    if ref:
+        return ("{0}".format(ref[0]), "")
+    vl = schema.xpath("//tei:attDef[@ident=$name]/tei:valList[@type=\"closed\"]", name=aname, namespaces=TEI_NS)
+    if vl:
+        lg.debug("{0} - {1}".format(module, aname))
+        
     return ("std::string", "")
 
 def vrv_getattdefault(schema, module, aname, includes_dir = ""):        
     """ returns the attribut default value for element name, or string if not detectable."""
     
-    attype, hungarian = vrv_translatetype(module, aname)
-    if attype:
-        default = vrv_translatedefault(attype, module, aname)
-        converters = vrv_translateconverters(attype, module, aname)
-        if default is not None:
-            return (default, "", converters)
+    #attype, hungarian = vrv_translatetype(module, aname)
+    #if attype:
+    #    default = vrv_translatedefault(attype, module, aname)
+    #    converters = vrv_translateconverters(attype, module, aname)
+    #    if default is not None:
+    #        return (default, "", converters)
     
     el = schema.xpath("//tei:attDef[@ident=$name]/tei:datatype/rng:data/@type", name=aname, namespaces=TEI_NS)
     if el:
@@ -369,6 +376,11 @@ def vrv_getattdefault(schema, module, aname, includes_dir = ""):
             return ("0", "Int", ["StrToInt", "IntToStr"])
         elif el[0] == "decimal":
             return ("0.0", "Dbl", ["StrToDbl", "DblToStr"])
+            
+    ref = schema.xpath("//tei:attDef[@ident=$name]/tei:datatype/rng:ref/@name", name=aname, namespaces=TEI_NS)
+    if ref:
+        return ("{0}_none".format(ref[0]), "", ["FromStr", "ToStr"])
+            
     return ("\"\"", "", ["StrToStr", "StrToStr"])
 
 def create(schema, outdir, includes_dir = ""):
@@ -583,6 +595,20 @@ def __create_att_classes(schema, outdir, includes_dir):
     fmi.write(ENUM_GRP_START)
     fmi.write(enum)
     fmi.write(ENUM_GRP_END)
+    fmi.close()
+    lg.debug("\tCreated atts_{0}.cpp".format(module.lower()))
+    
+    lg.debug("Writing data types and lists")
+    ########################################################################### 
+    # Classes enum
+    ###########################################################################
+    fmi = open(os.path.join(outdir, "att_def.h".format(module.lower())), 'w')
+
+    for data_type, values in sorted(schema.data_lists.iteritems()):
+        lg.debug(data_type)
+        for v in values:
+            lg.debug("-- {0}".format(v))
+
     fmi.close()
     lg.debug("\tCreated atts_{0}.cpp".format(module.lower()))
 

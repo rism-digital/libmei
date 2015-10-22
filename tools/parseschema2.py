@@ -58,11 +58,18 @@ class MeiSchema(object):
         self.element_structure = {}  # the element structure.
         self.attribute_group_structure = {}  # the attribute group structure
         self.inverse_attribute_group_structure = {}  # inverted, so we can map attgroups to modules
+        # holding data types and data lists
+        self.data_types = {}
+        self.data_lists = {}
 
         self.get_elements()
         self.get_attribute_groups()
+        self.get_data_types_and_lists()
         self.invert_attribute_group_structure()
         self.set_active_modules()
+        
+        lg.debug(self.data_lists)
+
 
     def get_elements(self):
         elements = [m for m in self.schema.xpath("//tei:elementSpec", namespaces=TEI_NS)]
@@ -119,6 +126,44 @@ class MeiSchema(object):
                     continue
                 attname = self.__process_att(attdef)
                 self.attribute_group_structure[group_module][group_name].append(attname)
+                
+    def get_data_types_and_lists(self):
+        types = [m for m in self.schema.xpath("//tei:macroSpec[.//rng:choice]", namespaces=TEI_RNG_NS)]
+        for t in types:
+            #lg.debug("{0}".format(t.get("ident")))
+            data_type = t.get("ident")
+            self.data_types[data_type] = []
+            values = t.xpath(".//rng:choice/rng:value", namespaces=TEI_RNG_NS)
+            for v in values:
+                #lg.debug("{0}".format(v.text))
+                type_value = v.text
+                self.data_types[data_type].append(type_value)
+        
+        vallists = [m for m in self.schema.xpath("//tei:valList[@type=\"closed\"]", namespaces=TEI_RNG_NS)]
+        for vl in vallists:
+            element = vl.xpath("./ancestor::tei:classSpec", namespaces=TEI_RNG_NS)
+            attName = vl.xpath("./parent::tei:attDef/@ident", namespaces=TEI_RNG_NS)
+            #if ($current.valList/ancestor::tei:classSpec) then($current.valList/ancestor::tei:classSpec/@ident) else($current.valList/ancestor::tei:elementSpec/@ident
+            if element:
+                #lg.debug("EEEE {0} --- {1}".format(element[0].get("ident"),attName[0]))
+                data_list = "{0}.{1}".format(element[0].get("ident"),attName[0])
+                self.data_lists[data_list] = []
+                values = vl.xpath(".//tei:valItem", namespaces=TEI_RNG_NS)
+                for v in values:
+                    #lg.debug("\t{0}".format(v.get("ident")))
+                    list_value = v.get("ident")
+                    self.data_lists[data_list].append(list_value)
+            else:
+                elName = vl.xpath("./ancestor::tei:elementSpec/@ident", namespaces=TEI_RNG_NS)
+                #lg.debug("***** {0} --- {1}".format(elName[0],attName[0]))
+                data_list = "{0}.{1}".format(elName[0],attName[0])
+                self.data_lists[data_list] = []
+                values = vl.xpath(".//tei:valItem", namespaces=TEI_RNG_NS)
+                for v in values:
+                    #lg.debug("\t{0}".format(v.get("ident")))
+                    list_value = v.get("ident")
+                    self.data_lists[data_list].append(list_value)
+
 
     def invert_attribute_group_structure(self):
         for module, groups in self.attribute_group_structure.iteritems():
@@ -250,6 +295,16 @@ if __name__ == "__main__":
             vrv.parse_includes(output_directory, args.includes)
         else:
             vrv.create(schema, output_directory)
+            
+    if "vdoc" in args.lang:
+        import langs.html_vrv as vrv
+        output_directory = os.path.join(outdir, "doc")
+        if os.path.exists(output_directory):
+            lg.debug("Removing old Verovio C++ output directory")
+            shutil.rmtree(output_directory)
+        os.mkdir(output_directory)
+        
+        vrv.create(schema, output_directory, args.includes)
 
     if "python" in args.lang:
         import langs.python as py
