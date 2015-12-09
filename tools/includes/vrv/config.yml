@@ -100,6 +100,9 @@ defaults:
     data_STEMDIRECTION:
         default: STEMDIRECTION_NONE
         converters: [StrToStemDirection, StemDirectionToStr]
+    data_STEMMODIFIER:
+        default: STEMMODIFIER_NONE
+        converters: [StrToStemModifier, StemModifierToStr]
     data_STEMPOSITION:
         default: STEMPOSITION_NONE
         converters: [StrToStemPosition, StemPositionToStr]
@@ -316,6 +319,9 @@ modules:
                 type: data_BOOLEAN
             num.format:
                 type: data_NUMFORMAT
+            # att.stemmed.cmn
+            stem.mod:
+                type: data_STEMMODIFIER
     mensural:
         attributes:
             # att.note.log.mensural
