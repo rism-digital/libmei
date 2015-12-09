@@ -31,7 +31,6 @@
 #include <algorithm>
 
 #include "meielement.h"
-#include "meinamespace.h"
 
 using std::map;
 using std::string;
@@ -39,48 +38,21 @@ using std::vector;
 using std::find;
 
 using mei::MeiElement;
-using mei::MeiNamespace;
 
 mei::MeiDocument::MeiDocument(string meiVers) {
     this->root = NULL;
     this->meiVersion = meiVers;
-    // add the default MEI namespace
-    MeiNamespace* mei = new MeiNamespace(MEI_PREFIX, MEI_NS);
-    this->namespaces.push_back(mei);
+}
+
+mei::MeiDocument::MeiDocument() {
+    this->root = NULL;
+    this->meiVersion = *--MEI_VERSION.end();
 }
 
 mei::MeiDocument::~MeiDocument() {
     vector<MeiElement*>::iterator iter;
     for(iter = flattenedDoc.begin(); iter != flattenedDoc.end(); ++iter) {
        delete *iter; 
-    }
-}
-
-bool mei::MeiDocument::hasNamespace(string href) {
-    if (this->namespaces.empty()) return false;
-    for (vector<MeiNamespace*>::iterator iter = namespaces.begin(); iter != namespaces.end(); ++iter) {
-        if ((*iter)->getHref() == href) {
-            return true;
-        }
-    }
-    return false;
-}
-
-MeiNamespace* mei::MeiDocument::getNamespace(string href) {
-    for (vector<MeiNamespace*>::iterator iter = namespaces.begin(); iter != namespaces.end(); ++iter) {
-        if ((*iter)->getHref() == href) return *iter;
-    }
-    return NULL;
-}
-
-vector<mei::MeiNamespace*> mei::MeiDocument::getNamespaces() {
-    return this->namespaces;
-}
-
-// note: should this raise an error if we try to add a namespace that already exists?
-void mei::MeiDocument::addNamespace(mei::MeiNamespace *ns) {
-    if (!hasNamespace(ns->getHref())) {
-        this->namespaces.push_back(ns);
     }
 }
 
@@ -91,6 +63,13 @@ MeiElement* mei::MeiDocument::getRootElement() {
 void mei::MeiDocument::setRootElement(MeiElement* root) {
     this->root = root;
     root->setDocument(this);
+
+    // when we set the root element we also assume that this will set the namespace for the MEI document.
+    MeiAttribute* meins = new MeiAttribute("xmlns", MEI_NS);
+    root->addAttribute(meins);
+    
+    MeiAttribute* meiversion = new MeiAttribute("meiversion", this->meiVersion);
+    root->addAttribute(meiversion);
 
     updateFlattenedTree();
 }
@@ -135,7 +114,8 @@ int mei::MeiDocument::getPositionInDocument(MeiElement* element) {
     vector<MeiElement*> els = this->getFlattenedTree();
     vector<MeiElement*>::iterator pos = find(els.begin(), els.end(), element);
     if (pos != els.end()) {
-        return pos - els.begin();
+        return (int)std::distance(els.begin(), pos);
+        //        return pos - els.begin();
     }
     return -1;
 }
@@ -157,7 +137,8 @@ MeiElement* mei::MeiDocument::lookBack(MeiElement* from, std::string name) {
      * We add 1 so that we can skip the element itself and start at the
      * preceding element.
      */
-    int diff = flattenedDoc.size() - (pos - flattenedDoc.begin());
+    int backwardsPos = (int)std::distance(flattenedDoc.begin(), pos);
+    int diff = (int)flattenedDoc.size() - backwardsPos;
 
     // topsy turvy world, where ++ is actually -- (iterating backwards..sdrawkcab gnitareti)
     for (vector<MeiElement*>::reverse_iterator iter = flattenedDoc.rbegin() + diff; iter != flattenedDoc.rend(); ++iter) {

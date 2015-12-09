@@ -134,7 +134,7 @@ modules:
             dots:
                 type: char            
             # att.barLine.log
-            rend: 
+            form: 
                 type: data_BARRENDITION
                 default: BARRENDITION_single
             # att.coloration
@@ -265,11 +265,13 @@ modules:
                 type: char
             ploc: 
                 type: data_PITCHNAME
-            # att.stemmed
+            # att.stems
             stem.dir: 
                 type: data_STEMDIRECTION
             stem.len: 
                 type: int
+            stem.mod:
+                type: data_STEMMODIFIER
             stem.pos: 
                 type: data_STEMPOSITION
             stem.x: 
@@ -299,7 +301,7 @@ modules:
     cmn:
         attributes:
             # att.beatRpt.vis
-            rend:
+            form:
                 type: data_BEATRPT_REND
                 default: BEATRPT_REND_NONE
             # att.graced
@@ -319,9 +321,7 @@ modules:
                 type: data_BOOLEAN
             num.format:
                 type: data_NUMFORMAT
-            # att.stemmed.cmn
-            stem.mod:
-                type: data_STEMMODIFIER
+            # att.stems.cmn
     mensural:
         attributes:
             # att.note.log.mensural

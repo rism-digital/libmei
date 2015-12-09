@@ -1,229 +1,225 @@
-//
-//  xmlimport.cpp
-//  libmei
-//
-//  Created by Andrew Hankinson on 11-08-18.
-//  Copyright 2011 McGill University. All rights reserved.
-//
-
 #include <string>
 #include <vector>
-#include <stdio.h>
-#include <libxml/xmlreader.h>
+#include <iostream>
+#include <memory>
 
-#include "xmlimport_impl.h"
 #include "xmlimport.h"
 #include "meidocument.h"
-#include "meixml.h"
-
-#include <iostream>
+#include "meiattribute.h"
 
 using std::string;
 using std::vector;
+using std::shared_ptr;
 
+//using mei::XMLImport;
 using mei::MeiDocument;
+using mei::MeiCommentNode;
+using mei::MeiAttribute;
 using mei::MeiElement;
-using mei::MeiFactory;
-using mei::XmlImport;
-using mei::XmlImportImpl;
-using mei::XmlInstructions;
-using mei::XmlProcessingInstruction;
+using mei::XMLImportResult;
+using mei::XMLProcessingInstructions;
+using mei::ImportWarnings;
 
-XmlImport::XmlImport() : impl(new XmlImportImpl) {
-}
+static int LIBMEI_PXML_IMPORT_OPTIONS = pugi::parse_pi | pugi::parse_comments;
+static MeiElement* XMLNodeToMEIElement(pugi::xml_node *el, bool strict, ImportWarnings *warn);
+static XMLImportResult parseMEIXML(shared_ptr<pugi::xml_document> xmldoc, bool strict);
+static XMLProcessingInstructions extractProcessingInstructions(shared_ptr<pugi::xml_document> xmldoc);
 
-XmlImport::~XmlImport() {
-    delete impl;
-}
 
-MeiDocument* XmlImport::documentFromFile(string filename) {
-    XmlImport *import = new XmlImport();
-    MeiDocument *d = import->impl->documentFromFile(filename);
-    delete import;
-    return d;
-}
-
-MeiDocument* XmlImport::documentFromFile(std::string filename, XmlInstructions &inst) {
-    XmlImport *import = new XmlImport();
-    MeiDocument *d = import->impl->documentFromFile(filename);
-    inst = import->impl->pi;
+XMLImportResult mei::documentFromText(string text, bool strict)
+{
+    shared_ptr<pugi::xml_document> xdoc = std::make_shared<pugi::xml_document>();
+    pugi::xml_parse_result result = xdoc->load_string(text.c_str(), LIBMEI_PXML_IMPORT_OPTIONS);
     
-    delete import;
-    return d;
-    
-}
-
-MeiDocument* XmlImport::documentFromText(string text) {
-    XmlImport *import = new XmlImport();
-    MeiDocument *d = import->impl->documentFromText(text);
-    delete import;
-    return d;
-}
-
-MeiDocument* XmlImport::documentFromText(string text, XmlInstructions &inst) {
-    XmlImport *import = new XmlImport();
-    MeiDocument *d = import->impl->documentFromText(text);
-    inst = import->impl->pi;
-    
-    delete import;
-    return d;
-}
-
-XmlImportImpl::XmlImportImpl() {
-    rootXmlNode = NULL;
-    xmlMeiDocument = NULL;
-    meiDocument = NULL;
-    rootMeiElement = NULL;
-}
-
-MeiDocument* XmlImportImpl::documentFromFile(string filename) {
-    xmlDocPtr doc = NULL;
-    /* XML_PARSE_NOERROR will simply suppress the libxml error messages on malformed XML,
-        it won't actually stop it from parsing. */
-    doc = xmlReadFile(filename.c_str(), NULL, XML_PARSE_NOERROR | XML_PARSE_NONET | XML_PARSE_NOWARNING);
-
-    if (doc == NULL) {
-        throw MalformedFileException(filename);
+    if (result.status != pugi::status_ok)
+    {
+        throw MeiException("There was a problem reading the input text. The XML Parser returned: " + string(result.description()));
     }
     
-    xmlNodePtr child = doc->children;
-    while (child != NULL) {
-        if (child->type == XML_PI_NODE) {
-            XmlProcessingInstruction *xpi = new XmlProcessingInstruction((const char*)child->name, (const char*)child->content);
-            this->pi.push_back(xpi);            
+    XMLImportResult res = parseMEIXML(xdoc, strict);
+
+    return res;
+}
+
+// helper function for the strict parser (default)
+XMLImportResult mei::documentFromText(string text)
+{
+    return mei::documentFromText(text, true);
+}
+
+XMLImportResult mei::documentFromFile(string filename, bool strict)
+{
+    shared_ptr<pugi::xml_document> xdoc = std::make_shared<pugi::xml_document>();
+    pugi::xml_parse_result result = xdoc->load_file(filename.c_str(), LIBMEI_PXML_IMPORT_OPTIONS);
+    
+    if (result.status != pugi::status_ok)
+    {
+        throw MeiException("There was a problem reading " + filename + ". The XML Parser returned " + string(result.description()));
+    }
+    
+    XMLImportResult res = parseMEIXML(xdoc, strict);
+
+    return res;
+}
+
+XMLImportResult mei::documentFromFile(string filename)
+{
+    return mei::documentFromFile(filename, true);
+}
+
+// private implementations
+static XMLProcessingInstructions extractProcessingInstructions(shared_ptr<pugi::xml_document> xmldoc)
+{
+    XMLProcessingInstructions inst;
+    for (pugi::xml_node_iterator it = xmldoc->begin(); it != xmldoc->end(); ++it)
+    {
+        // store the name/value as a single string. When this is exported in xmlexport, the
+        // exporter will add the opening/closing tags.
+        if (it->type() == pugi::node_pi)
+        {
+            inst.push_back(string(it->name()) + " " + string(it->value()));
         }
-        child = child->next;
+    }
+
+    return inst;
+}
+
+static XMLImportResult parseMEIXML(shared_ptr<pugi::xml_document> xmldoc, bool strict)
+{
+    pugi::xml_node rootXMLNode = xmldoc->document_element();
+    string meiversion = string(rootXMLNode.attribute("meiversion").value());
+    
+    XMLProcessingInstructions inst = extractProcessingInstructions(xmldoc);
+    ImportWarnings warn;
+    
+    string meiVersion = string(rootXMLNode.attribute("meiversion").value());
+    
+    if (meiVersion == "" && strict)
+    {
+        throw mei::NoVersionFoundException("No declared MEI Version");
+    }
+    else if (meiVersion == "" && !strict)
+    {
+        string warningString = "Warning: A 'meiversion' declaration was not found on this document.";
+        warn.push_back(warningString);
     }
     
-    this->xmlMeiDocument = doc;
-    this->rootXmlNode = xmlDocGetRootElement(this->xmlMeiDocument);
-
-    if (this->checkCompatibility(this->rootXmlNode)) {
-        this->init();
-        return this->getMeiDocument();
-    }
-    return NULL;
-}
-
-MeiDocument* XmlImportImpl::documentFromText(string text) {
-    xmlDoc *doc = NULL;
-    int options = XML_PARSE_NONET | XML_PARSE_RECOVER | XML_PARSE_NOWARNING;
-    doc = xmlReadMemory(text.c_str(), text.length(), NULL, NULL, options);
+    MeiDocument *doc = new MeiDocument(meiversion);
+    MeiElement *rootMEIElement = XMLNodeToMEIElement(&rootXMLNode, strict, &warn);
     
-    xmlNodePtr child = doc->children;
-    while (child != NULL) {
-        if (child->type == XML_PI_NODE) {
-            XmlProcessingInstruction *xpi = new XmlProcessingInstruction((const char*)child->name, (const char*)child->content);
-            this->pi.push_back(xpi);            
-        }
-        child = child->next;
-    }
+    doc->setRootElement(rootMEIElement);
     
-    this->xmlMeiDocument = doc;
-    this->rootXmlNode = xmlDocGetRootElement(this->xmlMeiDocument);
-
-    if (this->checkCompatibility(this->rootXmlNode)) {
-        this->init();        
-        return this->meiDocument;
-    }
-    return NULL;
-}
-
-void XmlImportImpl::init() {
-    // get mei version from document
-    xmlAttrPtr meiversAttr = xmlHasProp(this->rootXmlNode, (const xmlChar*)"meiversion");
-    string meiVersion = string((const char*)meiversAttr->children->content);
+    XMLImportResult result;
+    result.meiDocument = doc;
+    result.xmlProcessingInstructions = inst;
+    result.importWarnings = warn;
+    result.importStatus = warn.size() > 0 ? mei::status_warnings : mei::status_ok;
     
-    MeiDocument *doc = new MeiDocument(meiVersion);
-    this->meiDocument = doc;
-
-    this->rootMeiElement = this->xmlNodeToMeiElement(this->rootXmlNode);
-    doc->setRootElement(this->rootMeiElement);
+    return result;
 }
 
-mei::XmlImportImpl::~XmlImportImpl() {
-    if (xmlMeiDocument) {
-        xmlFreeDoc(xmlMeiDocument);
-    }
-}
-
-MeiDocument* XmlImportImpl::getMeiDocument() {
-    return this->meiDocument;
-}
-
-MeiElement* XmlImportImpl::xmlNodeToMeiElement(xmlNode *el) {
+static MeiElement* XMLNodeToMEIElement(pugi::xml_node* el, bool strictparsing, ImportWarnings *warnings)
+{
     string id = "";
     vector<MeiAttribute*> attributes;
-    // XML attributes and children. Text nodes will never have these.
-    if (el->properties) {
-        xmlAttr *curattr = NULL;
-        for (curattr = el->properties; curattr; curattr = curattr->next) {
-            if (curattr->atype == XML_ATTRIBUTE_ID) {
-                /* we store the ID on the element, not as an attribute. This will be serialized out
-                 *   on export
-                 */
-                id = (const char*)curattr->children->content;
-            } else {
-                string attrname = (const char*)curattr->name;
-                // values are rendered as children of the attribute *facepalm*
-                string attrvalue = (const char*)curattr->children->content;
-
-                MeiNamespace* meins = NULL;
-                if (curattr->ns) {
-                    if (!this->meiDocument->hasNamespace(string((const char*)curattr->ns->href))) {
-                        string prefix = (const char*)curattr->ns->prefix;
-                        string href = (const char*)curattr->ns->href;
-                        meins = new MeiNamespace(prefix, href);
-                    } else {
-                        meins = this->meiDocument->getNamespace(string((const char*)curattr->ns->href));
-                    }
-                }
-                MeiAttribute *a = new MeiAttribute(meins, attrname, attrvalue);
-
-                attributes.push_back(a);
-            }
+    MeiElement *obj;
+    
+    if (el->attribute("xml:id").value() != NULL)
+    {
+        id = string(el->attribute("xml:id").value());
+        // remove it so we don't have to deal with it later.
+        el->remove_attribute("xml:id");
+    }
+    
+    try
+    {
+        obj = mei::MeiFactory::createInstance((const char*)el->name(), id);
+    }
+    catch (mei::ElementNotRegisteredException)
+    {
+        if (strictparsing)
+        {
+            // if we get the exception and we're not in strict mode, pass it through
+            throw;
+        }
+        else
+        {
+            string warningString = "Warning: An element (" + string(el->name()) + ", id: " + id + ") was not found in the registry. Adding it to the document because the document is being loaded in lax mode.";
+            warnings->push_back(warningString);
+            obj = new MeiElement(string(el->name()));
+            obj->setId(id);
         }
     }
-
-    MeiElement *obj = MeiFactory::createInstance((const char*)el->name, id);
+    
+    // XML attributes. Text nodes will never have these.
+    for (pugi::xml_attribute attr = el->first_attribute(); attr; attr = attr.next_attribute())
+    {
+        string attrname = string(attr.name());
+        string attrvalue = string(attr.value());
+        MeiAttribute *a = new MeiAttribute(attrname, attrvalue);
+        attributes.push_back(a);
+    }
     obj->setAttributes(attributes);
-
+    
     MeiElement *lastElement = NULL;
-    xmlNodePtr child = el->children;
-    while (child != NULL) {
-        if (child->type == XML_ELEMENT_NODE) {
-            MeiElement* ch = xmlNodeToMeiElement(child);
+    
+    for (pugi::xml_node child = el->first_child(); child; child = child.next_sibling())
+    {
+        if (child.type() == pugi::node_element)
+        {
+            MeiElement *ch = XMLNodeToMEIElement(&child, strictparsing, warnings);
             obj->addChild(ch);
             lastElement = ch;
-        } else if (child->type == XML_TEXT_NODE) {
-            if (lastElement) {
-                const char *content = (const char*)child->content;
-                if (content) {
-                    lastElement->setTail(content);
-                }
-            } else {
-                const char *content = (const char*)child->content;
-                if (content) {
-                    obj->setValue(content);
-                }
+        }
+        else if (child.type() == pugi::node_pcdata)
+        {
+            // text content for elements are stored in value/tail
+            string content = string(child.value());
+            
+            if (lastElement)
+            {
+                lastElement->setTail(content);
             }
-        } else if (child->type == XML_COMMENT_NODE) {
+            else
+            {
+                obj->setValue(content);
+            }
+        }
+        else if (child.type() == pugi::node_comment)
+        {
             MeiElement *comment = new MeiCommentNode();
-            comment->setValue(string((const char*)child->content));
+            string c = string(child.value());
+            comment->setValue(c);
             obj->addChild(comment);
         }
-        child = child->next;
     }
     return obj;
 }
 
-bool XmlImportImpl::checkCompatibility(xmlNode *r) throw(NoVersionFoundException, VersionMismatchException) {
-    xmlAttrPtr meivers = xmlHasProp(r, (const xmlChar*)"meiversion");
-    if (meivers == NULL) {
-        throw NoVersionFoundException("");
-    } else if (MEI_VERSION.find(string((const char*)meivers->children->content)) == MEI_VERSION.end()) {
-        throw VersionMismatchException(string((const char*)meivers->children->content));
-    } else {
-        return true;
-    }
+XMLImportResult::XMLImportResult()
+{
+}
+
+XMLImportResult::~XMLImportResult()
+{
+}
+
+ImportWarnings XMLImportResult::getImportWarnings()
+{
+    return this->importWarnings;
+}
+
+XMLProcessingInstructions XMLImportResult::getXMLProcessingInstructions()
+{
+    return this->xmlProcessingInstructions;
+}
+
+MeiDocument* XMLImportResult::getMeiDocument()
+{
+    return this->meiDocument;
+}
+
+int XMLImportResult::getImportStatus()
+{
+    return this->importStatus;
 }

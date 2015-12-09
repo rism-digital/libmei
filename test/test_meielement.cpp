@@ -29,7 +29,6 @@ using mei::Layer;
 using mei::Accid;
 using mei::Note;
 
-
 TEST(TestMeiElement, TestConstructor) {
     MeiElement *m = new MeiElement("note");
     ASSERT_EQ("note", m->getName());
@@ -50,6 +49,25 @@ TEST(TestMeiElement, TestGetSet) {
 TEST(TestMeiElement, TestGetNoAttribute) {
     MeiElement *p = new MeiElement("note");
     ASSERT_EQ(NULL, p->getAttribute("color"));
+}
+
+TEST(TestMeiElement, TestMeiElementEquality) {
+    MeiElement *p = new MeiElement("one");
+    MeiElement *q = new MeiElement("two");
+    MeiElement *r = new MeiElement(*p);
+    MeiElement *s = new MeiElement(*p);
+    
+    // two elements with the same name and the same ID
+    string pId = p->getId();
+    r->setId(pId);
+    ASSERT_EQ(*p, *r);
+
+    // two elements with different names and the same ID
+    q->setId(pId);
+    ASSERT_NE(*p, *q);
+    
+    // two elements with the same name and different IDs
+    ASSERT_NE(*p, *s);
 }
 
 // Adding an attribute to an element sets the attr's element.
@@ -301,6 +319,49 @@ TEST(TestMeiElement, TestRemoveChild) {
     ASSERT_EQ(0, p->getChildren().size());
 }
 
+TEST(TestMeiElement, TestRemoveManyChildren) {
+    MeiDocument *doc = new MeiDocument();
+    MeiElement *mei = new MeiElement("mei");
+    MeiElement *sd1 = new MeiElement("staffDef");
+    MeiElement *sd2 = new MeiElement("staffDef");
+    MeiElement *sd3 = new MeiElement("staffDef");
+    MeiElement *sd4 = new MeiElement("staffDef");
+    MeiElement *sd5 = new MeiElement("staffDef");
+    MeiElement *sd6 = new MeiElement("staffDef");
+    
+    doc->setRootElement(mei);
+    
+    MeiElement *music = new mei::MeiElement("music");
+    MeiElement *scoreDef = new mei::MeiElement("scoreDef");
+    
+    mei->addChild(music);
+    music->addChild(scoreDef);
+    scoreDef->addChild(sd1);
+    scoreDef->addChild(sd2);
+    scoreDef->addChild(sd3);
+    scoreDef->addChild(sd4);
+    scoreDef->addChild(sd5);
+    scoreDef->addChild(sd6);
+    
+    sd1->addAttribute("n", "1");
+    sd2->addAttribute("n", "2");
+    sd3->addAttribute("n", "3");
+    sd4->addAttribute("n", "4");
+    sd5->addAttribute("n", "5");
+    sd6->addAttribute("n", "6");
+    
+    vector<MeiElement*> scoreDefs = doc->getRootElement()->getDescendantsByName("scoreDef");
+    vector<MeiElement*> staffDefs = doc->getRootElement()->getDescendantsByName("staffDef");
+    
+    for (vector<MeiElement*>::iterator iter = staffDefs.begin(); iter != staffDefs.end(); ++iter) {
+        if ((*iter)->getAttribute("n")->getValue() == "3" || (*iter)->getAttribute("n")->getValue() == "6") {
+            (*iter)->getParent()->removeChild((*iter));
+        }
+    }
+    ASSERT_EQ(4, music->getDescendantsByName("staffDef").size());
+    
+}
+
 TEST(TestMeiElement, TestRemoveChildByName) {
     MeiElement *p = new MeiElement("note");
     MeiElement *c1 = new Accid();
@@ -487,5 +548,37 @@ TEST(TestMeiElement, TestLookBack) {
 
     ASSERT_EQ(music->lookBack("mei"), m);
     ASSERT_EQ(staff->lookBack("mei"), m);
+}
+
+TEST(TestMeiElement, TestPrintElement) {
+    MeiElement *m = new MeiElement("mei");
+    MeiElement *music = new MeiElement("music");
+    MeiElement *body = new MeiElement("body");
+    MeiElement *staff = new MeiElement("staff");
+    Note *note = new Note();
+    Note *note2 = new Note();
+    
+    MeiDocument *doc = new MeiDocument();
+    doc->setRootElement(m);
+    
+    m->addChild(music);
+    music->addChild(body);
+    body->addChild(staff);
+    staff->addChild(note);
+    staff->addChild(note2);
+    
+    note->m_NoteVis.setHeadshape("diamond");
+    note->m_Pitch.setPname("c");
+
+    note2->m_Pitch.setPname("d");
+    
+    m->printElement();
+    
+    /* 
+        The printElement method does not return anything, so the value of it can't really be tested.
+        This test simply ensures that it is capable of being called without failing. 
+        So we just assert that everything's OK here if we haven't segfaulted by now.
+    */
+    ASSERT_TRUE(true);
 }
 

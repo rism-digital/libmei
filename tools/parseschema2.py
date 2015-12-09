@@ -1,6 +1,6 @@
 # -- coding: utf-8 --
 
-# Copyright (c) 2011-2012 Andrew Hankinson, Alastair Porter
+# Copyright (c) 2011-2015 Andrew Hankinson, Alastair Porter, and Others
 
 # Permission is hereby granted, free of charge, to any person obtaining
 # a copy of this software and associated documentation files (the
@@ -30,10 +30,9 @@ import os
 import shutil
 import codecs
 import re
-
 from argparse import ArgumentParser
-
 import logging
+
 lg = logging.getLogger('schemaparser')
 f = logging.Formatter("%(levelname)s %(asctime)s On Line: %(lineno)d %(message)s")
 h = logging.StreamHandler()
@@ -46,7 +45,8 @@ lg.addHandler(h)
 TEI_NS = {"tei": "http://www.tei-c.org/ns/1.0"}
 TEI_RNG_NS = {"tei": "http://www.tei-c.org/ns/1.0", "rng": "http://relaxng.org/ns/structure/1.0"}
 NAMESPACES = {'xml': 'http://www.w3.org/XML/1998/namespace',
-                'xlink': 'http://www.w3.org/1999/xlink'}
+              'xlink': 'http://www.w3.org/1999/xlink'}
+
 
 class MeiSchema(object):
     def __init__(self, oddfile):
@@ -121,12 +121,12 @@ class MeiSchema(object):
                 self.attribute_group_structure[group_module][group_name].append(attname)
 
     def invert_attribute_group_structure(self):
-        for module, groups in self.attribute_group_structure.iteritems():
+        for module, groups in self.attribute_group_structure.items():
             for attgroup in groups:
                 self.inverse_attribute_group_structure[attgroup] = module
 
     def set_active_modules(self):
-        self.active_modules = self.element_structure.keys()
+        self.active_modules = list(self.element_structure.keys())
         self.active_modules.sort()
 
     def __process_att(self, attdef):
@@ -195,23 +195,36 @@ class MeiSchema(object):
 
 
 if __name__ == "__main__":
-    p = ArgumentParser()
-
-    p.add_argument("compiled", help="A compiled ODD file")
+    p = ArgumentParser(usage='%(prog)s [compiled | -sl] [-h] [-o OUTDIR] [-i INCLUDES] [-d] [-l [LANG [LANG ...]]]') #Custom usage message to show user [compiled] should go before all other flags 
+    exclusive_group = p.add_mutually_exclusive_group()
+    exclusive_group.add_argument("compiled", help="A compiled ODD file", nargs="?") # Due to nargs="?", "compiled" will appear as optional and not positional
     p.add_argument("-o", "--outdir", default="output", help="output directory")
-    p.add_argument("-l", "--lang", default="python", help="Programming language to output")
+    p.add_argument("-l", "--lang", default=["python"], help="Programming language or languages to output. To output multiple languages at once, list desired languages separated by a space after -l. For example: python parseschema2.py [compiled] -l python cpp", nargs="*")
     p.add_argument("-i", "--includes", help="Parse external includes from a given directory")
     p.add_argument("-d", "--debugging", help="Run with verbose output", action="store_true")
-
-    p.add_argument("-sl", "--showlang", help="Show languages and exit.", action="store_true")
+    exclusive_group.add_argument("-sl", "--showlang", help="Show languages and exit.", action="store_true")
 
     args = p.parse_args()
 
+    if not args.showlang and not args.compiled:
+        p.print_usage()
+        print("error: You must include a compiled ODD file")
+        sys.exit(1)
+
+    avail_langs = ["cpp", "python", "manuscript", "vrv"]
+    
+    if not args.lang == "python":
+        for l_langs in args.lang:
+            if l_langs.lower() not in avail_langs:
+                p.print_usage()
+                print("error: One or more of the languages you have chosen are not supported. To check supported languages use the -sl flag")
+                sys.exit(1)
+
     if args.showlang:
         import langs
-        print "Available Output Languages"
+        print("Available Output Languages")
         for l in langs.AVAILABLE_LANGS:
-            print "\t{0}".format(l)
+            print("\t{0}".format(l))
         sys.exit(0)
 
     compiled_odd = args.compiled
@@ -226,16 +239,17 @@ if __name__ == "__main__":
 
     schema = MeiSchema(mei_source)
 
-    if "cpp" in args.lang:
-        import langs.cplusplus as cpp
-        output_directory = os.path.join(outdir, "cpp")
-        if os.path.exists(output_directory):
-            lg.debug("Removing old C++ output directory")
-            shutil.rmtree(output_directory)
-        os.mkdir(output_directory)
-        cpp.create(schema, output_directory)
-        if args.includes:
-            cpp.parse_includes(output_directory, args.includes)
+    for l_langs in args.lang:
+        if "cpp" in l_langs.lower():
+            import langs.cplusplus as cpp
+            output_directory = os.path.join(outdir, "cpp")
+            if os.path.exists(output_directory):
+                lg.debug("Removing old C++ output directory")
+                shutil.rmtree(output_directory)
+            os.mkdir(output_directory)
+            cpp.create(schema, output_directory)
+            if args.includes:
+                cpp.parse_includes(output_directory, args.includes)
 
     if "vrv" in args.lang:
         import langs.cplusplus_vrv as vrv
@@ -251,7 +265,7 @@ if __name__ == "__main__":
         else:
             vrv.create(schema, output_directory)
 
-    if "python" in args.lang:
+    if "python" in l_langs.lower():
         import langs.python as py
         output_directory = os.path.join(outdir, "python")
         if os.path.exists(output_directory):
@@ -262,7 +276,7 @@ if __name__ == "__main__":
         if args.includes:
             py.parse_includes(output_directory, args.includes)
 
-    if "manuscript" in args.lang:
+    if "manuscript" in l_langs.lower():
         import langs.manuscript as ms
         output_directory = os.path.join(outdir, "manuscript")
         if os.path.exists(output_directory):
@@ -270,6 +284,17 @@ if __name__ == "__main__":
             shutil.rmtree(output_directory)
         os.mkdir(output_directory)
         ms.create(schema, output_directory)
+
+    if "java" in args.lang:
+        import langs.java as java
+        output_directory = os.path.join(outdir, "java")
+        if os.path.exists(output_directory):
+            lg.debug("Removing old Java output directory")
+            shutil.rmtree(output_directory)
+        os.mkdir(output_directory)
+        java.create(schema, output_directory)
+        if args.includes:
+            java.parse_includes(output_directory, args.includes)
 
     mei_source.close()
 

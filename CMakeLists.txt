@@ -2,7 +2,6 @@ project( libmei )
 
 cmake_minimum_required( VERSION 2.6 )
 
-FIND_PACKAGE( LibXml2 REQUIRED )
 find_path    (UUID_INCLUDE_DIR   uuid/uuid.h)
 find_library (UUID_LIBRARY NAMES uuid)
 if (UUID_INCLUDE_DIR AND UUID_LIBRARY)
@@ -11,12 +10,22 @@ else (UUID_INCLUDE_DIR AND UUID_LIBRARY)
 	message(FATAL_ERROR "Could not find libuuid")
 endif (UUID_INCLUDE_DIR AND UUID_LIBRARY)
 
+include(CheckCXXCompilerFlag)
+CHECK_CXX_COMPILER_FLAG("-std=c++11" COMPILER_SUPPORTS_CXX11)
+CHECK_CXX_COMPILER_FLAG("-std=c++0x" COMPILER_SUPPORTS_CXX0X)
+if(COMPILER_SUPPORTS_CXX11)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+elseif(COMPILER_SUPPORTS_CXX0X)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
+else()
+        message(STATUS "The compiler ${CMAKE_CXX_COMPILER} has no C++11 support. Please use a different C++ compiler.")
+endif()
 
 set( CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH}" "${CMAKE_CURRENT_SOURCE_DIR}")
 
-set( MEI_LIB_MAJOR_VERSION "0" )
+set( MEI_LIB_MAJOR_VERSION "1" )
 set( MEI_LIB_MINOR_VERSION "0" )
-set( MEI_LIB_PATCH_VERSION "1" )
+set( MEI_LIB_PATCH_VERSION "0" )
 set( MEI_LIB_VERSION "${MEI_LIB_MAJOR_VERSION}.${MEI_LIB_MINOR_VERSION}.${MEI_LIB_PATCH_VERSION}" )
 set( MEI_LIB_VERSION_SONAME "${MEI_LIB_MAJOR_VERSION}.${MEI_LIB_MINOR_VERSION}")
 
@@ -48,6 +57,7 @@ ADD_CUSTOM_TARGET(uninstall
   "${CMAKE_COMMAND}" -P "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake")
 
 FILE(GLOB src_files "src/*.cpp")
+FILE(GLOB src_header_hpp "src/*.hpp")
 FILE(GLOB module_files "src/modules/*.cpp")
 FILE(GLOB src_headers "src/*.h")
 FILE(GLOB module_headers "src/modules/*.h")
@@ -65,6 +75,7 @@ set( LIBMEI_SRC
 
 set( LIBMEI_H
 	${src_headers}
+    ${src_header_hpp}
 	${module_headers}
 	${import_headers}
 	${export_headers}
@@ -79,18 +90,15 @@ INCLUDE_DIRECTORIES(
 	${CMAKE_CURRENT_SOURCE_DIR}/src/import
 	${CMAKE_CURRENT_SOURCE_DIR}/src/export
 	${CMAKE_CURRENT_SOURCE_DIR}/src/modules
-	${LIBXML2_INCLUDE_DIR}
 	${UUID_INCLUDE_DIR}
 )
 
 ADD_DEFINITIONS(
-	${LIBXML2_DEFINITIONS}
 )
 
 add_library( mei SHARED ${LIBMEI_SRC} )
 target_link_libraries( mei
 	${OS_SPECIFIC_LINK_LIBRARIES}
-	${LIBXML2_LIBRARIES}
 	${UUID_LIBRARY}
     ${GTEST_LIBRARIES}
 )

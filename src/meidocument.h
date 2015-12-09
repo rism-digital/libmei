@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2011-2012 Andrew Hankinson, Alastair Porter and Others
+    Copyright (c) 2011-2015 Andrew Hankinson, Alastair Porter and Others
 
     Permission is hereby granted, free of charge, to any person obtaining
     a copy of this software and associated documentation files (the
@@ -30,7 +30,6 @@
 #include <map>
 #include "meicommon.h"
 #include "meielement.h"
-#include "meinamespace.h"
 
 namespace mei {
 
@@ -45,22 +44,28 @@ namespace mei {
 class MEI_EXPORT MeiDocument {
     public:
         /**
-         * \brief Create a new document.
+         * \brief Create a new document with a particular MEI Version type
          */
-        MeiDocument(std::string meiVers = *--MEI_VERSION.end());
-        ~MeiDocument();
+        MeiDocument(std::string meiVers);
+    
+        /**
+         *  \brief Create a new document. This will be assigned the latest supported MEI Version.
+         */
+        MeiDocument();
 
-        bool hasNamespace(std::string href);
-        MeiNamespace* getNamespace(std::string href);
-        std::vector<MeiNamespace*> getNamespaces();
-        void addNamespace(MeiNamespace* ns);
+        ~MeiDocument();
 
         std::string getVersion();
 
         /** \brief Find the root element of the tree structure in the Mei document*/
         MeiElement* getRootElement();
 
-        /** \brief Make an Mei element the Root element of a document*/
+        /** 
+         *   \brief Make an Mei element the Root element of a document
+         *   
+         *   Note that adding an element as the root will also set the default MEI Namespace on that
+         *   element automatically.
+         */
         void setRootElement(MeiElement* root);
 
         /** \brief Get the element with the given ID.
@@ -82,7 +87,20 @@ class MEI_EXPORT MeiDocument {
          */
         int getPositionInDocument(MeiElement* element);
 
+        /** 
+         *  \brief Adds an ID and an element to the ID Map.
+         *  
+         *  Usage note: This is public so that it may be used by other members of the libmei
+         *  core, but generally the ID map is managed internally, so except in rare cases 
+         *  it should not be called directly.
+         */
         void addIdMap(std::string, MeiElement*);
+    
+        /**
+         *  \brief Removes an ID from the ID Map.
+         *  
+         *  See usage note on addIdMap for more information.
+         */
         void rmIdMap(std::string id);
 
         /** \brief Returns the flattened document tree */
@@ -105,9 +123,6 @@ class MEI_EXPORT MeiDocument {
         /** The version of this MEI document. */
         std::string meiVersion;
         MeiElement* root;
-
-        std::vector<MeiNamespace*> namespaces;
-        bool nsMatch(std::string href);
 
         std::map<std::string, MeiElement*> idMap;
         std::vector<MeiElement*> flattenedDoc;
