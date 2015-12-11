@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2011-2012 Andrew Hankinson, Alastair Porter and Others
+    Copyright (c) 2011-2015 Andrew Hankinson, Alastair Porter and Others
 
     Permission is hereby granted, free of charge, to any person obtaining
     a copy of this software and associated documentation files (the
@@ -30,7 +30,6 @@
 #include <map>
 
 #include "meicommon.h"
-#include "meinamespace.h"
 #include "meiattribute.h"
 #include "exceptions.h"
 
@@ -74,7 +73,11 @@ class MEI_EXPORT MeiElement
          * The copied element will not be tied to a document
          */
         MeiElement(const MeiElement& ele);
-
+        
+        /* \brief Basic equality check. NB: This does not compare attributes! */
+        bool operator==(const MeiElement &other) const;
+        bool operator!=(const MeiElement &other) const;
+        
         virtual ~MeiElement();
 
         /** \brief Get the id of this element.
@@ -166,7 +169,7 @@ class MEI_EXPORT MeiElement
          *  \return True if it does, False if it does not
          */
         bool hasParent();
-
+        
         /** \brief Get this element's parent, if it exists.
          */
         MeiElement *getParent();
@@ -304,26 +307,25 @@ class MEI_EXPORT MeiElement
         const std::vector<MeiElement*> flatten();
 
         /** \brief Print a tree of elements with this one at the root. */
-        void print();
+        void printElement();
 
         /** \brief Print a tree starting at this element, but indented.
          *  \param l the indentation level.
          */
-        void print(int l);
+        void printElement(int indentationLevel);
         template<typename T> static MeiElement* createT(std::string id);
 
-        void updateDocument();
-    private:
         /**
          * Call back to the document to update its internal representation
          * of the flatened element tree.
          */
+        void updateDocument();
+    private:
         void generateAndSetId();
         std::string id;
         std::string name;
         std::string value;
         std::string tail;
-        std::string ns;
 
         std::vector<MeiAttribute*> attributes;
         std::vector<MeiElement*> children;
@@ -334,7 +336,9 @@ class MEI_EXPORT MeiElement
 // This implements the element map for allowing the creation of an element given its
 // name. e.g. "note" -> a Note object.
 // http://stackoverflow.com/questions/582331/c-is-there-a-way-to-instantiate-objects-from-a-string-holding-their-class-name/582456#582456
-template<typename T> MeiElement* MeiElement::createT(std::string id) {
+
+template<typename T>
+MeiElement* MeiElement::createT(std::string id) {
     MeiElement *ret = new T();
     if (id == "") {
         ret->generateAndSetId();

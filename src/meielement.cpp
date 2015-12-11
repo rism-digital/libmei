@@ -30,14 +30,11 @@ mei::MeiElement::MeiElement(string name) {
 }
 
 mei::MeiElement::~MeiElement() {
-    vector<MeiAttribute*>::iterator it;
-    for (it = attributes.begin(); it != attributes.end(); ++it) {
-        delete *it;
-    }
+    this->attributes.clear();
 }
 
 mei::MeiElement::MeiElement(const MeiElement& ele) :
- name(ele.name), value(ele.value), tail(ele.tail), ns(ele.ns), parent(ele.parent), document(NULL) {
+ name(ele.name), value(ele.value), tail(ele.tail), parent(ele.parent), document(NULL) {
     // deep copy child elements
     vector<MeiElement*>::const_iterator ele_it;
     for (ele_it = ele.children.begin(); ele_it != ele.children.end(); ++ele_it) {
@@ -53,6 +50,18 @@ mei::MeiElement::MeiElement(const MeiElement& ele) :
     }
     this->generateAndSetId();
 }
+
+
+bool mei::MeiElement::operator==(const mei::MeiElement &other) const {
+    return (this->id != "" &&
+            this->name == other.name &&
+            this->id == other.id);
+}
+
+bool mei::MeiElement::operator!=(const mei::MeiElement &other) const {
+    return !(*this == other);
+}
+
 
 extern "C"
 {
@@ -76,7 +85,7 @@ void mei::MeiElement::generateAndSetId() {
     RpcStringFreeA(&str);
 #else
     uuid_t uuid;
-    uuid_generate_random(uuid);
+    uuid_generate(uuid);
     char s[37];
     uuid_unparse(uuid, s);
 #endif
@@ -129,7 +138,7 @@ void mei::MeiElement::setAttributes(const vector<MeiAttribute*> attrs) {
     attributes.clear();
     // Add one at a time so the element link gets added
     for (vector<MeiAttribute*>::const_iterator i = attrs.begin(); i != attrs.end(); ++i) {
-        addAttribute(*i);
+        this->addAttribute(*i);
     }
 }
 
@@ -153,7 +162,7 @@ bool mei::MeiElement::hasAttribute(string name) {
 
 void mei::MeiElement::addAttribute(MeiAttribute *attr) {
     if (this->hasAttribute(attr->getName())) {
-        removeAttribute(attr->getName());
+        this->removeAttribute(attr->getName());
     }
     attr->setElement(this);
     attributes.push_back(attr);
@@ -378,15 +387,16 @@ int mei::MeiElement::getPositionInDocument() {
     return this->document->getPositionInDocument(this);
 }
 
-void mei::MeiElement::print() {
-    print(0);
+void mei::MeiElement::printElement() {
+    printElement(0);
 }
 
-void mei::MeiElement::print(int level) {
-    printf("%*s ", level + (int)getName().length(), getName().c_str());
+void mei::MeiElement::printElement(int level) {
+    printf("%*s", level, "");
+    printf("{%s", getName().c_str());
 
     for (vector<MeiAttribute*>::iterator iter = attributes.begin(); iter !=attributes.end(); ++iter) {
-        printf("%s=%s ", (*iter)->getName().c_str(), (*iter)->getValue().c_str());
+        printf(" %s=\"%s\"", (*iter)->getName().c_str(), (*iter)->getValue().c_str());
     }
 
     if (value != "") {
@@ -396,11 +406,11 @@ void mei::MeiElement::print(int level) {
         printf(" (t=%s)", tail.c_str());
     }
 
-    printf("\n");
+    printf("}\n");
 
     vector<MeiElement*>::iterator iter = this->children.begin();
     while (iter != this->children.end()) {
-        (*iter)->print(level+2);
+        (*iter)->printElement(level+2);
         iter++;
     }
 }

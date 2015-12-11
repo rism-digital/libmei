@@ -6,7 +6,6 @@
 #include <mei/meielement.h>
 #include <mei/meidocument.h>
 #include <mei/exceptions.h>
-#include <mei/meinamespace.h>
 #include <mei/shared.h>
 
 using std::string;
@@ -14,25 +13,29 @@ using std::vector;
 
 using mei::MeiDocument;
 using mei::MeiElement;
-using mei::MeiNamespace;
 using mei::Mei;
 using mei::Music;
 using mei::Body;
 using mei::Staff;
 using mei::Note;
 
-TEST(TestMeiDocument, GetNamespace) {
+TEST(TestMeiDocument, SetsCorrectMeiVersion) {
     MeiDocument *doc = new MeiDocument();
-    MeiNamespace *ns = new MeiNamespace("prefix", "http://example.com/ns");
+    ASSERT_EQ(*--MEI_VERSION.end(), doc->getVersion());
+    
+    MeiDocument *doc2 = new MeiDocument("2012");
+    ASSERT_EQ("2012", doc2->getVersion());
+}
 
-    ASSERT_EQ("http://www.music-encoding.org/ns/mei", doc->getNamespaces().at(0)->getHref());
 
-    doc->addNamespace(ns);
-    ASSERT_EQ(2, doc->getNamespaces().size());
-    ASSERT_EQ(ns, doc->getNamespace("http://example.com/ns"));
-
-    ASSERT_TRUE(doc->hasNamespace("http://www.music-encoding.org/ns/mei"));
-    ASSERT_FALSE(doc->hasNamespace("http://www.mcgill.ca"));
+TEST(TestMeiDocument, SetsDefaultNamespace) {
+    MeiDocument *doc = new MeiDocument();
+    MeiElement *root = new MeiElement("mei");
+    
+    doc->setRootElement(root);
+    
+    ASSERT_TRUE(root->hasAttribute("xmlns"));
+    ASSERT_EQ(root->getAttribute("xmlns")->getValue(), MEI_NS);
 }
 
 TEST(TestMeiDocument, RootElement) {

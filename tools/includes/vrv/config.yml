@@ -52,7 +52,7 @@ modules:
             dots:
                 type: char            
             # att.barLine.log
-            rend: 
+            form: 
                 type: data_BARRENDITION
                 default: BARRENDITION_single
             # att.common
@@ -117,8 +117,17 @@ modules:
             # att.staffloc.pitched
             oloc: 
                 type: char
+            ploc: 
+                type: data_PITCHNAME
+            # att.stems
+            stem.dir: 
+                type: data_STEMDIRECTION
             stem.len: 
                 type: int
+            stem.mod:
+                type: data_STEMMODIFIER
+            stem.pos: 
+                type: data_STEMPOSITION
             stem.x: 
                 type: int
             stem.y: 
@@ -134,10 +143,27 @@ modules:
     cmn:
         attributes:
             # att.beatRpt.vis
-            rend:
+            form:
                 type: data_BEATRPT_REND
                 default: BEATRPT_REND_NONE
-
+            # att.graced
+            grace:
+                type: data_GRACE
+            # att.numberplacement
+            num.place:
+                type: data_PLACE
+            num.visible:
+                type: data_BOOLEAN
+            # att.tuplet.vis
+            bracket.place:
+                type: data_PLACE
+            bracket.visible:
+                type: data_BOOLEAN
+            dur.visible:
+                type: data_BOOLEAN
+            num.format:
+                type: data_NUMFORMAT
+            # att.stems.cmn
     mensural:
         attributes:
             # att.mensural.log
