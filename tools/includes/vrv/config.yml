@@ -1,191 +1,146 @@
 # Warning: do not use tabs, only spaces!
 ---
 excludes:
-    data.DURATION:
-        type: data_DURATION
-        default: DURATION_NONE
-    data.DURATION.cmn:
-        type: data_DURATION
-        default: DURATION_NONE
-    data.DURATION.mensural:
-        type: data_DURATION
-        default: DURATION_NONE
-    data.KEYSIGNATURE:
-        type: data_KEYSIGNATURE
-        default: KEYSIGNATURE_NONE
-    data.MODUSMAIOR:
-        type: data_MODUSMAIOR
-        default: MODUSMAIOR_NONE
-    data.MODUSMINOR:
-        type: data_MODUSMINOR
-        default: MODUSMINOR_NONE
-    data.OCTAVE.DIS:
-        type: data_OCTAVE_DIS
-        default: OCTAVE_DIS_NONE
-    data.PROLATIO:
-        type: data_PROLATIO
-        default: PROLATIO_NONE
-    data.TEMPUS:
-        type: data_TEMPUS
-        default: TEMPUS_NONE
+    [
+    data.DURATION,
+    data.DURATION.cmn,
+    data.DURATION.mensural,
+    data.KEYSIGNATURE,
+    data.MODUSMAIOR,
+    data.MODUSMINOR,
+    data.OCTAVE.DIS,
+    data.PROLATIO,
+    data.STEMDIRECTION.basic,
+    data.STEMDIRECTION.extended,
+    data.TEMPUS,
+    # string
+    data.URI
+    
+    ]
+    
+mapped:
+    data.AUGMENTDOT:
+        int
+    data.BEAM:
+        std::string    
+    data.BEAT:
+        double
+    data.BEND.AMOUNT:
+        std::string
+    data.COLOR:
+        std::string
+    data.CLEFLINE:
+        char
+    data.DURATION.additive:
+        data_DURATION
+    data.DURATION.cmn: 
+        data_DURATION
+    data.DURATION.gestural:
+        data_DURATION
+    data.DURATION.gestural.prop:
+        data_DURATION
+    data.FILL:
+        std::string
+    data.FONTFAMILY:
+        std::string
+    data.FONTNAME:
+        std::string
+    data.FONTSIZE:
+        std::string
+    data.HEADSHAPE:
+        std::string
+    data.ISODATE:
+        std::string
+    data.ISOTIME:
+        std::string
+    data.KEYSIGTOKEN:
+        std::string
+    data.LINESTARTENDSYMBOLSIZE:
+        std::string
+    data.LINEWIDTH:
+        std::string
+    data.MEASUREMENT:
+        std::string
+    data.MUSICFONT:
+        std::string
+    data.NOTEHEADMODIFIER:
+        std::string
+    data.OCTAVE:
+        char
+    data.PAGE.PANELS:
+        std::string
+    data.PGSCALE:
+        std::string
+    data.PERCENT:
+        int
+    data.PITCHNAME.GES:
+        data_PITCHNAME
+    data.PITCHNUMBER:
+        int
+    data.ROTATION:
+        std::string
+    data.SLASH:
+        char
+    data.SLUR:
+        std::string
+    data.STAFFLOC:
+        int
+    data.TEMPOVALUE:
+        std::string
+    data.TSTAMPOFFSET:
+        double
+    data.TUPLET:
+        std::string
+    data.URI:
+        std::string
 
 defaults:
-    int:
-        default: 0
-        converters: [StrToInt, IntToStr]
-    char: 
-        default: 0
-        converters: [StrToInt, IntToStr]
-    double: 
-        default: 0.0
-        converters: [StrToDbl, DblToStr]
-    data_PERCENT:
-        default: 0
-        #converters: [StrToPercent, PercentToStr]
-    typedef_TSTAMP2:
-        default: std::make_pair(-1,-1.0)
-        #converters: [StrToTstamp2, Tstamp2ToStr]
+    data_MEASUREBEAT:
+        std::make_pair(-1,-1.0)
+
 modules:
-    shared:
-        attributes:
-            # att.augmentdots
-            dots:
-                type: char            
-            # att.barLine.log
+    shared:    
+        att.barLine.log:
             form: 
-                type: data_BARRENDITION
                 default: BARRENDITION_single
-            # att.common
+        att.common:
             n: 
                 type: int
-            # att.cleffing.log
-            clef.line: 
-                type: char
-            clef.dis: 
-                type: data_OCTAVE_DIS
-            # att.curvature
+        att.curvature:
             bulge:
                 type: double
-            # att.duration.musical
-            dur: 
-                type: data_DURATION
-            # att.duration.performed
-            dur.ges: 
-                type: data_DURATION
-            # att.duration.ratio
+        att.duration.ratio:
             num: 
-                type: int
                 default: -1
             numbase: 
-                type: int
                 default: -1
-            # att.keySigDefault.log
-            key.sig: 
-                type: data_KEYSIGNATURE
-            # att.lineloc
-            line: 
-                type: char
-            # att.measure.log
+        att.measure.log:
             right: 
-                type: data_BARRENDITION
                 default: BARRENDITION_single
-            # att.meterSig.log
+        att.meterSig.log:
             count: 
                 type: int
             unit: 
                 type: int
-            # att.meterSigDefault.log
+        att.meterSigDefault.log:
             meter.count: 
                 type: int
             meter.unit: 
                 type: int
-            # att.octave
-            oct: 
-                type: char
-            # att.octavedisplacement
-            dis: 
-                type: data_OCTAVE_DIS
-            # att.scalable
-            scale:
-                type: data_PERCENT
-            # att.slashcount
-            slash: 
-                type: char
-            # att.staffident
+        att.staffident:
             staff: 
                 type: int
-            # att.staffloc.pitched
-            oloc: 
-                type: char
-            ploc: 
-                type: data_PITCHNAME
-            # att.stems
-            stem.dir: 
-                type: data_STEMDIRECTION
-            stem.len: 
-                type: int
-            stem.mod:
-                type: data_STEMMODIFIER
-            stem.pos: 
-                type: data_STEMPOSITION
-            stem.x: 
-                type: int
-            stem.y: 
-                type: int
-            # att.timestamp.musical
+        att.timestamp.musical:
             tstamp:
-                type: double
                 default: -1.0
-            # att.timestamp2.musical
-            tstamp2:
-                type: typedef_TSTAMP2
 
-    cmn:
-        attributes:
-            # att.beatRpt.vis
-            form:
-                type: data_BEATRPT_REND
-                default: BEATRPT_REND_NONE
-            # att.graced
-            grace:
-                type: data_GRACE
-            # att.numberplacement
-            num.place:
-                type: data_PLACE
-            num.visible:
-                type: data_BOOLEAN
-            # att.tuplet.vis
-            bracket.place:
-                type: data_PLACE
-            bracket.visible:
-                type: data_BOOLEAN
-            dur.visible:
-                type: data_BOOLEAN
-            num.format:
-                type: data_NUMFORMAT
-            # att.stems.cmn
     mensural:
-        attributes:
-            # att.mensural.log
-            mensur.slash: 
-                type: char
-            proport.num: 
-                type: int
+        att.mensural.log:
+            proport.num:
                 default: -1
             proport.numbase:
-                type: int
                 default: -1  
-            # att.mensural.shared
-            modusmaior:
-                type: data_MODUSMAIOR
-            modusminor:
-                type: data_MODUSMINOR
-            prolatio:
-                type: data_PROLATIO
-            tempus:
-                type: data_TEMPUS
 
-                
 att-classes:
   - id: "accidental"
     attributes:

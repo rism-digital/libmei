@@ -57,7 +57,7 @@ def vrv_translatetype(module, att):
     att = att_config["type"]
     return (att, "")
     
-def vrv_translatedefault(type, module, att):
+def vrv_get_att_default(type, module, att):
     """ Get the type default value."""
     # nothing in the defaults
     type_config = vrv_get_type_config(type)

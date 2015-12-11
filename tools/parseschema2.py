@@ -68,7 +68,7 @@ class MeiSchema(object):
         self.invert_attribute_group_structure()
         self.set_active_modules()
         
-        lg.debug(self.data_lists)
+        #lg.debug(self.data_lists)
 
 
     def get_elements(self):
@@ -128,15 +128,15 @@ class MeiSchema(object):
                 self.attribute_group_structure[group_module][group_name].append(attname)
                 
     def get_data_types_and_lists(self):
-        types = [m for m in self.schema.xpath("//tei:macroSpec[.//rng:choice]", namespaces=TEI_RNG_NS)]
+        types = [m for m in self.schema.xpath("//tei:macroSpec[.//tei:valList[@type=\"closed\"]]", namespaces=TEI_RNG_NS)]
         for t in types:
-            #lg.debug("{0}".format(t.get("ident")))
+            #lg.debug("TYPE - {0}".format(t.get("ident")))
             data_type = t.get("ident")
             self.data_types[data_type] = []
-            values = t.xpath(".//rng:choice/rng:value", namespaces=TEI_RNG_NS)
+            values = t.xpath(".//tei:valList/tei:valItem", namespaces=TEI_RNG_NS)
             for v in values:
-                #lg.debug("{0}".format(v.text))
-                type_value = v.text
+                #lg.debug("\t{0}".format(v.get("ident")))
+                type_value = v.get("ident")
                 self.data_types[data_type].append(type_value)
         
         vallists = [m for m in self.schema.xpath("//tei:valList[@type=\"closed\"]", namespaces=TEI_RNG_NS)]
@@ -145,24 +145,25 @@ class MeiSchema(object):
             attName = vl.xpath("./parent::tei:attDef/@ident", namespaces=TEI_RNG_NS)
             #if ($current.valList/ancestor::tei:classSpec) then($current.valList/ancestor::tei:classSpec/@ident) else($current.valList/ancestor::tei:elementSpec/@ident
             if element:
-                #lg.debug("EEEE {0} --- {1}".format(element[0].get("ident"),attName[0]))
-                data_list = "{0}.{1}".format(element[0].get("ident"),attName[0])
+                #lg.debug("VALLIST - ELEMEMT {0} --- {1}".format(element[0].get("ident"),attName[0]))
+                data_list = "{0}@{1}".format(element[0].get("ident"),attName[0])
                 self.data_lists[data_list] = []
+                self.data_lists[data_list]
                 values = vl.xpath(".//tei:valItem", namespaces=TEI_RNG_NS)
                 for v in values:
                     #lg.debug("\t{0}".format(v.get("ident")))
                     list_value = v.get("ident")
                     self.data_lists[data_list].append(list_value)
-            else:
-                elName = vl.xpath("./ancestor::tei:elementSpec/@ident", namespaces=TEI_RNG_NS)
-                #lg.debug("***** {0} --- {1}".format(elName[0],attName[0]))
-                data_list = "{0}.{1}".format(elName[0],attName[0])
-                self.data_lists[data_list] = []
-                values = vl.xpath(".//tei:valItem", namespaces=TEI_RNG_NS)
-                for v in values:
-                    #lg.debug("\t{0}".format(v.get("ident")))
-                    list_value = v.get("ident")
-                    self.data_lists[data_list].append(list_value)
+            #elif attName:
+            #    elName = vl.xpath("./ancestor::tei:elementSpec/@ident", namespaces=TEI_RNG_NS)
+            #    lg.debug("VALLIST {0} --- {1}".format(elName[0],attName[0]))
+            #    data_list = "{0}.{1}".format(elName[0],attName[0])
+            #    self.data_lists[data_list] = []
+            #    values = vl.xpath(".//tei:valItem", namespaces=TEI_RNG_NS)
+            #    for v in values:
+            #        lg.debug("\t{0}".format(v.get("ident")))
+            #        list_value = v.get("ident")
+            #        self.data_lists[data_list].append(list_value)
 
 
     def invert_attribute_group_structure(self):
