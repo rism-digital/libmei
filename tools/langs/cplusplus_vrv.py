@@ -656,6 +656,7 @@ def __create_att_classes(schema, outdir, includes_dir):
             reads = ""
             writes = ""
             checkers = ""
+            prefix = ""
             setters += SETTERS_IMPL_TEMPLATE_GRP_START.format(**{
                                                               "attGroupNameUpper": schema.cc(schema.strpatt(gp)),
                                                               "attId": "ATT_{0}".format(schema.cc(schema.strpatt(gp)).upper()) })
@@ -667,11 +668,12 @@ def __create_att_classes(schema, outdir, includes_dir):
                 if len(att.split("|")) > 1:
                     # we have a namespaced attribute
                     ns,att = att.split("|")
-                    nssubstr = {
-                        "prefix": NS_PREFIX_MAP[ns],
-                        "href": ns
-                    }
-                    nsDef = NAMESPACE_TEMPLATE.format(**nssubstr)
+                    prefix = NS_PREFIX_MAP[ns]
+                    #nssubstr = {
+                    #    "prefix": NS_PREFIX_MAP[ns],
+                    #    "href": ns
+                    #}
+                    #nsDef = NAMESPACE_TEMPLATE.format(**nssubstr)
                     attrNs = "s, "
                 else:
                     nsDef = ""
@@ -682,7 +684,7 @@ def __create_att_classes(schema, outdir, includes_dir):
                     "className": "{0}MixIn".format(schema.cc(schema.strpatt(gp))),
                     "attGroupNameUpper": schema.cc(schema.strpatt(gp)),
                     "attNameUpper": schema.cc(att),
-                    "attNameLower": att,
+                    "attNameLower": "{0}:{1}".format(prefix, att) if prefix != "" else "{0}".format(att),
                     "attNameLowerJoined": vrv_member_cc(att),
                     "attDefault": attdefault,
                     "attTypeName": atttypename,
