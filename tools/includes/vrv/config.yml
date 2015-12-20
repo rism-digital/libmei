@@ -97,6 +97,8 @@ mapped:
 defaults:
     data_MEASUREBEAT:
         std::make_pair(-1,-1.0)
+    xsd_posIntList:
+        std::vector<int>()
 
 modules:
     shared:    
@@ -129,7 +131,7 @@ modules:
                 type: int
         att.staffident:
             staff: 
-                type: int
+                type: xsd_posIntList
         att.timestamp.musical:
             tstamp:
                 default: -1.0
