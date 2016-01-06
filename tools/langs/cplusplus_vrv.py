@@ -22,7 +22,7 @@ AUTHORS = "Andrew Hankinson, Alastair Porter, and Others"
 
 METHODS_HEADER_TEMPLATE = """    void Set{attNameUpper}({attType} {attNameLowerJoined}{attTypeName}_) {{ m_{attNameLowerJoined}{attTypeName} = {attNameLowerJoined}{attTypeName}_; }};
     {attType} Get{attNameUpper}() const {{ return m_{attNameLowerJoined}{attTypeName}; }};    
-    bool Has{attNameUpper}( );
+    bool Has{attNameUpper}();
     """
 
 MEMBERS_HEADER_TEMPLATE = """{documentation}
@@ -42,7 +42,7 @@ WRITES_IMPL_TEMPLATE = """if (this->Has{attNameUpper}()) {{
         wroteAttribute = true;
     }}"""
     
-CHECKERS_IMPL_TEMPLATE = """bool Att{attGroupNameUpper}::Has{attNameUpper}( )
+CHECKERS_IMPL_TEMPLATE = """bool Att{attGroupNameUpper}::Has{attNameUpper}()
 {{
     return (m_{attNameLowerJoined}{attTypeName} != {attDefault});
 }}
@@ -176,8 +176,7 @@ CONVERTER_IMPL_TEMPLATE_METHOD1_START = """
 std::string AttConverter::{fname}ToStr({type} data) 
 {{
     std::string value;
-    switch(data)
-    {{"""
+    switch(data) {{"""
     
 CONVERTER_IMPL_TEMPLATE_METHOD2_START = """
 {type} AttConverter::StrTo{fname}(std::string value)
@@ -200,7 +199,7 @@ CONVERTER_IMPL_TEMPLATE_METHOD1_END = """
 """
 
 CONVERTER_IMPL_TEMPLATE_METHOD2_END = """
-    LogWarning("Unsupported value '%s' for {type}", value.c_str() );
+    LogWarning("Unsupported value '%s' for {type}", value.c_str());
     return {prefix}_NONE;
 }}
 """
@@ -214,12 +213,13 @@ CONVERTER_IMPL_TEMPLATE_END = """
 # These templates generate a module level static method for setting attribute on an unspcified Object
 #
 
-SETTERS_IMPL_TEMPLATE_START = """bool Att::Set{moduleNameCap}( Object *element, std::string attrType, std::string attrValue ) {{
+SETTERS_IMPL_TEMPLATE_START = """bool Att::Set{moduleNameCap}(Object *element, std::string attrType, std::string attrValue)
+{{
 """
 
-SETTERS_IMPL_TEMPLATE_GRP_START = """    if (element->HasAttClass( {attId} ) ) {{
+SETTERS_IMPL_TEMPLATE_GRP_START = """    if (element->HasAttClass({attId})) {{
         Att{attGroupNameUpper} *att = dynamic_cast<Att{attGroupNameUpper}*>(element);
-        assert( att );
+        assert(att);
 """
 
 SETTERS_IMPL_TEMPLATE = """        if (attrType == "{attNameLower}{attTypeName}") {{
@@ -241,12 +241,13 @@ SETTERS_IMPL_TEMPLATE_END = """
 # These templates generate a module level static method for getting attributes of an unspcified Object
 #
 
-GETTERS_IMPL_TEMPLATE_START = """void Att::Get{moduleNameCap}( Object *element, ArrayOfStrAttr *attributes ) {{
+GETTERS_IMPL_TEMPLATE_START = """void Att::Get{moduleNameCap}(Object *element, ArrayOfStrAttr *attributes)
+{{
 """
 
-GETTERS_IMPL_TEMPLATE_GRP_START = """    if (element->HasAttClass( {attId} ) ) {{
+GETTERS_IMPL_TEMPLATE_GRP_START = """    if (element->HasAttClass({attId})) {{
         Att{attGroupNameUpper} *att = dynamic_cast<Att{attGroupNameUpper}*>(element);
-        assert( att );
+        assert(att);
 """
 
 GETTERS_IMPL_TEMPLATE = """        if (att->Has{attNameUpper}()) {{
@@ -324,10 +325,10 @@ public:
     void Reset{attGroupNameUpper}();
     
     /** Read the values for the attribute class **/
-    bool Read{attGroupNameUpper}( pugi::xml_node element );
+    bool Read{attGroupNameUpper}(pugi::xml_node element);
     
     /** Write the values for the attribute class **/
-    bool Write{attGroupNameUpper}( pugi::xml_node element );
+    bool Write{attGroupNameUpper}(pugi::xml_node element);
     
     /**
      * @name Setters, getters and presence checker for class members.
@@ -349,25 +350,29 @@ MIXIN_CLASS_IMPL_CONS_TEMPLATE = """
 // Att{attGroupNameUpper}
 //----------------------------------------------------------------------------
 
-Att{attGroupNameUpper}::Att{attGroupNameUpper}(): Att() {{
+Att{attGroupNameUpper}::Att{attGroupNameUpper}(): Att()
+{{
     Reset{attGroupNameUpper}();
 }}
 
-Att{attGroupNameUpper}::~Att{attGroupNameUpper}() {{
-
+Att{attGroupNameUpper}::~Att{attGroupNameUpper}()
+{{
 }}
 
-void Att{attGroupNameUpper}::Reset{attGroupNameUpper}() {{
+void Att{attGroupNameUpper}::Reset{attGroupNameUpper}()
+{{
     {defaults}
 }}
 
-bool Att{attGroupNameUpper}::Read{attGroupNameUpper}( pugi::xml_node element ) {{
+bool Att{attGroupNameUpper}::Read{attGroupNameUpper}(pugi::xml_node element)
+{{
     bool hasAttribute = false;
     {reads}
     return hasAttribute;
 }}
 
-bool Att{attGroupNameUpper}::Write{attGroupNameUpper}( pugi::xml_node element ) {{
+bool Att{attGroupNameUpper}::Write{attGroupNameUpper}(pugi::xml_node element)
+{{
     bool wroteAttribute = false;
     {writes}
     return wroteAttribute;
