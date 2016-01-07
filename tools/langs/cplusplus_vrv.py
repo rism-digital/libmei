@@ -21,7 +21,7 @@ NS_PREFIX_MAP = {
 AUTHORS = "Andrew Hankinson, Alastair Porter, and Others"
 
 METHODS_HEADER_TEMPLATE = """    void Set{attNameUpper}({attType} {attNameLowerJoined}{attTypeName}_) {{ m_{attNameLowerJoined}{attTypeName} = {attNameLowerJoined}{attTypeName}_; }};
-    {attType} Get{attNameUpper}() const {{ return m_{attNameLowerJoined}{attTypeName}; }};    
+    {attType} Get{attNameUpper}() const {{ return m_{attNameLowerJoined}{attTypeName}; }};
     bool Has{attNameUpper}();
     """
 
@@ -30,18 +30,18 @@ MEMBERS_HEADER_TEMPLATE = """{documentation}
 """
 
 DEFAULTS_IMPL_TEMPLATE = """m_{attNameLowerJoined}{attTypeName} = {attDefault};"""
-    
+
 READS_IMPL_TEMPLATE = """if (element.attribute("{attNameLower}")) {{
         this->Set{attNameUpper}({converterRead}(element.attribute("{attNameLower}").value()));
         element.remove_attribute("{attNameLower}");
         hasAttribute = true;
     }}"""
-    
+
 WRITES_IMPL_TEMPLATE = """if (this->Has{attNameUpper}()) {{
         element.append_attribute("{attNameLower}") = {converterWrite}(this->Get{attNameUpper}()).c_str();
         wroteAttribute = true;
     }}"""
-    
+
 CHECKERS_IMPL_TEMPLATE = """bool Att{attGroupNameUpper}::Has{attNameUpper}()
 {{
     return (m_{attNameLowerJoined}{attTypeName} != {attDefault});
@@ -54,14 +54,14 @@ CHECKERS_IMPL_TEMPLATE = """bool Att{attGroupNameUpper}::Has{attNameUpper}()
 #
 
 ENUM_GRP_START = """
-    
+
 #ifndef __VRV_ATT_CLASSES_H__
 #define __VRV_ATT_CLASSES_H__
 
 //----------------------------------------------------------------------------
 
 namespace vrv {
-    
+
 enum AttClassId {
     ATT_CLASS_min = 0,
 """
@@ -71,8 +71,7 @@ ENUM_GRP_END = """    ATT_CLASS_max
 
 } // vrv namespace
 
-#endif  // __VRV_ATT_CLASSES_H__
-
+#endif // __VRV_ATT_CLASSES_H__
 """
 
 #
@@ -80,7 +79,7 @@ ENUM_GRP_END = """    ATT_CLASS_max
 #
 
 TYPE_GRP_START = """
-    
+
 #ifndef __VRV_ATT_TYPES_H__
 #define __VRV_ATT_TYPES_H__
 
@@ -94,8 +93,7 @@ TYPE_GRP_END = """
 
 } // vrv namespace
 
-#endif  // __VRV_ATT_TYPES_H__
-
+#endif // __VRV_ATT_TYPES_H__
 """
 
 TYPE_START = """/**
@@ -117,7 +115,7 @@ TYPE_END = """
 #
 
 CONVERTER_HEADER_TEMPLATE_START = """
-    
+
 #ifndef __VRV_ATT_CONVERTER_H__
 #define __VRV_ATT_CONVERTER_H__
 
@@ -133,24 +131,19 @@ namespace vrv {
 // AttConverter
 //----------------------------------------------------------------------------
 
-class AttConverter
-{
-public:
-"""
+class AttConverter {
+public:"""
 
 CONVERTER_HEADER_TEMPLATE = """
     std::string {fname}ToStr({type} data);
     {type} StrTo{fname}(std::string value);
 """
 
-CONVERTER_HEADER_TEMPLATE_END = """
-
-};
+CONVERTER_HEADER_TEMPLATE_END = """};
 
 } // vrv namespace
 
-#endif  // __VRV_ATT_CONVERTER_H__
-
+#endif // __VRV_ATT_CONVERTER_H__
 """
 
 CONVERTER_IMPL_TEMPLATE_START = """
@@ -173,18 +166,18 @@ namespace vrv {
 """
 
 CONVERTER_IMPL_TEMPLATE_METHOD1_START = """
-std::string AttConverter::{fname}ToStr({type} data) 
+std::string AttConverter::{fname}ToStr({type} data)
 {{
     std::string value;
-    switch(data) {{"""
-    
+    switch (data) {{"""
+
 CONVERTER_IMPL_TEMPLATE_METHOD2_START = """
 {type} AttConverter::StrTo{fname}(std::string value)
 {{"""
 
 CONVERTER_IMPL_TEMPLATE_METHOD1 = """
-        case {value} : value = "{string}"; break;"""
-        
+        case {value}: value = "{string}"; break;"""
+
 CONVERTER_IMPL_TEMPLATE_METHOD2 = """
     if (value == "{string}") return {value};"""
 
@@ -218,7 +211,7 @@ SETTERS_IMPL_TEMPLATE_START = """bool Att::Set{moduleNameCap}(Object *element, s
 """
 
 SETTERS_IMPL_TEMPLATE_GRP_START = """    if (element->HasAttClass({attId})) {{
-        Att{attGroupNameUpper} *att = dynamic_cast<Att{attGroupNameUpper}*>(element);
+        Att{attGroupNameUpper} *att = dynamic_cast<Att{attGroupNameUpper} *>(element);
         assert(att);
 """
 
@@ -246,7 +239,7 @@ GETTERS_IMPL_TEMPLATE_START = """void Att::Get{moduleNameCap}(Object *element, A
 """
 
 GETTERS_IMPL_TEMPLATE_GRP_START = """    if (element->HasAttClass({attId})) {{
-        Att{attGroupNameUpper} *att = dynamic_cast<Att{attGroupNameUpper}*>(element);
+        Att{attGroupNameUpper} *att = dynamic_cast<Att{attGroupNameUpper} *>(element);
         assert(att);
 """
 
@@ -258,11 +251,9 @@ GETTERS_IMPL_TEMPLATE = """        if (att->Has{attNameUpper}()) {{
 GETTERS_IMPL_TEMPLATE_GRP_END = """    }}
 """
 
-GETTERS_IMPL_TEMPLATE_END = """
-}}
-    
+GETTERS_IMPL_TEMPLATE_END = """}}
+
 }} // vrv namespace
-    
 """
 
 NAMESPACE_TEMPLATE = """MeiNamespace *s = new MeiNamespace("{prefix}", "{href}");\n    """
@@ -282,7 +273,7 @@ CLASSES_IMPL_TEMPLATE = """{license}
 /* #include_block */
 
 namespace vrv {{
-    
+
 {elements}
 
 """
@@ -301,13 +292,12 @@ CLASSES_HEAD_TEMPLATE = """{license}
 {includes}
 
 namespace vrv {{
-    
+
 {elements}
 
 }} // vrv namespace
 
-#endif  // __VRV_{moduleNameCaps}_H__
-
+#endif // __VRV_{moduleNameCaps}_H__
 """
 
 MIXIN_CLASS_HEAD_TEMPLATE = """
@@ -315,33 +305,31 @@ MIXIN_CLASS_HEAD_TEMPLATE = """
 // Att{attGroupNameUpper}
 //----------------------------------------------------------------------------
 
-class Att{attGroupNameUpper}: public Att
-{{
+class Att{attGroupNameUpper} : public Att {{
 public:
     Att{attGroupNameUpper}();
     virtual ~Att{attGroupNameUpper}();
-    
+
     /** Reset the default values for the attribute class **/
     void Reset{attGroupNameUpper}();
-    
+
     /** Read the values for the attribute class **/
     bool Read{attGroupNameUpper}(pugi::xml_node element);
-    
+
     /** Write the values for the attribute class **/
     bool Write{attGroupNameUpper}(pugi::xml_node element);
-    
+
     /**
      * @name Setters, getters and presence checker for class members.
-     * The checker returns true if the attribute class is set (e.g., not equal 
+     * The checker returns true if the attribute class is set (e.g., not equal
      * to the default value)
      **/
     ///@{{
-{methods}
-    ///@}}
+{methods}///@}}
 
 private:
 {members}
-/* include <{attNameLower}> */
+    /* include <{attNameLower}> */
 }};
 """
 
@@ -350,7 +338,7 @@ MIXIN_CLASS_IMPL_CONS_TEMPLATE = """
 // Att{attGroupNameUpper}
 //----------------------------------------------------------------------------
 
-Att{attGroupNameUpper}::Att{attGroupNameUpper}(): Att()
+Att{attGroupNameUpper}::Att{attGroupNameUpper}() : Att()
 {{
     Reset{attGroupNameUpper}();
 }}
@@ -378,8 +366,7 @@ bool Att{attGroupNameUpper}::Write{attGroupNameUpper}(pugi::xml_node element)
     return wroteAttribute;
 }}
 
-{checkers}
-/* include <{attNameLower}> */
+{checkers}/* include <{attNameLower}> */
 """
 
 LICENSE = """/////////////////////////////////////////////////////////////////////////////
@@ -387,12 +374,12 @@ LICENSE = """///////////////////////////////////////////////////////////////////
 // Created:     2014
 // Copyright (c) Authors and others. All rights reserved.
 //
-// Code generated using a modified version of libmei 
+// Code generated using a modified version of libmei
 // by Andrew Hankinson, Alastair Porter, and Others
 /////////////////////////////////////////////////////////////////////////////
 
-///////////////////////////////////////////////////////////////////////////// 
-// NOTE: this file was generated with the Verovio libmei version and 
+/////////////////////////////////////////////////////////////////////////////
+// NOTE: this file was generated with the Verovio libmei version and
 // should not be edited because changes will be lost.
 /////////////////////////////////////////////////////////////////////////////"""
 
@@ -611,7 +598,7 @@ def __create_att_classes(schema, outdir, includes_dir):
                     "attTypeName": atttypename,
                 }
                 if len(methods) > 0:
-                    methods += "\n    //\n"
+                    methods += "//\n"
                 methods += METHODS_HEADER_TEMPLATE.format(**substrings)
                 members += MEMBERS_HEADER_TEMPLATE.format(**substrings)
                 
@@ -622,16 +609,15 @@ def __create_att_classes(schema, outdir, includes_dir):
                 "attNameLower": "att{0}".format(att)
             }
             classes += MIXIN_CLASS_HEAD_TEMPLATE.format(**clsubstr)
-            enum += "\tATT_{0},\n".format(schema.cc(schema.strpatt(gp)).upper())
+            enum += "    ATT_{0},\n".format(schema.cc(schema.strpatt(gp)).upper())
         
         tplvars = {
-            "includes": "",
+            "includes": "#include <string>",
             'license': LICENSE.format(authors=AUTHORS),
             'moduleNameCaps': "ATTS_{0}".format(module.upper()),
             'elements': classes.strip()
         }
-        if "std::string" in classes:
-            tplvars["includes"] = "#include <string>"
+        
         fullout = CLASSES_HEAD_TEMPLATE.format(**tplvars)
         fmh = open(os.path.join(outdir, "atts_{0}.h".format(module.lower())), 'w')
         fmh.write(fullout)
