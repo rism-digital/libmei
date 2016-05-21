@@ -22,7 +22,7 @@ AUTHORS = "Andrew Hankinson, Alastair Porter, and Others"
 
 METHODS_HEADER_TEMPLATE = """    void Set{attNameUpper}({attType} {attNameLowerJoined}{attTypeName}_) {{ m_{attNameLowerJoined}{attTypeName} = {attNameLowerJoined}{attTypeName}_; }};
     {attType} Get{attNameUpper}() const {{ return m_{attNameLowerJoined}{attTypeName}; }};
-    bool Has{attNameUpper}();
+    bool Has{attNameUpper}() const;
     """
 
 MEMBERS_HEADER_TEMPLATE = """{documentation}
@@ -42,7 +42,7 @@ WRITES_IMPL_TEMPLATE = """if (this->Has{attNameUpper}()) {{
         wroteAttribute = true;
     }}"""
 
-CHECKERS_IMPL_TEMPLATE = """bool Att{attGroupNameUpper}::Has{attNameUpper}()
+CHECKERS_IMPL_TEMPLATE = """bool Att{attGroupNameUpper}::Has{attNameUpper}() const
 {{
     return (m_{attNameLowerJoined}{attTypeName} != {attDefault});
 }}
@@ -135,8 +135,8 @@ class AttConverter {
 public:"""
 
 CONVERTER_HEADER_TEMPLATE = """
-    std::string {fname}ToStr({type} data);
-    {type} StrTo{fname}(std::string value);
+    std::string {fname}ToStr({type} data) const;
+    {type} StrTo{fname}(std::string value) const;
 """
 
 CONVERTER_HEADER_TEMPLATE_END = """};
@@ -166,13 +166,13 @@ namespace vrv {
 """
 
 CONVERTER_IMPL_TEMPLATE_METHOD1_START = """
-std::string AttConverter::{fname}ToStr({type} data)
+std::string AttConverter::{fname}ToStr({type} data) const
 {{
     std::string value;
     switch (data) {{"""
 
 CONVERTER_IMPL_TEMPLATE_METHOD2_START = """
-{type} AttConverter::StrTo{fname}(std::string value)
+{type} AttConverter::StrTo{fname}(std::string value) const
 {{"""
 
 CONVERTER_IMPL_TEMPLATE_METHOD1 = """
@@ -234,12 +234,12 @@ SETTERS_IMPL_TEMPLATE_END = """
 # These templates generate a module level static method for getting attributes of an unspcified Object
 #
 
-GETTERS_IMPL_TEMPLATE_START = """void Att::Get{moduleNameCap}(Object *element, ArrayOfStrAttr *attributes)
+GETTERS_IMPL_TEMPLATE_START = """void Att::Get{moduleNameCap}(const Object *element, ArrayOfStrAttr *attributes)
 {{
 """
 
 GETTERS_IMPL_TEMPLATE_GRP_START = """    if (element->HasAttClass({attId})) {{
-        Att{attGroupNameUpper} *att = dynamic_cast<Att{attGroupNameUpper} *>(element);
+        const Att{attGroupNameUpper} *att = dynamic_cast<const Att{attGroupNameUpper} *>(element);
         assert(att);
 """
 
