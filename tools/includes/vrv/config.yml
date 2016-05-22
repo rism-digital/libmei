@@ -39,14 +39,12 @@ mapped:
         data_DURATION
     data.DURATION.gestural.prop:
         data_DURATION
-    data.FILL:
-        std::string
     data.FONTFAMILY:
         std::string
     data.FONTNAME:
         std::string
     data.FONTSIZE:
-        std::string
+        int
     data.HEADSHAPE:
         std::string
     data.ISODATE:
@@ -59,7 +57,13 @@ mapped:
         std::string
     data.LINEWIDTH:
         std::string
+    data.MEASUREBEATOFFSET:
+        data_MEASUREBEAT
     data.MEASUREMENT:
+        std::string
+    data.MEASUREMENTABS:
+        std::string
+    data.MEASUREMENTREL:
         std::string
     data.MUSICFONT:
         std::string
