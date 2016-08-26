@@ -75,8 +75,6 @@ mapped:
         std::string
     data.PGSCALE:
         std::string
-    data.PERCENT:
-        int
     data.PITCHNAME.GES:
         data_PITCHNAME
     data.PITCHNUMBER:
@@ -103,6 +101,8 @@ defaults:
         std::make_pair(-1,-1.0)
     xsd_posIntList:
         std::vector<int>()
+    data_PERCENT:
+        0
 
 modules:
     shared:    
@@ -112,6 +112,7 @@ modules:
         att.common:
             n: 
                 type: int
+                default: -1
         att.curvature:
             bulge:
                 type: double

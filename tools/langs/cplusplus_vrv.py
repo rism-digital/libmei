@@ -20,8 +20,8 @@ NS_PREFIX_MAP = {
 
 AUTHORS = "Andrew Hankinson, Alastair Porter, and Others"
 
-METHODS_HEADER_TEMPLATE = """    void Set{attNameUpper}({attType} {attNameLowerJoined}{attTypeName}_) {{ m_{attNameLowerJoined}{attTypeName} = {attNameLowerJoined}{attTypeName}_; }};
-    {attType} Get{attNameUpper}() const {{ return m_{attNameLowerJoined}{attTypeName}; }};
+METHODS_HEADER_TEMPLATE = """    void Set{attNameUpper}({attType} {attNameLowerJoined}{attTypeName}_) {{ m_{attNameLowerJoined}{attTypeName} = {attNameLowerJoined}{attTypeName}_; }}
+    {attType} Get{attNameUpper}() const {{ return m_{attNameLowerJoined}{attTypeName}; }}
     bool Has{attNameUpper}() const;
     """
 
