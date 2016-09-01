@@ -99,6 +99,14 @@ mapped:
 defaults:
     data_MEASUREBEAT:
         std::make_pair(-1,-1.0)
+    data_MIDIBPM:
+        -1  
+    data_MIDICHANNEL:
+        -1
+    data_MIDIMSPB:
+        -1
+    data_MIDIVALUE:
+        -1
     xsd_posIntList:
         std::vector<int>()
     data_PERCENT:
