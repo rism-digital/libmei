@@ -97,6 +97,8 @@ mapped:
         std::string
 
 defaults:
+    data_ARTICULATION_List:
+        std::vector<data_ARTICULATION>()
     data_MEASUREBEAT:
         std::make_pair(-1,-1.0)
     data_MIDIBPM:
@@ -114,6 +116,9 @@ defaults:
 
 modules:
     shared:    
+        att.articulation:
+            artic:
+                type: data_ARTICULATION_List
         att.barLine.log:
             form: 
                 default: BARRENDITION_single
