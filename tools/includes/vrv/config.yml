@@ -107,7 +107,7 @@ defaults:
         -1
     data_MIDIVALUE:
         -1
-    xsd_posIntList:
+    xsdPositiveInteger_List:
         std::vector<int>()
     data_PERCENT:
         0
@@ -144,7 +144,7 @@ modules:
                 type: int
         att.staffident:
             staff: 
-                type: xsd_posIntList
+                type: xsdPositiveInteger_List
         att.timestamp.musical:
             tstamp:
                 default: -1.0
