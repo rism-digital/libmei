@@ -145,6 +145,10 @@ modules:
         att.staffident:
             staff: 
                 type: xsd_posIntList
+        att.stems:
+            stem.len:
+                type: int
+                default: -1
         att.timestamp.musical:
             tstamp:
                 default: -1.0
