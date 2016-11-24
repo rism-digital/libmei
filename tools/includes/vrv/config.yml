@@ -134,9 +134,6 @@ modules:
                 default: -1
             numbase: 
                 default: -1
-        att.measure.log:
-            right: 
-                default: BARRENDITION_single
         att.meterSig.log:
             count: 
                 type: int
