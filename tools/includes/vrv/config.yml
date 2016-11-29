@@ -115,6 +115,18 @@ defaults:
         0
 
 modules:
+    externalsymbols:
+        att.extsym:
+            glyphnum:
+                type: wchar_t
+                default: 0
+    mensural:
+        att.mensural.log:
+            proport.num:
+                default: -1
+            proport.numbase:
+                default: -1  
+    
     shared:    
         att.articulation:
             artic:
@@ -154,13 +166,6 @@ modules:
         att.timestamp.musical:
             tstamp:
                 default: -1.0
-
-    mensural:
-        att.mensural.log:
-            proport.num:
-                default: -1
-            proport.numbase:
-                default: -1  
 
 att-classes:
   - id: "accidental"
