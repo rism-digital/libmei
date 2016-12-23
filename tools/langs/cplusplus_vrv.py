@@ -1,5 +1,6 @@
  # -- coding: utf-8 --
 
+import sys
 import os
 import re
 import codecs
@@ -532,7 +533,11 @@ def __get_docstr(text, indent=0):
         and use it for the brief. Then put the rest of the text after a blank
         line if there is text there
     """
-    text = text.strip().encode("utf-8")
+    # string handling is handled differently in Python 3+
+    if sys.version_info >= (3, 0):
+        text = text.strip()
+    else:
+        text = text.strip().encode("utf-8")
     dotpos = text.find(". ")
     if dotpos > 0:
         brief = text[:dotpos+1]
@@ -569,7 +574,7 @@ def __create_att_classes(schema, outdir, includes_dir):
     lg.debug("Creating Mixin Headers.")
     enum = ""
     
-    for module, atgroup in sorted(schema.attribute_group_structure.iteritems()):
+    for module, atgroup in sorted(schema.attribute_group_structure.items()):
         fullout = ""
         classes = ""
         methods = ""
@@ -578,7 +583,7 @@ def __create_att_classes(schema, outdir, includes_dir):
             # continue if we don't have any attribute groups in this module
             continue
         
-        for gp, atts in sorted(atgroup.iteritems()):
+        for gp, atts in sorted(atgroup.items()):
             if not atts:
                 continue
             
@@ -629,7 +634,7 @@ def __create_att_classes(schema, outdir, includes_dir):
     ########################################################################### 
     # Implementation
     ###########################################################################
-    for module, atgroup in sorted(schema.attribute_group_structure.iteritems()):
+    for module, atgroup in sorted(schema.attribute_group_structure.items()):
         fullout = ""
         classes = ""
         methods = ""
@@ -639,7 +644,7 @@ def __create_att_classes(schema, outdir, includes_dir):
         if not atgroup:
             continue
         
-        for gp, atts in sorted(atgroup.iteritems()):
+        for gp, atts in sorted(atgroup.items()):
             if not atts:
                 continue
             methods = ""
@@ -743,7 +748,7 @@ def __create_att_classes(schema, outdir, includes_dir):
     fmi.write(LICENSE)
     fmi.write(TYPE_GRP_START)
     
-    for data_type, values in sorted(schema.data_types.iteritems()):
+    for data_type, values in sorted(schema.data_types.items()):
         if vrv_is_excluded_type(data_type) == True:
             lg.debug("Skipping {0}".format(data_type))
             continue
@@ -766,7 +771,7 @@ def __create_att_classes(schema, outdir, includes_dir):
         vstr += TYPE_END  
         fmi.write(vstr)
         
-    for list_type, values in sorted(schema.data_lists.iteritems()):
+    for list_type, values in sorted(schema.data_lists.items()):
         if vrv_is_excluded_type(list_type) == True:
             lg.debug("Skipping {0}".format(list_type))
             continue
@@ -806,7 +811,7 @@ def __create_att_classes(schema, outdir, includes_dir):
     fmi_cpp.write(LICENSE)
     fmi_cpp.write(CONVERTER_IMPL_TEMPLATE_START)
     
-    for data_type, values in sorted(schema.data_types.iteritems()):
+    for data_type, values in sorted(schema.data_types.items()):
         if vrv_is_excluded_type(data_type) == True:
             lg.debug("Skipping {0}".format(data_type))
             continue
@@ -840,7 +845,7 @@ def __create_att_classes(schema, outdir, includes_dir):
         fmi_cpp.write(vstr1)
         fmi_cpp.write(vstr2)
         
-    for list_type, values in sorted(schema.data_lists.iteritems()):
+    for list_type, values in sorted(schema.data_lists.items()):
         if vrv_is_excluded_type(list_type) == True:
             lg.debug("Skipping {0}".format(list_type))
             continue
@@ -949,5 +954,5 @@ def __copy_codefile(directory, codefile):
     # For now they are in the Verovio codebase because this makes it easier to edit the files.
     # eventually, we might want to have them in the libmei include dir and use this function to
     # copy them in the output directory
-    print "Todo"
-    
+    lg.debug("Todo")
+
