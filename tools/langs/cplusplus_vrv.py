@@ -764,7 +764,7 @@ def __create_att_classes(schema, outdir, includes_dir):
         for v in values:
             tpsubstr = { 
                 "val_prefix": val_prefix,
-                "value": v.replace('.','_').replace('-','_').replace(',','_')
+                "value": v.replace('.','_').replace('-','_').replace(',','_').replace('+','plus')
              }
             vstr += TYPE_VALUE.format(**tpsubstr)
           
@@ -788,7 +788,7 @@ def __create_att_classes(schema, outdir, includes_dir):
         for v in values:
             tpsubstr = { 
                 "val_prefix": val_prefix,
-                "value": v.replace('.','_').replace('-','_').replace(',','_')
+                "value": v.replace('.','_').replace('-','_').replace(',','_').replace('+','plus')
              }
             vstr += TYPE_VALUE.format(**tpsubstr)
           
@@ -830,7 +830,7 @@ def __create_att_classes(schema, outdir, includes_dir):
         vstr2 = CONVERTER_IMPL_TEMPLATE_METHOD2_START.format(**tpsubstr)
         for v in values:
             tpsubstr = {
-                "value": "{0}_{1}".format(val_prefix, v.replace('.','_').replace('-','_').replace(',','_')),
+                "value": "{0}_{1}".format(val_prefix, v.replace('.','_').replace('-','_').replace(',','_').replace('+','plus')),
                 "string": v
              }
             vstr1 += CONVERTER_IMPL_TEMPLATE_METHOD1.format(**tpsubstr)
@@ -864,7 +864,7 @@ def __create_att_classes(schema, outdir, includes_dir):
         vstr2 = CONVERTER_IMPL_TEMPLATE_METHOD2_START.format(**tpsubstr)
         for v in values:
             tpsubstr = {
-                "value": "{0}_{1}".format(val_prefix, v.replace('.','_').replace('-','_').replace(',','_')),
+                "value": "{0}_{1}".format(val_prefix, v.replace('.','_').replace('-','_').replace(',','_').replace('+','plus')),
                 "string": v
              }
             vstr1 += CONVERTER_IMPL_TEMPLATE_METHOD1.format(**tpsubstr)

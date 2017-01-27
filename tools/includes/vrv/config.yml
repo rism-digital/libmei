@@ -46,7 +46,7 @@ mapped:
     data.FONTSIZE:
         int
     data.HEADSHAPE:
-        std::string
+        data_HEADSHAPE_list
     data.ISODATE:
         std::string
     data.ISOTIME:

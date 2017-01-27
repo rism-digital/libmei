@@ -128,7 +128,7 @@ class MeiSchema(object):
                 self.attribute_group_structure[group_module][group_name].append(attname)
                 
     def get_data_types_and_lists(self):
-        types = [m for m in self.schema.xpath("//tei:macroSpec[.//tei:valList[@type=\"closed\"]]", namespaces=TEI_RNG_NS)]
+        types = [m for m in self.schema.xpath("//tei:macroSpec[.//tei:valList[@type=\"closed\" or @type=\"semi\"]]", namespaces=TEI_RNG_NS)]
         for t in types:
             #lg.debug("TYPE - {0}".format(t.get("ident")))
             data_type = t.get("ident")
