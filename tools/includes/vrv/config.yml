@@ -71,6 +71,8 @@ mapped:
         std::string
     data.OCTAVE:
         char
+    data.ORNAM.cmn:
+        std::string
     data.PAGE.PANELS:
         std::string
     data.PGSCALE:
