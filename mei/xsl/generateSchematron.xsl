@@ -20,8 +20,8 @@
             </xd:p>
             <xd:p>
                 It reads in rism-ch/libmei/tools/includes/vrv/config.yml, translates it into XML, and
-                generates an ODD customization out of it. This ODD is then used to generate a corresponding
-                RNG in a separate process.
+                generates a Schematron file at ../checkVerovioCompatibility.sch, which can be used to 
+                scan MEI files for Verovio support. 
             </xd:p>
         </xd:desc>
     </xd:doc>
@@ -38,10 +38,10 @@
     <xsl:param name="complain.on.elements" select="false()" as="xs:boolean"/>
     
     <!-- complain about unsupported attributes: -->
-    <xsl:param name="complain.on.attributes" select="true()" as="xs:boolean"/>
+    <xsl:param name="complain.on.attributes" select="false()" as="xs:boolean"/>
     
     <!-- comment on attributes: -->
-    <xsl:param name="comment.on.attributes" select="false()" as="xs:boolean"/>
+    <xsl:param name="comment.on.attributes" select="true()" as="xs:boolean"/>
     
     
     <!-- this tries to read in the required files -->
@@ -192,7 +192,6 @@
                             
                             <xsl:for-each select="$unsupported.attributes">
                                 <xsl:variable name="current.attribute" select="." as="xs:string"/>
-                                <xsl:message select="'attribute ' || $current.attribute || ' on ' || $current.element/@ident || ' is not supported'"></xsl:message>
                                 <rule context="mei:{$current.element/@ident}/@{$current.attribute}">
                                     <assert test="false()">The attribute <xsl:value-of select="$current.attribute"/> on <xsl:value-of select="$current.element/@ident"/> is currently not supported by Verovio.</assert>
                                 </rule>
