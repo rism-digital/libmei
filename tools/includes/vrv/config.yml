@@ -158,6 +158,9 @@ modules:
                 type: int
             meter.unit: 
                 type: int
+        att.staffloc:
+            loc:
+                default: VRV_UNSET
         att.staffident:
             staff: 
                 type: xsdPositiveInteger_List
