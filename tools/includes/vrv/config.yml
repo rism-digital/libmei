@@ -45,11 +45,15 @@ mapped:
         std::string
     data.FONTSIZE:
         int
+    data.FONTSIZESCALE:
+        int
     data.HEADSHAPE:
         data_HEADSHAPE_list
     data.ISODATE:
         std::string
     data.ISOTIME:
+        std::string
+    data.KEYFIFTHS:
         std::string
     data.KEYSIGTOKEN:
         std::string
@@ -89,7 +93,11 @@ mapped:
         std::string
     data.STAFFLOC:
         int
+    data.STAFFREL:
+        data_STAFFREL_extended
     data.TEMPOVALUE:
+        std::string
+    data.TEXTRENDITION:
         std::string
     data.TSTAMPOFFSET:
         double
