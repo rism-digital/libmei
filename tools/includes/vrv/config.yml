@@ -5,6 +5,7 @@ excludes:
     data.DURATION,
     data.DURATION.cmn,
     data.DURATION.mensural,
+    data.HEXNUM,
     data.KEYSIGNATURE,
     data.MODUSMAIOR,
     data.MODUSMINOR,
@@ -15,7 +16,14 @@ excludes:
     data.TEMPUS,
     # string
     data.URI
+    ]
     
+alternates:
+    [
+    data_FONTSIZE,
+    data_PLACEMENT,
+    data_STAFFITEM,
+    data_STAFFREL
     ]
     
 mapped:
@@ -43,12 +51,14 @@ mapped:
         std::string
     data.FONTNAME:
         std::string
-    data.FONTSIZE:
-        int
     data.FONTSIZESCALE:
         int
     data.HEADSHAPE:
         data_HEADSHAPE_list
+    data.INTERVAL.HARMONIC:
+        std::string
+    data.INTERVAL.MELODIC:
+     std::string
     data.ISODATE:
         std::string
     data.ISOTIME:
@@ -83,9 +93,13 @@ mapped:
         std::string
     data.PITCHNAME.GES:
         data_PITCHNAME
+    data.PITCHCLASS:
+        int
     data.PITCHNUMBER:
         int
     data.ROTATION:
+        std::string
+    data.SCALEDEGREE:
         std::string
     data.SLASH:
         char
@@ -93,8 +107,6 @@ mapped:
         std::string
     data.STAFFLOC:
         int
-    data.STAFFREL:
-        data_STAFFREL_extended
     data.TEMPOVALUE:
         std::string
     data.TEXTRENDITION:
@@ -109,8 +121,12 @@ mapped:
 defaults:
     data_ARTICULATION_List:
         std::vector<data_ARTICULATION>()
+    data_HEXNUM:
+        0
+    data_FONTSIZE:
+        data_FONTSIZE()
     data_MEASUREBEAT:
-        std::make_pair(-1,-1.0)
+        std::make_pair(-1, -1.0)
     data_MIDIBPM:
         -1  
     data_MIDICHANNEL:
@@ -121,8 +137,14 @@ defaults:
         -1
     xsdPositiveInteger_List:
         std::vector<int>()
+    data_PLACEMENT:
+        data_PLACEMENT()
     data_PERCENT:
-        0
+        -1.0
+    data_STAFFITEM:
+        data_STAFFITEM()
+    data_STAFFREL:
+        data_STAFFREL()
 
 modules:
     externalsymbols:
@@ -156,6 +178,9 @@ modules:
                 default: -1
             numbase: 
                 default: -1
+        att.keySigDefault.log:
+            key.sig:
+                type: data_KEYSIGNATURE
         att.meterSig.log:
             count: 
                 type: int
@@ -166,17 +191,17 @@ modules:
                 type: int
             meter.unit: 
                 type: int
-        att.staffloc:
+        att.staffLoc:
             loc:
                 default: VRV_UNSET
-        att.staffident:
+        att.staffIdent:
             staff: 
                 type: xsdPositiveInteger_List
         att.stems:
             stem.len:
                 type: int
                 default: -1
-        att.timestamp.musical:
+        att.timestamp.logical:
             tstamp:
                 default: -1.0
 
