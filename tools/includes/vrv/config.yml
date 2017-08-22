@@ -135,6 +135,8 @@ defaults:
         -1
     data_MIDIVALUE:
         -1
+    xsdAnyURI_List:
+        std::vector<std::string>()
     xsdPositiveInteger_List:
         std::vector<int>()
     data_PLACEMENT:
@@ -166,10 +168,6 @@ modules:
         att.barLine.log:
             form: 
                 default: BARRENDITION_single
-        att.common:
-            n: 
-                type: int
-                default: -1
         att.curvature:
             bulge:
                 type: double
@@ -191,6 +189,16 @@ modules:
                 type: int
             meter.unit: 
                 type: int
+        att.nInteger:
+            n: 
+                type: int
+                default: -1
+        att.nNumberLike:
+            n: 
+                type: std::string
+        att.plist:
+            plist: 
+                type: xsdAnyURI_List
         att.staffLoc:
             loc:
                 default: VRV_UNSET
