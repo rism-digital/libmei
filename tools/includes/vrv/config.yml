@@ -37,6 +37,8 @@ mapped:
         std::string
     data.COLOR:
         std::string
+    data.CONFIDENCE:
+        double
     data.CLEFLINE:
         char
     data.DURATION.additive:
