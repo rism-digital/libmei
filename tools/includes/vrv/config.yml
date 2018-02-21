@@ -167,6 +167,9 @@ modules:
         att.articulation:
             artic:
                 type: data_ARTICULATION_List
+        att.augmentDots:
+            dots:
+                default: -1
         att.barLine.log:
             form: 
                 default: BARRENDITION_single
@@ -214,6 +217,10 @@ modules:
         att.timestamp.logical:
             tstamp:
                 default: -1.0
+        att.verticalAlignment:
+            vgrp:
+                type: int
+                default: -1
 
 att-classes:
   - id: "accidental"
