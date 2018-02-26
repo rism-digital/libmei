@@ -220,7 +220,7 @@ modules:
         att.verticalAlignment:
             vgrp:
                 type: int
-                default: -1
+                default: VRV_UNSET
 
 att-classes:
   - id: "accidental"

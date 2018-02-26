@@ -204,7 +204,7 @@ CONVERTER_IMPL_TEMPLATE_METHOD1_END = """
 """
 
 CONVERTER_IMPL_TEMPLATE_METHOD2_END = """
-    if (logWarning)
+    if (logWarning && !value.empty())
         LogWarning("Unsupported value '%s' for {type}", value.c_str());
     return {prefix}_NONE;
 }}
