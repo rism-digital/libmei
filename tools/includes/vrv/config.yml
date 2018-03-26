@@ -110,7 +110,7 @@ mapped:
     data.STAFFLOC:
         int
     data.TEMPOVALUE:
-        std::string
+        int
     data.TEXTRENDITION:
         std::string
     data.TSTAMPOFFSET:
