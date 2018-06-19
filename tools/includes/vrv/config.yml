@@ -224,7 +224,7 @@ modules:
                 type: xsdPositiveInteger_List
         att.stems:
             stem.len:
-                type: int
+                type: double
                 default: -1
         att.timestamp.logical:
             tstamp:
