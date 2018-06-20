@@ -30,4 +30,6 @@ A compiled version of the 2013 schema with the latest page-based customization i
 
 To generate the code, simply
 
-    python tools/parseschema2.py -l vrv -o path_to_verovio_directory -i tools/includes/vrv mei/2013-11-05/mei-page-based.xml.odd
+    python3 tools/parseschema2.py -l vrv -o path_to_verovio_directory -i tools/includes/vrv mei/2013-11-05/mei-page-based.xml.odd
+    
+Remark: you will need the `lxml` and `pyyaml` packages to be installed for this to run.
