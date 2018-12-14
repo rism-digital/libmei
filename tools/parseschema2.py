@@ -139,7 +139,7 @@ class MeiSchema(object):
                 type_value = v.get("ident")
                 self.data_types[data_type].append(type_value)
         
-        vallists = [m for m in self.schema.xpath("//tei:valList[@type=\"closed\"]", namespaces=TEI_RNG_NS)]
+        vallists = [m for m in self.schema.xpath("//tei:valList[@type=\"closed\" or @type=\"semi\"]", namespaces=TEI_RNG_NS)]
         for vl in vallists:
             element = vl.xpath("./ancestor::tei:classSpec", namespaces=TEI_RNG_NS)
             attName = vl.xpath("./parent::tei:attDef/@ident", namespaces=TEI_RNG_NS)

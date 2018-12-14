@@ -20,6 +20,8 @@ excludes:
     
 alternates:
     [
+    data_COMPASSDIRECTION,
+    data_EVENTREL,
     data_FONTSIZE,
     data_PLACEMENT,
     data_STAFFITEM,
@@ -125,6 +127,10 @@ mapped:
 defaults:
     data_ARTICULATION_List:
         std::vector<data_ARTICULATION>()
+    data_COMPASSDIRECTION:
+        data_COMPASSDIRECTION()
+    data_EVENTREL:
+        data_EVENTREL()
     data_HEXNUM:
         0
     data_FONTSIZE:
@@ -168,6 +174,12 @@ modules:
             glyphnum:
                 type: wchar_t
                 default: 0
+    
+    gestural:
+        att.duration.gestural:
+            dots.ges:
+                default: -1
+    
     mensural:
         att.mensural.log:
             proport.num:
@@ -224,7 +236,7 @@ modules:
                 type: xsdPositiveInteger_List
         att.stems:
             stem.len:
-                type: int
+                type: double
                 default: -1
         att.timestamp.logical:
             tstamp:
