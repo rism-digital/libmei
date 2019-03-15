@@ -23,6 +23,7 @@ alternates:
     data_COMPASSDIRECTION,
     data_EVENTREL,
     data_FONTSIZE,
+    data_LINEWIDTH,
     data_PLACEMENT,
     data_STAFFITEM,
     data_STAFFREL
@@ -75,16 +76,8 @@ mapped:
         std::string
     data.LINESTARTENDSYMBOLSIZE:
         std::string
-    data.LINEWIDTH:
-        std::string
     data.MEASUREBEATOFFSET:
         data_MEASUREBEAT
-    data.MEASUREMENT:
-        std::string
-    data.MEASUREMENTABS:
-        std::string
-    data.MEASUREMENTREL:
-        std::string
     data.MIDIVALUE_PERCENT:
         data_PERCENT
     data.MUSICFONT:
@@ -135,8 +128,14 @@ defaults:
         0
     data_FONTSIZE:
         data_FONTSIZE()
+    data_LINEWIDTH:
+        data_LINEWIDTH()
     data_MEASUREBEAT:
         std::make_pair(-1, -1.0)
+    data_MEASUREMENTABS:
+        VRV_UNSET
+    data_MEASUREMENTREL:
+        VRV_UNSET
     data_MIDIBPM:
         -1  
     data_MIDICHANNEL:
