@@ -46,6 +46,8 @@ mapped:
         double
     data.CLEFLINE:
         char
+    data.COURSENUMBER:
+        int
     data.DURATION.additive:
         data_DURATION
     data.DURATION.cmn: 
@@ -59,6 +61,8 @@ mapped:
     data.FONTNAME:
         std::string
     data.FONTSIZESCALE:
+        int
+    data.FRETNUMBER:
         int
     data.HEADSHAPE:
         data_HEADSHAPE_list
