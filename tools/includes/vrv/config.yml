@@ -116,6 +116,8 @@ mapped:
         std::string
     data.URI:
         std::string
+    data.URIS:
+        std::string
 
 defaults:
     data_ARTICULATION_List:
@@ -128,6 +130,8 @@ defaults:
         0
     data_FONTSIZE:
         data_FONTSIZE()
+    data_KEYSIGNATURE:
+        std::make_pair(-1, ACCIDENTAL_WRITTEN_NONE)
     data_LINEWIDTH:
         data_LINEWIDTH()
     data_MEASUREBEAT:
@@ -204,6 +208,9 @@ modules:
                 default: -1
             numbase: 
                 default: -1
+        att.keySig.log:
+            sig:
+                type: data_KEYSIGNATURE
         att.keySigDefault.log:
             key.sig:
                 type: data_KEYSIGNATURE
