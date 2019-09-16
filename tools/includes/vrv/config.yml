@@ -2,31 +2,31 @@
 ---
 excludes:
     [
+    data.COLOR,
     data.DURATION,
     data.DURATION.cmn,
     data.DURATION.mensural,
+    data.DURATION.gestural,
     data.HEXNUM,
     data.KEYSIGNATURE,
     data.MODUSMAIOR,
     data.MODUSMINOR,
     data.OCTAVE.DIS,
     data.PROLATIO,
-    data.STEMDIRECTION.basic,
-    data.STEMDIRECTION.extended,
     data.TEMPUS,
     # string
-    data.URI
+    data.URI,
+    # alternates but with .
+    data.FONTSIZE,
+    data.LINEWIDTH,
+    data.PLACEMENT
     ]
     
 alternates:
     [
-    data_COMPASSDIRECTION,
-    data_EVENTREL,
     data_FONTSIZE,
     data_LINEWIDTH,
-    data_PLACEMENT,
-    data_STAFFITEM,
-    data_STAFFREL
+    data_PLACEMENT
     ]
     
 mapped:
@@ -46,13 +46,11 @@ mapped:
         double
     data.CLEFLINE:
         char
-    data.DURATION.additive:
-        data_DURATION
-    data.DURATION.cmn: 
+    data.DURATION.cmn:
         data_DURATION
     data.DURATION.gestural:
         data_DURATION
-    data.DURATION.gestural.prop:
+    data.DURATION.mensural:
         data_DURATION
     data.FONTFAMILY:
         std::string
@@ -60,8 +58,6 @@ mapped:
         std::string
     data.FONTSIZESCALE:
         int
-    data.HEADSHAPE:
-        data_HEADSHAPE_list
     data.INTERVAL.HARMONIC:
         std::string
     data.INTERVAL.MELODIC:
@@ -82,8 +78,6 @@ mapped:
         data_PERCENT
     data.MUSICFONT:
         std::string
-    data.NOTEHEADMODIFIER:
-        std::string
     data.ORNAM.cmn:
         std::string
     data.PAGE.PANELS:
@@ -96,8 +90,6 @@ mapped:
         int
     data.PITCHNUMBER:
         int
-    data.ROTATION:
-        std::string
     data.SCALEDEGREE:
         std::string
     data.SLASH:
@@ -108,8 +100,6 @@ mapped:
         int
     data.TEMPOVALUE:
         int
-    data.TEXTRENDITION:
-        std::string
     data.TSTAMPOFFSET:
         double
     data.TUPLET:
