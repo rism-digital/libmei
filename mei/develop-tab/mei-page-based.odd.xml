@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><TEI xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.tei-c.org/ns/1.0" xml:base="file:/tmp/tmpvveqoifa/mei-page-based.xml"><?TEIVERSION Version 4.0.0?>
+<?xml version="1.0" encoding="utf-8"?><TEI xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.tei-c.org/ns/1.0" xml:base="file:/tmp/tmptayh2ycc/mei-page-based.xml"><?TEIVERSION Version 4.0.0?>
 	<teiHeader>
 		<fileDesc>
 			<titleStmt>
@@ -37,7 +37,7 @@
 			<divGen type="toc"/>
 		</front>
 		<body>
-			<schemaSpec ident="mei" start="mei meiHead meiCorpus music" ns="http://www.music-encoding.org/ns/mei" source="/tmp/tmpqppytxha/source/mei-source.xml"><macroSpec rend="add" ident="data.ACCIDENTAL.WRITTEN" module="MEI" type="dt">
+			<schemaSpec ident="mei" start="mei meiHead meiCorpus music" ns="http://www.music-encoding.org/ns/mei" source="/tmp/tmpvly05mig/source/mei-source.xml"><macroSpec rend="add" ident="data.ACCIDENTAL.WRITTEN" module="MEI" type="dt">
     <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Written accidental values.</desc>
     <content xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <valList type="closed">
@@ -346,13 +346,13 @@
     <content xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <valList type="closed">
         <valItem ident="above">
-          <desc>The beam is above the material it affects.</desc>
+          <desc>The beam is above the events it affects.</desc>
         </valItem>
         <valItem ident="below">
-          <desc>The beam is below the material it affects.</desc>
+          <desc>The beam is below the events it affects.</desc>
         </valItem>
         <valItem ident="mixed">
-          <desc>The below is above and below the material it affects.</desc>
+          <desc>The beam is above and below the events it affects.</desc>
         </valItem>
       </valList>
     </content>
@@ -475,8 +475,7 @@
       </rng:data>
     </content>
   </macroSpec><macroSpec rend="add" ident="data.COLORNAMES" module="MEI" type="dt">
-    <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">List of SVG-recognized color keyword names described at
-      https://www.w3.org/TR/SVG/types.html#ColorKeywords.</desc>
+    <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">List of named colors from CSS Color Module Level 4.</desc>
     <content xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <valList type="closed">
         <valItem ident="aliceblue">
@@ -836,6 +835,9 @@
         <valItem ident="purple">
           <desc>Hex: #800080 / RGB: 128,0,128</desc>
         </valItem>
+        <valItem ident="rebeccapurple">
+          <desc>Hex: #663399 / RGB: 102,51,153</desc>
+        </valItem>
         <valItem ident="red">
           <desc>Hex: #ff0000 / RGB: 255,0,0</desc>
         </valItem>
@@ -922,6 +924,10 @@
         </valItem>
       </valList>
     </content>
+    <remarks xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
+      <p>Color names are taken from the list at <ref target="https://www.w3.org/TR/css-color-4/">https://www.w3.org/TR/css-color-4/</ref>. </p>
+      <p>All of these keywords are case-insensitive.</p>
+    </remarks>
   </macroSpec><macroSpec rend="add" ident="data.COLORVALUES" module="MEI" type="dt">
     <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Parameterized color values</desc>
     <content xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
@@ -2392,7 +2398,7 @@
       </valList>
     </content>
     <remarks xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
-      <p>Instrument names are taken from the list at <ref target="http://www.midi.org/techspecs/gm1sound.php">http://www.midi.org/techspecs/gm1sound.php</ref>. </p>
+      <p>Instrument names are taken from the list at <ref target="https://www.midi.org/specifications/item/gm-level-1-sound-set">https://www.midi.org/specifications/item/gm-level-1-sound-set</ref>. </p>
       <p>MEI uses 0-based program numbers.</p>
       <p>Percussion sounds are available when the MIDI channel is set to "10".</p>
     </remarks>
@@ -5496,14 +5502,7 @@
       <memberOf key="model.eventLike.cmn"/>
     </classes><content xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <zeroOrMore xmlns="http://relaxng.org/ns/structure/1.0"><choice><ref name="model.appLike"/><ref name="model.editLike"/><ref name="model.eventLike"/><ref name="model.eventLike.cmn"/><ref name="model.transcriptionLike"/></choice></zeroOrMore>
-    </content><constraintSpec xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" ident="When_not_copyof_tuplet_content" scheme="isoschematron">
-      <constraint>
-        <sch:rule context="mei:tuplet[not(@copyof)]">
-          <sch:assert test="count(descendant::*[local-name()='note' or local-name()='rest' or               local-name()='chord']) &gt; 1">A tuplet without a copyof attribute must have at least 2 note, rest, or chord
-            descendants.</sch:assert>
-        </sch:rule>
-      </constraint>
-    </constraintSpec><remarks xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
+    </content><remarks xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <p>The <gi scheme="MEI">beam</gi> sub-element is allowed so that custom beaming may be
         indicated, e.g., a septuplet may be divided into a group of three plus a group of four
         notes. See Read, p. 187-215. The <gi scheme="MEI">tuplet</gi> element may also used for
@@ -14064,6 +14063,9 @@
           <valItem ident="m">
             <desc>(medial) neither first nor last syllable.</desc>
           </valItem>
+          <valItem ident="s">
+            <desc>(single) single syllable.</desc>
+          </valItem>
           <valItem ident="t">
             <desc>(terminal) last syllable.</desc>
           </valItem>
@@ -15066,16 +15068,7 @@
       <memberOf key="model.eventLike"/>
     </classes><content xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <rng:empty/>
-    </content><constraintSpec xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" ident="Check_barLinetaktplace" scheme="isoschematron">
-      <constraint>
-        <sch:rule context="mei:barLine[@taktplace]">
-          <sch:let name="staff" value="ancestor::mei:staff/@n"/>
-          <sch:let name="staffpos" value="count(ancestor::mei:staff/preceding-sibling::mei:staff) + 1"/>
-          <sch:assert test="number(@taktplace) &lt;= number(2 * preceding::mei:staffDef[@n=$staff and @lines][1]/@lines)">The value of @taktplace must be less than or equal to two times the number of staff
-            lines.</sch:assert>
-        </sch:rule>
-      </constraint>
-    </constraintSpec><remarks xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
+    </content><remarks xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <p>This element is provided for repertoires, such as mensural notation, that lack measures.
         Because the <gi scheme="MEI">barLine</gi> element's attributes, from which the logical and
         visual characteristics of the bar line can be discerned, largely duplicate those of measure,
@@ -16724,7 +16717,7 @@
       <memberOf key="att.sb.vis"/>
       <memberOf key="model.milestoneLike.music"/>
     </classes><content xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
-      <optional xmlns="http://relaxng.org/ns/structure/1.0"><ref name="custos"/></optional>
+      <rng:empty/>
     </content><remarks xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <p>Do not confuse this element with the <gi scheme="MEI">lb</gi> element, which performs a
         similar function in prose.</p>
@@ -18565,6 +18558,7 @@
     <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Visual domain attributes.</desc>
     <classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <memberOf key="att.altSym"/>
+      <memberOf key="att.color"/>
       <memberOf key="att.enclosingChars"/>
       <memberOf key="att.extSym"/>
       <memberOf key="att.staffLoc"/>
@@ -18574,6 +18568,7 @@
   </classSpec><classSpec rend="add" ident="att.keySig.vis" module="MEI.visual" type="atts">
     <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Visual domain attributes.</desc>
     <classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
+      <memberOf key="att.color"/>
       <memberOf key="att.visibility"/>
     </classes>
     <attList xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
