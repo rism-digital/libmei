@@ -148,7 +148,7 @@ public:"""
 
 CONVERTER_HEADER_TEMPLATE = """
     std::string {fname}ToStr({type} data) const;
-    {type} StrTo{fname}(std::string value, bool logWarning = true) const;
+    {type} StrTo{fname}(const std::string &value, bool logWarning = true) const;
 """
 
 CONVERTER_HEADER_TEMPLATE_END = """};
@@ -184,7 +184,7 @@ std::string AttConverter::{fname}ToStr({type} data) const
     switch (data) {{"""
 
 CONVERTER_IMPL_TEMPLATE_METHOD2_START = """
-{type} AttConverter::StrTo{fname}(std::string value, bool logWarning) const
+{type} AttConverter::StrTo{fname}(const std::string &value, bool logWarning) const
 {{"""
 
 CONVERTER_IMPL_TEMPLATE_METHOD1 = """
@@ -219,7 +219,7 @@ CONVERTER_IMPL_TEMPLATE_END = """
 # These templates generate a module level static method for setting attribute on an unspcified Object
 #
 
-SETTERS_IMPL_TEMPLATE_START = """bool Att::Set{moduleNameCap}(Object *element, std::string attrType, std::string attrValue)
+SETTERS_IMPL_TEMPLATE_START = """bool Att::Set{moduleNameCap}(Object *element, const std::string &attrType, const std::string &attrValue)
 {{
 """
 
