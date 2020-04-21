@@ -2,30 +2,31 @@
 ---
 excludes:
     [
+    data.COLOR,
     data.DURATION,
     data.DURATION.cmn,
     data.DURATION.mensural,
+    data.DURATION.gestural,
     data.HEXNUM,
     data.KEYSIGNATURE,
     data.MODUSMAIOR,
     data.MODUSMINOR,
     data.OCTAVE.DIS,
     data.PROLATIO,
-    data.STEMDIRECTION.basic,
-    data.STEMDIRECTION.extended,
     data.TEMPUS,
     # string
-    data.URI
+    data.URI,
+    # alternates but with .
+    data.FONTSIZE,
+    data.LINEWIDTH,
+    data.PLACEMENT
     ]
     
 alternates:
     [
-    data_COMPASSDIRECTION,
-    data_EVENTREL,
     data_FONTSIZE,
-    data_PLACEMENT,
-    data_STAFFITEM,
-    data_STAFFREL
+    data_LINEWIDTH,
+    data_PLACEMENT
     ]
     
 mapped:
@@ -45,13 +46,11 @@ mapped:
         double
     data.CLEFLINE:
         char
-    data.DURATION.additive:
-        data_DURATION
-    data.DURATION.cmn: 
+    data.DURATION.cmn:
         data_DURATION
     data.DURATION.gestural:
         data_DURATION
-    data.DURATION.gestural.prop:
+    data.DURATION.mensural:
         data_DURATION
     data.FONTFAMILY:
         std::string
@@ -59,8 +58,6 @@ mapped:
         std::string
     data.FONTSIZESCALE:
         int
-    data.HEADSHAPE:
-        data_HEADSHAPE_list
     data.INTERVAL.HARMONIC:
         std::string
     data.INTERVAL.MELODIC:
@@ -75,21 +72,11 @@ mapped:
         std::string
     data.LINESTARTENDSYMBOLSIZE:
         std::string
-    data.LINEWIDTH:
-        std::string
     data.MEASUREBEATOFFSET:
         data_MEASUREBEAT
-    data.MEASUREMENT:
-        std::string
-    data.MEASUREMENTABS:
-        std::string
-    data.MEASUREMENTREL:
-        std::string
     data.MIDIVALUE_PERCENT:
         data_PERCENT
     data.MUSICFONT:
-        std::string
-    data.NOTEHEADMODIFIER:
         std::string
     data.ORNAM.cmn:
         std::string
@@ -103,8 +90,6 @@ mapped:
         int
     data.PITCHNUMBER:
         int
-    data.ROTATION:
-        std::string
     data.SCALEDEGREE:
         std::string
     data.SLASH:
@@ -115,13 +100,13 @@ mapped:
         int
     data.TEMPOVALUE:
         int
-    data.TEXTRENDITION:
-        std::string
     data.TSTAMPOFFSET:
         double
     data.TUPLET:
         std::string
     data.URI:
+        std::string
+    data.URIS:
         std::string
 
 defaults:
@@ -135,8 +120,16 @@ defaults:
         0
     data_FONTSIZE:
         data_FONTSIZE()
+    data_KEYSIGNATURE:
+        std::make_pair(-1, ACCIDENTAL_WRITTEN_NONE)
+    data_LINEWIDTH:
+        data_LINEWIDTH()
     data_MEASUREBEAT:
         std::make_pair(-1, -1.0)
+    data_MEASUREMENTABS:
+        VRV_UNSET
+    data_MEASUREMENTREL:
+        VRV_UNSET
     data_MIDIBPM:
         -1  
     data_MIDICHANNEL:
@@ -205,6 +198,9 @@ modules:
                 default: -1
             numbase: 
                 default: -1
+        att.keySig.log:
+            sig:
+                type: data_KEYSIGNATURE
         att.keySigDefault.log:
             key.sig:
                 type: data_KEYSIGNATURE

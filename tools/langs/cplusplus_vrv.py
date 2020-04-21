@@ -773,7 +773,11 @@ def __create_att_classes(schema, outdir, includes_dir):
     
     for data_type, values in sorted(schema.data_types.items()):
         if vrv_is_excluded_type(data_type) == True:
-            lg.debug("Skipping {0}".format(data_type))
+            lg.debug("Skipping excluded {0}".format(data_type))
+            continue
+        
+        if vrv_is_alternate_type(data_type) == True:
+            lg.debug("Skipping alternate {0}".format(data_type))
             continue
         
         vstr = ""
@@ -843,9 +847,13 @@ def __create_att_classes(schema, outdir, includes_dir):
     
     for data_type, values in sorted(schema.data_types.items()):
         if vrv_is_excluded_type(data_type) == True:
-            lg.debug("Skipping {0}".format(data_type))
+            lg.debug("Skipping excluded {0}".format(data_type))
             continue
-        
+
+        if vrv_is_alternate_type(data_type) == True:
+            lg.debug("Skipping alternate {0}".format(data_type))
+            continue
+
         vrvtype = vrv_getformattedtype(data_type);
         val_prefix =  vrvtype.replace("data_","")
         vrvfname = vrv_converter_cc(vrvtype)
