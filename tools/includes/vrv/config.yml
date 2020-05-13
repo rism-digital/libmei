@@ -241,6 +241,11 @@ modules:
             vgrp:
                 type: int
                 default: VRV_UNSET
+    
+    visual:
+        att.fTrem.vis:
+            beams.float:
+                default: -1
 
 att-classes:
   - id: "accidental"
