@@ -190,9 +190,6 @@ modules:
         att.barLine.log:
             form: 
                 default: BARRENDITION_single
-        att.curvature:
-            bulge:
-                type: double
         att.duration.ratio:
             num: 
                 default: -1
