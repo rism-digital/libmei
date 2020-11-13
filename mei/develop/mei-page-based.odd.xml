@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><TEI xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.tei-c.org/ns/1.0" xml:base="file:/tmp/tmpuq9xyyrq/mei-page-based.xml"><?TEIVERSION Version 4.0.0?>
+<?xml version="1.0" encoding="utf-8"?><TEI xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.tei-c.org/ns/1.0" xml:base="file:/tmp/tmpqgye4ic1/mei-page-based.xml"><?TEIVERSION Version 4.0.0?>
     <teiHeader>
         <fileDesc>
             <titleStmt>
@@ -37,7 +37,7 @@
             <divGen type="toc"/>
         </front>
         <body>
-            <schemaSpec ident="mei" start="mei meiHead meiCorpus music" ns="http://www.music-encoding.org/ns/mei" source="/tmp/tmpaecbmhy0/source/mei-source.xml"><macroSpec rend="add" ident="data.ACCIDENTAL.WRITTEN" module="MEI" type="dt">
+            <schemaSpec ident="mei" start="mei meiHead meiCorpus music" ns="http://www.music-encoding.org/ns/mei" source="/tmp/tmpa5qdonbh/source/mei-source.xml"><macroSpec rend="add" ident="data.ACCIDENTAL.WRITTEN" module="MEI" type="dt">
     <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Written accidental values.</desc>
     <content xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <valList type="closed">
@@ -1001,10 +1001,42 @@
         <rng:param name="minInclusive">-360.0</rng:param>
       </rng:data>
     </content>
+  </macroSpec><macroSpec rend="add" ident="data.DIVISIO" module="MEI" type="dt">
+    <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Divisio values.</desc>
+    <content xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
+      <valList type="closed">
+        <valItem ident="ternaria">
+          <desc>Divisio ternaria. Three semibreves in a breve.</desc>
+        </valItem>
+        <valItem ident="quaternaria">
+          <desc>Divisio quaternaria. Foursemibreves in a breve.</desc>
+        </valItem>
+        <valItem ident="senariaimperf">
+          <desc>Divisio senaria imperfecta. Six semibreves in a breve (breve is divided into two, then into three). Aka senaria gallica.</desc>
+        </valItem>
+        <valItem ident="senariaperf">
+          <desc>Divisio senaria perfecta. Six semibreves in a breve (breve is divided into three, then into two). Aka senaria italica.</desc>
+        </valItem>
+        <valItem ident="octonaria">
+          <desc>Divisio octonaria. Eight semibreves in a breve.</desc>
+        </valItem>
+        <valItem ident="novenaria">
+          <desc>Divisio novenaria. Nine semibreves in a breve.</desc>
+        </valItem>
+        <valItem ident="duodenaria">
+          <desc>Divisio duodenaria. Twelve semibreves in a breve.</desc>
+        </valItem>
+      </valList>
+    </content>
   </macroSpec><macroSpec rend="add" ident="data.DURATION" module="MEI" type="dt">
     <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Logical, that is, written, duration attribute values.</desc>
     <content xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <choice xmlns="http://relaxng.org/ns/structure/1.0"><ref name="data.DURATION.cmn"/><ref name="data.DURATION.mensural"/></choice>
+    </content>
+  </macroSpec><macroSpec rend="add" ident="data.DURATIONRESTS" module="MEI" type="dt">
+    <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Logical, that is, written, duration attribute values for rests.</desc>
+    <content xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
+      <choice xmlns="http://relaxng.org/ns/structure/1.0"><ref name="data.DURATION.cmn"/><ref name="data.DURATIONRESTS.mensural"/></choice>
     </content>
   </macroSpec><macroSpec rend="add" ident="data.DURATION.gestural" module="MEI" type="dt">
     <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Performed duration attribute values.</desc>
@@ -1673,14 +1705,53 @@
       </valList>
     </content>
   </macroSpec><macroSpec rend="add" ident="data.MENSURATIONSIGN" module="MEI" type="dt">
-    <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Mensuration attribute values.</desc>
+    <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Mensuration signs attribute values.</desc>
     <content xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <valList type="closed">
         <valItem ident="C">
-          <desc>Tempus imperfectum.</desc>
+          <desc>Sign for tempus imperfectum.</desc>
         </valItem>
         <valItem ident="O">
-          <desc>Tempus perfectum.</desc>
+          <desc>Sign for tempus perfectum.</desc>
+        </valItem>
+        <valItem ident="t">
+          <desc>Sign for divisio ternaria.</desc>
+        </valItem>
+        <valItem ident="q">
+          <desc>Sign for divisio quaternaria.</desc>
+        </valItem>
+        <valItem ident="si">
+          <desc>Sign for divisio senaria imperfecta.</desc>
+        </valItem>
+        <valItem ident="i">
+          <desc>Sign for divisio senaria imperfecta.</desc>
+        </valItem>
+        <valItem ident="sg">
+          <desc>Sign for divisio senaria gallica.</desc>
+        </valItem>
+        <valItem ident="g">
+          <desc>Sign for divisio senaria gallica.</desc>
+        </valItem>
+        <valItem ident="sp">
+          <desc>Sign for divisio senaria perfecta.</desc>
+        </valItem>
+        <valItem ident="p">
+          <desc>Sign for divisio senaria perfecta.</desc>
+        </valItem>
+        <valItem ident="sy">
+          <desc>Sign for divisio senaria ytalica.</desc>
+        </valItem>
+        <valItem ident="y">
+          <desc>Sign for divisio senaria ytalica.</desc>
+        </valItem>
+        <valItem ident="n">
+          <desc>Sign for divisio novenaria.</desc>
+        </valItem>
+        <valItem ident="oc">
+          <desc>Sign for divisio octonaria.</desc>
+        </valItem>
+        <valItem ident="d">
+          <desc>Sign for divisio duodenaria.</desc>
         </valItem>
       </valList>
     </content>
@@ -2409,9 +2480,14 @@
       <choice xmlns="http://relaxng.org/ns/structure/1.0"><ref name="data.MIDIVALUE"/><ref name="data.NCNAME"/></choice>
     </content>
   </macroSpec><macroSpec rend="add" ident="data.MIDIVALUE_PAN" module="MEI" type="dt">
-    <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">data.MIDIVALUE or data.PERCENT.LIMITED values.</desc>
+    <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">data.MIDIVALUE or data.PERCENT.LIMITED.SIGNED values.</desc>
     <content xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <choice xmlns="http://relaxng.org/ns/structure/1.0"><ref name="data.MIDIVALUE"/><ref name="data.PERCENT.LIMITED.SIGNED"/></choice>
+    </content>
+  </macroSpec><macroSpec rend="add" ident="data.MIDIVALUE_PERCENT" module="MEI" type="dt">
+    <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">data.MIDIVALUE or data.PERCENT.LIMITED values.</desc>
+    <content xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
+      <choice xmlns="http://relaxng.org/ns/structure/1.0"><ref name="data.MIDIVALUE"/><ref name="data.PERCENT.LIMITED"/></choice>
     </content>
   </macroSpec><macroSpec rend="add" ident="data.MODE" module="MEI" type="dt">
     <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Modes.</desc>
@@ -3814,15 +3890,15 @@
         <desc>Captures whether a beam is "feathered" and in which direction.</desc>
         <valList type="closed">
           <valItem ident="acc">
-            <desc>(accelerando) indicates that the secondary beams get progressively closer together
+            <desc>(accelerando) means that the secondary beams become progressively more distant
               toward the end of the beam.</desc>
           </valItem>
           <valItem ident="mixed">
             <desc>(mixed acc and rit) for beams that are "feathered" in both directions.</desc>
           </valItem>
           <valItem ident="rit">
-            <desc>(ritardando) means that the secondary beams become progressively more distant
-              toward the end of the beam.</desc>
+            <desc>(ritardando) indicates that the secondary beams get progressively closer together
+            toward the end of the beam.</desc>
           </valItem>
           <valItem ident="norm">
             <desc>(normal) indicates that the secondary beams are equidistant along the course of
@@ -5100,7 +5176,7 @@
       <p>The starting point of the harp pedal diagram may be indicated by either a
         <att>tstamp</att>, <att>tstamp.ges</att>, <att>tstamp.real</att> or <att>startid</att>
         attribute. It is a semantic error not to specify a starting point attribute.</p>
-    </remarks></elementSpec><elementSpec rend="add" ident="lv" module="MEI.cmn"><desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">A "tie-like" indication that a note should ring beyond its written duration.</desc><classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
+    </remarks></elementSpec><elementSpec rend="add" ident="lv" module="MEI.cmn"><desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">(laissez vibrer) – A "tie-like" indication that a note should ring beyond its written duration.</desc><classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <memberOf key="att.common"/>
       <memberOf key="att.facsimile"/>
       <memberOf key="att.lv.log"/>
@@ -5115,8 +5191,6 @@
         <sch:rule context="mei:lv">
           <sch:assert test="@startid or @tstamp or @tstamp.ges or @tstamp.real">Must have one of the
             attributes: startid, tstamp, tstamp.ges or tstamp.real.</sch:assert>
-          <sch:assert test="@dur or @dur.ges or @endid or @tstamp2">Must have one of the attributes:
-            dur, dur.ges, endid, or tstamp2.</sch:assert>
         </sch:rule>
       </constraint>
     </constraintSpec><constraintSpec xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" ident="lv_containing_curve" scheme="isoschematron">
@@ -9703,7 +9777,7 @@
       <p>The volta element is intended for those cases where the musical notation is repeated, but
         the accompanying lyrics are not.</p>
     </remarks></elementSpec><macroSpec rend="add" ident="data.DURATION.mensural" module="MEI.mensural" type="dt">
-    <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Logical, that is, written, duration attribute values for the mensural repertoire.</desc>
+    <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Logical, that is, written, note-shape (or note symbol) attribute values for the mensural repertoire.</desc>
     <content xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <valList type="closed">
         <valItem ident="maxima">
@@ -9713,7 +9787,7 @@
           <desc>Two or three times as long as a brevis.</desc>
         </valItem>
         <valItem ident="brevis">
-          <desc>Two times as long as a semibreve.</desc>
+          <desc>Two or three times as long as a semibreve.</desc>
         </valItem>
         <valItem ident="semibrevis">
           <desc>Half or one-third as long as a breve/brevis.</desc>
@@ -9722,13 +9796,99 @@
           <desc>Half or one-third as long as a semibreve/semibrevis.</desc>
         </valItem>
         <valItem ident="semiminima">
-          <desc>Half or one-third as long as a minima.</desc>
+          <desc>Half as long as a minima.</desc>
         </valItem>
         <valItem ident="fusa">
-          <desc>Half or one-third as long as a semiminima.</desc>
+          <desc>Half as long as a semiminima.</desc>
         </valItem>
         <valItem ident="semifusa">
-          <desc>Half or one-third as long as a fusa.</desc>
+          <desc>Half as long as a fusa.</desc>
+        </valItem>
+      </valList>
+    </content>
+  </macroSpec><macroSpec rend="add" ident="data.MULTIBREVERESTS.mensural" module="MEI.mensural" type="dt">
+    <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Logical, that is, written, duration attribute values for multi-breve rests in the mensural repertoire.</desc>
+    <content xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
+      <valList type="closed">
+        <valItem ident="2B">
+          <desc>A two-breve rest.</desc>
+        </valItem>
+        <valItem ident="3B">
+          <desc>A three-breve rest.</desc>
+        </valItem>
+      </valList>
+    </content>
+  </macroSpec><macroSpec rend="add" ident="data.DURATIONRESTS.mensural" module="MEI.mensural" type="dt">
+    <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Logical, that is, written, duration attribute values for mensural rests.</desc>
+    <content xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
+      <choice xmlns="http://relaxng.org/ns/structure/1.0"><ref name="data.MULTIBREVERESTS.mensural"/><ref name="data.DURATION.mensural"/></choice>
+    </content>
+  </macroSpec><macroSpec rend="add" ident="data.DURQUALITY.mensural" module="MEI.mensural" type="dt">
+    <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Duration attribute values of a given note symbol for the mensural repertoire.</desc>
+    <content xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
+      <valList type="closed">
+        <valItem ident="perfecta">
+          <desc>Three times the duration of the note in the next smaller degree.</desc>
+        </valItem>
+        <valItem ident="imperfecta">
+          <desc>Two times the duration of the note in the next smaller degree.</desc>
+        </valItem>
+        <valItem ident="altera">
+          <desc>Twice the original duration of the note (only usable in perfect mensurations).</desc>
+        </valItem>
+        <valItem ident="minor">
+          <desc>Category of a regular semibrevis in Ars antiqua, equivalent to a third of a brevis.</desc>
+        </valItem>
+        <valItem ident="maior">
+          <desc>Category of an altered semibrevis in Ars antiqua, equivalent to two minor semibrevis.</desc>
+        </valItem>
+        <valItem ident="duplex">
+          <desc>One of the three categories of a longa in Ars antiqua ('duplex', 'perfecta', and 'imperfecta'). A duplex longa is twice as long as a regular longa.</desc>
+        </valItem>
+      </valList>
+    </content>
+  </macroSpec><macroSpec rend="add" ident="data.FLAGFORM.mensural" module="MEI.mensural" type="dt">
+    <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Form of the flag.</desc>
+    <content xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
+      <valList type="closed">
+        <valItem ident="straight">
+          <desc>Flag is a straight horizontal line.</desc>
+        </valItem>
+        <valItem ident="angled">
+          <desc>Flag is a straight line at an angle.</desc>
+        </valItem>
+        <valItem ident="curled">
+          <desc>Flag is curled.</desc>
+        </valItem>
+        <valItem ident="flared">
+          <desc>Flag is flared.</desc>
+        </valItem>
+        <valItem ident="extended">
+          <desc>Flag looks extended.</desc>
+        </valItem>
+        <valItem ident="hooked">
+          <desc>Flag is hooked-form.</desc>
+        </valItem>
+      </valList>
+    </content>
+    <remarks xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
+        <p>
+            
+            
+        </p>
+    </remarks>
+  </macroSpec><macroSpec rend="add" ident="data.FLAGPOS.mensural" module="MEI.mensural" type="dt">
+    <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Position of the flag relative to the stem.</desc>
+    <content xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
+      <valList type="closed">
+        <valItem ident="left">
+          <desc>Flag lies at the left side of the stem.</desc>
+        </valItem>
+        <valItem ident="right">
+          <desc>Flag lies at the right side of the stem.</desc>
+        </valItem>
+        <valItem ident="center">
+          <desc>Flag is centered in the stem.</desc>
         </valItem>
       </valList>
     </content>
@@ -9741,7 +9901,35 @@
         </valItem>
       </valList>
     </content>
-  </macroSpec><classSpec rend="add" ident="att.ligature.log" module="MEI.mensural" type="atts">
+  </macroSpec><macroSpec rend="add" ident="data.STEMFORM.mensural" module="MEI.mensural" type="dt">
+    <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Form of the stem attached to the note.</desc>
+    <content xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
+      <valList type="closed">
+        <valItem ident="circle">
+          <desc>Stem has a circular form.</desc>
+        </valItem>
+        <valItem ident="oblique">
+          <desc>Stem has an oblique form.</desc>
+        </valItem>
+        <valItem ident="swallowtail">
+          <desc>Stem has a swallowtail form.</desc>
+        </valItem>
+        <valItem ident="virgula">
+          <desc>Stem has a virgula-like form.</desc>
+        </valItem>
+      </valList>
+    </content>
+  </macroSpec><classSpec rend="add" ident="att.duration.quality" module="MEI.mensural" type="atts">
+    <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Attribute that expresses duration for a given mensural note symbol.</desc>
+    <attList xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
+      <attDef ident="dur.quality" usage="rec">
+        <desc>Encodes the durational quality of a mensural note using the values provided by the data.DURQUALITY.mensural datatype (i.e., the perfect / imperfect / altered / major / minor / duplex quality of a note).</desc>
+        <datatype>
+          <ref xmlns="http://relaxng.org/ns/structure/1.0" name="data.DURQUALITY.mensural"/>
+        </datatype>
+      </attDef>
+    </attList>
+  </classSpec><classSpec rend="add" ident="att.ligature.log" module="MEI.mensural" type="atts">
     <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Logical domain attributes.</desc>
     <attList xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <attDef ident="form" usage="opt">
@@ -9800,6 +9988,15 @@
     </attList>
   </classSpec><classSpec rend="add" ident="att.mensural.shared" module="MEI.mensural" type="atts">
     <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Shared attributes in the mensural repertoire.</desc>
+    <constraintSpec xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" ident="mensuration_conflicting_attributes" scheme="isoschematron">
+      <constraint>
+        <sch:rule context="mei:mensur[@divisio]">
+          <sch:assert test="not(@tempus) and not(@prolatio)">
+            When the @divisio attribute is used, the @tempus and @prolatio attributes are not allowed.
+          </sch:assert>
+        </sch:rule>
+      </constraint>
+    </constraintSpec>
     <attList xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <attDef ident="modusmaior" usage="opt">
         <desc>Describes the maxima-long relationship.</desc>
@@ -9823,6 +10020,12 @@
         <desc>Describes the breve-semibreve relationship.</desc>
         <datatype>
           <ref xmlns="http://relaxng.org/ns/structure/1.0" name="data.TEMPUS"/>
+        </datatype>
+      </attDef>
+      <attDef ident="divisio" usage="opt">
+        <desc>Describes the divisions of the breve in use in 14th-century Italy.</desc>
+        <datatype>
+          <ref xmlns="http://relaxng.org/ns/structure/1.0" name="data.DIVISIO"/>
         </datatype>
       </attDef>
     </attList>
@@ -9887,6 +10090,59 @@
     <classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <memberOf key="att.mensural.vis"/>
     </classes>
+  </classSpec><classSpec rend="add" ident="att.STEMPROPERTIES.mensural" module="MEI.mensural" type="atts">
+    <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Attributes that describe the properties of stems in the mensural repertoire.</desc>
+    <classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
+        <memberOf key="att.xy"/>
+    </classes>
+    <attList xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
+      <attDef ident="pos" usage="opt">
+        <desc>Records the position of the stem in relation to the note head(s).</desc>
+        <datatype>
+          <ref xmlns="http://relaxng.org/ns/structure/1.0" name="data.STEMPOSITION"/>
+        </datatype>
+      </attDef>
+      <attDef ident="length" usage="opt">
+        <desc>Encodes the stem length.</desc>
+        <datatype>
+          <ref xmlns="http://relaxng.org/ns/structure/1.0" name="data.MEASUREMENTABS"/>
+        </datatype>
+      </attDef>
+      <attDef ident="form" usage="opt">
+        <desc>Encodes the form of the stem using the values provided by the data.STEMFORM.mensural datatype.</desc>
+        <datatype>
+          <ref xmlns="http://relaxng.org/ns/structure/1.0" name="data.STEMFORM.mensural"/>
+        </datatype>
+      </attDef>
+      <attDef ident="dir" usage="opt">
+        <desc>Describes the direction of a stem.</desc>
+        <datatype>
+          <ref xmlns="http://relaxng.org/ns/structure/1.0" name="data.STEMDIRECTION"/>
+        </datatype>
+      </attDef>
+      <attDef ident="flag.pos" usage="opt">
+        <desc>Records the position of the flag using the values provided by the data.FLAGPOS.mensural datatype.</desc>
+        <datatype>
+          <ref xmlns="http://relaxng.org/ns/structure/1.0" name="data.FLAGPOS.mensural"/>
+        </datatype>
+      </attDef>
+      <attDef ident="flag.form" usage="opt">
+        <desc>Encodes the form of the flag using the values provided by the data.FLAGFORM.mensural datatype.</desc>
+        <datatype>
+          <ref xmlns="http://relaxng.org/ns/structure/1.0" name="data.FLAGFORM.mensural"/>
+        </datatype>
+      </attDef>
+    </attList>
+  </classSpec><classSpec rend="add" ident="att.stems.mensural" module="MEI.mensural" type="atts">
+      <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Attributes that describe the properties of stemmed features specific to mensural repertoires.</desc>
+      <attList xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
+          <attDef ident="stem.form" usage="opt">
+              <desc>Records the form of the stem.</desc>
+              <datatype maxOccurs="1" minOccurs="1">
+                  <ref xmlns="http://relaxng.org/ns/structure/1.0" name="data.STEMFORM.mensural"/>
+              </datatype>
+          </attDef>
+      </attList>
   </classSpec><classSpec rend="add" predeclare="true" ident="model.eventLike.mensural" module="MEI.mensural" type="model">
     <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Groups event elements that occur in the mensural repertoire.</desc>
     <classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
@@ -9962,6 +10218,24 @@
         description of note durations as arithmetic ratios. While mensuration refers to the normal
         relationships between note durations, proportion affects the relations of the note durations
         to the tactus.</p>
+    </remarks></elementSpec><elementSpec rend="add" ident="stem" module="MEI.mensural"><desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">A stem element.</desc><classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
+      <memberOf key="att.common"/>
+      <memberOf key="att.STEMPROPERTIES.mensural"/>
+      <memberOf key="model.noteModifierLike"/>
+    </classes><content xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
+      <rng:empty/>
+    </content><constraintSpec xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" ident="Check_stem" scheme="isoschematron">
+      <constraint>
+        <sch:rule context="mei:stem">
+          <sch:assert test="not(ancestor::mei:note/@*[starts-with(local-name(),'stem.')])">A note with nested stem elements must not have @stem.* attributes.</sch:assert>
+        </sch:rule>
+      </constraint>
+    </constraintSpec><remarks xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
+      <p>Mensural notes can have multiple stems and these may have various forms, directions, and types of flags.
+        Multiple stem elements can be encoded as children of a single note. The attributes <att>pos</att>,
+        <att>length</att>, <att>form</att>, and <att>dir</att> allow to encode different positions, lengths,
+        forms, and directions for each these stems. The attributes <att>flag.pos</att> and <att>flag.form</att> 
+        also allow to encode different types of flags for each of the stems.</p>
     </remarks></elementSpec><classSpec rend="add" ident="att.channelized" module="MEI.midi" type="atts">
     <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Attributes that record MIDI channel information.</desc>
     <attList xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
@@ -12847,22 +13121,7 @@
     <classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <memberOf key="att.duration.ratio"/>
       <memberOf key="att.mensural.shared"/>
-      <memberOf key="att.slashCount"/>
     </classes>
-    <attList xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
-      <attDef ident="dot" usage="opt">
-        <desc>Specifies whether a dot is to be added to the base symbol.</desc>
-        <datatype>
-          <ref xmlns="http://relaxng.org/ns/structure/1.0" name="data.BOOLEAN"/>
-        </datatype>
-      </attDef>
-      <attDef ident="sign" usage="opt">
-        <desc>The base symbol in the mensuration sign/time signature of mensural notation.</desc>
-        <datatype>
-          <ref xmlns="http://relaxng.org/ns/structure/1.0" name="data.MENSURATIONSIGN"/>
-        </datatype>
-      </attDef>
-    </attList>
   </classSpec><classSpec rend="add" ident="att.meterConformance" module="MEI.shared" type="atts">
     <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Attributes that provide information about a structure's conformance to the prevailing
       meter.</desc>
@@ -13085,6 +13344,7 @@
       <memberOf key="att.note.log.cmn"/>
       <memberOf key="att.note.log.mensural"/>
       <memberOf key="att.pitched"/>
+      <memberOf key="att.duration.quality"/>
     </classes>
   </classSpec><classSpec rend="add" ident="att.noteHeads" module="MEI.shared" type="atts">
     <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Attributes pertaining to the notehead part of a note.</desc>
@@ -13639,10 +13899,21 @@
     <classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <memberOf key="att.augmentDots"/>
       <memberOf key="att.cue"/>
-      <memberOf key="att.duration.logical"/>
+      <memberOf key="att.restduration.logical"/>
       <memberOf key="att.event"/>
       <memberOf key="att.rest.log.cmn"/>
     </classes>
+  </classSpec><classSpec rend="add" ident="att.restduration.logical" module="MEI.shared" type="atts">
+    <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Attributes that express duration of rests in musical terms.</desc>
+    <attList xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
+      <attDef ident="dur" usage="opt">
+        <desc>Records the duration of a rest using the relative durational values provided by the
+          data.DURATIONRESTS datatype.</desc>
+        <datatype>
+          <ref xmlns="http://relaxng.org/ns/structure/1.0" name="data.DURATIONRESTS"/>
+        </datatype>
+      </attDef>
+    </attList>
   </classSpec><classSpec rend="add" ident="att.sb.log" module="MEI.shared" type="atts">
     <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Logical domain attributes.</desc>
     <classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
@@ -13958,6 +14229,7 @@
       notes.</desc>
     <classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <memberOf key="att.stems.cmn"/>
+      <memberOf key="att.stems.mensural"/>
     </classes>
     <attList xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <attDef ident="stem.dir" usage="opt">
@@ -14074,8 +14346,8 @@
     <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Attributes that capture system layout information.</desc>
     <attList xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <attDef ident="system.leftline" usage="opt">
-        <desc>Indicates whether the staves are joined at the left by a continuous line. The default
-          value is "true". Do not confuse this with the heavy vertical line used as a grouping
+        <desc>Indicates whether the system starts with a continuous line connecting all staves,
+          including single-staff systems. Do not confuse this with the heavy vertical line used as a grouping
           symbol.</desc>
         <datatype>
           <ref xmlns="http://relaxng.org/ns/structure/1.0" name="data.BOOLEAN"/>
@@ -17059,7 +17331,7 @@
         coordinate terms using the <att>x</att> and <att>y</att> attributes or relative to another
         element using the <att>startid</att> attribute. Attributes in the att.visualOffset class may
         be used to record horizontal, vertical, or time offsets from the absolute coordinates or
-        from the location of the referenced element. The <att>ref</att> attribute must contain the
+        from the location of the referenced element. The <att>altsym</att> attribute must contain the
         id of a <gi scheme="MEI">symbolDef</gi> element. The <att>scale</att> attribute indicates
         that the printed output must be scaled by the specified percentage.</p>
     </remarks></elementSpec><elementSpec rend="add" ident="tempo" module="MEI.shared"><desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Text and symbols descriptive of tempo, mood, or style, e.g., "allarg.", "a tempo",
@@ -18717,6 +18989,7 @@
       <memberOf key="att.extSym"/>
       <memberOf key="att.staffLoc"/>
       <memberOf key="att.typography"/>
+      <memberOf key="att.slashCount"/>
     </classes>
     <attList xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <attDef ident="form" usage="opt">
@@ -18734,6 +19007,18 @@
         <desc>Describes the rotation or reflection of the base symbol.</desc>
         <datatype>
           <ref xmlns="http://relaxng.org/ns/structure/1.0" name="data.ORIENTATION"/>
+        </datatype>
+      </attDef>
+      <attDef ident="dot" usage="opt">
+        <desc>Specifies whether a dot is to be added to the base symbol.</desc>
+        <datatype>
+          <ref xmlns="http://relaxng.org/ns/structure/1.0" name="data.BOOLEAN"/>
+        </datatype>
+      </attDef>
+      <attDef ident="sign" usage="opt">
+        <desc>The base symbol in the mensuration sign/time signature of mensural notation.</desc>
+        <datatype>
+          <ref xmlns="http://relaxng.org/ns/structure/1.0" name="data.MENSURATIONSIGN"/>
         </datatype>
       </attDef>
     </attList>
