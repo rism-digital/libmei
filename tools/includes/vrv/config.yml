@@ -99,7 +99,7 @@ mapped:
     data.STAFFLOC:
         int
     data.TEMPOVALUE:
-        int
+        double
     data.TSTAMPOFFSET:
         double
     data.TUPLET:
