@@ -46,6 +46,8 @@ mapped:
         double
     data.CLEFLINE:
         char
+    data.COURSENUMBER:
+        int
     data.DURATION.cmn:
         data_DURATION
     data.DURATION.gestural:
@@ -57,6 +59,8 @@ mapped:
     data.FONTNAME:
         std::string
     data.FONTSIZESCALE:
+        int
+    data.FRETNUMBER:
         int
     data.INTERVAL.HARMONIC:
         std::string
