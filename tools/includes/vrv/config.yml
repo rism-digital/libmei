@@ -21,19 +21,19 @@ excludes:
     data.LINEWIDTH,
     data.PLACEMENT
     ]
-    
+
 alternates:
     [
     data_FONTSIZE,
     data_LINEWIDTH,
     data_PLACEMENT
     ]
-    
+
 mapped:
     data.AUGMENTDOT:
         int
     data.BEAM:
-        std::string    
+        std::string
     data.BEAT:
         double
     data.BEND.AMOUNT:
@@ -135,7 +135,7 @@ defaults:
     data_MEASUREMENTREL:
         VRV_UNSET
     data_MIDIBPM:
-        -1  
+        -1
     data_MIDICHANNEL:
         -1
     data_MIDIMSPB:
@@ -148,6 +148,8 @@ defaults:
         data_MIDIVALUE_PAN()
     data_OCTAVE:
         -127
+    data_SUMMAND_List:
+        std::vector<int>()
     xsdAnyURI_List:
         std::vector<std::string>()
     xsdPositiveInteger_List:
@@ -171,20 +173,20 @@ modules:
             glyphnum:
                 type: wchar_t
                 default: 0
-    
+
     gestural:
         att.duration.gestural:
             dots.ges:
                 default: -1
-    
+
     mensural:
         att.mensural.log:
             proport.num:
                 default: -1
             proport.numbase:
-                default: -1  
-    
-    shared:    
+                default: -1
+
+    shared:
         att.articulation:
             artic:
                 type: data_ARTICULATION_List
@@ -192,12 +194,12 @@ modules:
             dots:
                 default: -1
         att.barLine.log:
-            form: 
+            form:
                 default: BARRENDITION_single
         att.duration.ratio:
-            num: 
+            num:
                 default: -1
-            numbase: 
+            numbase:
                 default: -1
         att.keySig.log:
             sig:
@@ -206,30 +208,30 @@ modules:
             key.sig:
                 type: data_KEYSIGNATURE
         att.meterSig.log:
-            count: 
-                type: int
-            unit: 
+            count:
+                type: data_SUMMAND_List
+            unit:
                 type: int
         att.meterSigDefault.log:
-            meter.count: 
-                type: int
-            meter.unit: 
+            meter.count:
+                type: data_SUMMAND_List
+            meter.unit:
                 type: int
         att.nInteger:
-            n: 
+            n:
                 type: int
                 default: -1
         att.nNumberLike:
-            n: 
+            n:
                 type: std::string
         att.plist:
-            plist: 
+            plist:
                 type: xsdAnyURI_List
         att.staffLoc:
             loc:
                 default: VRV_UNSET
         att.staffIdent:
-            staff: 
+            staff:
                 type: xsdPositiveInteger_List
         att.stems:
             stem.len:
@@ -242,7 +244,7 @@ modules:
             vgrp:
                 type: int
                 default: VRV_UNSET
-    
+
     visual:
         att.fTrem.vis:
             beams.float:
@@ -261,7 +263,7 @@ att-classes:
     - ["clef.line", "Supported values are 1-5 for shape 'C', 1-2 for 'G' and 3-5 for 'F'.", ""]
     - ["clef.dis", "Only value '8' is supported and it assumes shape 'G' and line 2.", ""]
     - ["clef.place", "Supported values: 'below'", ""]
-  
+
 interfaces:
   - id: "pitchInterface"
     att-classes:
@@ -286,4 +288,3 @@ classes:
   - id: "barLine"
     att-classes:
       - barLine.log
-
