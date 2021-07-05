@@ -78,6 +78,8 @@ mapped:
         std::string
     data.MEASUREBEATOFFSET:
         data_MEASUREBEAT
+    data.MIDIBPM:
+        double
     data.MIDIVALUE_PERCENT:
         data_PERCENT
     data.MUSICFONT:
@@ -135,7 +137,7 @@ defaults:
     data_MEASUREMENTREL:
         VRV_UNSET
     data_MIDIBPM:
-        -1
+        -1.0
     data_MIDICHANNEL:
         -1
     data_MIDIMSPB:
