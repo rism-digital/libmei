@@ -136,8 +136,6 @@ defaults:
         VRV_UNSET
     data_MEASUREMENTREL:
         VRV_UNSET
-    data_MIDIBPM:
-        -1.0
     data_MIDICHANNEL:
         -1
     data_MIDIMSPB:
