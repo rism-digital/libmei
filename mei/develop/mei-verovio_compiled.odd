@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><TEI xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.tei-c.org/ns/1.0" xml:base="file:/Users/davidbauer/Development/libmei/mei-verovio.xml"><?TEIVERSION Version 4.0.0?>
+<?xml version="1.0" encoding="utf-8"?><TEI xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.tei-c.org/ns/1.0" xml:base="file:/Users/laurent/libs/mei_lpugin/mei-verovio.xml"><?TEIVERSION Version 4.0.0?>
 	<teiHeader>
 		<fileDesc>
 			<titleStmt>
