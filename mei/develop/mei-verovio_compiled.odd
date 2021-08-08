@@ -186,6 +186,12 @@
         <valItem ident="ff">
           <desc>Double flat.</desc>
         </valItem>
+        <valItem ident="ts">
+          <desc>Triple sharp.</desc>
+        </valItem>
+        <valItem ident="tf">
+          <desc>Triple flat.</desc>
+        </valItem>
         <valItem ident="n">
           <desc>Natural.</desc>
         </valItem>
@@ -217,6 +223,15 @@
       <valList type="closed">
         <valItem ident="acc">
           <desc>Accent (Unicode 1D17B).</desc>
+        </valItem>
+        <valItem ident="acc-inv">
+          <desc>Inverted accent.</desc>
+        </valItem>
+        <valItem ident="acc-long">
+          <desc>Long accent, used to indicate an elongated accent mark. It is the responsibility of the encoder to distinguish between accents and hairpins.</desc>
+        </valItem>
+        <valItem ident="acc-soft">
+          <desc>Soft accent, see SMuFL Articulation supplement (U+ED40–U+ED4F).</desc>
         </valItem>
         <valItem ident="stacc">
           <desc>Staccato (Unicode 1D17C).</desc>
@@ -16580,8 +16595,8 @@
       <memberOf key="att.layerDef.anl"/>
       <memberOf key="model.layerDefLike"/>
     </classes><content xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
-      <zeroOrMore xmlns="http://relaxng.org/ns/structure/1.0"><choice><ref name="model.labelLike"/></choice></zeroOrMore>
-      <zeroOrMore xmlns="http://relaxng.org/ns/structure/1.0"><ref name="model.instrDefLike"/></zeroOrMore>
+      <zeroOrMore xmlns="http://relaxng.org/ns/structure/1.0"><ref name="model.labelLike"/></zeroOrMore>
+      <zeroOrMore xmlns="http://relaxng.org/ns/structure/1.0"><choice><ref name="model.instrDefLike"/><ref name="model.meterSigLike"/></choice></zeroOrMore>
       <optional xmlns="http://relaxng.org/ns/structure/1.0"><ref name="ambitus"/></optional>
     </content></elementSpec><elementSpec rend="add" ident="lb" module="MEI.shared"><desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">(line beginning) – An empty formatting element that forces text to begin on a new
       line.</desc><classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
@@ -17435,7 +17450,7 @@
       <memberOf key="att.staffDef.anl"/>
       <memberOf key="model.staffDefLike"/>
     </classes><content xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
-      <zeroOrMore xmlns="http://relaxng.org/ns/structure/1.0"><choice><ref name="model.labelLike"/></choice></zeroOrMore>
+      <zeroOrMore xmlns="http://relaxng.org/ns/structure/1.0"><ref name="model.labelLike"/></zeroOrMore>
       <zeroOrMore xmlns="http://relaxng.org/ns/structure/1.0"><choice><ref name="model.instrDefLike"/><ref name="model.layerDefLike"/><ref name="model.staffDefPart"/></choice></zeroOrMore>
       <optional xmlns="http://relaxng.org/ns/structure/1.0"><ref name="ambitus"/></optional>
     </content><constraintSpec xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" ident="Check_staffDefn" scheme="isoschematron">
@@ -17551,7 +17566,7 @@
       <memberOf key="model.staffGrpLike"/>
     </classes><content xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <zeroOrMore xmlns="http://relaxng.org/ns/structure/1.0"><ref name="grpSym"/></zeroOrMore>
-      <zeroOrMore xmlns="http://relaxng.org/ns/structure/1.0"><choice><ref name="model.labelLike"/></choice></zeroOrMore>
+      <zeroOrMore xmlns="http://relaxng.org/ns/structure/1.0"><ref name="model.labelLike"/></zeroOrMore>
       <zeroOrMore xmlns="http://relaxng.org/ns/structure/1.0"><ref name="model.instrDefLike"/></zeroOrMore>
       <oneOrMore xmlns="http://relaxng.org/ns/structure/1.0"><choice><ref name="model.staffGrpLike"/><ref name="model.staffDefLike"/></choice></oneOrMore>
       <zeroOrMore xmlns="http://relaxng.org/ns/structure/1.0"><ref name="grpSym"/></zeroOrMore>
