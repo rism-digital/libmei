@@ -47,7 +47,7 @@
     </content>
     <remarks xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <p>
-        <graphic url="ExampleImages/accid-20100510.png" height="50%" width="50%"/>
+        <graphic url="../images/ExampleImages/accid-20100510.png" height="50%" width="50%"/>
       </p>
     </remarks>
   </macroSpec><macroSpec rend="add" ident="data.ACCIDENTAL.WRITTEN.basic" module="MEI" type="dt">
@@ -186,6 +186,12 @@
         <valItem ident="ff">
           <desc>Double flat.</desc>
         </valItem>
+        <valItem ident="ts">
+          <desc>Triple sharp.</desc>
+        </valItem>
+        <valItem ident="tf">
+          <desc>Triple flat.</desc>
+        </valItem>
         <valItem ident="n">
           <desc>Natural.</desc>
         </valItem>
@@ -217,6 +223,15 @@
       <valList type="closed">
         <valItem ident="acc">
           <desc>Accent (Unicode 1D17B).</desc>
+        </valItem>
+        <valItem ident="acc-inv">
+          <desc>Inverted accent.</desc>
+        </valItem>
+        <valItem ident="acc-long">
+          <desc>Long accent, used to indicate an elongated accent mark. It is the responsibility of the encoder to distinguish between accents and hairpins.</desc>
+        </valItem>
+        <valItem ident="acc-soft">
+          <desc>Soft accent, see SMuFL Articulation supplement (U+ED40–U+ED4F).</desc>
         </valItem>
         <valItem ident="stacc">
           <desc>Staccato (Unicode 1D17C).</desc>
@@ -1104,7 +1119,7 @@
       <choice xmlns="http://relaxng.org/ns/structure/1.0"><ref name="data.DURATION.cmn"/><ref name="data.DURATION.mensural"/></choice>
     </content>
   </macroSpec><macroSpec rend="add" ident="data.ENCLOSURE" module="MEI" type="dt">
-    <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Enclosures for editorial notes and accidentals.</desc>
+    <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Enclosures for editorial notes, accidentals, articulations, etc.</desc>
     <content xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <valList type="closed">
         <valItem ident="paren">
@@ -1112,6 +1127,12 @@
         </valItem>
         <valItem ident="brack">
           <desc>Square brackets: [ and ].</desc>
+        </valItem>
+        <valItem ident="box">
+          <desc>Box.</desc>
+        </valItem>
+        <valItem ident="none">
+          <desc>None.</desc>
         </valItem>
       </valList>
     </content>
@@ -1865,7 +1886,9 @@
     <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Tempo expressed as "beats" per minute, where "beat" is always defined as a quarter note,
       *not the numerator of the time signature or the metronomic indication*.</desc>
     <content xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
-      <rng:data type="positiveInteger"/>
+      <rng:data type="decimal">
+        <rng:param name="minExclusive">0</rng:param>
+      </rng:data>
     </content>
   </macroSpec><macroSpec rend="add" ident="data.MIDIMSPB" module="MEI" type="dt">
     <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Tempo expressed as microseconds per "beat", where "beat" is always defined as a quarter
@@ -6154,7 +6177,7 @@
     <classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <memberOf key="att.controlEvent"/>
       <memberOf key="att.startEndId"/>
-      <memberOf key="att.timestamp2.gestural"/>
+      <memberOf key="att.timestamp2.logical"/>
       <memberOf key="att.edit"/>
       <memberOf key="att.trans"/>
     </classes>
@@ -7641,7 +7664,6 @@
     <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Gestural domain attributes.</desc>
     <classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <memberOf key="att.duration.gestural"/>
-      <memberOf key="att.instrumentIdent"/>
     </classes>
   </classSpec><classSpec rend="add" ident="att.mRpt.ges" module="MEI.gestural" type="atts">
     <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Gestural domain attributes.</desc>
@@ -7651,13 +7673,11 @@
     <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Gestural domain attributes.</desc>
     <classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <memberOf key="att.duration.gestural"/>
-      <memberOf key="att.instrumentIdent"/>
     </classes>
   </classSpec><classSpec rend="add" ident="att.multiRest.ges" module="MEI.gestural" type="atts">
     <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Gestural domain attributes.</desc>
     <classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <memberOf key="att.duration.gestural"/>
-      <memberOf key="att.instrumentIdent"/>
     </classes>
   </classSpec><classSpec rend="add" ident="att.multiRpt.ges" module="MEI.gestural" type="atts">
     <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Gestural domain attributes.</desc>
@@ -7807,7 +7827,6 @@
     <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Gestural domain attributes.</desc>
     <classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <memberOf key="att.duration.gestural"/>
-      <memberOf key="att.instrumentIdent"/>
       <memberOf key="att.rest.ges.mensural"/>
     </classes>
   </classSpec><classSpec rend="add" ident="att.sb.ges" module="MEI.gestural" type="atts">
@@ -13432,7 +13451,9 @@
         <desc>Contains the number indicating the beat unit, that is, the bottom number of the meter
           signature.</desc>
         <datatype>
-          <rng:data type="decimal"/>
+          <rng:data type="decimal">
+            <rng:param name="minExclusive">0</rng:param>
+          </rng:data>
         </datatype>
       </attDef>
       <attDef ident="meter.sym" usage="opt">
@@ -16574,8 +16595,8 @@
       <memberOf key="att.layerDef.anl"/>
       <memberOf key="model.layerDefLike"/>
     </classes><content xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
-      <zeroOrMore xmlns="http://relaxng.org/ns/structure/1.0"><choice><ref name="model.labelLike"/></choice></zeroOrMore>
-      <zeroOrMore xmlns="http://relaxng.org/ns/structure/1.0"><ref name="model.instrDefLike"/></zeroOrMore>
+      <zeroOrMore xmlns="http://relaxng.org/ns/structure/1.0"><ref name="model.labelLike"/></zeroOrMore>
+      <zeroOrMore xmlns="http://relaxng.org/ns/structure/1.0"><choice><ref name="model.instrDefLike"/><ref name="model.meterSigLike"/></choice></zeroOrMore>
       <optional xmlns="http://relaxng.org/ns/structure/1.0"><ref name="ambitus"/></optional>
     </content></elementSpec><elementSpec rend="add" ident="lb" module="MEI.shared"><desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">(line beginning) – An empty formatting element that forces text to begin on a new
       line.</desc><classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
@@ -17429,7 +17450,7 @@
       <memberOf key="att.staffDef.anl"/>
       <memberOf key="model.staffDefLike"/>
     </classes><content xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
-      <zeroOrMore xmlns="http://relaxng.org/ns/structure/1.0"><choice><ref name="model.labelLike"/></choice></zeroOrMore>
+      <zeroOrMore xmlns="http://relaxng.org/ns/structure/1.0"><ref name="model.labelLike"/></zeroOrMore>
       <zeroOrMore xmlns="http://relaxng.org/ns/structure/1.0"><choice><ref name="model.instrDefLike"/><ref name="model.layerDefLike"/><ref name="model.staffDefPart"/></choice></zeroOrMore>
       <optional xmlns="http://relaxng.org/ns/structure/1.0"><ref name="ambitus"/></optional>
     </content><constraintSpec xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" ident="Check_staffDefn" scheme="isoschematron">
@@ -17545,7 +17566,7 @@
       <memberOf key="model.staffGrpLike"/>
     </classes><content xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <zeroOrMore xmlns="http://relaxng.org/ns/structure/1.0"><ref name="grpSym"/></zeroOrMore>
-      <zeroOrMore xmlns="http://relaxng.org/ns/structure/1.0"><choice><ref name="model.labelLike"/></choice></zeroOrMore>
+      <zeroOrMore xmlns="http://relaxng.org/ns/structure/1.0"><ref name="model.labelLike"/></zeroOrMore>
       <zeroOrMore xmlns="http://relaxng.org/ns/structure/1.0"><ref name="model.instrDefLike"/></zeroOrMore>
       <oneOrMore xmlns="http://relaxng.org/ns/structure/1.0"><choice><ref name="model.staffGrpLike"/><ref name="model.staffDefLike"/></choice></oneOrMore>
       <zeroOrMore xmlns="http://relaxng.org/ns/structure/1.0"><ref name="grpSym"/></zeroOrMore>
@@ -18425,6 +18446,7 @@
     <classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <memberOf key="att.altSym"/>
       <memberOf key="att.color"/>
+      <memberOf key="att.enclosingChars"/>
       <memberOf key="att.extSym"/>
       <memberOf key="att.typography"/>
       <memberOf key="att.visualOffset"/>
@@ -18550,6 +18572,7 @@
       <memberOf key="att.color"/>
       <memberOf key="att.cue"/>
       <memberOf key="att.beamRend"/>
+      <memberOf key="att.visibility"/>
     </classes>
   </classSpec><classSpec rend="add" ident="att.beaming.vis" module="MEI.visual" type="atts">
     <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Used by layerDef, staffDef, and scoreDef to provide default values for attributes in the
@@ -18706,6 +18729,7 @@
     <classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <memberOf key="att.altSym"/>
       <memberOf key="att.color"/>
+      <memberOf key="att.enclosingChars"/>
       <memberOf key="att.extSym"/>
       <memberOf key="att.typography"/>
       <memberOf key="att.visibility"/>
@@ -18853,6 +18877,7 @@
     <classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <memberOf key="att.altSym"/>
       <memberOf key="att.color"/>
+      <memberOf key="att.enclosingChars"/>
       <memberOf key="att.extSym"/>
       <memberOf key="att.placementRelStaff"/>
       <memberOf key="att.typography"/>
@@ -19369,6 +19394,7 @@
     <classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <memberOf key="att.altSym"/>
       <memberOf key="att.color"/>
+      <memberOf key="att.enclosingChars"/>
       <memberOf key="att.extSym"/>
       <memberOf key="att.typography"/>
     </classes>
@@ -19405,6 +19431,7 @@
     <classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <memberOf key="att.altSym"/>
       <memberOf key="att.color"/>
+      <memberOf key="att.enclosingChars"/>
       <memberOf key="att.extSym"/>
       <memberOf key="att.placementRelStaff"/>
       <memberOf key="att.typography"/>
@@ -19561,6 +19588,7 @@
     <classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <memberOf key="att.altSym"/>
       <memberOf key="att.color"/>
+      <memberOf key="att.enclosingChars"/>
       <memberOf key="att.placementRelStaff"/>
       <memberOf key="att.visualOffset"/>
       <memberOf key="att.visualOffset2.ho"/>
@@ -19986,6 +20014,7 @@
     <classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <memberOf key="att.altSym"/>
       <memberOf key="att.color"/>
+      <memberOf key="att.enclosingChars"/>
       <memberOf key="att.extender"/>
       <memberOf key="att.placementRelStaff"/>
       <memberOf key="att.extSym"/>
@@ -20043,6 +20072,7 @@
     <classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <memberOf key="att.altSym"/>
       <memberOf key="att.color"/>
+      <memberOf key="att.enclosingChars"/>
       <memberOf key="att.extSym"/>
       <memberOf key="att.placementRelStaff"/>
       <memberOf key="att.typography"/>
