@@ -207,12 +207,12 @@ modules:
                 type: data_KEYSIGNATURE
         att.meterSig.log:
             count: 
-                type: int
+                type: data_SUMMAND_List
             unit: 
                 type: int
         att.meterSigDefault.log:
             meter.count: 
-                type: int
+                type: data_SUMMAND_List
             meter.unit: 
                 type: int
         att.nInteger:
