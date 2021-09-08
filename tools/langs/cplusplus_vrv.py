@@ -257,7 +257,7 @@ GETTERS_IMPL_TEMPLATE_GRP_START = """    if (element->HasAttClass({attId})) {{
 """
 
 GETTERS_IMPL_TEMPLATE = """        if (att->Has{attNameUpper}()) {{
-            attributes->push_back(std::make_pair("{attNameLower}{attTypeName}", att->{converterWrite}(att->Get{attNameUpper}())));
+            attributes->push_back({{ "{attNameLower}{attTypeName}", att->{converterWrite}(att->Get{attNameUpper}()) }});
         }}
 """
 
