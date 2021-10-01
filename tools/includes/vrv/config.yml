@@ -60,8 +60,6 @@ mapped:
         std::string
     data.FONTSIZESCALE:
         int
-    data.FRETNUMBER:
-        int
     data.INTERVAL.HARMONIC:
         std::string
     data.INTERVAL.MELODIC:
@@ -244,6 +242,12 @@ modules:
             vgrp:
                 type: int
                 default: VRV_UNSET
+
+    frettab:
+        att.note.ges.tab:
+            tab.fret:
+                type: int
+                default: -1
 
     visual:
         att.fTrem.vis:
