@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><TEI xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.tei-c.org/ns/1.0" xml:base="file:/Users/laurent/libs/mei_lpugin/mei-verovio.xml"><?TEIVERSION Version 4.0.0?>
+<?xml version="1.0" encoding="utf-8"?><TEI xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.tei-c.org/ns/1.0" xml:base="file:/Users/laurent/libs/mei_official/mei-verovio.xml"><?TEIVERSION Version 4.0.0?>
 	<teiHeader>
 		<fileDesc>
 			<titleStmt>
@@ -40,7 +40,7 @@
 			<divGen type="toc"/>
 		</front>
 		<body>
-			<schemaSpec ident="mei" start="mei meiHead meiCorpus music" ns="http://www.music-encoding.org/ns/mei" source="/Users/laurent/libs/mei_lpugin/dist/schemata/dev/mei-source_canonicalized.xml"><macroSpec rend="add" ident="data.ACCIDENTAL.WRITTEN" module="MEI" type="dt">
+			<schemaSpec ident="mei" start="mei meiHead meiCorpus music" ns="http://www.music-encoding.org/ns/mei" source="/Users/laurent/libs/mei_official/dist/schemata/dev/mei-source_canonicalized.xml"><macroSpec rend="add" ident="data.ACCIDENTAL.WRITTEN" module="MEI" type="dt">
     <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Written accidental values.</desc>
     <content xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <alternate minOccurs="1" maxOccurs="1"><macroRef key="data.ACCIDENTAL.WRITTEN.basic"/><macroRef key="data.ACCIDENTAL.WRITTEN.extended"/><macroRef key="data.ACCIDENTAL.aeu"/></alternate>
@@ -18572,7 +18572,6 @@
       <memberOf key="att.color"/>
       <memberOf key="att.cue"/>
       <memberOf key="att.beamRend"/>
-      <memberOf key="att.visibility"/>
     </classes>
   </classSpec><classSpec rend="add" ident="att.beaming.vis" module="MEI.visual" type="atts">
     <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Used by layerDef, staffDef, and scoreDef to provide default values for attributes in the
@@ -20171,14 +20170,29 @@
 				</macroSpec><macroSpec rend="add" ident="data.COURSETUNING" module="MEI.frettab" type="dt">
 					<desc>Standard course tunings.</desc>
 					<content>
-						<valList type="closed">
-							<valItem ident="guitar-drop-D">
-								<desc>Guitar Drop D</desc>
-							</valItem>
-							<valItem ident="lute-renaissance-6">
-								<desc>Lute Renaissance 6</desc>
-							</valItem>
-						</valList>
+					   <valList type="semi">
+					      <valItem ident="guitar.standard">
+					         <desc>Standard tuning for current guitars. The courses are tuned to E2 A2 D3 G3 B3 E4.</desc>
+					      </valItem>
+					      <valItem ident="guitar.drop.D">
+					         <desc>Drop D tuning for guitars. The lowest course is tuned down to D, while all other courses are kept to their regular pitches. D2 A2 D3 G3 B3 E4.</desc>
+					      </valItem>
+					      <valItem ident="guitar.open.D">
+					         <desc>Open D tuning for guitars. D2 A2 D3 F3s A3 D4.</desc>
+					      </valItem>
+					      <valItem ident="guitar.open.G">
+					         <desc>Open G tuning for guitars. D2 G2 D2 G2 B3 D4.</desc>
+					      </valItem>
+					      <valItem ident="guitar.open.A">
+					         <desc>Open A tuning for guitars. E2 A2 E3 A3 C4s E4.</desc>
+					      </valItem>
+					      <valItem ident="lute.renaissance.6">
+					         <desc>Renaissance tuning for lutes with 10 strings on 6 courses. G2G3 C3C4 F3F4 A4A4 D4 G4.</desc>
+					      </valItem>
+					      <valItem ident="lute.baroque.d.major">
+					         <desc>Baroque tuning for lutes with 6 stable courses, and additional bass courses tuned to the key of D Major.</desc>
+					      </valItem>
+					   </valList>
 					</content>
 				</macroSpec><classSpec rend="add" ident="att.note.ges.tab" module="MEI.frettab" type="atts" mode="add">
 					<attList>
