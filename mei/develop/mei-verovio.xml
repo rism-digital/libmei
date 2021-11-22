@@ -286,6 +286,9 @@
 					      <valItem ident="lute.baroque.d.major">
 					         <desc>Baroque tuning for lutes with 6 stable courses, and additional bass courses tuned to the key of D Major.</desc>
 					      </valItem>
+					   	<valItem ident="lute.baroque.d.minor">
+					   		<desc>Baroque tuning for lutes with 6 stable courses, and additional bass courses tuned to the key of D minor.</desc>
+					   	</valItem>
 					   </valList>
 					</content>
 				</macroSpec>
