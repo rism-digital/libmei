@@ -432,7 +432,7 @@
       </valList>
     </content>
   </macroSpec><macroSpec rend="add" ident="data.BEAT" module="MEI" type="dt">
-    <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">A beat location, i.e., [0-9]+(\.?[0-9]*)? The value must fall between 0 and the numerator
+    <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">A beat location, <abbr>i.e.</abbr>, [0-9]+(\.?[0-9]*)? The value must fall between 0 and the numerator
       of the time signature + 1, where 0 represents the left bar line and the upper boundary
       represents the right bar line. For example, in 12/8 the value must be in the range from 0 to
       13.</desc>
@@ -521,7 +521,7 @@
           <desc>Drum clef (Unicode 1D125 or Unicode 1D126).</desc>
         </valItem>
         <valItem ident="TAB">
-          <desc>Tablature "clef"; i.e. usually "TAB" rendered vertically.</desc>
+          <desc>Tablature "clef"; <abbr>i.e.</abbr>, usually "TAB" rendered vertically.</desc>
         </valItem>
       </valList>
     </content>
@@ -1219,7 +1219,7 @@
       <choice xmlns="http://relaxng.org/ns/structure/1.0"><ref name="data.FONTSIZENUMERIC"/><ref name="data.FONTSIZETERM"/><ref name="data.PERCENT"/></choice>
     </content>
   </macroSpec><macroSpec rend="add" ident="data.FONTSIZENUMERIC" module="MEI" type="dt">
-    <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Font size expressed as numbers; i.e. points or virtual units.</desc>
+    <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Font size expressed as numbers; <abbr>i.e.</abbr>, points or virtual units.</desc>
     <content xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <rng:data type="token">
         <rng:param name="pattern">\d*(\.\d+)?(pt|vu)</rng:param>
@@ -1491,7 +1491,7 @@
         </rng:data></choice>
     </content>
   </macroSpec><macroSpec rend="add" ident="data.ISOTIME" module="MEI" type="dt">
-    <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">ISO 24-hour time format: HH:MM:SS.ss, i.e.,
+    <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">ISO 24-hour time format: HH:MM:SS.ss, <abbr>i.e.</abbr>,
       [0-9][0-9]:[0-9][0-9]:[0-9][0-9](\.?[0-9]*)?.</desc>
     <content xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <rng:data type="time"/>
@@ -1650,7 +1650,7 @@
       </valList>
     </content>
   </macroSpec><macroSpec rend="add" ident="data.MEASUREBEAT" module="MEI" type="dt">
-    <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">A count of measures plus a beat location, i.e., [0-9]+m *\+ *[0-9]+(\.?[0-9]*)?. The
+    <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">A count of measures plus a beat location, <abbr>i.e.</abbr>, [0-9]+m *\+ *[0-9]+(\.?[0-9]*)?. The
       measure count is the number of barlines crossed by the event, while the beat location is a
       timestamp expressed as a beat with an optional fractional part. For example, "1m+3.5"
       indicates a point in the next measure on the second half of beat 3. The measure number must be
@@ -1665,7 +1665,7 @@
       </rng:data>
     </content>
   </macroSpec><macroSpec rend="add" ident="data.MEASUREBEATOFFSET" module="MEI" type="dt">
-    <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">A count of measures plus a beat location, i.e., (\+|-)?[0-9]+m\+[0-9]+(\.?[0-9]*)?. The
+    <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">A count of measures plus a beat location, <abbr>i.e.</abbr>, (\+|-)?[0-9]+m\+[0-9]+(\.?[0-9]*)?. The
       measure count is the number of barlines crossed by the event, while the beat location is a
       timestamp expressed as a beat with an optional fractional part. The measure number must be in
       the range of preceding measures to the number of remaining measures. A value with a positive
@@ -1681,7 +1681,7 @@
       </rng:data>
     </content>
   </macroSpec><macroSpec rend="add" ident="data.MEASUREMENTABS" module="MEI" type="dt">
-    <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Measurement expressed in real-world (e.g., centimeters, millimeters, inches, points,
+    <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Measurement expressed in real-world (<abbr>e.g.</abbr>, centimeters, millimeters, inches, points,
       picas, or pixels) or virtual units (vu). 'vu' is the default value. Unlike
       data.MEASUREMENTREL, which may be used to express relative measures, only positive values are
       allowed.</desc>
@@ -1691,7 +1691,7 @@
       </rng:data>
     </content>
   </macroSpec><macroSpec rend="add" ident="data.MEASUREMENTREL" module="MEI" type="dt">
-    <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Measurement expressed in real-world (e.g., centimeters, millimeters, inches, points,
+    <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Measurement expressed in real-world (<abbr>e.g.</abbr>, centimeters, millimeters, inches, points,
       picas, or pixels) or virtual units (vu). 'vu' is the default value. Unlike
       data.MEASUREMENTABS, in which only positive values are allowed, both positive and negative
       values are permitted.</desc>
@@ -1701,7 +1701,7 @@
       </rng:data>
     </content>
   </macroSpec><macroSpec rend="add" ident="data.MELODICFUNCTION" module="MEI" type="dt">
-    <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Indication of melodic function, i.e., anticipation, lower neighbor, escape tone,
+    <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Indication of melodic function, <abbr>i.e.</abbr>, anticipation, lower neighbor, escape tone,
       etc.</desc>
     <content xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <valList type="closed">
@@ -1733,7 +1733,7 @@
           <desc>Chromatic lower neighbor.</desc>
         </valItem>
         <valItem ident="ct">
-          <desc>Chord tone (i.e., not an embellishment).</desc>
+          <desc>Chord tone (<abbr>i.e.</abbr>, not an embellishment).</desc>
         </valItem>
         <valItem ident="ct7">
           <desc>Chord tone (7th added to the chord).</desc>
@@ -1865,13 +1865,13 @@
     <content xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <valList type="closed">
         <valItem ident="common">
-          <desc>Common time; i.e. 4/4.</desc>
+          <desc>Common time; <abbr>i.e.</abbr>, 4/4.</desc>
         </valItem>
         <valItem ident="cut">
-          <desc>Cut time; i.e. 2/2.</desc>
+          <desc>Cut time; <abbr>i.e.</abbr>, 2/2.</desc>
         </valItem>
         <valItem ident="open">
-          <desc>Open time signature, i.e., Senza misura. See Gould pp. 611–615.</desc>
+          <desc>Open time signature, <abbr>i.e.</abbr>, Senza misura. See Gould pp. 611–615.</desc>
         </valItem>
       </valList>
     </content>
@@ -2740,16 +2740,16 @@
           <desc>At the right of the page.</desc>
         </valItem>
         <valItem ident="facing">
-          <desc>On the opposite, i.e. facing, page.</desc>
+          <desc>On the opposite, <abbr>i.e.</abbr>, facing, page.</desc>
         </valItem>
         <valItem ident="overleaf">
           <desc>On the other side of the leaf.</desc>
         </valItem>
         <valItem ident="end">
-          <desc>At the end of this division; e.g., chapter, volume, etc.</desc>
+          <desc>At the end of this division; <abbr>e.g.</abbr>, chapter, volume, etc.</desc>
         </valItem>
         <valItem ident="inter">
-          <desc>Within a line text; i.e., an insertion.</desc>
+          <desc>Within a line text; <abbr>i.e.</abbr>, an insertion.</desc>
         </valItem>
         <valItem ident="intra">
           <desc>Between the lines of text, less exact than "sub" or "super".</desc>
@@ -2763,10 +2763,10 @@
             rendition.</desc>
         </valItem>
         <valItem ident="inspace">
-          <desc>In a predefined space; i.e., that left by an earlier scribe.</desc>
+          <desc>In a predefined space; <abbr>i.e.</abbr>, that left by an earlier scribe.</desc>
         </valItem>
         <valItem ident="superimposed">
-          <desc>Obscures original text; e.g., via overstrike, addition of new writing surface
+          <desc>Obscures original text; <abbr>e.g.</abbr>, via overstrike, addition of new writing surface
             material, etc.</desc>
         </valItem>
       </valList>
@@ -2885,7 +2885,7 @@
     </content>
   </macroSpec><macroSpec rend="add" ident="data.OTHERSTAFF" module="MEI" type="dt">
     <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">For musical material designated to appear on another staff, the location of the staff
-      relative to the current one; i.e., the staff above or the staff below.</desc>
+      relative to the current one; <abbr>i.e.</abbr>, the staff above or the staff below.</desc>
     <content xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <valList type="closed">
         <valItem ident="above">
@@ -2905,7 +2905,7 @@
       </rng:data>
     </content>
   </macroSpec><macroSpec rend="add" ident="data.PERCENT" module="MEI" type="dt">
-    <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Positive decimal number plus '%', i.e., [0-9]+(\.?[0-9]*)?\%.</desc>
+    <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Positive decimal number plus '%', <abbr>i.e.</abbr>, [0-9]+(\.?[0-9]*)?\%.</desc>
     <content xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <rng:data type="token">
         <rng:param name="pattern">[0-9]+(\.?[0-9]*)?%</rng:param>
@@ -2954,7 +2954,7 @@
       </rng:data>
     </content>
   </macroSpec><macroSpec rend="add" ident="data.PITCHNUMBER" module="MEI" type="dt">
-    <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Pnum (pitch number, e.g. MIDI) attribute values.</desc>
+    <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Pnum (pitch number, <abbr>e.g.</abbr>, MIDI) attribute values.</desc>
     <content xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <rng:data type="nonNegativeInteger"/>
     </content>
@@ -3247,7 +3247,7 @@
       </valList>
     </content>
   </macroSpec><macroSpec rend="add" ident="data.TEMPOVALUE" module="MEI" type="dt">
-    <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Beats (meter signature denominator) per minute, e.g. 120.</desc>
+    <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Beats (meter signature denominator) per minute, <abbr>e.g.</abbr>, 120.</desc>
     <content xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <rng:data type="decimal"/>
     </content>
@@ -3306,14 +3306,14 @@
           <desc>Struck through by '/' (forward slash).</desc>
         </valItem>
         <valItem ident="line-through">
-          <desc>Struck through by '-'; may be qualified to indicate multiple parallel lines, e.g.
+          <desc>Struck through by '-'; may be qualified to indicate multiple parallel lines, <abbr>e.g.</abbr>,
             line-through(2).</desc>
         </valItem>
         <valItem ident="none">
           <desc>Not rendered, invisible.</desc>
         </valItem>
         <valItem ident="overline">
-          <desc>Line above the text; may be qualified to indicate multiple parallel lines, e.g.
+          <desc>Line above the text; may be qualified to indicate multiple parallel lines, <abbr>e.g.</abbr>,
             overline(3).</desc>
         </valItem>
         <valItem ident="overstrike">
@@ -3322,7 +3322,7 @@
         </valItem>
         <valItem ident="strike">
           <desc>Struck through by '-'; equivalent to line-through; may be qualified to indicate
-            multiple parallel lines, e.g. strike(3).</desc>
+            multiple parallel lines, <abbr>e.g.</abbr>, strike(3).</desc>
         </valItem>
         <valItem ident="sub">
           <desc>Subscript.</desc>
@@ -3335,12 +3335,12 @@
             earlier writing stage.</desc>
         </valItem>
         <valItem ident="underline">
-          <desc>Underlined; may be qualified to indicate multiple parallel lines, e.g.
+          <desc>Underlined; may be qualified to indicate multiple parallel lines, <abbr>e.g.</abbr>,
             underline(2).</desc>
         </valItem>
         <valItem ident="x-through">
           <desc>Crossed-out; equivalent to 'bslash' (\) plus 'fslash' (/); that is, a hand-written
-            'X'; may be qualified to indicate multiple parallel lines, e.g. x-through(2).</desc>
+            'X'; may be qualified to indicate multiple parallel lines, <abbr>e.g.</abbr>, x-through(2).</desc>
         </valItem>
         <valItem ident="ltr">
           <desc>Left-to-right (BIDI embed).</desc>
@@ -3379,7 +3379,7 @@
     </content>
   </macroSpec><macroSpec rend="add" ident="data.TSTAMPOFFSET" module="MEI" type="dt">
     <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">A positive or negative offset from the value given in the tstamp attribute in terms of
-      musical time, i.e., beats[.fractional beat part].</desc>
+      musical time, <abbr>i.e.</abbr>, beats[.fractional beat part].</desc>
     <content xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <rng:data type="decimal"/>
     </content>
@@ -3499,6 +3499,8 @@
     <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Analytical domain attributes.</desc>
   </classSpec><classSpec rend="add" ident="att.custos.anl" module="MEI.analytical" type="atts">
     <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Analytical domain attributes.</desc>
+  </classSpec><classSpec rend="add" ident="att.mdiv.anl" module="MEI.analytical" type="atts">
+    <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Analytical domain attributes.</desc>
   </classSpec><classSpec rend="add" ident="att.dir.anl" module="MEI.analytical" type="atts">
     <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Analytical domain attributes.</desc>
   </classSpec><classSpec rend="add" ident="att.dot.anl" module="MEI.analytical" type="atts">
@@ -3537,12 +3539,12 @@
         <desc>Indicates to what degree the harmonic label is supported by the notation.</desc>
         <valList type="closed">
           <valItem ident="explicit">
-            <desc>The notation contains all the notes necessary for the harmonic label, e.g., the
+            <desc>The notation contains all the notes necessary for the harmonic label, <abbr>e.g.</abbr>, the
               notes "D F♯ A" for the harmonic label "D".</desc>
           </valItem>
           <valItem ident="implied">
             <desc>The harmonic label relies on notes implied, but not actually present, in the
-              notation, e.g., the notes "D F♯ C" for the harmonic label "D7". The note "A" is
+              notation, <abbr>e.g.</abbr>, the notes "D F♯ C" for the harmonic label "D7". The note "A" is
               missing from the notation, but can be implied.</desc>
           </valItem>
         </valList>
@@ -3611,7 +3613,7 @@
       domain that are related to key signatures.</desc>
     <attList xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <attDef ident="key.accid" usage="opt">
-        <desc>Contains an accidental for the tonic key, if one is required, e.g., if key.pname
+        <desc>Contains an accidental for the tonic key, if one is required, <abbr>e.g.</abbr>, if key.pname
           equals 'c' and key.accid equals 's', then a tonic of C# is indicated.</desc>
         <datatype>
           <ref xmlns="http://relaxng.org/ns/structure/1.0" name="data.ACCIDENTAL.GESTURAL"/>
@@ -3624,7 +3626,7 @@
         </datatype>
       </attDef>
       <attDef ident="key.pname" usage="opt">
-        <desc>Holds the pitch name of the tonic key, e.g. 'c' for the key of C.</desc>
+        <desc>Holds the pitch name of the tonic key, <abbr>e.g.</abbr>, 'c' for the key of C.</desc>
         <datatype>
           <ref xmlns="http://relaxng.org/ns/structure/1.0" name="data.PITCHNAME"/>
         </datatype>
@@ -3783,7 +3785,7 @@
     <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Attributes that specify pitch using sol-fa.</desc>
     <attList xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <attDef ident="psolfa" usage="opt">
-        <desc>Contains sol-fa designation, e.g., do, re, mi, etc., in either a fixed or movable Do
+        <desc>Contains sol-fa designation, <abbr>e.g.</abbr>, do, re, mi, etc., in either a fixed or movable Do
           system.</desc>
         <datatype>
           <rng:data type="NMTOKEN"/>
@@ -3896,7 +3898,7 @@
           <desc>Bend indications.</desc>
         </valItem>
         <valItem ident="bracketSpan">
-          <desc>Brackets, e.g., for transcribed ligatures.</desc>
+          <desc>Brackets, <abbr>e.g.</abbr>, for transcribed ligatures.</desc>
         </valItem>
         <valItem ident="breath">
           <desc>Breath marks.</desc>
@@ -4013,7 +4015,7 @@
     <remarks xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <p>The <att>beam.group</att> attribute can be used to set a default beaming pattern to be used
         when no beaming is indicated at the event level. <att>beam.group</att> must contain a
-        comma-separated list of time values that add up to a measure, e.g., in 4/4 time '4,4,4,4'
+        comma-separated list of time values that add up to a measure, <abbr>e.g.</abbr>, in 4/4 time '4,4,4,4'
         indicates each quarter note worth of shorter notes would be beamed together. Parentheses can
         be used to indicate sub-groupings of secondary beams. For example, '(4.,4.,4.)' in 9/8 meter
         indicates one outer beam per measure with secondary beams broken at each dotted quarter
@@ -4367,10 +4369,10 @@
           indicates an increase or a decrease in volume.</desc>
         <valList type="closed">
           <valItem ident="cres">
-            <desc>Crescendo; i.e., louder.</desc>
+            <desc>Crescendo; <abbr>i.e.</abbr>, louder.</desc>
           </valItem>
           <valItem ident="dim">
-            <desc>Diminuendo; i.e., softer.</desc>
+            <desc>Diminuendo; <abbr>i.e.</abbr>, softer.</desc>
           </valItem>
         </valList>
       </attDef>
@@ -4389,7 +4391,7 @@
       <memberOf key="att.duration.logical"/>
     </classes>
   </classSpec><classSpec rend="add" ident="att.harpPedal.log" module="MEI.cmn" type="atts">
-    <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Logical domain attributes. The pedal setting, i.e., flat, natural, or sharp, for each
+    <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Logical domain attributes. The pedal setting, <abbr>i.e.</abbr>, flat, natural, or sharp, for each
       diatonic pitch name is indicated by the seven letter-named attributes.</desc>
     <classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <memberOf key="att.controlEvent"/>
@@ -4564,7 +4566,7 @@
             <desc>Meter signatures apply to alternating measures.</desc>
           </valItem>
           <valItem ident="interchanging">
-            <desc>Meter signatures are interchangeable, e.g. 3/4 and 6/8.</desc>
+            <desc>Meter signatures are interchangeable, <abbr>e.g.</abbr>, 3/4 and 6/8.</desc>
           </valItem>
           <valItem ident="mixed">
             <desc>Meter signatures with different unit values are used to express a complex metrical
@@ -4669,7 +4671,7 @@
     <attList xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <attDef ident="coll" usage="opt">
         <desc>Indicates whether the octave displacement should be performed simultaneously with the
-          written notes, i.e., "coll' ottava". Unlike other octave signs which are indicated by
+          written notes, <abbr>i.e.</abbr>, "coll' ottava". Unlike other octave signs which are indicated by
           broken lines, coll' ottava typically uses an unbroken line or a series of longer broken
           lines, ending with a short vertical stroke. See Read, p. 47-48.</desc>
         <valList type="closed">
@@ -5199,7 +5201,7 @@
     </constraintSpec><remarks xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <p>The <att>shape</att> attribute may be used to record whether the fermata is curved, square,
         or triangular, while <att>form</att> may be used to capture whether the fermata is
-        "upright", i.e., has the curve or bracket above the dot, or inverted, i.e., has the curve or
+        "upright", <abbr>i.e.</abbr>, has the curve or bracket above the dot, or inverted, <abbr>i.e.</abbr>, has the curve or
         bracket below the dot. Other visual forms of a fermata may be indicated via the
         <att>altsym</att> attribute. The starting point of the fermata may be indicated by either a
         <att>startid</att>, <att>tstamp</att>, <att>tstamp.ges</att>, or <att>tstamp.real</att>
@@ -5269,7 +5271,7 @@
             descendants of a graceGrp with a grace attribute.</sch:assert>
         </sch:rule>
       </constraint>
-    </constraintSpec></elementSpec><elementSpec rend="add" ident="hairpin" module="MEI.cmn"><desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Indicates continuous dynamics expressed on the score as wedge-shaped graphics, e.g. &lt;
+    </constraintSpec></elementSpec><elementSpec rend="add" ident="hairpin" module="MEI.cmn"><desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Indicates continuous dynamics expressed on the score as wedge-shaped graphics, <abbr>e.g.</abbr>, &lt;
       and &gt;.</desc><classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <memberOf key="att.common"/>
       <memberOf key="att.facsimile"/>
@@ -5290,7 +5292,7 @@
         </sch:rule>
       </constraint>
     </constraintSpec><remarks xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
-      <p>The <gi scheme="MEI">hairpin</gi> element is used for <emph>graphical</emph>, i.e.,
+      <p>The <gi scheme="MEI">hairpin</gi> element is used for <emph>graphical</emph>, <abbr>i.e.</abbr>,
         crescendo and diminuendo, dynamic markings. For instantaneous or continuous
         <emph>textual</emph> dynamics, such as 'p', 'mf', or 'cres. poco a poco', the <gi scheme="MEI">dynam</gi> element should be used. The starting point of the hairpin marking
         may be indicated by either a <att>startid</att>, <att>tstamp</att>, <att>tstamp.ges</att>,
@@ -5360,21 +5362,7 @@
       <p>The lv element captures the graphical, "tie-like" symbol. Any associated text, such as
         "l.v.", must be captured using a <gi scheme="MEI">dir</gi> element.</p>
     </remarks></elementSpec><elementSpec rend="add" ident="measure" module="MEI.cmn"><desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Unit of musical time consisting of a fixed number of note values of a given type, as
-      determined by the prevailing meter, and delimited in musical notation by bar lines.</desc><classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
-      <memberOf key="att.common"/>
-      <memberOf key="att.facsimile"/>
-      <memberOf key="att.metadataPointing"/>
-      <memberOf key="att.pointing"/>
-      <memberOf key="att.measure.anl"/>
-      <memberOf key="att.measure.ges"/>
-      <memberOf key="att.measure.log"/>
-      <memberOf key="att.measure.vis"/>
-      <memberOf key="att.targetEval"/>
-      <memberOf key="model.measureLike"/>
-    </classes><content xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
-      <optional xmlns="http://relaxng.org/ns/structure/1.0"><ref name="mNum"/></optional>
-      <zeroOrMore xmlns="http://relaxng.org/ns/structure/1.0"><choice><ref name="model.annotLike"/><ref name="model.appLike"/><ref name="model.editLike"/><ref name="model.graphicPrimitiveLike"/><ref name="model.measurePart"/><ref name="model.milestoneLike.music"/><ref name="model.relationLike"/><ref name="model.staffDefLike"/><ref name="model.transcriptionLike"/></choice></zeroOrMore>
-    </content><remarks xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
+      determined by the prevailing meter, and delimited in musical notation by bar lines.</desc><classes><memberOf key="att.coord.lr"/><memberOf key="att.common"/><memberOf key="att.facsimile"/><memberOf key="att.metadataPointing"/><memberOf key="att.pointing"/><memberOf key="att.measure.anl"/><memberOf key="att.measure.ges"/><memberOf key="att.measure.log"/><memberOf key="att.measure.vis"/><memberOf key="att.targetEval"/><memberOf key="model.measureLike"/></classes><content><optional xmlns="http://relaxng.org/ns/structure/1.0"><ref name="mNum"/></optional><zeroOrMore xmlns="http://relaxng.org/ns/structure/1.0"><choice><ref name="model.annotLike"/><ref name="model.appLike"/><ref name="model.editLike"/><ref name="model.graphicPrimitiveLike"/><ref name="model.measurePart"/><ref name="model.milestoneLike.music"/><ref name="model.relationLike"/><ref name="model.staffDefLike"/><ref name="model.transcriptionLike"/></choice></zeroOrMore></content><attList/><remarks xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <p>In MEI, the <gi scheme="MEI">measure</gi> element is a grouping mechanism for events and
         control events. Pointing attributes make it possible to connect this element to other
         internal or external entities, such as media objects or annotations. The <att>width</att>
@@ -5715,7 +5703,7 @@
       <zeroOrMore xmlns="http://relaxng.org/ns/structure/1.0"><choice><ref name="model.appLike"/><ref name="model.editLike"/><ref name="model.eventLike"/><ref name="model.eventLike.cmn"/><ref name="model.transcriptionLike"/></choice></zeroOrMore>
     </content><remarks xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <p>The <gi scheme="MEI">beam</gi> sub-element is allowed so that custom beaming may be
-        indicated, e.g., a septuplet may be divided into a group of three plus a group of four
+        indicated, <abbr>e.g.</abbr>, a septuplet may be divided into a group of three plus a group of four
         notes. See Read, p. 187-215. The <gi scheme="MEI">tuplet</gi> element may also used for
         bowed tremolo (Read, p. 394) and double, triple, or flutter tonguing (Read, p. 348-349);
         that is, for repetition of the same pitch. In the case of irrational durations, such as such
@@ -5773,7 +5761,7 @@
     </classes>
     <attList xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <attDef ident="form" usage="opt">
-        <desc>Records semantic meaning, i.e., intended performance, of the mordent. The
+        <desc>Records semantic meaning, <abbr>i.e.</abbr>, intended performance, of the mordent. The
             <att>altsym</att>, <att>glyph.name</att>, or <att>glyph.num</att> attributes may be used
           to specify the appropriate symbol.</desc>
         <valList type="closed">
@@ -5849,7 +5837,7 @@
         </datatype>
       </attDef>
       <attDef ident="form" usage="opt">
-        <desc>Records meaning; i.e., intended performance, of the turn. The <att>altsym</att>,
+        <desc>Records meaning; <abbr>i.e.</abbr>, intended performance, of the turn. The <att>altsym</att>,
             <att>glyph.name</att>, or <att>glyph.num</att> attributes may be used to specify the
           appropriate symbol.</desc>
         <valList type="closed">
@@ -5910,7 +5898,7 @@
       </constraint>
     </constraintSpec><remarks xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <p>The interval between the main and auxiliary notes is usually understood to be diatonic
-        unless altered by an accidental. The starting note of the trill; i.e., the written one or
+        unless altered by an accidental. The starting note of the trill; <abbr>i.e.</abbr>, the written one or
         the ornamenting one, and the speed of alternation depends on performance practice. The
         starting point of the trill may be indicated by either a <att>startid</att>,
           <att>tstamp</att>, <att>tstamp.ges</att>, or <att>tstamp.real</att> attribute, while the
@@ -5994,9 +5982,9 @@
     </content><remarks xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <p>The alternatives provided in <gi scheme="MEI">lem</gi> and/or <gi scheme="MEI">rdg</gi>
         sub-elements may be thought of as exclusive or as parallel. The <att>type</att> attribute
-        may contain any convenient descriptive word, describing the extent of the variation (e.g.
-        note, phrase, measure, etc.), its text-critical significance (e.g. significant, accidental,
-        unclear), or the nature of the variation or the principles required to understand it (e.g.
+        may contain any convenient descriptive word, describing the extent of the variation (<abbr>e.g.</abbr>,
+        note, phrase, measure, etc.), its text-critical significance (<abbr>e.g.</abbr>, significant, accidental,
+        unclear), or the nature of the variation or the principles required to understand it (<abbr>e.g.</abbr>,
         lectio difficilior, usus auctoris, etc.).</p>
     </remarks><remarks xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <p>This element is modelled on an element in the Text Encoding Initiative (TEI) standard.</p>
@@ -6514,8 +6502,8 @@
         </constraintSpec>
       </attDef></attList><remarks xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <p>The <att>character</att> attribute describes characteristics of the hand, particularly
-        those related to the quality of the writing, e.g., 'shaky', 'thick', regular'. A description
-        of the tint or type of ink, e.g. 'brown' or the writing medium, e.g. 'pencil', may be placed
+        those related to the quality of the writing, <abbr>e.g.</abbr>, 'shaky', 'thick', regular'. A description
+        of the tint or type of ink, <abbr>e.g.</abbr>, 'brown' or the writing medium, <abbr>e.g.</abbr>, 'pencil', may be placed
         in the <att>medium</att> attribute. The new hand may be identified using the <att>new</att>
         attribute, while the previous hand may be recorded in the <att>old</att> attribute. The
         <att>resp</att> attribute contains an ID reference to an element containing the name of the
@@ -6552,7 +6540,7 @@
         </datatype>
         <valList type="semi">
           <valItem ident="confirmation">
-            <desc>confirmation of a previous textual decision; i.e., cancellation of a deleted
+            <desc>confirmation of a previous textual decision; <abbr>i.e.</abbr>, cancellation of a deleted
               passage in a different writing medium.</desc>
           </valItem>
           <valItem ident="addition">
@@ -6700,7 +6688,7 @@
         causative agent. When the presumed loss of text arises from action (partial deletion, etc.)
         assignable to an identifiable hand, the <att>hand</att> attribute signifies the hand
         responsible for the action. The <att>reason</att> attribute indicates why the text has to be
-        supplied, e.g. 'overbinding', 'faded ink', 'lost folio', 'omitted in original', etc. The
+        supplied, <abbr>e.g.</abbr>, 'overbinding', 'faded ink', 'lost folio', 'omitted in original', etc. The
         <att>source</att> attribute contains the source of the supplied text. The editor(s)
         responsible for supplied material may be recorded in the <att>resp</att> attribute. The
         value of resp must point to one or more identifiers declared in the document header. The
@@ -6772,7 +6760,7 @@
         </constraintSpec>
       </attDef>
       <attDef ident="glyph.num" usage="opt">
-        <desc>Numeric glyph reference in hexadecimal notation, e.g. "#xE000" or "U+E000". N.B. SMuFL
+        <desc>Numeric glyph reference in hexadecimal notation, <abbr>e.g.</abbr>, "#xE000" or "U+E000". N.B. SMuFL
           version 1.18 uses the range U+E000 - U+ECBF.</desc>
         <datatype>
           <ref xmlns="http://relaxng.org/ns/structure/1.0" name="data.HEXNUM"/>
@@ -6793,20 +6781,28 @@
         </datatype>
       </attDef>
     </attList>
-  </classSpec><classSpec ident="att.facsimile" module="MEI.facsimile" type="atts" mode="replace">
-					<desc>Attributes that associate a feature corresponding with all or part of an image.</desc>
-					<classes>
-						<memberOf key="att.coordinated"/>
-					</classes>
-					<attList>
-						<attDef ident="facs" usage="opt">
-							<desc>permits the current element to reference a facsimile image or image zone which corresponds to it.</desc>
-							<datatype>
-								<ref xmlns="http://relaxng.org/ns/structure/1.0" name="data.URIS"/>
-							</datatype>
-						</attDef>
-					</attList>
-				</classSpec><elementSpec rend="add" ident="facsimile" module="MEI.facsimile"><desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Contains a representation of a written source in the form of a set of images rather than
+  </classSpec><classSpec rend="add" ident="att.facsimile" module="MEI.facsimile" type="atts">
+    <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Attributes that associate a feature corresponding with all or part of an image.</desc>
+    <attList xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
+      <attDef ident="facs" usage="opt">
+        <desc>Permits the current element to reference a facsimile surface or image zone which
+          corresponds to it.</desc>
+        <datatype maxOccurs="unbounded">
+          <ref xmlns="http://relaxng.org/ns/structure/1.0" name="data.URI"/>
+        </datatype>
+        <constraintSpec ident="check_facsTarget" scheme="isoschematron">
+          <constraint>
+            <sch:rule context="@facs">
+              <sch:assert role="warning" test="not(normalize-space(.) eq '')">@facs attribute should
+                have content.</sch:assert>
+              <sch:assert role="warning" test="every $i in tokenize(., '\s+') satisfies substring($i,2)=//mei:*[local-name() eq 'surface' or local-name() eq 'zone']/@xml:id">Each value in @facs should correspond to the @xml:id attribute of a surface or zone
+                element.</sch:assert>
+            </sch:rule>
+          </constraint>
+        </constraintSpec>
+      </attDef>
+    </attList>
+  </classSpec><elementSpec rend="add" ident="facsimile" module="MEI.facsimile"><desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Contains a representation of a written source in the form of a set of images rather than
       as transcribed or encoded text.</desc><classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <memberOf key="att.common"/>
       <memberOf key="att.metadataPointing"/>
@@ -7474,6 +7470,17 @@
     <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Gestural domain attributes.</desc>
   </classSpec><classSpec rend="add" ident="att.custos.ges" module="MEI.gestural" type="atts">
     <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Gestural domain attributes.</desc>
+  </classSpec><classSpec rend="add" ident="att.mdiv.ges" module="MEI.gestural" type="atts">
+    <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Gestural domain attributes.</desc>
+    <attList xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
+      <attDef ident="attacca">
+        <desc>Indicates that the performance of the next musical division should begin immediately
+          following this one.</desc>
+        <datatype>
+          <ref xmlns="http://relaxng.org/ns/structure/1.0" name="data.BOOLEAN"/>
+        </datatype>
+      </attDef>
+    </attList>
   </classSpec><classSpec rend="add" ident="att.dir.ges" module="MEI.gestural" type="atts">
     <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Gestural domain attributes.</desc>
     <classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
@@ -7508,14 +7515,14 @@
         </datatype>
       </attDef>
       <attDef ident="dur.ppq" usage="opt">
-        <desc>Duration recorded as pulses-per-quarter note, e.g. MIDI clicks or MusicXML
+        <desc>Duration recorded as pulses-per-quarter note, <abbr>e.g.</abbr>, MIDI clicks or MusicXML
           divisions.</desc>
         <datatype>
           <rng:data type="nonNegativeInteger"/>
         </datatype>
       </attDef>
       <attDef ident="dur.real" usage="opt">
-        <desc>Duration in seconds, e.g. '1.732'.</desc>
+        <desc>Duration in seconds, <abbr>e.g.</abbr>, '1.732'.</desc>
         <datatype>
           <rng:data type="decimal">
             <rng:param name="pattern">\d+(\.\d+)?</rng:param>
@@ -7855,7 +7862,7 @@
         </datatype>
       </attDef>
       <attDef ident="tune.Hz" usage="opt">
-        <desc>Holds a value for cycles per second, i.e., Hertz, for a tuning reference pitch.</desc>
+        <desc>Holds a value for cycles per second, <abbr><abbr>i.e.</abbr>,</abbr>, Hertz, for a tuning reference pitch.</desc>
         <datatype>
           <rng:data type="decimal"/>
         </datatype>
@@ -7961,7 +7968,7 @@
     <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Attributes that record a performed (as opposed to notated) time stamp.</desc>
     <attList xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <attDef ident="tstamp.ges" usage="opt">
-        <desc>Encodes the onset time in terms of musical time, i.e., beats[.fractional beat part],
+        <desc>Encodes the onset time in terms of musical time, <abbr>i.e.</abbr>, beats[.fractional beat part],
           as expressed in the written time signature.</desc>
         <datatype>
           <ref xmlns="http://relaxng.org/ns/structure/1.0" name="data.BEAT"/>
@@ -7979,7 +7986,7 @@
       event.</desc>
     <attList xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <attDef ident="tstamp2.ges" usage="opt">
-        <desc>Encodes the ending point of an event, i.e., a count of measures plus a beat location
+        <desc>Encodes the ending point of an event, <abbr>i.e.</abbr>, a count of measures plus a beat location
           in the ending measure.</desc>
         <datatype>
           <ref xmlns="http://relaxng.org/ns/structure/1.0" name="data.MEASUREBEAT"/>
@@ -8133,7 +8140,7 @@
       <memberOf key="model.figbassLike"/>
     </classes><content xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <zeroOrMore xmlns="http://relaxng.org/ns/structure/1.0"><choice><ref name="model.fLike"/><ref name="model.editLike"/><ref name="model.transcriptionLike"/></choice></zeroOrMore>
-    </content></elementSpec><elementSpec rend="add" ident="harm" module="MEI.harmony"><desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">(harmony) – An indication of harmony, e.g., chord names, tablature grids, harmonic
+    </content></elementSpec><elementSpec rend="add" ident="harm" module="MEI.harmony"><desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">(harmony) – An indication of harmony, <abbr>e.g.</abbr>, chord names, tablature grids, harmonic
       analysis, figured bass.</desc><classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <memberOf key="att.common"/>
       <memberOf key="att.facsimile"/>
@@ -8293,9 +8300,9 @@
           <item>Use for motion pictures, videorecordings (including digital video), filmstrips,
             slide, transparencies or material specifically designed for projection.</item>
           <label>i</label>
-          <item>Use for recordings of nonmusical sounds (e.g., speech).</item>
+          <item>Use for recordings of nonmusical sounds (<abbr>e.g.</abbr>, speech).</item>
           <label>j</label>
-          <item>Use for musical sound recording (e.g., phonodiscs, compact discs, or cassette
+          <item>Use for musical sound recording (<abbr>e.g.</abbr>, phonodiscs, compact discs, or cassette
             tapes.</item>
           <label>k</label>
           <item>Use for two-dimensional nonprojectable graphics such as, activity cards, charts,
@@ -8306,7 +8313,7 @@
           <label>m</label>
           <item>Use for computer software (including programs, games, fonts), numeric data,
             computer-oriented multimedia, online systems or services. Other classes of electronic
-            resources are coded for their most significant aspect (e.g. language material, graphic,
+            resources are coded for their most significant aspect (<abbr>e.g.</abbr>, language material, graphic,
             cartographic material, sound, music, moving image). In case of doubt or if the most
             significant aspect cannot be determined, consider the item a computer file.</item>
           <label>o</label>
@@ -8320,7 +8327,7 @@
           <item>Use for materials in two or more forms that are usually related by virtue of their
             having been accumulated by or about a person or body. Includes archival fonds and
             manuscript collections of mixed forms of materials, such as text, photographs, and sound
-            recordings. Intended primary purpose is other than for instructional purposes (i.e.,
+            recordings. Intended primary purpose is other than for instructional purposes (<abbr>i.e.</abbr>,
             materials coded as "o").</item>
           <label>r</label>
           <item>Includes man-made objects such as models, dioramas, games, puzzles, simulations,
@@ -8402,7 +8409,7 @@
         expressing FRBR's hasPart and isPartOf relationships, it avoids this terminology in order to
         prevent confusion with musical terminology. Work, expression, and item components must be
         the same type as the parent of componentList: <gi scheme="MEI">work</gi> children are
-        allowed within <gi scheme="MEI">work</gi>, etc. Manifestations; i.e., sources, may have
+        allowed within <gi scheme="MEI">work</gi>, etc. Manifestations; <abbr>i.e.</abbr>, sources, may have
         either <gi scheme="MEI">source</gi> or <gi scheme="MEI">item</gi>components as required to
         accommodate composite sources (those containing multiple sources) or multi-part sources
         (those made up of several physical items.</p>
@@ -8488,8 +8495,8 @@
         <datatype>
           <rng:data type="string"/>
         </datatype>
-      </attDef></attList></elementSpec><elementSpec rend="add" ident="audience" module="MEI.header"><desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Defines the class of user for which the work is intended, as defined by age group (e.g.,
-      children, young adults, adults, etc.), educational level (e.g., primary, secondary, etc.), or
+      </attDef></attList></elementSpec><elementSpec rend="add" ident="audience" module="MEI.header"><desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Defines the class of user for which the work is intended, as defined by age group (<abbr>e.g.</abbr>,
+      children, young adults, adults, etc.), educational level (<abbr>e.g.</abbr>, primary, secondary, etc.), or
       other categorization.</desc><classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <memberOf key="att.common"/>
       <memberOf key="att.authorized"/>
@@ -8529,7 +8536,7 @@
     </classes><content xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <zeroOrMore xmlns="http://relaxng.org/ns/structure/1.0"><choice><rng:text xmlns="http://www.tei-c.org/ns/1.0"/><ref name="model.textPhraseLike.limited"/><ref name="model.respLikePart"/></choice></zeroOrMore>
     </content></elementSpec><elementSpec rend="add" ident="captureMode" module="MEI.header"><desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">(capture mode) – The means used to record notation, sound, or images in the production of
-      a source/manifestation (e.g., analogue, acoustic, electric, digital, optical etc.).</desc><classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
+      a source/manifestation (<abbr>e.g.</abbr>, analogue, acoustic, electric, digital, optical etc.).</desc><classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <memberOf key="att.common"/>
       <memberOf key="att.authorized"/>
       <memberOf key="att.bibl"/>
@@ -8538,9 +8545,9 @@
     </classes><content xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <ref xmlns="http://relaxng.org/ns/structure/1.0" name="macro.struc-unstrucContent"/>
     </content></elementSpec><elementSpec rend="add" ident="carrierForm" module="MEI.header"><desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">(carrier form) – The specific class of material to which the physical carrier of the
-      source/manifestation belongs (e.g., sound cassette, videodisc, microfilm cartridge,
+      source/manifestation belongs (<abbr>e.g.</abbr>, sound cassette, videodisc, microfilm cartridge,
       transparency, etc.). The carrier for a manifestation comprising multiple physical components
-      may include more than one form (e.g., a filmstrip with an accompanying booklet, a separate
+      may include more than one form (<abbr>e.g.</abbr>, a filmstrip with an accompanying booklet, a separate
       sound disc carrying the sound track for a film, etc.).</desc><classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <memberOf key="att.common"/>
       <memberOf key="att.authorized"/>
@@ -8659,7 +8666,7 @@
         multiple MEI documents, or MEI documents and bibliographic records from many
         institutions.</p>
     </remarks></elementSpec><elementSpec rend="add" ident="condition" module="MEI.header"><desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">The physical condition of an item, particularly any variances between the physical make-up
-      of the item and that of other copies of the same item (e.g., missing pages or plates,
+      of the item and that of other copies of the same item (<abbr>e.g.</abbr>, missing pages or plates,
       brittleness, faded images, etc.).</desc><classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <memberOf key="att.common"/>
       <memberOf key="att.bibl"/>
@@ -8720,7 +8727,7 @@
         included material is desired, use the <gi scheme="MEI">componentList</gi> element
         instead.</p>
     </remarks></elementSpec><elementSpec rend="add" ident="context" module="MEI.header"><desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">The historical, social, intellectual, artistic, or other context within which the work was
-      originally conceived (e.g., the 17th century restoration of the monarchy in England, the
+      originally conceived (<abbr>e.g.</abbr>, the 17th century restoration of the monarchy in England, the
       aesthetic movement of the late 19th century, etc.) or the historical, social, intellectual,
       artistic, or other context within which the expression was realized.</desc><classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <memberOf key="att.common"/>
@@ -8803,7 +8810,7 @@
           </valItem>
         </valList>
       </attDef></attList><remarks xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
-      <p>The dimensions (@width, @height) of the parent element (e.g. <gi scheme="MEI">folium</gi>)
+      <p>The dimensions (@width, @height) of the parent element (<abbr>e.g.</abbr>, <gi scheme="MEI">folium</gi>)
         indicate the size of the bounding box of the remaining part of the page. That is, if the
         complete lower half of a page has been cut, the @width and @height attributes describe the
         remaining upper half. If, in contrast, only the lower right quarter of the page has been
@@ -8900,8 +8907,8 @@
       <memberOf key="att.whitespace"/>
     </classes><content xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <zeroOrMore xmlns="http://relaxng.org/ns/structure/1.0"><group><choice><rng:text xmlns="http://www.tei-c.org/ns/1.0"/><ref name="macro.anyXML"/></choice></group></zeroOrMore>
-    </content></elementSpec><elementSpec rend="add" ident="fileChar" module="MEI.header"><desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">(file characteristics) – Standards or schemes used to encode the file (e.g., ASCII, SGML,
-      etc.), physical characteristics of the file (e.g., recording density, parity, blocking, etc.),
+    </content></elementSpec><elementSpec rend="add" ident="fileChar" module="MEI.header"><desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">(file characteristics) – Standards or schemes used to encode the file (<abbr>e.g.</abbr>, ASCII, SGML,
+      etc.), physical characteristics of the file (<abbr>e.g.</abbr>, recording density, parity, blocking, etc.),
       and other characteristics that have a bearing on how the file can be processed.</desc><classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <memberOf key="att.common"/>
       <memberOf key="att.bibl"/>
@@ -8971,8 +8978,8 @@
         </datatype>
       </attDef></attList><remarks xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <p>The <att>initial</att> attribute indicates whether this is the first or main hand of the
-        document. The <att>medium</att> attribute describes the writing medium, e.g., 'pencil', or
-        the tint or type of ink, e.g. 'brown'. The <att>resp</att> attribute contains an ID
+        document. The <att>medium</att> attribute describes the writing medium, <abbr>e.g.</abbr>, 'pencil', or
+        the tint or type of ink, <abbr>e.g.</abbr>, 'brown'. The <att>resp</att> attribute contains an ID
         reference to an element containing the name of the editor or transcriber responsible for
         identifying the hand. The characteristics of the hand, particularly those related to the
         quality of the writing, such as 'shaky', 'thick', etc. may be described within the content
@@ -9159,7 +9166,7 @@
             <desc>Header is attached to a corpus.</desc>
           </valItem>
           <valItem ident="independent">
-            <desc>Header is independent; i.e., not attached to either a music or a corpus
+            <desc>Header is independent; <abbr>i.e.</abbr>, not attached to either a music or a corpus
               document.</desc>
           </valItem>
         </valList>
@@ -9318,7 +9325,7 @@
     </classes><content xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <ref xmlns="http://relaxng.org/ns/structure/1.0" name="macro.struc-unstrucContent"/>
     </content><attList><attDef ident="isodur" usage="opt">
-        <desc>Holds a W3C duration value, e.g., "PT2H34M45.67S".</desc>
+        <desc>Holds a W3C duration value, <abbr>e.g.</abbr>, "PT2H34M45.67S".</desc>
         <datatype>
           <rng:data type="duration"/>
         </datatype>
@@ -9386,7 +9393,7 @@
       <zeroOrMore xmlns="http://relaxng.org/ns/structure/1.0"><ref name="model.physDescPart"/></zeroOrMore>
     </content><remarks xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <p>Dedicatory text and title page features may also be encoded here when they are not
-        transcribed as part of the front or back matter; i.e., when they are considered to be
+        transcribed as part of the front or back matter; <abbr>i.e.</abbr>, when they are considered to be
         meta-data rather than a transcription.</p>
     </remarks><remarks xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <p>This element is modelled on an element in the Encoded Archival Description (EAD)
@@ -9422,7 +9429,7 @@
         <att>facs</att> attribute may be used to record the location of the plate number in a
         facsimile image.</p>
     </remarks></elementSpec><elementSpec rend="add" ident="playingSpeed" module="MEI.header"><desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Playing speed for a sound recording is the speed at which the carrier must be operated to
-      produce the sound intended (e.g., 33 1/3 rpm, 19 cm/s, etc.).</desc><classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
+      produce the sound intended (<abbr>e.g.</abbr>, 33 1/3 rpm, 19 cm/s, etc.).</desc><classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <memberOf key="att.common"/>
       <memberOf key="att.bibl"/>
       <memberOf key="att.lang"/>
@@ -9512,7 +9519,7 @@
       <oneOrMore xmlns="http://relaxng.org/ns/structure/1.0"><ref name="model.pLike"/></oneOrMore>
     </content><remarks xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <p>This element is modelled on an element in the Text Encoding Initiative (TEI) standard.</p>
-    </remarks></elementSpec><elementSpec rend="add" ident="scoreFormat" module="MEI.header"><desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Describes the type of score used to represent a musical composition (e.g., short score,
+    </remarks></elementSpec><elementSpec rend="add" ident="scoreFormat" module="MEI.header"><desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Describes the type of score used to represent a musical composition (<abbr>e.g.</abbr>, short score,
       full score, condensed score, close score, etc.).</desc><classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <memberOf key="att.common"/>
       <memberOf key="att.authorized"/>
@@ -9564,7 +9571,7 @@
         </datatype>
       </attDef></attList><remarks xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <p>The number of apparent playback channels can differ from the number of physical channels of
-        the recording medium, i.e., 2-track monophonic recordings. In this example, the soundChan
+        the recording medium, <abbr>i.e.</abbr>, 2-track monophonic recordings. In this example, the soundChan
         element should record the fact that there is a single output channel, while the <gi scheme="MEI">trackConfig</gi> element should capture the existence of two physical tracks.
         This element is analogous to MARC field 344 subfield g.</p>
     </remarks></elementSpec><elementSpec rend="add" ident="source" module="MEI.header"><desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">A bibliographic description of a source used in the creation of the electronic
@@ -9610,7 +9617,7 @@
       <p>This element is recommended where the MEI file is a transcription of existing music, but is
         not required when the data is originally created in MEI form.</p>
     </remarks></elementSpec><elementSpec rend="add" ident="specRepro" module="MEI.header"><desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">(special reproduction characteristic) – The equalization system, noise reduction system,
-      etc. used in making the recording (e.g., NAB, DBX, Dolby, etc.).</desc><classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
+      etc. used in making the recording (<abbr>e.g.</abbr>, NAB, DBX, Dolby, etc.).</desc><classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <memberOf key="att.common"/>
       <memberOf key="att.authorized"/>
       <memberOf key="att.bibl"/>
@@ -9718,7 +9725,7 @@
       <zeroOrMore xmlns="http://relaxng.org/ns/structure/1.0"><choice><ref name="model.respLike"/></choice></zeroOrMore>
     </content><remarks xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <p>This element is modelled on an element in the Text Encoding Initiative (TEI) standard.</p>
-    </remarks></elementSpec><elementSpec rend="add" ident="trackConfig" module="MEI.header"><desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">(track configuration) – Number of physical/input tracks on a sound medium (e.g., eight
+    </remarks></elementSpec><elementSpec rend="add" ident="trackConfig" module="MEI.header"><desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">(track configuration) – Number of physical/input tracks on a sound medium (<abbr>e.g.</abbr>, eight
       track, twelve track).</desc><classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <memberOf key="att.common"/>
       <memberOf key="att.authorized"/>
@@ -9734,12 +9741,12 @@
         </datatype>
       </attDef></attList><remarks xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <p>The number of apparent playback channels can differ from the number of physical channels of
-        the recording medium, i.e., 2-track monophonic recordings. In this example, the trackConfig
+        the recording medium, <abbr>i.e.</abbr>, 2-track monophonic recordings. In this example, the trackConfig
         element should record the fact that there are two physical tracks on the sound medium, while
         the <gi scheme="MEI">soundChan</gi> element should be used to state that there is a single
         output channel. This element may be mapped to MARC field 344 subfield e or subfield f as
         appropriate.</p>
-    </remarks></elementSpec><elementSpec rend="add" ident="treatHist" module="MEI.header"><desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">(treatment history) – A record of the treatment the item has undergone (e.g.,
+    </remarks></elementSpec><elementSpec rend="add" ident="treatHist" module="MEI.header"><desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">(treatment history) – A record of the treatment the item has undergone (<abbr>e.g.</abbr>,
       de-acidification, restoration, etc.).</desc><classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <memberOf key="att.common"/>
       <memberOf key="att.bibl"/>
@@ -9748,12 +9755,12 @@
     </classes><content xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <ref xmlns="http://relaxng.org/ns/structure/1.0" name="macro.struc-unstrucContent"/>
     </content><remarks xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
-      <p>Treatment history may also comprise details of the treatment process (e.g., chemical
+      <p>Treatment history may also comprise details of the treatment process (<abbr>e.g.</abbr>, chemical
         solutions used, techniques applied, etc.), the date the treatment was applied, etc.</p>
     </remarks><remarks xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <p>This element is modelled on an element in the Encoded Archival Description (EAD)
         standard.</p>
-    </remarks></elementSpec><elementSpec rend="add" ident="treatSched" module="MEI.header"><desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">(treatment scheduled) – Scheduled treatment, e.g. de-acidification, restoration, etc., for
+    </remarks></elementSpec><elementSpec rend="add" ident="treatSched" module="MEI.header"><desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">(treatment scheduled) – Scheduled treatment, <abbr>e.g.</abbr>, de-acidification, restoration, etc., for
       an item.</desc><classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <memberOf key="att.common"/>
       <memberOf key="att.bibl"/>
@@ -9808,7 +9815,7 @@
     </remarks><remarks xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <p>This element is modelled on an element in the Text Encoding Initiative (TEI) standard.</p>
     </remarks></elementSpec><elementSpec rend="add" ident="work" module="MEI.header"><desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Provides a detailed description of a work — a distinct intellectual or artistic creation —
-      specifically its history, language use, and high-level musical attributes (e.g., key, tempo,
+      specifically its history, language use, and high-level musical attributes (<abbr>e.g.</abbr>, key, tempo,
       meter, medium of performance, and intended duration).</desc><classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <memberOf key="att.common"/>
       <memberOf key="att.authorized"/>
@@ -9858,13 +9865,13 @@
     </classes>
   </classSpec><classSpec rend="add" ident="att.refrain.log" module="MEI.lyrics" type="atts">
     <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Logical domain attributes. The n attribute should be used for verse numbers. Numbers need
-      not be consecutive; they may also be expressed as ranges, e.g. 2-3,6.</desc>
+      not be consecutive; they may also be expressed as ranges, <abbr>e.g.</abbr>, 2-3,6.</desc>
   </classSpec><classSpec rend="add" ident="att.verse.log" module="MEI.lyrics" type="atts">
     <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Logical domain attributes. The n attribute should be used for verse numbers. Numbers need
-      not be consecutive; they may also be expressed as ranges, e.g. 2-3,6.</desc>
+      not be consecutive; they may also be expressed as ranges, <abbr>e.g.</abbr>, 2-3,6.</desc>
   </classSpec><classSpec rend="add" ident="att.volta.log" module="MEI.lyrics" type="atts">
     <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Logical domain attributes. The n attribute should be used for repetition numbers. Numbers
-      need not be consecutive; they may also be expressed as ranges, e.g. 2-3,6.</desc>
+      need not be consecutive; they may also be expressed as ranges, <abbr>e.g.</abbr>, 2-3,6.</desc>
   </classSpec><classSpec rend="add" predeclare="true" ident="model.verseLike" module="MEI.lyrics" type="model">
     <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Groups elements that contain a lyric verse.</desc>
     <classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
@@ -10074,7 +10081,7 @@
     <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Attribute that expresses duration for a given mensural note symbol.</desc>
     <attList xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <attDef ident="dur.quality" usage="rec">
-        <desc>Encodes the durational quality of a mensural note using the values provided by the data.DURQUALITY.mensural datatype (i.e., the perfect / imperfect / altered / major / minor / duplex quality of a note).</desc>
+        <desc>Encodes the durational quality of a mensural note using the values provided by the data.DURQUALITY.mensural datatype (<abbr>i.e.</abbr>, the perfect / imperfect / altered / major / minor / duplex quality of a note).</desc>
         <datatype>
           <ref xmlns="http://relaxng.org/ns/structure/1.0" name="data.DURQUALITY.mensural"/>
         </datatype>
@@ -10118,7 +10125,7 @@
     <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Used by staffDef and scoreDef to provide default values for attributes in the logical
       domain related to mensuration. The tempus, prolatio, modusmaior, and modusminor attributes
       (from the att.mensural.shared class) specify the relationship between the four principle
-      levels of note value, i.e., the long, breve, semibreve and minim, in mensural notation.
+      levels of note value, <abbr>i.e.</abbr>, the long, breve, semibreve and minim, in mensural notation.
       Modusminor describes the long-breve relationship, while tempus describes the breve-semibreve,
       and prolatio the semibreve-minim relationship, respectively. Modusmaior is for the maxima-long
       relationship. The proport.* attributes describe augmentation or diminution of the normal value
@@ -10129,14 +10136,14 @@
     <attList xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <attDef ident="proport.num" usage="opt">
         <desc>Together, proport.num and proport.numbase specify a proportional change as a ratio,
-          e.g., 1:3. Proport.num is for the first value in the ratio.</desc>
+          <abbr>e.g.</abbr>, 1:3. Proport.num is for the first value in the ratio.</desc>
         <datatype>
           <rng:data type="positiveInteger"/>
         </datatype>
       </attDef>
       <attDef ident="proport.numbase" usage="opt">
         <desc>Together, proport.num and proport.numbase specify a proportional change as a ratio,
-          e.g., 1:3. Proport.numbase is for the second value in the ratio.</desc>
+          <abbr>e.g.</abbr>, 1:3. Proport.numbase is for the second value in the ratio.</desc>
         <datatype>
           <rng:data type="positiveInteger"/>
         </datatype>
@@ -10724,7 +10731,7 @@
       <zeroOrMore xmlns="http://relaxng.org/ns/structure/1.0"><choice><ref name="cc"/><ref name="chan"/><ref name="chanPr"/><ref name="cue"/><ref name="hex"/><ref name="marker"/><ref name="metaText"/><ref name="noteOff"/><ref name="noteOn"/><ref name="port"/><ref name="prog"/><ref name="seqNum"/><ref name="trkName"/><ref name="vel"/></choice></zeroOrMore>
     </content><remarks xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <p>The <att>label</att> attribute can be used to differentiate between multiple MIDI data
-        streams, e.g. quantized/unquantized, straight/swing, ornamented/as notated, etc.</p>
+        streams, <abbr>e.g.</abbr>, quantized/unquantized, straight/swing, ornamented/as notated, etc.</p>
     </remarks></elementSpec><elementSpec rend="add" ident="noteOff" module="MEI.midi"><desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">MIDI note-off event.</desc><classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <memberOf key="att.common"/>
       <memberOf key="att.midi.event"/>
@@ -11207,7 +11214,7 @@
         </valList>
       </attDef>
       <attDef ident="s-shape" usage="opt">
-        <desc>Direction of the initial direction for an s-shaped pen stroke; i.e., "w" for the
+        <desc>Direction of the initial direction for an s-shaped pen stroke; <abbr>i.e.</abbr>, "w" for the
           standard letter S, "e" for its mirror image, "s" for the letter S turned 90-degrees
           anti-clockwise, and "n" for its mirror image.</desc>
         <datatype>
@@ -11482,6 +11489,7 @@
       <memberOf key="att.visibility"/>
       <memberOf key="att.xy"/>
       <memberOf key="att.visualOffset.ho"/>
+      <memberOf key="model.eventLike.neumes"/>
     </classes><attList><attDef ident="form" usage="opt">
         <desc>Identifies the different kinds of division.</desc>
         <datatype maxOccurs="unbounded">
@@ -11850,7 +11858,7 @@
     </classes>
   </classSpec><classSpec rend="add" ident="att.annot.log" module="MEI.shared" type="atts">
     <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Logical domain attributes for annot. Values for the type attribute can be taken from any
-      convenient typology of annotation suitable to the work in hand; e.g. annotation, gloss,
+      convenient typology of annotation suitable to the work in hand; <abbr>e.g.</abbr>, annotation, gloss,
       citation, digression, preliminary, temporary, etc.</desc>
     
     <classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
@@ -11987,7 +11995,7 @@
     <attList xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <attDef ident="bar.len" usage="opt">
         <desc>States the length of barlines in virtual units. The value must be greater than 0 and
-          is typically equal to 2 times (the number of staff lines - 1); e.g., a value of '8' for a
+          is typically equal to 2 times (the number of staff lines - 1); <abbr>e.g.</abbr>, a value of '8' for a
           5-line staff.</desc>
         <datatype>
           <rng:data type="decimal">
@@ -12058,7 +12066,7 @@
       <p>Mapping elements from one system to another via <att>analog</att> may help a repository
         harvest selected data from the MEI file to build a basic catalog record. The encoding system
         from which fields are taken must be specified. When possible, subfields as well as fields
-        should be specified, e.g., subfields within MARC fields.</p>
+        should be specified, <abbr>e.g.</abbr>, subfields within MARC fields.</p>
     </remarks>
   </classSpec><classSpec rend="add" ident="att.caesura.log" module="MEI.shared" type="atts">
     <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Logical domain attributes.</desc>
@@ -12314,7 +12322,7 @@
     <attList xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <attDef ident="bezier" usage="opt">
         <desc>Records the placement of Bezier control points as a series of pairs of space-separated
-          values; e.g., 19 45 -32 118.</desc>
+          values; <abbr>e.g.</abbr>, 19 45 -32 118.</desc>
         <datatype>
           <list xmlns="http://relaxng.org/ns/structure/1.0"><oneOrMore><rng:data xmlns="http://www.tei-c.org/ns/1.0" type="decimal"/><rng:data xmlns="http://www.tei-c.org/ns/1.0" type="decimal"/></oneOrMore></list>
         </datatype>
@@ -12440,6 +12448,11 @@
         </constraintSpec>
       </attDef>
     </attList>
+  </classSpec><classSpec rend="add" ident="att.mdiv.log" module="MEI.shared" type="atts">
+    <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Logical domain attributes.</desc>
+    <classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
+      <memberOf key="att.alignment"/>
+    </classes>
   </classSpec><classSpec rend="add" ident="att.metadataPointing" module="MEI.shared" type="atts">
     <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Provides attributes for elements which may be associated with particular contextual
       elements within the header.</desc>
@@ -12630,7 +12643,7 @@
       </attDef>
     </attList>
   </classSpec><classSpec rend="add" ident="att.event" module="MEI.shared" type="atts">
-    <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Attributes that apply to all written events, e.g., note, chord, rest, etc.</desc>
+    <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Attributes that apply to all written events, <abbr>e.g.</abbr>, note, chord, rest, etc.</desc>
     <classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <memberOf key="att.alignment"/>
       <memberOf key="att.layerIdent"/>
@@ -12852,7 +12865,7 @@
       </attDef>
     </attList>
     <remarks xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
-      <p>Mixed key signatures, e.g. those consisting of a mixture of flats and sharps (Read, p. 143,
+      <p>Mixed key signatures, <abbr>e.g.</abbr>, those consisting of a mixture of flats and sharps (Read, p. 143,
         ex. 9-39), and key signatures with unorthodox placement of the accidentals (Read, p. 141)
         can be encoded using the <gi scheme="MEI">keySig</gi> element.</p>
     </remarks>
@@ -12868,7 +12881,7 @@
       </attDef>
     </attList>
     <remarks xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
-      <p>Mixed key signatures, e.g. those consisting of a mixture of flats and sharps (Read, p. 143,
+      <p>Mixed key signatures, <abbr>e.g.</abbr>, those consisting of a mixture of flats and sharps (Read, p. 143,
         ex. 9-39), and key signatures with unorthodox placement of the accidentals (Read, p. 141)
         can be encoded using the <gi scheme="MEI">keySig</gi> element.</p>
     </remarks>
@@ -13372,13 +13385,13 @@
           meter.</desc>
         <valList type="closed">
           <valItem ident="c">
-            <desc>Complete; i.e., conformant with the prevailing meter.</desc>
+            <desc>Complete; <abbr>i.e.</abbr>, conformant with the prevailing meter.</desc>
           </valItem>
           <valItem ident="i">
-            <desc>Incomplete; i.e., not enough beats.</desc>
+            <desc>Incomplete; <abbr>i.e.</abbr>, not enough beats.</desc>
           </valItem>
           <valItem ident="o">
-            <desc>Overfull; i.e., too many beats.</desc>
+            <desc>Overfull; <abbr>i.e.</abbr>, too many beats.</desc>
           </valItem>
         </valList>
       </attDef>
@@ -13620,7 +13633,7 @@
             <sch:rule context="mei:*[lower-case(@head.auth) eq 'smufl']">
               <sch:assert test="matches(@head.shape, '^#x') or matches(@head.shape, '^U+')">When
                 @head.auth matches 'smufl', @head.shape must contain a numeric glyph reference in
-                hexadecimal notation, e.g. "#xE000" or "U+E000".</sch:assert>
+                hexadecimal notation, <abbr>e.g.</abbr>, "#xE000" or "U+E000".</sch:assert>
             </sch:rule>
           </constraint>
         </constraintSpec>
@@ -13785,14 +13798,14 @@
     <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Attributes that identify a musical range in terms of musical time.</desc>
     <attList xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <attDef ident="origin.tstamp" usage="opt">
-        <desc>encodes the starting point of musical material in terms of musical time, i.e., a
+        <desc>encodes the starting point of musical material in terms of musical time, <abbr>i.e.</abbr>, a
           (potentially negative) count of measures plus a beat location.</desc>
         <datatype>
           <ref xmlns="http://relaxng.org/ns/structure/1.0" name="data.MEASUREBEATOFFSET"/>
         </datatype>
       </attDef>
       <attDef ident="origin.tstamp2" usage="rec">
-        <desc>encodes the ending point of musical material in terms of musical time, i.e., a count
+        <desc>encodes the ending point of musical material in terms of musical time, <abbr>i.e.</abbr>, a count
           of measures plus a beat location. The values are relative to the measure identified by
           <att>origin.tstamp</att>.</desc>
         <datatype>
@@ -14359,16 +14372,16 @@
         <desc>Specifies the symbol used to group a set of staves.</desc>
         <valList type="closed">
           <valItem ident="brace">
-            <desc>Curved symbol, i.e., {.</desc>
+            <desc>Curved symbol, <abbr>i.e.</abbr>, {.</desc>
           </valItem>
           <valItem ident="bracket">
-            <desc>Square symbol, i.e., [, but with curved/angled top and bottom segments.</desc>
+            <desc>Square symbol, <abbr>i.e.</abbr>, [, but with curved/angled top and bottom segments.</desc>
           </valItem>
           <valItem ident="bracketsq">
-            <desc>Square symbol, i.e., [, with horizontal top and bottom segments.</desc>
+            <desc>Square symbol, <abbr>i.e.</abbr>, [, with horizontal top and bottom segments.</desc>
           </valItem>
           <valItem ident="line">
-            <desc>Line symbol, i.e., |, (wide) line without top and bottom curved/horizontal
+            <desc>Line symbol, <abbr>i.e.</abbr>, |, (wide) line without top and bottom curved/horizontal
               segments.</desc>
           </valItem>
           <valItem ident="none">
@@ -14790,11 +14803,11 @@
       </attDef>
     </attList>
   </classSpec><classSpec rend="add" ident="att.timestamp.logical" module="MEI.shared" type="atts">
-    <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Attributes that record a time stamp in terms of musical time, i.e., beats[.fractional beat
+    <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Attributes that record a time stamp in terms of musical time, <abbr>i.e.</abbr>, beats[.fractional beat
       part].</desc>
     <attList xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <attDef ident="tstamp" usage="opt">
-        <desc>Encodes the onset time in terms of musical time, i.e., beats[.fractional beat part],
+        <desc>Encodes the onset time in terms of musical time, <abbr>i.e.</abbr>, beats[.fractional beat part],
           as expressed in the written time signature.</desc>
         <datatype>
           <ref xmlns="http://relaxng.org/ns/structure/1.0" name="data.BEAT"/>
@@ -14806,7 +14819,7 @@
       time.</desc>
     <attList xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <attDef ident="tstamp2" usage="opt">
-        <desc>Encodes the ending point of an event, i.e., a count of measures plus a beat location
+        <desc>Encodes the ending point of an event, <abbr>i.e.</abbr>, a count of measures plus a beat location
           in the ending measure.</desc>
         <datatype>
           <ref xmlns="http://relaxng.org/ns/structure/1.0" name="data.MEASUREBEAT"/>
@@ -14817,14 +14830,14 @@
     <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Attributes that describe transposition.</desc>
     <attList xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <attDef ident="trans.diat" usage="opt">
-        <desc>Records the amount of diatonic pitch shift, e.g., C to C♯ = 0, C to D♭ = 1, necessary
+        <desc>Records the amount of diatonic pitch shift, <abbr>e.g.</abbr>, C to C♯ = 0, C to D♭ = 1, necessary
           to calculate the sounded pitch from the written one.</desc>
         <datatype>
           <rng:data type="decimal"/>
         </datatype>
       </attDef>
       <attDef ident="trans.semi" usage="opt">
-        <desc>Records the amount of pitch shift in semitones, e.g., C to C♯ = 1, C to D♭ = 1,
+        <desc>Records the amount of pitch shift in semitones, <abbr>e.g.</abbr>, C to C♯ = 1, C to D♭ = 1,
           necessary to calculate the sounded pitch from the written one.</desc>
         <datatype>
           <rng:data type="decimal"/>
@@ -14881,9 +14894,9 @@
         </datatype>
       </attDef>
       <attDef ident="fontsize" usage="opt">
-        <desc>Indicates the size of a font expressed in printers' points, i.e., 1/72nd of an inch,
-          relative terms, e.g., "small", "larger", etc., or percentage values relative to "normal"
-          size, e.g., "125%". </desc>
+        <desc>Indicates the size of a font expressed in printers' points, <abbr>i.e.</abbr>, 1/72nd of an inch,
+          relative terms, <abbr>e.g.</abbr>, "small", "larger", etc., or percentage values relative to "normal"
+          size, <abbr>e.g.</abbr>, "125%". </desc>
         <datatype>
           <ref xmlns="http://relaxng.org/ns/structure/1.0" name="data.FONTSIZE"/>
         </datatype>
@@ -15051,16 +15064,16 @@
         <desc>Specifies the symbol used to group lyrics.</desc>
         <valList type="closed">
           <valItem ident="brace">
-            <desc>Curved symbol, i.e., {.</desc>
+            <desc>Curved symbol, <abbr>i.e.</abbr>, {.</desc>
           </valItem>
           <valItem ident="bracket">
-            <desc>Square symbol, i.e., [, but with curved/angled top and bottom segments.</desc>
+            <desc>Square symbol, <abbr>i.e.</abbr>, [, but with curved/angled top and bottom segments.</desc>
           </valItem>
           <valItem ident="bracketsq">
-            <desc>Square symbol, i.e., [, with horizontal top and bottom segments.</desc>
+            <desc>Square symbol, <abbr>i.e.</abbr>, [, with horizontal top and bottom segments.</desc>
           </valItem>
           <valItem ident="line">
-            <desc>Line symbol, i.e., |, (wide) line without top and bottom curved/horizontal
+            <desc>Line symbol, <abbr>i.e.</abbr>, |, (wide) line without top and bottom curved/horizontal
               segments.</desc>
           </valItem>
           <valItem ident="none">
@@ -15104,30 +15117,24 @@
         printing systems that utilize this information for printing. On &lt;barLine&gt; the width
         attribute captures the width of the preceding measure.</p>
     </remarks>
-  </classSpec><classSpec rend="add" ident="att.xy" module="MEI.shared" type="atts">
-    <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Output coordinate attributes. Some elements may have their exact rendered *output*
+  </classSpec><classSpec rend="add" ident="att.xy" module="MEI.shared" type="atts"><desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Output coordinate attributes. Some elements may have their exact rendered *output*
       coordinates recorded. x and y attributes indicate where to place the rendered output.
       Recording the coordinates of a feature in a facsimile requires the use of the facs
-      attribute.</desc>
-    <attList xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
-      <attDef ident="x" usage="opt">
+      attribute.</desc><classes><memberOf key="att.coord.x1"/></classes><attList><attDef xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" ident="x" usage="opt">
         <desc>Encodes an x coordinate for a feature in an output coordinate system. When it is
           necessary to record the placement of a feature in a facsimile image, use the facs
           attribute.</desc>
         <datatype>
           <rng:data type="decimal"/>
         </datatype>
-      </attDef>
-      <attDef ident="y" usage="opt">
+      </attDef><attDef xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" ident="y" usage="opt">
         <desc>Encodes a y coordinate for a feature in an output coordinate system. When it is
           necessary to record the placement of a feature in a facsimile image, use the facs
           attribute.</desc>
         <datatype>
           <rng:data type="decimal"/>
         </datatype>
-      </attDef>
-    </attList>
-  </classSpec><classSpec rend="add" ident="att.xy2" module="MEI.shared" type="atts">
+      </attDef></attList></classSpec><classSpec rend="add" ident="att.xy2" module="MEI.shared" type="atts">
     <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Output coordinate attributes. Some elements may need 2 coordinate pairs to record their
       rendered *output* coordinates. The attributes indicate where to place the rendered output.
       Recording the coordinates of a feature in a facsimile requires the use of the facs
@@ -15508,7 +15515,7 @@
       <memberOf key="att.ambNote.anl"/>
     </classes><content xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <rng:empty/>
-    </content></elementSpec><elementSpec rend="add" ident="analytic" module="MEI.shared"><desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">(analytic level) – Contains bibliographic elements describing an item (e.g. an article or
+    </content></elementSpec><elementSpec rend="add" ident="analytic" module="MEI.shared"><desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">(analytic level) – Contains bibliographic elements describing an item (<abbr>e.g.</abbr>, an article or
       poem) published within a monograph or journal and not as an independent publication.</desc><classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <memberOf key="att.common"/>
       <memberOf key="att.bibl"/>
@@ -15688,13 +15695,7 @@
       <memberOf key="model.biblLike"/>
     </classes><content xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <group xmlns="http://relaxng.org/ns/structure/1.0"><zeroOrMore><ref name="analytic"/></zeroOrMore><oneOrMore><ref name="monogr"/><zeroOrMore><ref name="series"/></zeroOrMore></oneOrMore><zeroOrMore><choice><ref name="model.annotLike"/><ref name="identifier"/><ref name="relatedItem"/></choice></zeroOrMore></group>
-    </content></elementSpec><elementSpec rend="add" ident="body" module="MEI.shared"><desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Contains the whole of a single musical text, excluding any front or back matter.</desc><classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
-      <memberOf key="att.common"/>
-      <memberOf key="att.metadataPointing"/>
-      
-    </classes><content xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
-      <oneOrMore xmlns="http://relaxng.org/ns/structure/1.0"><choice><ref name="model.divLike"/><ref name="model.mdivLike"/></choice></oneOrMore>
-    </content><remarks xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
+    </content></elementSpec><elementSpec rend="add" ident="body" module="MEI.shared"><desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Contains the whole of a single musical text, excluding any front or back matter.</desc><classes><memberOf key="att.common"/><memberOf key="att.metadataPointing"/></classes><content><oneOrMore xmlns="http://relaxng.org/ns/structure/1.0"><choice><ref name="model.divLike"/><ref name="model.mdivLike"/><ref name="model.pagesLike"/></choice></oneOrMore></content><attList/><remarks xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <p>When the music can be broken into high-level, discrete, linear segments, such as movements
         of a symphony, there may be multiple <gi scheme="MEI">mdiv</gi> elements within <gi scheme="MEI">body</gi>. This is the highest level indication of the structure of the
         music.</p>
@@ -15703,7 +15704,7 @@
         including those that are primarily textual with only occasional musical material or even
         those which completely lack music notation.</p>
     </remarks></elementSpec><elementSpec rend="add" ident="caesura" module="MEI.shared"><desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Break, pause, or interruption in the normal tempo of a composition. Typically indicated by
-      "railroad tracks", i.e., two diagonal slashes.</desc><classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
+      "railroad tracks", <abbr>i.e.</abbr>, two diagonal slashes.</desc><classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <memberOf key="att.common"/>
       <memberOf key="att.facsimile"/>
       <memberOf key="att.caesura.anl"/>
@@ -16023,7 +16024,7 @@
               meeting the circumference or surface at each end.</desc>
           </valItem>
           <valItem ident="elevation">
-            <desc>Distance to which something has been raised or uplifted above a level, e.g. a
+            <desc>Distance to which something has been raised or uplifted above a level, <abbr>e.g.</abbr>, a
               hill's elevation above the surrounding country.</desc>
           </valItem>
           <valItem ident="height">
@@ -16228,8 +16229,8 @@
       </constraint>
     </constraintSpec><remarks xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <p>This element may be used for instantaneous or continuous <emph>textual</emph> dynamics,
-        e.g. 'p', 'mf', or 'cresc. poco a poco'. The <gi scheme="MEI">hairpin</gi> element should be
-        used for <emph>graphical</emph>, i.e., crescendo and diminuendo, dynamic markings. The
+        <abbr>e.g.</abbr>, 'p', 'mf', or 'cresc. poco a poco'. The <gi scheme="MEI">hairpin</gi> element should be
+        used for <emph>graphical</emph>, <abbr>i.e.</abbr>, crescendo and diminuendo, dynamic markings. The
         starting point of the dynamic marking may be indicated by either a <att>startid</att>,
         <att>tstamp</att>, <att>tstamp.ges</att>, or <att>tstamp.real</att> attribute, while the
         ending point may be recorded by either a <att>dur</att>, <att>dur.ges</att>,
@@ -16238,8 +16239,8 @@
         recorded in the <att>val</att> and <att>val2</att> attributes.</p>
     </remarks></elementSpec><elementSpec rend="add" ident="edition" module="MEI.shared"><desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">(edition designation) – A word or text phrase that indicates a difference in either
       content or form between the item being described and a related item previously issued by the
-      same publisher/distributor (e.g. 2nd edition, version 2.0, etc.), or simultaneously issued by
-      either the same publisher/distributor or another publisher/distributor (e.g. large print
+      same publisher/distributor (<abbr>e.g.</abbr>, 2nd edition, version 2.0, etc.), or simultaneously issued by
+      either the same publisher/distributor or another publisher/distributor (<abbr>e.g.</abbr>, large print
       edition, British edition, etc.).</desc><classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <memberOf key="att.common"/>
       <memberOf key="att.bibl"/>
@@ -16262,7 +16263,7 @@
       <zeroOrMore xmlns="http://relaxng.org/ns/structure/1.0"><choice><rng:text xmlns="http://www.tei-c.org/ns/1.0"/><ref name="model.textPhraseLike.limited"/></choice></zeroOrMore>
     </content><remarks xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <p>This element is modelled on an element in the Text Encoding Initiative (TEI) standard.</p>
-    </remarks></elementSpec><elementSpec rend="add" ident="ending" module="MEI.shared"><desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Alternative ending for a repeated passage of music; i.e., prima volta, seconda volta,
+    </remarks></elementSpec><elementSpec rend="add" ident="ending" module="MEI.shared"><desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Alternative ending for a repeated passage of music; <abbr>i.e.</abbr>, prima volta, seconda volta,
       etc.</desc><classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <memberOf key="att.common"/>
       <memberOf key="att.ending.anl"/>
@@ -16280,7 +16281,7 @@
       <p>The <gi scheme="MEI">scoreDef</gi> element is allowed as a sub-element so that an ending
         may have its own meta-data without the overhead of child <gi scheme="MEI">section</gi>
         elements. <gi scheme="MEI">div</gi> sub-elements are not allowed within ending. They may,
-        however, be contained by the children of ending, e.g., measures. Endings may not contain
+        however, be contained by the children of ending, <abbr>e.g.</abbr>, measures. Endings may not contain
         other ending elements.</p>
     </remarks></elementSpec><elementSpec rend="add" ident="event" module="MEI.shared"><desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Contains a free-text event description.</desc><classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <memberOf key="att.common"/>
@@ -16614,7 +16615,7 @@
     </remarks><remarks xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <p>This element is modelled on an element in the Text Encoding Initiative (TEI) standard.</p>
     </remarks></elementSpec><elementSpec rend="add" ident="lg" module="MEI.shared"><desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">(line group) – May be used for any section of text that is organized as a group of lines;
-      however, it is most often used for a group of verse lines functioning as a formal unit, e.g. a
+      however, it is most often used for a group of verse lines functioning as a formal unit, <abbr>e.g.</abbr>, a
       stanza, refrain, verse paragraph, etc.</desc><classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <memberOf key="att.common"/>
       <memberOf key="att.facsimile"/>
@@ -16649,8 +16650,18 @@
       <memberOf key="model.respLikePart"/>
     </classes><content xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <zeroOrMore xmlns="http://relaxng.org/ns/structure/1.0"><choice><rng:text xmlns="http://www.tei-c.org/ns/1.0"/><ref name="model.textPhraseLike.limited"/></choice></zeroOrMore>
-    </content></elementSpec><elementSpec rend="add" ident="mdiv" module="MEI.shared"><desc rend="replace">(musical division) – contains a subdivision of the body of a musical text.
-						</desc><classes><memberOf key="att.common"/><memberOf key="att.facsimile"/><memberOf key="att.typed"/><memberOf key="model.mdivLike"/></classes><content><choice xmlns="http://relaxng.org/ns/structure/1.0"><group><optional><ref name="model.scoreLike"/></optional><optional><ref name="model.partsLike"/></optional><optional><ref name="model.pagesLike"/></optional></group><zeroOrMore><ref name="model.mdivLike"/></zeroOrMore></choice></content><attList/><remarks xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
+    </content></elementSpec><elementSpec rend="add" ident="mdiv" module="MEI.shared"><desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">(musical division) – Contains a subdivision of the body of a musical text.</desc><classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
+      <memberOf key="att.common"/>
+      <memberOf key="att.facsimile"/>
+      <memberOf key="att.metadataPointing"/>
+      <memberOf key="att.mdiv.anl"/>
+      <memberOf key="att.mdiv.ges"/>
+      <memberOf key="att.mdiv.log"/>
+      <memberOf key="att.mdiv.vis"/>
+      <memberOf key="model.mdivLike"/>
+    </classes><content xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
+      <choice xmlns="http://relaxng.org/ns/structure/1.0"><group><optional><ref name="model.scoreLike"/></optional><optional><ref name="model.partsLike"/></optional></group><zeroOrMore><ref name="model.mdivLike"/></zeroOrMore></choice>
+    </content><remarks xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <p>The <gi scheme="MEI">mdiv</gi> element may contain one or both of 2 possible views of the
         music. The score view is the traditional full and open score while the parts view contains
         each performer's view of the score; that is, his part. These 2 views are necessary because
@@ -16742,7 +16753,7 @@
             <desc>Name of a process or software application.</desc>
           </valItem>
           <valItem ident="style">
-            <desc>Name of a musical style; i.e., form, genre, technique, etc.</desc>
+            <desc>Name of a musical style; <abbr>i.e.</abbr>, form, genre, technique, etc.</desc>
           </valItem>
           <valItem ident="time">
             <desc>Name of a period of time.</desc>
@@ -16782,7 +16793,7 @@
     </content><remarks xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <p>The <gi scheme="MEI">accid</gi> and <gi scheme="MEI">artic</gi> sub-elements may be used
         instead of the note element's attributes when accid and artic represent first-class objects,
-        e.g., when they require attributes, such as <att>x</att> and <att>y</att> location
+        <abbr>e.g.</abbr>, when they require attributes, such as <att>x</att> and <att>y</att> location
         attributes. Similarly, the <gi scheme="MEI">syl</gi> sub-element may be used instead of the
         <att>syl</att> attribute. The verse sub-element may be used to group text syllables by
         verse. The <att>colored</att> attribute may be used to indicate coloration. In the mensural
@@ -16900,7 +16911,7 @@
       <ref xmlns="http://relaxng.org/ns/structure/1.0" name="macro.metaLike.page"/>
     </content><remarks xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <p>The <att>n</att> attribute should be used to record the page number displayed in the
-        source. It need not be an integer, e.g., 'iv', or 'p17-3'. The logical page number can be
+        source. It need not be an integer, <abbr>e.g.</abbr>, 'iv', or 'p17-3'. The logical page number can be
         calculated by counting previous <gi scheme="MEI">pb</gi> ancestor elements. When used in a
         score context, a page beginning implies an accompanying system beginning.</p>
     </remarks><remarks xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
@@ -17087,7 +17098,7 @@
     </classes><content xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <zeroOrMore xmlns="http://relaxng.org/ns/structure/1.0"><choice><ref name="model.biblLike"/></choice></zeroOrMore>
     </content><attList><attDef ident="rel" usage="req">
-        <desc>Describes the relationship between the entity identified by the <gi scheme="MEI">relatedItem</gi> element and the resource described in the parent element, i.e., <gi scheme="MEI">bibl</gi>, <gi scheme="MEI">source</gi> or <gi scheme="MEI">relatedItem</gi>.</desc>
+        <desc>Describes the relationship between the entity identified by the <gi scheme="MEI">relatedItem</gi> element and the resource described in the parent element, <abbr>i.e.</abbr>, <gi scheme="MEI">bibl</gi>, <gi scheme="MEI">source</gi> or <gi scheme="MEI">relatedItem</gi>.</desc>
         <datatype>
           <ref xmlns="http://relaxng.org/ns/structure/1.0" name="data.MODSRELATIONSHIP"/>
         </datatype>
@@ -17141,7 +17152,7 @@
     </classes><content xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <zeroOrMore xmlns="http://relaxng.org/ns/structure/1.0"><ref name="model.headLike"/></zeroOrMore>
       <zeroOrMore xmlns="http://relaxng.org/ns/structure/1.0"><ref name="model.relationLike"/></zeroOrMore>
-    </content></elementSpec><elementSpec rend="add" ident="rend" module="MEI.shared"><desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">(render) – A formatting element indicating special visual rendering, e.g., bold or
+    </content></elementSpec><elementSpec rend="add" ident="rend" module="MEI.shared"><desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">(render) – A formatting element indicating special visual rendering, <abbr>e.g.</abbr>, bold or
       italicized, of a text word or phrase.</desc><classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <memberOf key="att.color"/>
       <memberOf key="att.common"/>
@@ -17406,23 +17417,7 @@
       </attDef></attList></elementSpec><elementSpec rend="add" ident="staff" module="MEI.shared"><desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">A group of equidistant horizontal lines on which notes are placed in order to represent
       pitch or a grouping element for individual 'strands' of notes, rests, etc. that may or may not
       actually be rendered on staff lines; that is, both diastematic and non-diastematic
-      signs.</desc><classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
-      <memberOf key="att.basic"/>
-      <memberOf key="att.facsimile"/>
-      <memberOf key="att.labelled"/>
-      <memberOf key="att.linking"/>
-      <memberOf key="att.metadataPointing"/>
-      <memberOf key="att.nInteger"/>
-      <memberOf key="att.responsibility"/>
-      <memberOf key="att.typed"/>
-      <memberOf key="att.staff.log"/>
-      <memberOf key="att.staff.vis"/>
-      <memberOf key="att.staff.ges"/>
-      <memberOf key="att.staff.anl"/>
-      <memberOf key="model.staffLike"/>
-    </classes><content xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
-      <zeroOrMore xmlns="http://relaxng.org/ns/structure/1.0"><choice><ref name="model.annotLike"/><ref name="model.appLike"/><ref name="model.editLike"/><ref name="model.graphicPrimitiveLike"/><ref name="model.milestoneLike.music"/><ref name="model.relationLike"/><ref name="model.staffDefLike"/><ref name="model.staffPart"/><ref name="model.transcriptionLike"/></choice></zeroOrMore>
-    </content><constraintSpec xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" ident="checkStaff_n" scheme="isoschematron">
+      signs.</desc><classes><memberOf key="att.coord.y1"/><memberOf key="att.basic"/><memberOf key="att.facsimile"/><memberOf key="att.labelled"/><memberOf key="att.linking"/><memberOf key="att.metadataPointing"/><memberOf key="att.nInteger"/><memberOf key="att.responsibility"/><memberOf key="att.typed"/><memberOf key="att.staff.log"/><memberOf key="att.staff.vis"/><memberOf key="att.staff.ges"/><memberOf key="att.staff.anl"/><memberOf key="model.staffLike"/></classes><content><zeroOrMore xmlns="http://relaxng.org/ns/structure/1.0"><choice><ref name="model.annotLike"/><ref name="model.appLike"/><ref name="model.editLike"/><ref name="model.graphicPrimitiveLike"/><ref name="model.milestoneLike.music"/><ref name="model.relationLike"/><ref name="model.staffDefLike"/><ref name="model.staffPart"/><ref name="model.transcriptionLike"/></choice></zeroOrMore></content><constraintSpec xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" ident="checkStaff_n" scheme="isoschematron">
       <constraint>
         <sch:rule context="mei:staff[@n]">
           <sch:let name="thisstaff" value="@n"/>
@@ -17430,7 +17425,7 @@
             a matching @n value containing a staffDef, or a staffDef child element.</sch:assert>
         </sch:rule>
       </constraint>
-    </constraintSpec><remarks xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
+    </constraintSpec><attList/><remarks xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <p>The <att>def</att> attribute may be used to create a connection with a <gi scheme="MEI">staffDef</gi> element where logical and visual information about the staff is recorded.
         Alternatively, the <att>n</att> attribute may be used as a reference to a <gi scheme="MEI">staffDef</gi> element with the same value in its <att>n</att> attribute or the staff may
         contain a staffDef element that defines it. If neither <att>def</att> nor <att>n</att>
@@ -17618,14 +17613,14 @@
         </sch:rule>
       </constraint>
     </constraintSpec><remarks xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
-      <p>The starting point, e.g. "hotspot", of the symbol may be identified in absolute output
+      <p>The starting point, <abbr>e.g.</abbr>, "hotspot", of the symbol may be identified in absolute output
         coordinate terms using the <att>x</att> and <att>y</att> attributes or relative to another
         element using the <att>startid</att> attribute. Attributes in the att.visualOffset class may
         be used to record horizontal, vertical, or time offsets from the absolute coordinates or
         from the location of the referenced element. The <att>altsym</att> attribute must contain the
         id of a <gi scheme="MEI">symbolDef</gi> element. The <att>scale</att> attribute indicates
         that the printed output must be scaled by the specified percentage.</p>
-    </remarks></elementSpec><elementSpec rend="add" ident="tempo" module="MEI.shared"><desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Text and symbols descriptive of tempo, mood, or style, e.g., "allarg.", "a tempo",
+    </remarks></elementSpec><elementSpec rend="add" ident="tempo" module="MEI.shared"><desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Text and symbols descriptive of tempo, mood, or style, <abbr>e.g.</abbr>, "allarg.", "a tempo",
       "cantabile", "Moderato", "♩=60", "Moderato ♩ =60").</desc><classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <memberOf key="att.common"/>
       <memberOf key="att.bibl"/>
@@ -17671,7 +17666,7 @@
       </constraint>
     </constraintSpec><remarks xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <p>The <gi scheme="MEI">term</gi> element may include other <gi scheme="MEI">term</gi>
-        elements in order to allow the creation of coordinated terms; i.e., terms created from a
+        elements in order to allow the creation of coordinated terms; <abbr>i.e.</abbr>, terms created from a
         combination of other, independent terms.</p>
       <p>To associate a term with a taxonomy category defined in the MEI metadata header, the value
         of <att>class</att> must contain a fragment identifier corresponding to the appropriate <gi scheme="MEI">term</gi> element. To associate a term with category in an externally-defined
@@ -17727,7 +17722,7 @@
               produced together.</desc>
           </valItem>
           <valItem ident="d">
-            <desc>Subunit of a collection, e.g. item, folder, box, archival series, subgroup, or
+            <desc>Subunit of a collection, <abbr>e.g.</abbr>, item, folder, box, archival series, subgroup, or
               subcollection.</desc>
           </valItem>
           <valItem ident="i">
@@ -17966,7 +17961,7 @@
     </content><remarks xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <p> <gi scheme="MEI">titlePage</gi> may be used to transcribe the item's title page. Other
         front matter structures, such as a preface, dedication, or table of contents, may be encoded
-        as textual divisions; that is, as <gi scheme="MEI">div</gi> elements, with an optional <gi scheme="MEI">head</gi> sub-element describing the nature of the division. The <gi scheme="MEI">pb</gi> element is allowed here in order to accommodate page images, e.g.
+        as textual divisions; that is, as <gi scheme="MEI">div</gi> elements, with an optional <gi scheme="MEI">head</gi> sub-element describing the nature of the division. The <gi scheme="MEI">pb</gi> element is allowed here in order to accommodate page images, <abbr>e.g.</abbr>,
         cover, endpapers, etc. before and after the actual textual matter.</p>
     </remarks><remarks xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <p>This element is modelled on elements in the Text Encoding Initiative (TEI) and Encoded
@@ -17991,7 +17986,7 @@
       <choice xmlns="http://relaxng.org/ns/structure/1.0"><zeroOrMore><choice><rng:text xmlns="http://www.tei-c.org/ns/1.0"/><ref name="model.editLike"/><ref name="model.sylLike"/><ref name="model.textPhraseLike"/><ref name="model.transcriptionLike"/></choice></zeroOrMore></choice>
     </content><attList><attDef ident="rhythm" usage="opt">
         <desc>Used to specify a rhythm for the lyric syllables that differs from that of the notes
-          on the staff, e.g., '4,4,4,4' when the rhythm of the notes is '4.,8,4.,8'.</desc>
+          on the staff, <abbr>e.g.</abbr>, '4,4,4,4' when the rhythm of the notes is '4.,8,4.,8'.</desc>
         <datatype>
           <rng:data type="string"/>
         </datatype>
@@ -18104,7 +18099,7 @@
             <desc>Representation of speech.</desc>
           </valItem>
           <valItem ident="thought">
-            <desc>Representation of thought, e.g. internal monologue.</desc>
+            <desc>Representation of thought, <abbr>e.g.</abbr>, internal monologue.</desc>
           </valItem>
           <valItem ident="written">
             <desc>Quotation from a written source.</desc>
@@ -18308,7 +18303,7 @@
         <att>bulge</att> attribute or, alternatively, the <att>bezier</att> attribute, describe the
         shape of the curve and the <att>lform</att> and <att>lwidth</att> attributes capture its
         appearance.</p>
-    </remarks></elementSpec><elementSpec rend="add" ident="line" module="MEI.usersymbols"><desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">A visual line that cannot be represented by a more specific; i.e., semantic,
+    </remarks></elementSpec><elementSpec rend="add" ident="line" module="MEI.usersymbols"><desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">A visual line that cannot be represented by a more specific; <abbr>i.e.</abbr>, semantic,
       element.</desc><classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <memberOf key="att.common"/>
       <memberOf key="att.facsimile"/>
@@ -18343,7 +18338,7 @@
         or from the location of the element reference in the <att>startid</att> attribute.
         Similarly, the terminal point of the line may be recorded using the <att>x2</att> and
         <att>y2</att> attributes. Attributes in the att.visualOffset2 class maybe used to record the
-        offsets of the ending point. Textual content of the <gi scheme="MEI">line</gi> element, e.g.
+        offsets of the ending point. Textual content of the <gi scheme="MEI">line</gi> element, <abbr>e.g.</abbr>,
         'gliss.', may be rendered with the line. The appearance of the line is captured in the
         color, <att>form</att> and <att>width</att> attributes.</p>
     </remarks></elementSpec><elementSpec rend="add" ident="mapping" module="MEI.usersymbols"><desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">One or more characters which are related to the parent symbol in some respect, as
@@ -18534,7 +18529,7 @@
     <attList xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <attDef ident="len" usage="opt">
         <desc>States the length of barlines in virtual units. The value must be greater than 0 and
-          is typically equal to 2 times (the number of staff lines - 1); e.g., a value of '8' for a
+          is typically equal to 2 times (the number of staff lines - 1); <abbr>e.g.</abbr>, a value of '8' for a
           5-line staff.</desc>
         <datatype>
           <rng:data type="decimal">
@@ -18572,6 +18567,7 @@
       <memberOf key="att.color"/>
       <memberOf key="att.cue"/>
       <memberOf key="att.beamRend"/>
+      <memberOf key="att.visibility"/>
     </classes>
   </classSpec><classSpec rend="add" ident="att.beaming.vis" module="MEI.visual" type="atts">
     <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Used by layerDef, staffDef, and scoreDef to provide default values for attributes in the
@@ -18785,6 +18781,8 @@
       <memberOf key="att.staffLoc"/>
       <memberOf key="att.typography"/>
     </classes>
+  </classSpec><classSpec rend="add" ident="att.mdiv.vis" module="MEI.visual" type="atts">
+    <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Visual domain attributes.</desc>
   </classSpec><classSpec rend="add" ident="att.dir.vis" module="MEI.visual" type="atts">
     <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Visual domain attributes.</desc>
     <classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
@@ -18889,10 +18887,10 @@
           or inverted.</desc>
         <valList type="closed">
           <valItem ident="inv">
-            <desc>Inverted, i.e., curve or bracket below the dot.</desc>
+            <desc>Inverted, <abbr>i.e.</abbr>, curve or bracket below the dot.</desc>
           </valItem>
           <valItem ident="norm">
-            <desc>Upright; i.e., curve or bracket above the dot.</desc>
+            <desc>Upright; <abbr>i.e.</abbr>, curve or bracket above the dot.</desc>
           </valItem>
         </valList>
       </attDef>
@@ -18959,7 +18957,7 @@
         </datatype>
       </attDef>
       <attDef ident="beams.float" usage="opt">
-        <desc>Captures the number of "floating" beams, i.e., those not attached to stems.</desc>
+        <desc>Captures the number of "floating" beams, <abbr>i.e.</abbr>, those not attached to stems.</desc>
         <datatype>
           <rng:data type="nonNegativeInteger"/>
         </datatype>
@@ -19848,7 +19846,7 @@
     </classes>
     <attList xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <attDef ident="compressable" usage="opt">
-        <desc>Indicates whether a space is 'compressible', i.e., if it may be removed at the
+        <desc>Indicates whether a space is 'compressible', <abbr>i.e.</abbr>, if it may be removed at the
           discretion of processing software.</desc>
         <datatype>
           <ref xmlns="http://relaxng.org/ns/structure/1.0" name="data.BOOLEAN"/>
@@ -20053,10 +20051,10 @@
         <desc>Controls how the num:numbase ratio is to be displayed.</desc>
         <valList type="closed">
           <valItem ident="count">
-            <desc>Only the num attribute is displayed, e.g., '7'.</desc>
+            <desc>Only the num attribute is displayed, <abbr>e.g.</abbr>, '7'.</desc>
           </valItem>
           <valItem ident="ratio">
-            <desc>Both the num and numbase attributes are displayed, e.g., '7:4'.</desc>
+            <desc>Both the num and numbase attributes are displayed, <abbr>e.g.</abbr>, '7:4'.</desc>
           </valItem>
         </valList>
       </attDef>
@@ -20102,12 +20100,136 @@
 					<desc/>
 				</moduleSpec><classSpec rend="add" predeclare="true" ident="model.pagesLike" type="model" module="MEI.pageBased" mode="add">
 					<desc>Collects pagesLike elements.</desc>
-				</classSpec><classSpec rend="add" predeclare="true" ident="model.pageLike" type="model" module="MEI.pageBased" mode="add">
+				</classSpec><elementSpec rend="add" ident="pages" module="MEI.pageBased" mode="add"><desc>A set of pages in a page-based encoding</desc><classes>
+						<memberOf key="att.common"/>
+						<memberOf key="model.pagesLike"/>
+					</classes><content>
+						<zeroOrMore xmlns="http://relaxng.org/ns/structure/1.0"><ref name="model.pageLike"/></zeroOrMore>
+					</content></elementSpec><classSpec rend="add" predeclare="true" ident="model.pageLike" type="model" module="MEI.pageBased" mode="add">
 					<desc>Collects pageLike elements.</desc>
-				</classSpec><classSpec rend="add" predeclare="true" ident="model.systemLike" type="model" module="MEI.pageBased" mode="add">
+				</classSpec><elementSpec rend="add" ident="page" module="MEI.pageBased" mode="add"><desc>A page in a page-base encoding</desc><classes>
+						<memberOf key="att.pages"/>
+						
+						<memberOf key="att.common"/>
+						
+						<memberOf key="att.surface"/>
+						<memberOf key="model.pageLike"/>
+					</classes><content>
+						<zeroOrMore xmlns="http://relaxng.org/ns/structure/1.0"><choice><ref name="model.systemLike"/><ref name="model.msLike"/><ref name="model.secbLike"/><ref name="model.mdivbLike"/><ref name="model.scoreLike"/><ref name="model.partsLike"/></choice></zeroOrMore>
+					</content></elementSpec><classSpec rend="add" predeclare="true" ident="model.systemLike" type="model" module="MEI.pageBased" mode="add">
 					<desc>Collects systemLike elements.</desc>
-				</classSpec><classSpec rend="add" predeclare="true" ident="model.scbLike" type="model" module="MEI.pageBased" mode="add">
-					<desc>Collects scbLike (section breaks) elements.</desc>
+				</classSpec><elementSpec rend="add" ident="system" module="MEI.pageBased" mode="add"><desc>A system in a page-based encoding</desc><classes>
+						<memberOf key="att.systems"/>
+						<memberOf key="att.common"/>
+						<memberOf key="att.coordinated"/>
+						<memberOf key="model.systemLike"/>
+					</classes><content>
+						
+						<zeroOrMore xmlns="http://relaxng.org/ns/structure/1.0"><choice><ref name="model.secbLike"/><ref name="model.measureLike"/><ref name="model.staffLike"/><ref name="model.scoreDefLike"/><ref name="model.msLike"/></choice></zeroOrMore>
+					</content></elementSpec><classSpec rend="add" predeclare="true" ident="model.secbLike" type="model" module="MEI.pageBased" mode="add">
+					<desc>Collects secbLike (section beginning) elements.</desc>
+				</classSpec><elementSpec rend="add" ident="secb" module="MEI.pageBased" mode="add"><desc>(section beginning) – A milestone element indicating the start of a new section in page-based MEI.</desc><classes>
+						<memberOf key="att.common"/>
+						<memberOf key="model.secbLike"/>
+					</classes><content>
+						<rng:empty/>
+					</content></elementSpec><classSpec rend="add" predeclare="true" ident="model.mdivbLike" type="model" module="MEI.pageBased" mode="add">
+					<desc>Collects mdivbLike (mdiv beginning) elements.</desc>
+				</classSpec><elementSpec rend="add" ident="mdivb" module="MEI.pageBased" mode="add"><desc>(mdiv beginning) – A milestone element indicating the start of a new mdiv in page-based MEI.</desc><classes>
+						<memberOf key="att.common"/>
+						<memberOf key="model.mdivbLike"/>
+					</classes><content>
+						<rng:empty/>
+					</content></elementSpec><elementSpec rend="add" ident="scoreb" module="MEI.pageBased" mode="add"><desc>(score beginning) – A milestone element indicating the start of a new score in page-based MEI.</desc><classes>
+						<memberOf key="att.common"/>
+						
+					</classes><content>
+						<optional xmlns="http://relaxng.org/ns/structure/1.0"><ref name="model.scoreDefLike"/></optional>
+					</content><remarks>
+						<p>This element is necessary to allow round-tripping between page-based and score-based (regular) MEI.</p>
+					</remarks></elementSpec><elementSpec rend="add" ident="partsb" module="MEI.pageBased" mode="add"><desc>(parts beginning) – A milestone element indicating the start of new parts in page-based MEI.</desc><classes>
+						<memberOf key="att.common"/>
+						
+					</classes><content>
+						<rng:empty/>
+					</content><remarks>
+						<p>This element is necessary to allow round-tripping between page-based and score-based (regular) MEI.</p>
+					</remarks></elementSpec><elementSpec rend="add" ident="partb" module="MEI.pageBased" mode="add"><desc>(part beginning) – A milestone element indicating the start of a new part in page-based MEI.</desc><classes>
+						<memberOf key="att.common"/>
+						
+					</classes><content>
+						<optional xmlns="http://relaxng.org/ns/structure/1.0"><ref name="model.scoreDefLike"/></optional>
+					</content><remarks>
+						<p>This element is necessary to allow round-tripping between page-based and score-based (regular) MEI.</p>
+					</remarks></elementSpec><classSpec rend="add" predeclare="true" ident="model.msLike" type="model" module="MEI.ptrref" mode="add">
+					<desc>Collects milestone like elements.</desc>
+				</classSpec><elementSpec rend="add" ident="ms" module="MEI.ptrref" mode="add"><desc>(milestone) – A generic milestone element that can be used as anchor in an MEI file.</desc><classes>
+						<memberOf key="att.common"/>
+						<memberOf key="model.msLike"/>
+						
+						<memberOf key="model.annotLike"/>
+						<memberOf key="model.eventLike"/>
+					</classes><content>
+						<rng:empty/>
+					</content></elementSpec><elementSpec rend="add" ident="msEnd" module="MEI.ptrref" mode="add"><desc>(milestone end) – A milestone element that can be used to indicate the end of an arbitrary feature in MEI.</desc><classes>
+						<memberOf key="att.common"/>
+						<memberOf key="att.startId"/>
+						<memberOf key="model.msLike"/>
+						
+						<memberOf key="model.annotLike"/>
+						<memberOf key="model.eventLike"/>
+					</classes><content>
+						<rng:empty/>
+					</content><constraintSpec ident="check_msEnd" scheme="isoschematron">
+						<constraint>
+							<sch:rule context="mei:msEnd">
+								<sch:assert role="error" test="exists(@startid)">msEnd needs a @startid attribute.</sch:assert>                                                                
+							</sch:rule>
+						</constraint>
+					</constraintSpec><remarks>
+						<p>The @startid attribute should be used to point to the element starting the feature that is ended by an msEnd.</p>
+					</remarks></elementSpec><classSpec rend="add" ident="att.coord.x1" module="MEI.shared" type="atts">
+					<desc>Attributes that record the x coordinate of the left side of a feature.</desc>
+					<attList>
+						<attDef ident="coord.x1" usage="opt">
+							<desc>gives coordinates for the left side of a feature.</desc>
+							<datatype>
+								<rng:data type="decimal">
+									<rng:param name="minInclusive">0</rng:param>
+								</rng:data>
+							</datatype>
+						</attDef>
+					</attList>
+				</classSpec><classSpec rend="add" ident="att.coord.x2" module="MEI.shared" type="atts">
+					<desc>Attributes that record the x coordinate of the right side of a feature.</desc>
+					<attList>
+						<attDef ident="coord.x2" usage="opt">
+							<desc>gives coordinates for the right side of a feature.</desc>
+							<datatype>
+								<rng:data type="decimal">
+									<rng:param name="minInclusive">0</rng:param>
+								</rng:data>
+							</datatype>
+						</attDef>
+					</attList>
+				</classSpec><classSpec rend="add" ident="att.coord.y1" module="MEI.shared" type="atts">
+					<desc>Attributes that record the y coordinate of the top left of a feature.</desc>
+					<attList>
+						<attDef ident="coord.y1" usage="opt">
+							<desc>gives y coordinates for the top left of a feature.</desc>
+							<datatype>
+								<rng:data type="decimal">
+									<rng:param name="minInclusive">0</rng:param>
+								</rng:data>
+							</datatype>
+						</attDef>
+					</attList>
+				</classSpec><classSpec rend="add" ident="att.coord.lr" module="MEI.shared" type="atts">
+					<desc>Attributes for left/right coordinates.</desc>
+					<classes>
+						<memberOf key="att.coord.x1"/>
+						<memberOf key="att.coord.x2"/>
+					</classes>
 				</classSpec><classSpec rend="add" ident="att.surface" module="MEI.pageBased" type="atts" mode="add">
 					<desc>This attribute is used to point to a surface.</desc>
 					<attList>
@@ -20118,49 +20240,7 @@
 							</datatype>
 						</attDef>
 					</attList>
-				</classSpec><elementSpec rend="add" ident="pages" module="MEI.pageBased" mode="add"><desc>A set of pages in a page-based encoding</desc><classes>
-						
-						<memberOf key="att.common"/>
-						<memberOf key="att.typed"/>
-						<memberOf key="model.pagesLike"/>
-					</classes><content>
-						<zeroOrMore xmlns="http://relaxng.org/ns/structure/1.0"><ref name="model.pageLike"/></zeroOrMore>
-					</content></elementSpec><elementSpec rend="add" ident="page" module="MEI.pageBased" mode="add"><desc>A page in a page-base encoding</desc><classes>
-						
-						<memberOf key="att.scoreDef.vis"/>
-						<memberOf key="att.common"/>
-						
-						<memberOf key="att.surface"/>
-						<memberOf key="model.pageLike"/>
-					</classes><content>
-						<zeroOrMore xmlns="http://relaxng.org/ns/structure/1.0"><ref name="model.systemLike"/></zeroOrMore>
-					</content><attList><attDef ident="position" usage="opt">
-							<desc>This attribute specifies whereas the positionning of the elements is absolute or relative to its parent.</desc>
-							<valList type="closed">
-								<valItem ident="relative">
-									<desc>indicates that the positionning is relative</desc>
-								</valItem>
-								<valItem ident="absolute">
-									<desc>indicates that the positionning is absolute</desc>
-								</valItem>
-							</valList>
-						</attDef></attList></elementSpec><elementSpec rend="add" ident="system" module="MEI.pageBased" mode="add"><desc>A system in a page-based encoding</desc><classes>
-						<memberOf key="att.scoreDef.vis"/>
-						<memberOf key="att.common"/>
-						
-						<memberOf key="att.coordinated"/>
-						
-						
-						<memberOf key="model.systemLike"/>
-					</classes><content>
-						
-						<optional xmlns="http://relaxng.org/ns/structure/1.0"><ref name="model.staffGrpLike"/></optional>
-						
-						<zeroOrMore xmlns="http://relaxng.org/ns/structure/1.0"><choice><ref name="model.scbLike"/><ref name="model.measureLike"/><ref name="model.staffLike"/><ref name="model.scoreDefLike"/></choice></zeroOrMore>
-					</content></elementSpec><elementSpec rend="add" ident="secb" module="MEI.pageBased" mode="add"><desc>A section break milestone element</desc><classes>
-						<memberOf key="att.common"/>
-						<memberOf key="model.scbLike"/>
-					</classes></elementSpec><moduleSpec ident="MEI.frettab" mode="add">
+				</classSpec><moduleSpec ident="MEI.frettab" mode="add">
 					<desc/>
 				</moduleSpec><macroSpec rend="add" ident="data.COURSENUMBER" module="MEI.frettab" type="dt" mode="add">
 					<desc>In string tablature, the number of the course to be played, i.e., [1-9]+.</desc>

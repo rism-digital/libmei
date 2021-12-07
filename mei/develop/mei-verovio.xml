@@ -79,22 +79,342 @@
 			   <!-- ****************************************************************** -->
 				<!-- Page-based MEI -->
 			   <!-- ****************************************************************** -->
+				
+				<!-- See https://github.com/BeethovensWerkstatt/music-encoding/commit/84fae3e2e936511521e1159ae1b002668c9c5c6c#diff-202b5c7e97f1d58bb0f19d70d623fe4faf4a7d2621c6c863fd0450bc643ec58aR106-R451 -->
 			   
 				<moduleSpec ident="MEI.pageBased" mode="add">
 					<desc/>
 				</moduleSpec>
+				
 				<classSpec ident="model.pagesLike" type="model" module="MEI.pageBased" mode="add">
 					<desc>Collects pagesLike elements.</desc>
 				</classSpec>
+				
+				<elementSpec ident="pages" module="MEI.pageBased" mode="add">
+					<desc>A set of pages in a page-based encoding</desc>
+					<classes>
+						<memberOf key="att.common"/>
+						<memberOf key="model.pagesLike"/>
+					</classes>
+					<content>
+						<rng:zeroOrMore>
+							<rng:ref name="model.pageLike"/>
+						</rng:zeroOrMore>
+					</content>
+				</elementSpec>
+				
 				<classSpec ident="model.pageLike" type="model" module="MEI.pageBased" mode="add">
 					<desc>Collects pageLike elements.</desc>
 				</classSpec>
+				
+				<elementSpec ident="page" module="MEI.pageBased" mode="add">
+					<desc>A page in a page-base encoding</desc>
+					<classes>
+						<memberOf key="att.pages"/>
+						<!-- was: att.scoreDef.vis -->
+						<memberOf key="att.common"/>
+						<memberOf key="att.pageRef"/>
+						<memberOf key="att.surface"/>
+						<memberOf key="model.pageLike"/>
+					</classes>
+					<content>
+						<rng:zeroOrMore>
+							<rng:choice>
+								<rng:ref name="model.systemLike"/>
+								<rng:ref name="model.msLike"/>
+								<rng:ref name="model.secbLike"/>
+								<rng:ref name="model.mdivbLike"/>
+								<rng:ref name="model.scoreLike"/>
+								<rng:ref name="model.partsLike"/>
+							</rng:choice>
+						</rng:zeroOrMore>
+					</content>
+				</elementSpec>
+				
+				<!-- remove att.pages and att.systems from att.scoreDef.vis, 
+					as they go on other elements now -->
+				<!--<classSpec ident="att.scoreDef.vis" module="MEI.visual" type="atts" mode="change">
+					<desc>Visual domain attributes for scoreDef in the CMN repertoire.</desc>
+					<classes mode="change">
+					<memberOf key="att.pages" mode="delete"/>
+					<memberOf key="att.systems" mode="delete"/>
+					</classes>
+					</classSpec>-->
+				
+				<elementSpec ident="body" module="MEI.shared" mode="change">
+					<content>
+						<rng:oneOrMore>
+							<rng:choice>
+								<rng:ref name="model.divLike"/>
+								<rng:ref name="model.mdivLike"/>
+								<rng:ref name="model.pagesLike"/>
+							</rng:choice>
+						</rng:oneOrMore>
+					</content>
+					<!--<constraintSpec ident="page-atts-on-scoreDef" scheme="isoschematron" mode="add">
+						<constraint>
+						<sch:rule context="mei:scoreDef">
+						<sch:assert role="warning" test="@*[starts-with(local-name(),'page.')]">Page-related attributes should go on a page element.</sch:assert>
+						<sch:assert role="warning" test="@*[starts-with(local-name(),'system.')]">System-related attributes should go on a system element.</sch:assert>                                
+						</sch:rule>
+						</constraint>
+						</constraintSpec>       --> 
+				</elementSpec>
+				
 				<classSpec ident="model.systemLike" type="model" module="MEI.pageBased" mode="add">
 					<desc>Collects systemLike elements.</desc>
 				</classSpec>
-				<classSpec ident="model.scbLike" type="model" module="MEI.pageBased" mode="add">
-					<desc>Collects scbLike (section breaks) elements.</desc>
+				
+				<elementSpec ident="system" module="MEI.pageBased" mode="add">
+					<desc>A system in a page-based encoding</desc>
+					<classes>
+						<memberOf key="att.systems"/>
+						<memberOf key="att.common"/>
+						<memberOf key="att.coordinated"/>
+						<memberOf key="model.systemLike"/>
+					</classes>
+					<content>
+						<!-- then the actual content of a system -->
+						<rng:zeroOrMore>
+							<rng:choice>
+								<!-- section are turned into milestones -->
+								<rng:ref name="model.secbLike"/>
+								<!-- measures for measured music -->
+								<rng:ref name="model.measureLike"/>
+								<!-- staves for un-measured music -->
+								<rng:ref name="model.staffLike"/>
+								<!-- scoreDef for redefinition -->
+								<rng:ref name="model.scoreDefLike"/>
+								<rng:ref name="model.msLike"/>
+								<!-- anything else? -->
+							</rng:choice>
+						</rng:zeroOrMore>
+					</content>
+				</elementSpec>
+				
+				<classSpec ident="model.secbLike" type="model" module="MEI.pageBased" mode="add">
+					<desc>Collects secbLike (section beginning) elements.</desc>
 				</classSpec>
+				
+				<!-- because the hierarchy is flipped, &lt;section&gt; has to become a milestone -->
+				<elementSpec ident="secb" module="MEI.pageBased" mode="add">
+					<desc>(section beginning) – A milestone element indicating the start of a new section in page-based MEI.</desc>
+					<classes>
+						<memberOf key="att.common"/>
+						<memberOf key="model.secbLike"/>
+					</classes>
+					<content>
+						<rng:empty/>
+					</content>
+				</elementSpec>
+				
+				<classSpec ident="model.mdivbLike" type="model" module="MEI.pageBased" mode="add">
+					<desc>Collects mdivbLike (mdiv beginning) elements.</desc>
+				</classSpec>
+				
+				<elementSpec ident="mdivb" module="MEI.pageBased" mode="add">
+					<desc>(mdiv beginning) – A milestone element indicating the start of a new mdiv in page-based MEI.</desc>
+					<classes>
+						<memberOf key="att.common"/>
+						<memberOf key="model.mdivbLike"/>
+					</classes>
+					<content>
+						<rng:empty/>
+					</content>
+				</elementSpec>
+				
+				<classSpec ident="model.scorebLike" type="model" module="MEI.pageBased" mode="add">
+					<desc>Collects scorebLike (score beginning) elements.</desc>
+				</classSpec>
+				
+				<elementSpec ident="scoreb" module="MEI.pageBased" mode="add">
+					<desc>(score beginning) – A milestone element indicating the start of a new score in page-based MEI.</desc>
+					<classes>
+						<memberOf key="att.common"/>
+						<memberOf key="model.scorebLike"/>
+					</classes>
+					<content>
+						<rng:optional>
+							<rng:ref name="model.scoreDefLike"/>
+						</rng:optional>
+					</content>
+					<remarks>
+						<p>This element is necessary to allow round-tripping between page-based and score-based (regular) MEI.</p>
+					</remarks>
+				</elementSpec>
+				
+				<classSpec ident="model.partsbLike" type="model" module="MEI.pageBased" mode="add">
+					<desc>Collects partsbLike (parts beginning) elements.</desc>
+				</classSpec>
+				
+				<elementSpec ident="partsb" module="MEI.pageBased" mode="add">
+					<desc>(parts beginning) – A milestone element indicating the start of new parts in page-based MEI.</desc>
+					<classes>
+						<memberOf key="att.common"/>
+						<memberOf key="model.scorebLike"/>
+					</classes>
+					<content>
+						<rng:empty/>
+					</content>
+					<remarks>
+						<p>This element is necessary to allow round-tripping between page-based and score-based (regular) MEI.</p>
+					</remarks>
+				</elementSpec>
+				
+				<classSpec ident="model.partbLike" type="model" module="MEI.pageBased" mode="add">
+					<desc>Collects partbLike (part beginning) elements.</desc>
+				</classSpec>
+				
+				<elementSpec ident="partb" module="MEI.pageBased" mode="add">
+					<desc>(part beginning) – A milestone element indicating the start of a new part in page-based MEI.</desc>
+					<classes>
+						<memberOf key="att.common"/>
+						<memberOf key="model.partbLike"/>
+					</classes>
+					<content>
+						<rng:optional>
+							<rng:ref name="model.scoreDefLike"/>
+						</rng:optional>
+					</content>
+					<remarks>
+						<p>This element is necessary to allow round-tripping between page-based and score-based (regular) MEI.</p>
+					</remarks>
+				</elementSpec>
+				
+				<classSpec ident="model.msLike" type="model" module="MEI.ptrref" mode="add">
+					<desc>Collects milestone like elements.</desc>
+				</classSpec>
+				
+				<elementSpec ident="ms" module="MEI.ptrref" mode="add">
+					<desc>(milestone) – A generic milestone element that can be used as anchor in an MEI file.</desc>
+					<classes>
+						<memberOf key="att.common"/>
+						<memberOf key="model.msLike"/>
+						<!-- the following two will allow ms to appear in many places -->
+						<memberOf key="model.annotLike"/>
+						<memberOf key="model.eventLike"/>
+					</classes>
+					<content>
+						<rng:empty/>
+					</content>
+				</elementSpec>
+				
+				<elementSpec ident="msEnd" module="MEI.ptrref" mode="add">
+					<desc>(milestone end) – A milestone element that can be used to indicate the end of an arbitrary feature in MEI.</desc>
+					<classes>
+						<memberOf key="att.common"/>
+						<memberOf key="att.startId"/>
+						<memberOf key="model.msLike"/>
+						<!-- the following two will allow ms to appear in many places -->
+						<memberOf key="model.annotLike"/>
+						<memberOf key="model.eventLike"/>
+					</classes>
+					<content>
+						<rng:empty/>
+					</content>
+					<constraintSpec ident="check_msEnd" scheme="isoschematron">
+						<constraint>
+							<sch:rule context="mei:msEnd">
+								<sch:assert role="error" test="exists(@startid)">msEnd needs a @startid attribute.</sch:assert>                                                                
+							</sch:rule>
+						</constraint>
+					</constraintSpec>        
+					<remarks>
+						<p>The @startid attribute should be used to point to the element starting the feature that is ended by an msEnd.</p>
+					</remarks>
+				</elementSpec>
+				
+				<classSpec ident="att.coord.x1" module="MEI.shared" type="atts">
+					<desc>Attributes that record the x coordinate of the left side of a feature.</desc>
+					<attList>
+						<attDef ident="coord.x1" usage="opt">
+							<desc>gives coordinates for the left side of a feature.</desc>
+							<datatype>
+								<rng:data type="decimal">
+									<rng:param name="minInclusive">0</rng:param>
+								</rng:data>
+							</datatype>
+						</attDef>
+					</attList>
+				</classSpec>
+				<classSpec ident="att.coord.x2" module="MEI.shared" type="atts">
+					<desc>Attributes that record the x coordinate of the right side of a feature.</desc>
+					<attList>
+						<attDef ident="coord.x2" usage="opt">
+							<desc>gives coordinates for the right side of a feature.</desc>
+							<datatype>
+								<rng:data type="decimal">
+									<rng:param name="minInclusive">0</rng:param>
+								</rng:data>
+							</datatype>
+						</attDef>
+					</attList>
+				</classSpec>
+				<classSpec ident="att.coord.y1" module="MEI.shared" type="atts">
+					<desc>Attributes that record the y coordinate of the top left of a feature.</desc>
+					<attList>
+						<attDef ident="coord.y1" usage="opt">
+							<desc>gives y coordinates for the top left of a feature.</desc>
+							<datatype>
+								<rng:data type="decimal">
+									<rng:param name="minInclusive">0</rng:param>
+								</rng:data>
+							</datatype>
+						</attDef>
+					</attList>
+				</classSpec>
+				<classSpec ident="att.coord.y2" module="MEI.shared" type="atts">
+					<desc>Attributes that record the y coordinate of the top right of a feature.</desc>
+					<attList>
+						<attDef ident="coord.y1" usage="opt">
+							<desc>gives y coordinates for the top right of a feature.</desc>
+							<datatype>
+								<rng:data type="decimal">
+									<rng:param name="minInclusive">0</rng:param>
+								</rng:data>
+							</datatype>
+						</attDef>
+					</attList>
+				</classSpec>
+				
+				<classSpec ident="att.coord.lr" module="MEI.shared" type="atts">
+					<desc>Attributes for left/right coordinates.</desc>
+					<classes>
+						<memberOf key="att.coord.x1"/>
+						<memberOf key="att.coord.x2"/>
+					</classes>
+				</classSpec>
+				
+				<elementSpec ident="measure" module="MEI.cmn" mode="change">
+					<classes mode="change">
+						<memberOf key="att.coord.lr" mode="add"/>
+					</classes>
+				</elementSpec>
+				
+				<elementSpec ident="staff" module="MEI.shared" mode="change">
+					<classes mode="change">
+						<memberOf key="att.coord.y1" mode="add"/>
+					</classes>
+				</elementSpec>
+				
+				<classSpec ident="att.xy" module="MEI.shared" type="atts" mode="change">
+					<classes mode="change">
+						<memberOf key="att.coord.x1"/>
+					</classes>
+				</classSpec>
+				
+				<!-- Making att.facsimile a member of att.coordinated -->
+				<!-- is this necessary? -->
+				<!--<classSpec ident="att.facsimile" module="MEI.facsimile" type="atts" mode="change">
+					<desc>Attributes that associate a feature corresponding with all or part of an image.</desc>
+					<classes mode="change">
+					<memberOf key="att.coordinated" mode="add"/>
+					</classes>
+					</classSpec>-->
+				
+				
+				<!-- todos down here -->
+				
 				<classSpec ident="att.surface" module="MEI.pageBased" type="atts" mode="add">
 					<desc>This attribute is used to point to a surface.</desc>
 					<attList>
@@ -106,147 +426,6 @@
 						</attDef>
 					</attList>
 				</classSpec>
-				<elementSpec ident="pages" module="MEI.pageBased" mode="add">
-					<desc>A set of pages in a page-based encoding</desc>
-					<classes>
-						<memberOf key="att.common.anl"/>
-						<memberOf key="att.common"/>
-						<memberOf key="att.typed"/>
-						<memberOf key="model.pagesLike"/>
-					</classes>
-					<content>
-						<rng:zeroOrMore>
-							<rng:ref name="model.pageLike"/>
-						</rng:zeroOrMore>
-					</content>
-				</elementSpec>
-				<elementSpec ident="page" module="MEI.pageBased" mode="add">
-					<desc>A page in a page-base encoding</desc>
-					<classes>
-						<memberOf key="att.common.anl"/>
-						<memberOf key="att.scoreDef.vis"/>
-						<memberOf key="att.common"/>
-						<memberOf key="att.pageRef"/>
-						<memberOf key="att.surface"/>
-						<memberOf key="model.pageLike"/>
-					</classes>
-					<content>
-						<rng:zeroOrMore>
-							<rng:ref name="model.systemLike"/>
-						</rng:zeroOrMore>
-					</content>
-					<attList>
-						<attDef ident="position" usage="opt">
-							<desc>This attribute specifies whereas the positionning of the elements is absolute or relative to its parent.</desc>
-							<valList type="closed">
-								<valItem ident="relative">
-									<desc>indicates that the positionning is relative</desc>
-								</valItem>
-								<valItem ident="absolute">
-									<desc>indicates that the positionning is absolute</desc>
-								</valItem>
-							</valList>
-						</attDef>
-					</attList>
-				</elementSpec>
-				<elementSpec ident="system" module="MEI.pageBased" mode="add">
-					<desc>A system in a page-based encoding</desc>
-					<classes>
-						<memberOf key="att.scoreDef.vis"/>
-						<memberOf key="att.common"/>
-						<memberOf key="att.systemRef"/>
-						<memberOf key="att.coordinated"/>
-						<memberOf key="att.visualoffset.vo"/>
-						<memberOf key="att.visualoffset2.ho"/>
-						<memberOf key="model.systemLike"/>
-					</classes>
-					<content>
-						<!-- we expect a system to start with a staffGrp. It is optional, however if identical from the previous system -->
-						<rng:optional>
-							<rng:ref name="model.staffGrpLike"/>
-						</rng:optional>
-						<!-- then the actual content of a system -->
-						<rng:zeroOrMore>
-							<rng:choice>
-								<!-- section are turned into milestones -->
-								<rng:ref name="model.scbLike"/>
-								<!-- measures for measured music -->
-								<rng:ref name="model.measureLike"/>
-								<!-- staves for un-measured music -->
-								<rng:ref name="model.staffLike"/>
-								<!-- scoreDef for redefinition -->
-								<rng:ref name="model.scoreDefLike"/>
-								<!-- anything else? -->
-							</rng:choice>
-						</rng:zeroOrMore>
-					</content>
-				</elementSpec>
-				<!-- because the hierarchy is flipped, &lt;section&gt; has to become a milestone -->
-				<elementSpec ident="secb" module="MEI.pageBased" mode="add">
-					<desc>A section break milestone element</desc>
-					<classes>
-						<memberOf key="att.common"/>
-						<memberOf key="model.scbLike"/>
-					</classes>
-				</elementSpec>
-				<!-- Changes to preexisting elements -->
-				<!-- Replacing att.facsimile for making it member of att.coordinated - probably not the best way to do this? -->
-				<classSpec ident="att.facsimile" module="MEI.facsimile" type="atts" mode="replace">
-					<desc>Attributes that associate a feature corresponding with all or part of an image.</desc>
-					<classes>
-						<memberOf key="att.coordinated"/>
-					</classes>
-					<attList>
-						<attDef ident="facs" usage="opt">
-							<desc>permits the current element to reference a facsimile image or image zone which corresponds to it.</desc>
-							<datatype>
-								<rng:ref name="data.URIS"/>
-							</datatype>
-						</attDef>
-					</attList>
-				</classSpec>
-				<!-- changing mdiv for adding &lt;pages&gt; a possible child -->
-				<elementSpec ident="mdiv" module="MEI.shared" mode="change">
-					<desc>(musical division) – contains a subdivision of the body of a musical text.
-						<!--The mdiv element may contain one or both of 2 possible views of the
-        music. The score view is the traditional full and open score while the parts view contains
-        each performer's view of the score; that is, his part. These 2 views are necessary because
-        it is not always possible or desirable to generate one from the other. The score and parts
-        elements are placed here and not directly within the body element because score and part
-        characteristics may change from mdiv to mdiv. For example, the 2nd movement of a symphony
-        may require different performing forces (and therefore different score and part layout) than
-        the other movements. The mdiv element may be recursively nested in order to represent music
-        which exhibits this kind of structure. For example, an opera is normally divided into acts,
-        which are in turn divided into scenes. This may be represented by the following markup:
-        &lt;mdiv&gt; &lt;- the opera &lt;mdiv&gt; &lt;- act I &lt;mdiv&gt; &lt;- scene i
-        &lt;mdiv&gt; &lt;- scene ii &lt;/mdiv&gt; &lt;mdiv&gt; &lt;- act II &lt;mdiv&gt; &lt;- scene
-        i &lt;mdiv&gt; &lt;- scene ii &lt;/mdiv&gt; &lt;/mdiv&gt;--></desc>
-					<classes>
-						<memberOf key="att.common"/>
-						<memberOf key="att.declaring"/>
-						<memberOf key="att.facsimile"/>
-						<memberOf key="att.typed"/>
-						<memberOf key="model.mdivLike"/>
-					</classes>
-					<content>
-						<rng:choice>
-							<rng:group>
-								<rng:optional>
-									<rng:ref name="model.scoreLike"/>
-								</rng:optional>
-								<rng:optional>
-									<rng:ref name="model.partsLike"/>
-								</rng:optional>
-								<rng:optional>
-									<rng:ref name="model.pagesLike"/>
-								</rng:optional>
-							</rng:group>
-							<rng:zeroOrMore>
-								<rng:ref name="model.mdivLike"/>
-							</rng:zeroOrMore>
-						</rng:choice>
-					</content>
-				</elementSpec>
 			  
 			  <!-- ****************************************************************** -->
 				<!-- Tablature MEI -->
