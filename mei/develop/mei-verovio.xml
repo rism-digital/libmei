@@ -79,9 +79,7 @@
 			   <!-- ****************************************************************** -->
 				<!-- Page-based MEI -->
 			   <!-- ****************************************************************** -->
-				
-				<!-- See https://github.com/BeethovensWerkstatt/music-encoding/commit/84fae3e2e936511521e1159ae1b002668c9c5c6c#diff-202b5c7e97f1d58bb0f19d70d623fe4faf4a7d2621c6c863fd0450bc643ec58aR106-R451 -->
-			   
+						   
 				<moduleSpec ident="MEI.pageBased" mode="add">
 					<desc/>
 				</moduleSpec>
@@ -121,7 +119,7 @@
 						<rng:zeroOrMore>
 							<rng:choice>
 								<rng:ref name="model.systemLike"/>
-								<rng:ref name="model.msLike"/>
+								<rng:ref name="model.milestoneLike"/>
 								<rng:ref name="model.secbLike"/>
 								<rng:ref name="model.mdivbLike"/>
 								<rng:ref name="model.scoreLike"/>
@@ -185,7 +183,7 @@
 								<rng:ref name="model.staffLike"/>
 								<!-- scoreDef for redefinition -->
 								<rng:ref name="model.scoreDefLike"/>
-								<rng:ref name="model.msLike"/>
+								<rng:ref name="model.milestoneLike"/>
 								<!-- anything else? -->
 							</rng:choice>
 						</rng:zeroOrMore>
@@ -281,16 +279,16 @@
 					</remarks>
 				</elementSpec>
 				
-				<classSpec ident="model.msLike" type="model" module="MEI.ptrref" mode="add">
+				<classSpec ident="model.milestoneLike" type="model" module="MEI.ptrref" mode="add">
 					<desc>Collects milestone like elements.</desc>
 				</classSpec>
 				
-				<elementSpec ident="ms" module="MEI.ptrref" mode="add">
+				<elementSpec ident="milestone" module="MEI.ptrref" mode="add">
 					<desc>(milestone) – A generic milestone element that can be used as anchor in an MEI file.</desc>
 					<classes>
 						<memberOf key="att.common"/>
-						<memberOf key="model.msLike"/>
-						<!-- the following two will allow ms to appear in many places -->
+						<memberOf key="model.milestoneLike"/>
+						<!-- the following two will allow milestone to appear in many places -->
 						<memberOf key="model.annotLike"/>
 						<memberOf key="model.eventLike"/>
 					</classes>
@@ -299,28 +297,28 @@
 					</content>
 				</elementSpec>
 				
-				<elementSpec ident="msEnd" module="MEI.ptrref" mode="add">
+				<elementSpec ident="milestoneEnd" module="MEI.ptrref" mode="add">
 					<desc>(milestone end) – A milestone element that can be used to indicate the end of an arbitrary feature in MEI.</desc>
 					<classes>
 						<memberOf key="att.common"/>
 						<memberOf key="att.startId"/>
-						<memberOf key="model.msLike"/>
-						<!-- the following two will allow ms to appear in many places -->
+						<memberOf key="model.milestoneLike"/>
+						<!-- the following two will allow milestone to appear in many places -->
 						<memberOf key="model.annotLike"/>
 						<memberOf key="model.eventLike"/>
 					</classes>
 					<content>
 						<rng:empty/>
 					</content>
-					<constraintSpec ident="check_msEnd" scheme="isoschematron">
+					<constraintSpec ident="check_milestoneEnd" scheme="isoschematron">
 						<constraint>
-							<sch:rule context="mei:msEnd">
-								<sch:assert role="error" test="exists(@startid)">msEnd needs a @startid attribute.</sch:assert>                                                                
+							<sch:rule context="mei:milestoneEnd">
+								<sch:assert role="error" test="exists(@startid)">milestoneEnd needs a @startid attribute.</sch:assert>                                                                
 							</sch:rule>
 						</constraint>
 					</constraintSpec>        
 					<remarks>
-						<p>The @startid attribute should be used to point to the element starting the feature that is ended by an msEnd.</p>
+						<p>The @startid attribute should be used to point to the element starting the feature that is ended by an milestoneEnd.</p>
 					</remarks>
 				</elementSpec>
 				
