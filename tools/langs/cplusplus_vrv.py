@@ -425,7 +425,7 @@ def vrv_load_config(includes_dir):
         return
     
     f = open(config, "r")
-    CONFIG = yaml.load(f)
+    CONFIG = yaml.load(f, Loader=yaml.FullLoader)
     f.close()
     
 def vrv_get_att_config(module, gp, att):

@@ -116,6 +116,8 @@ mapped:
 defaults:
     data_ARTICULATION_List:
         std::vector<data_ARTICULATION>()
+    data_BULGE:
+        std::vector<std::pair<double, double>>()
     data_COMPASSDIRECTION:
         data_COMPASSDIRECTION()
     data_EVENTREL:
@@ -194,6 +196,9 @@ modules:
         att.barLine.log:
             form:
                 default: BARRENDITION_single
+        att.curvature:
+            bulge:
+                type: data_BULGE
         att.duration.ratio:
             num:
                 default: -1
