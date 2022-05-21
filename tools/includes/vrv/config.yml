@@ -136,6 +136,8 @@ defaults:
         VRV_UNSET
     data_MEASUREMENTREL:
         VRV_UNSET
+    data_METERCOUNT_pair:
+        std::pair<std::vector<int>, MeterCountSign>()
     data_MIDICHANNEL:
         -1
     data_MIDIMSPB:
@@ -212,12 +214,12 @@ modules:
                 type: data_KEYSIGNATURE
         att.meterSig.log:
             count:
-                type: data_SUMMAND_List
+                type: data_METERCOUNT_pair
             unit:
                 type: int
         att.meterSigDefault.log:
             meter.count:
-                type: data_SUMMAND_List
+                type: data_METERCOUNT_pair
             meter.unit:
                 type: int
         att.nInteger:
