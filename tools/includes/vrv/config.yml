@@ -245,6 +245,11 @@ modules:
         att.timestamp.logical:
             tstamp:
                 default: -1.0
+        att.transposition:
+            trans.diat:
+                default: VRV_UNSET
+            trans.semi:
+                default: VRV_UNSET
         att.verticalAlignment:
             vgrp:
                 type: int
