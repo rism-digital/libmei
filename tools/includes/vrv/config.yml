@@ -177,6 +177,9 @@ modules:
                 default: 0
 
     gestural:
+        att.articulation.gestural:
+            artic.ges:
+                type: data_ARTICULATION_List
         att.duration.gestural:
             dots.ges:
                 default: -1
