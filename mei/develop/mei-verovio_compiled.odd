@@ -13217,6 +13217,18 @@
         <desc>Specifies a generic MEI version label.</desc>
         <defaultVal>5.0.0-dev</defaultVal>
         <valList type="closed">
+          <valItem ident="2013">
+            <desc>MEI 2013</desc>
+          </valItem>
+          <valItem ident="3.0.0">
+            <desc>MEI 3.0.0</desc>
+          </valItem>
+          <valItem ident="4.0.0">
+            <desc>MEI 4.0.0</desc>
+          </valItem>
+          <valItem ident="4.0.1">
+            <desc>MEI 4.0.1</desc>
+          </valItem>
           <valItem ident="5.0.0-dev">
             <desc>Development version of MEI 5.0.0</desc>
           </valItem>
