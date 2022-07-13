@@ -179,6 +179,11 @@ modules:
             artic.ges:
                 type: data_ARTICULATION_List
 
+    mensural:
+        att.stem.vis:
+            len:
+                default: -1.0
+
     shared:
         att.articulation:
             artic:
@@ -217,7 +222,7 @@ modules:
         att.stems:
             stem.len:
                 type: double
-                default: -1
+                default: -1.0
         att.timestamp.logical:
             tstamp:
                 default: -1.0
