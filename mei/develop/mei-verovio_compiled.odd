@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><TEI xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.tei-c.org/ns/1.0" xml:base="file:/var/cache/oxgarage/temp/51a607ed-7416-40fb-a1fd-b5820b6af3c1/mei-verovio.xml"><?TEIVERSION Version 4.0.0?>
+<?xml version="1.0" encoding="utf-8"?><TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xml:base="file:/Users/rettinghaus/git/libmei/mei/develop/mei-verovio.xml"><?TEIVERSION Version 4.0.0?>
 	<teiHeader>
 		<fileDesc>
 			<titleStmt>
@@ -8,6 +8,7 @@
 					<name xml:id="LP">Laurent Pugin</name>
 					<name xml:id="AH">Andrew Hankinson</name>
 					<name xml:id="PR">Perry Roland</name>
+					<name xml:id="KR">Klaus Rettinghaus</name>
 				</respStmt>
 			</titleStmt>
 			<publicationStmt>
@@ -18,8 +19,11 @@
 			</sourceDesc>
 		</fileDesc>
 		<revisionDesc>
+		   <change n="4" when="2022-07-15">
+		      <desc>Add all supported versions of MEI</desc>
+		   </change>
 		   <change n="4" when="2021-03-30">
-		      <desc>Onclude tablature preliminary proposal</desc>
+		      <desc>Include tablature preliminary proposal</desc>
 		   </change>
 		   <change n="3" when="2013-11-08">
 				<desc>Changing to /measure/staff organisation; adding /pages container in /mdiv; adding /page@position; changing scb to secb; </desc>
@@ -1022,7 +1026,7 @@
     </content>
   </macroSpec><macroSpec rend="add" ident="data.COLOR" module="MEI" type="dt">
     <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">A value in one of the following forms is expected: 1) hexadecimal RRGGBB, 2) hexadecimal
-      AARRGGBB, 3) CSS RGB, 4) CSS RGBA, 5) HSL, 6) HSLA, or 7) HTML 4.01 color name.</desc>
+      RRGGBBAA, 3) CSS RGB, 4) CSS RGBA, 5) HSL, 6) HSLA, or 7) CSS color name.</desc>
     <content xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <choice xmlns="http://relaxng.org/ns/structure/1.0"><ref name="data.COLORNAMES"/><ref name="data.COLORVALUES"/></choice>
     </content>
@@ -7736,7 +7740,7 @@
         </datatype>
       </attDef>
       <attDef ident="tune.Hz" usage="opt">
-        <desc>Holds a value for cycles per second, <abbr><abbr>i.e.</abbr>,</abbr>, Hertz, for a tuning reference pitch.</desc>
+        <desc>Holds a value for cycles per second, <abbr>i.e.</abbr>, Hertz, for a tuning reference pitch.</desc>
         <datatype>
           <rng:data type="decimal"/>
         </datatype>
@@ -13210,35 +13214,35 @@
         </datatype>
       </attDef>
     </attList>
-  </classSpec><classSpec rend="add" ident="att.meiVersion" module="MEI.shared" type="atts">
-    <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Attributes that record the version of MEI in use.</desc>
-    <attList xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
-      <attDef ident="meiversion" usage="opt">
-        <desc>Specifies a generic MEI version label.</desc>
-        <defaultVal>5.0.0-dev</defaultVal>
-        <valList type="closed">
-          <valItem ident="2013">
-            <desc>MEI 2013</desc>
-          </valItem>
-          <valItem ident="3.0.0">
-            <desc>MEI 3.0.0</desc>
-          </valItem>
-          <valItem ident="4.0.0">
-            <desc>MEI 4.0.0</desc>
-          </valItem>
-          <valItem ident="4.0.1">
-            <desc>MEI 4.0.1</desc>
-          </valItem>
-          <valItem ident="4.0.1-rc1+basic">
-            <desc>MEI basic</desc>
-          </valItem>
-          <valItem ident="5.0.0-dev">
-            <desc>Development version of MEI 5.0.0</desc>
-          </valItem>
-        </valList>
-      </attDef>
-    </attList>
-  </classSpec><classSpec rend="add" ident="att.mensur.log" module="MEI.shared" type="atts">
+  </classSpec><classSpec ident="att.meiVersion" module="MEI.shared" type="atts" mode="replace">
+                    <desc>Attributes that record the version of MEI supported.</desc>
+                    <attList>
+                        <attDef ident="meiversion" usage="req">
+                            <desc>Specifies a generic MEI version label.</desc>
+							<defaultVal>5.0.0-dev</defaultVal>
+							<valList type="closed">
+							  <valItem ident="2013">
+								<desc>MEI 2013</desc>
+							  </valItem>
+							  <valItem ident="3.0.0">
+								<desc>MEI 3.0.0</desc>
+							  </valItem>
+							  <valItem ident="4.0.0">
+								<desc>MEI 4.0.0</desc>
+							  </valItem>
+							  <valItem ident="4.0.1">
+								<desc>MEI 4.0.1</desc>
+							  </valItem>
+							  <valItem ident="5.0.0-dev+basic">
+								<desc>MEI basic</desc>
+							  </valItem>
+							  <valItem ident="5.0.0-dev">
+								<desc>Development version of MEI 5.0.0</desc>
+							  </valItem>
+							</valList>
+						</attDef>
+                    </attList>
+                </classSpec><classSpec rend="add" ident="att.mensur.log" module="MEI.shared" type="atts">
     <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">Logical domain attributes.</desc>
     <classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <memberOf key="att.duration.ratio"/>
