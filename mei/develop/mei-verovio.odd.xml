@@ -13334,6 +13334,9 @@
           <valItem ident="4.0.1">
             <desc>MEI 4.0.1</desc>
           </valItem>
+          <valItem ident="4.0.1-rc1+basic">
+            <desc>MEI basic</desc>
+          </valItem>
           <valItem ident="5.0.0-dev">
             <desc>Development version of MEI 5.0.0</desc>
           </valItem>
