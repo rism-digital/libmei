@@ -12,6 +12,7 @@
 					<name xml:id="LP">Laurent Pugin</name>
 					<name xml:id="AH">Andrew Hankinson</name>
 					<name xml:id="PR">Perry Roland</name>
+					<name xml:id="KR">Klaus Rettinghaus</name>
 				</respStmt>
 			</titleStmt>
 			<publicationStmt>
@@ -22,8 +23,11 @@
 			</sourceDesc>
 		</fileDesc>
 		<revisionDesc>
+		   <change n="4" when="2022-07-15">
+		      <desc>Add all supported versions of MEI</desc>
+		   </change>
 		   <change n="4" when="2021-03-30">
-		      <desc>Onclude tablature preliminary proposal</desc>
+		      <desc>Include tablature preliminary proposal</desc>
 		   </change>
 		   <change n="3" when="2013-11-08">
 				<desc>Changing to /measure/staff organisation; adding /pages container in /mdiv; adding /page@position; changing scb to secb; </desc>
@@ -75,7 +79,37 @@
 				<moduleRef key="MEI.visual"/>
 				<moduleRef key="MEI.pageBased"/>
 				<moduleRef key="MEI.frettab"/>
-			   
+
+				<classSpec ident="att.meiVersion" module="MEI.shared" type="atts" mode="replace">
+                    <desc>Attributes that record the version of MEI supported.</desc>
+                    <attList>
+                        <attDef ident="meiversion" usage="req">
+                            <desc>Specifies a generic MEI version label.</desc>
+							<defaultVal>5.0.0-dev</defaultVal>
+							<valList type="closed">
+							  <valItem ident="2013">
+								<desc>MEI 2013</desc>
+							  </valItem>
+							  <valItem ident="3.0.0">
+								<desc>MEI 3.0.0</desc>
+							  </valItem>
+							  <valItem ident="4.0.0">
+								<desc>MEI 4.0.0</desc>
+							  </valItem>
+							  <valItem ident="4.0.1">
+								<desc>MEI 4.0.1</desc>
+							  </valItem>
+							  <valItem ident="5.0.0-dev+basic">
+								<desc>MEI basic</desc>
+							  </valItem>
+							  <valItem ident="5.0.0-dev">
+								<desc>Development version of MEI 5.0.0</desc>
+							  </valItem>
+							</valList>
+						</attDef>
+                    </attList>
+                </classSpec>
+		  
 			   <!-- ****************************************************************** -->
 				<!-- Page-based MEI -->
 			   <!-- ****************************************************************** -->
