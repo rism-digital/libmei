@@ -1,14 +1,12 @@
  # -- coding: utf-8 --
 
-import sys
+import logging
 import os
 import re
-import codecs
+import sys
 import textwrap
-import logging
-import types
+
 lg = logging.getLogger('schemaparser')
-import pdb
 
 import yaml
 

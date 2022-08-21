@@ -188,9 +188,6 @@ modules:
         att.articulation:
             artic:
                 type: data_ARTICULATION_List
-        att.barLine.log:
-            form:
-                default: BARRENDITION_single
         att.curvature:
             bulge:
                 type: data_BULGE
