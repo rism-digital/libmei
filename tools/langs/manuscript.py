@@ -1,17 +1,18 @@
-import os
 import logging
+from pathlib import Path
+
 lg = logging.getLogger('schemaparser')
 
 LANG_NAME = "ManuScript"
 
 METHOD_TEMPLATE = """
 {className} "() {{
-    createEntry('{elementName}');
+    CreateElement('{elementName}', null);
 }}"
 """
 LICENSE = """
     _License "() {{
-    return 'Copyright (c) 2011-2013 {authors}
+    return 'Copyright (c) 2011-2019 {authors}
 
     Permission is hereby granted, free of charge, to any person obtaining
     a copy of this software and associated documentation files (the
@@ -35,262 +36,372 @@ LICENSE = """
 """
 
 EXTRAS = """
-    createEntry "(tagname) {
-    return CreateDictionary(tagname, CreateDictionary('attrs', CreateDictionary(), 'children', CreateSparseArray(), 'text', '', 'tail', ''));
+Initialize "() {
+        tree_doc = CreateSparseArray();
+        flat_doc = CreateDictionary();
+        id_incr = 0;
+
+        Self._property:MEIDocument = tree_doc;
+        Self._property:MEIFlattened = flat_doc;
+        Self._property:MEIID = id_incr;
 }"
-    getChildren "(obj) {
-    props = obj.GetPropertyNames();
-    objname = props[0];
-    el = obj[objname];
-    return el['children'];
+
+    XMLComment "(comment) {
+    commentObj = CreateElement('<!--', null);
+    commentObj.text = comment;
+    return commentObj;
 }"
-    setChildren "(obj, childarr) {
-        props = obj.GetPropertyNames();
-        objname = props[0];
-        el = obj[objname];
-        el['children'] = childarr;
+CreateElement "(tagname, orig_id) {
+    element = CreateDictionary(
+        'name', tagname,
+        'attrs', CreateDictionary(),
+        'children', CreateSparseArray(),
+        'text', '',
+        'tail', '',
+        '_id', '',
+        '_parent', null);
+
+    if (orig_id = null)
+    {
+        element._id = generateRandomID();
+    }
+    else
+    {
+        element._id = orig_id;
+    }
+
+    f = Self._property:MEIFlattened;
+    f[element._id] = element;
+
+    return element;
 }"
-    addChildAtPosition "(obj, child, position) {
-        c = getChildren(obj);
-        r = CreateSparseArray();
-        // copy the children to the new array. Add two
-        // beyond the length since we'll be adding a new element.
-        for i = c.Length + 2 {
-            if (i = position) {
-                r[i] = child;
-                i = i + 1;
-            } else {
-                r[i] = c[i];
-            }
+GetChildren "(element) {
+        c = CreateSparseArray();
+        for each child_id in element.children {
+            child = Self.MEIFlattened[child_id];
+            c.Push(child);
         }
-        setChildren(obj, r);
+        return c;
 }"
-    addChild "(obj, child) {
-    c = getChildren(obj);
-    c.Push(child);
+SetChildren "(element, childarr) {
+        element.children = childarr;
 }"
-    getAttributes "(obj) {
-    props = obj.GetPropertyNames();
-    objname = props[0];
-    el = obj[objname];
-    return el['attrs'];
+AddChildAtPosition "(element, child, position) {
+        AddChild(element, child);
+        c = element.children;
+        // shift all children that are at a higher index than `position`
+        for i = c.Length - 1 to position step -1 {
+            c[i] = c[i - 1];
+        }
+        element.children[position] = child._id;
 }"
-    addAttribute "(obj, attrname, attrval) {
-    a = getAttributes(obj);
+AddChild "(element, child) {
+        cid = child._id;
+        child._parent = element._id;
+        element.children.Push(cid);
+        // The following might be redundant, but in case a child is removed from
+        // one parent and added to another, it's safer to re-register the ID.
+        Self.MEIFlattened[cid] = child;
+}"
+RemoveChild "(element, child) {
+    child._parent = null;
+    UnregisterId(child._id);
+
+    newarr = CreateSparseArray();
+
+    for each elid in element.children
+    {
+        if (elid != child._id)
+        {
+            newarr.Push(elid);
+        }
+    }
+
+    element.children = newarr;
+}"
+GetAttributes "(element) {
+    return element.attrs;
+}"
+AddAttribute "(element, attrname, attrval) {
+    a = element.attrs;
     // check and replace any newlines
-
     val = _encodeEntities(attrval);
-
     a[attrname] = val;
 }"
-    getAttribute "(obj, attrname) {
-    props = obj.GetPropertyNames();
-    objname = props[0];
-    el = obj[objname];
-    attrs = el['attrs'];
-    if (attrs.PropertyExists(attrname)) {
-        return attrs[attrname];
-    } else {
-        return false;
+AddAttributeValue "(element, attrname, attrval) {
+    // appends a value to an existing attribute. Used, for example,
+    // in appending multiple articulations to @artic on note.
+    a = element.attrs;
+
+    if (a.PropertyExists(attrname))
+    {
+        origval = a[attrname];
+        newval = _encodeEntities(attrval);
+        val = origval & ' ' & newval;
     }
+    else
+    {
+        val = attrval;
+    }
+
+    element.attrs[attrname] = val;
 }"
-    setAttributes "(obj, attrs) {
+GetAttribute "(element, attrname) {
+        attrs = element.attrs;
+        if (attrs.PropertyExists(attrname))
+        {
+            return attrs[attrname];
+        }
+        else
+        {
+            return False;
+        }
+}"
+SetAttributes "(element, new_attrs) {
     //sets all attributes, wiping out any previous ones
-    props = obj.GetPropertyNames();
-    objname = props[0];
-    el = obj[objname];
-    el['attrs'] = CreateDictionary();
+    element.attrs = CreateDictionary();
 
     // this will provide character encoding
-    for each Pair a in attrs
+    for each Pair a in new_attrs
     {
-        addAttribute(a.Name, a.Value);
+        AddAttribute(element, a.Name, a.Value);
     }
 }"
-    getId "(obj)
-    {
-        return getAttribute(obj, 'xml:id');
+GetId "(element) {
+        return element._id;
 }"
-    setId "(obj, value)
-    {
-        addAttribute(obj, 'xml:id', value);
+SetId "(element, newId) {
+    UnregisterId(element._id);
+    element._id = newId;
+    Self.MEIFlattened[newId] = element;
 }"
-    removeAttribute "(obj, attrname) {
+UnregisterId "(id) {
+    olddict = Self._property:MEIFlattened;
+    newdict = removeKeyFromDictionary(olddict, id);
+    Self._property:MEIFlattened = newdict;
+}"
+RemoveAttribute "(element, attrname) {
     // since there are no delete functions
     // for dictionaries, we set the attribute
     // to a blank space and this will get
     // removed when converted to XML.
-    a = getAttributes(obj);
-    a[attrname] = ' ';
+    element.attrs[attrname] = ' ';
 }"
-    getName "(obj) {
-    n = '';
-    props = obj.GetPropertyNames();
-    return props[0];
+GetName "(element) {
+    return element.name;
 }"
-    setText "(obj, val) {
-    props = obj.GetPropertyNames();
-    objname = props[0];
-    el = obj[objname];
-    el['text'] = _encodeEntities(val);
+SetText "(element, val) {
+    element.text = _encodeEntities(val);
 }"
-    getText "(obj) {
-    props = obj.GetPropertyNames();
-    objname = props[0];
-    el = obj[objname];
-    return el['text'];
+GetText "(element) {
+    return element.text;
 }"
-    setTail "(obj, val) {
-    props = obj.GetPropertyNames();
-    objname = props[0];
-    el = obj[objname];
-    el['tail'] = _encodeEntities(val);
+SetTail "(element, val) {
+    element.tail = _encodeEntities(val);
 }"
-    getTail "(obj) {
-    props = obj.GetPropertyNames();
-    objname = props[0];
-    el = obj[objname];
-    return el['tail'];
+GetTail "(element) {
+    return element.tail;
 }"
+
+    destroy "() {
+        // cleans up
+        Self._property:MEIFlattened = CreateDictionary();
+        Self._property:MEIDocument = CreateSparseArray();
+        Self._property:MEIID = 0;
+    }"
+
+    setDocumentRoot "(el) {
+        d = Self._property:MEIDocument;
+        d.Push(el);
+    }"
+
+    getDocumentRoot "() {
+        d = Self._property:MEIDocument;
+        return d[0];
+    }"
+
+    getDocument "() {
+        return Self._property:MEIDocument;
+    }"
+
+    getElementById "(id) {
+        d = Self._property:MEIFlattened;
+        if (d.PropertyExists(id))
+        {
+            return d[id];
+        }
+        else
+        {
+            return null;
+        }
+    }"
+
     getElementsByName "(name) {
-    if (not Self.flattened) {
+    if (not Self.MEIFlattened) {
         return false;
     }
     res = CreateSparseArray();
-    for each e in Self.flattened {
-        if (getName(e) = name) {
+    for each e in Self.MEIFlattened {
+        if (IsObject(e) and getName(e) = name) {
             res.Push(e);
         }
     }
     return res;
 }"
-    getPositionInDocument "(obj) {
-    if (not Self.flattened) {
-        return false;
+    createXmlTag "(name, id, attributesList, isTerminal) {
+    if (name = '<!--')
+    {
+        // handle XML comments
+        return name;
     }
-    for i = 0 to Length(Self.flattened) {
-        if (Self.flattened[i] = obj) {
-            return i;
-        }
-    }
-    return false;
-}"
-    lookBack "(from, name) {
-    if (not Self.flattened) {
-        return false;
-    }
-    pos = getPositionInDocument(from);
-    for i = pos to 0 step -1 {
-        if (getName(Self.flattened[i]) = name) {
-            return Self.flattened[i];
-        }
-    }
-}"
-    createXmlTag "(name, attributesList, isTerminal) {
+
     attrstring = '';
     spacer = '';
-    if (attributesList) {
+
+    if (id != null)
+    {
+        attrstring = 'xml:id=' & Chr(34) & id & Chr(34);
+    }
+
+    if (attributesList != null)
+    {
         spacer = ' ';
-        for each Pair attr in attributesList {
-            if (attr.Value != ' ') {
-                if (attrstring = '') {
+        for each Pair attr in attributesList
+        {
+            if (attr.Value != ' ')
+            {
+                if (attrstring = '')
+                {
                     // Don't add initial space
                     attrstring = attr.Name & '=' & Chr(34) & attr.Value & Chr(34);
                 }
-                else {
+                else
+                {
                     attrstring = attrstring & spacer & attr.Name & '=' & Chr(34) & attr.Value & Chr(34);
                 }
             }
         }
     }
-    if (isTerminal) {
+
+    if (isTerminal)
+    {
         return '<' & name & spacer & attrstring & '/>';
-    } else {
+    }
+    else
+    {
         return '<' & name & spacer & attrstring & '>';
     }
 }"
+    childHasTail "(children) {
+    for each child in children
+    {
+        if (Length(GetTail(child)) > 0)
+        {
+            return true;
+        }
+    }
+    return false;
+}"
     convertDictToXml "(meiel, indent) {
+    // The indent parameter includes the leading line break
+
     xmlout = '';
     terminalTag = true;
-    nm = libmei.getName(meiel);
-    at = libmei.getAttributes(meiel);
-    ch = libmei.getChildren(meiel);
-    tx = libmei.getText(meiel);
-    tl = libmei.getTail(meiel);
-    tabs = '';
-    if (indent > 0) {
-        // add four spaces for every indent level.
-        arr = utils.CreateArrayBlanket('    ', indent);
-        tabs = JoinStrings(arr, '');
+
+    nm = GetName(meiel);
+    at = GetAttributes(meiel);
+    ch = GetChildren(meiel);
+    tx = GetText(meiel);
+    tl = GetTail(meiel);
+    id = GetId(meiel);
+
+
+    // comments are simple so they're handled specially.
+    if (nm = '<!--')
+    {
+        xmlout = indent & nm & ' ' & tx & ' -->';
+        return xmlout;
     }
-    if (ch or Length(tx) > 0) {
+
+    if (ch.Length > 0 or Length(tx) > 0)
+    {
         terminalTag = false;
     }
 
-    xmlout = createXmlTag(nm, at, terminalTag);
+    xmlout = indent & createXmlTag(nm, id, at, terminalTag);
 
-    if (Length(tx) > 0) {
-        endchar = '';
+    hasTextChild = Length(tx) > 0 or childHasTail(ch);
+
+    if (hasTextChild)
+    {
         xmlout = xmlout & tx;
-    } else {
-        xmlout = xmlout & '\n';
+        // Do not add indentation whitespace as it might mess up text content
+        indent = '';
     }
 
-    if (ch.Length > 0) {
-        indent = indent + 1;
-        for each child in ch {
-            xmlout = xmlout & tabs & convertDictToXml(child, indent);
+    if (ch.Length > 0)
+    {
+        if (indent != '')
+        {
+            innerIndent = indent & '    ';
         }
-        indent = indent - 1;
-    }
+        else
+        {
+            innerIndent = '';
+        }
 
-    if (Length(tl) > 0) {
-        xmlout = xmlout & tl;
+        for each child in ch
+        {
+            xmlout = xmlout & convertDictToXml(child, innerIndent);
+        }
     }
 
     // convertDictToXml takes care of adding the />
     // for tags that do not have children. We'll
     // take care of the terminal tag here for those
     // that do.
-    if (not terminalTag) {
-        if (Length(tx) > 0) {
-            xmlout = xmlout & '</' & nm & '>\n';
-        } else {
-            tabs = Substring(tabs, 0, Length(tabs) - 1);
-            xmlout = xmlout & tabs & '</' & nm & '>\n';
-        }
+    if (not terminalTag)
+    {
+        xmlout = xmlout & indent & '</' & nm & '>';
+    }
+
+    if (Length(tl) > 0)
+    {
+        xmlout = xmlout & tl;
     }
 
     return xmlout;
 }"
+
+    _exportMeiDocument "(meidoc) {
+        xdecl = '<?xml version=' & Chr(34) & '1.0' & Chr(34) & ' encoding=' & Chr(34) & 'UTF-16' & Chr(34) & ' ?>';
+        meiout = xdecl & convertDictToXml(meidoc[0], Chr(10));
+
+        return meiout;
+    }"
+
     meiDocumentToFile "(meidoc, filename) {
-    xdecl = '<?xml version=' & Chr(34) & '1.0' & Chr(34) & ' encoding=' & Chr(34) & 'UTF-8' & Chr(34) & ' ?>\n';
-    indent = 0;
-    meiout = xdecl & convertDictToXml(meidoc[0], indent);
-    Sibelius.CreateTextFile(filename);
-    Sibelius.AppendTextFile(filename, meiout, 1);
+        meiout = _exportMeiDocument(meidoc);
+        if (Sibelius.CreateTextFile(filename)) {
+            return Sibelius.AppendTextFile(filename, meiout, true);
+        } else {
+            return false;
+        }
+}"
 
-    return true;
-}"
-    documentFromFile "(filename) {
-    Self._property:flattened = CreateSparseArray();
-    res = _xmlImport(filename);
-
-    return res;
-}"
-    popMode "(arr) {
-    if (arr.Length > 0) {
-        return arr.Pop();
-    } else {
-        // return PRE
-        return 15;
-    }
-}"
+    meiDocumentToString "(meidoc) {
+        return _exportMeiDocument(meidoc);
+    }"
     _encodeEntities "(string)
     {
         /*
             Returns an entity-encoded version of the string.
         */
+        if (string = '')
+        {
+            return string;
+        }
+
         nc = Chr(10);
         quote = Chr(34);
         apos = Chr(39);
@@ -308,6 +419,33 @@ EXTRAS = """
 
         return string;
     }"
+
+generateRandomID "() {
+//$module(ExportGenerators.mss)
+    id = Self._property:MEIID + 1;
+    Self._property:MEIID = id;
+    id = 'm-' & id;
+    return id;
+}"
+"""
+
+# The XML parser code does not work at the moment because of how the code above
+# has changed over time. It's kept anyway to facilitate future work on MEI
+# import.
+XMLPARSER = """
+    documentFromFile "(filename) {
+    res = _xmlImport(filename);
+
+    return res;
+}"
+    popMode "(arr) {
+    if (arr.Length > 0) {
+        return arr.Pop();
+    } else {
+        // return PRE
+        return 15;
+    }
+}"
     _xmlImport "(filename) {
     /*
         Based on the Quick-n-Dirty XML parser at
@@ -516,7 +654,7 @@ EXTRAS = """
                     ent = createEntry(tagName);
                     libmei.setAttributes(ent, attrs);
                     libmei.addChild(parentTag[-1], ent);
-                    Self.flattened.Push(ent);
+                    Self.MEIFlattened.Push(ent);
 
                     // doc.endElement(tagName);
                     if (depth = 0) {
@@ -543,7 +681,7 @@ EXTRAS = """
                             libmei.setAttributes(ent, attrs);
                             libmei.addChild(parentTag[-1], ent);
                             parentTag.Push(ent);
-                            Self.flattened.Push(ent);
+                            Self.MEIFlattened.Push(ent);
 
                             sb.Length = 0;
                             depth = depth + 1;
@@ -595,7 +733,7 @@ EXTRAS = """
                             mode = IN_TAG;
                         }
                         // not sure what this does
-                        case (' \u0009') {
+                        case ('     ') {
                             sb.Push(' ');
                         }
                         case ('&') {
@@ -668,7 +806,7 @@ EXTRAS = """
                                 libmei.addChild(parentTag[-1], ent);
                             }
                             parentTag.Push(ent);
-                            Self.flattened.Push(ent);
+                            Self.MEIFlattened.Push(ent);
 
                             depth = depth + 1;
                             tagName = '';
@@ -694,7 +832,7 @@ EXTRAS = """
 }"
 """
 
-AUTHORS = "Andrew Hankinson, Alastair Porter, and Others"
+AUTHORS = "Andrew Hankinson, Alastair Porter, Thomas Weber and Others"
 
 FILE_TEMPLATE = """
 {{
@@ -714,11 +852,11 @@ def create(schema, outdir):
 
 def __create_manuscript_classes(schema, outdir):
     output = ""
-    for module, elements in sorted(schema.element_structure.iteritems()):
+    for module, elements in sorted(schema.element_structure.items()):
         if not elements:
             continue
 
-        for element, atgroups in sorted(elements.iteritems()):
+        for element, atgroups in sorted(elements.items()):
             methstr = {
                 'className': element[0].upper() + element[1:],
                 'elementName': element
@@ -732,7 +870,6 @@ def __create_manuscript_classes(schema, outdir):
     }
     fileoutput = FILE_TEMPLATE.format(**filestr)
 
-    fmi = open(os.path.join(outdir, 'libmei.plg'), 'w')
-    fmi.write(fileoutput)
-    fmi.close()
+    fmi = Path(outdir, "libmei.plg")
+    fmi.write_text(fileoutput)
     return True
