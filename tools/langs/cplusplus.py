@@ -234,7 +234,7 @@ def __create_mixin_classes(schema, outdir):
         if "std::string" in classes:
             tplvars["includes"] = "#include <string>"
         fullout = CLASSES_HEAD_TEMPLATE.format(**tplvars)
-        fmh = Path(outdir, "{0}mixins.h".format(module.lower()))
+        fmh = Path(outdir, f"{module.lower()}mixins.h")
         fmh.write_text(fullout)
         lg.debug("\tCreated {0}mixins.h".format(module.lower()))
 
