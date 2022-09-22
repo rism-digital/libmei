@@ -22,7 +22,7 @@ def vrv_member_cc_upper(name):
 
 
 def vrv_load_config(includes_dir):
-    """ Load the vrv attribute overrides into CONFIG."""
+    """Load the vrv attribute overrides into CONFIG."""
     global CONFIG
 
     if not includes_dir:
@@ -30,11 +30,11 @@ def vrv_load_config(includes_dir):
         return
 
     config = Path(includes_dir, "config.yml")
-    if not config.isfile():
+    if not config.is_file():
         return
 
-    f = open(config, "r")
-    CONFIG = yaml.load(f)
+    f = config.open()
+    CONFIG = yaml.load(f, Loader=yaml.FullLoader)
     f.close()
 
 
@@ -118,7 +118,7 @@ def __create_att_classes(schema, outdir, includes_dir):
     for cc in c:
         lg.debug("\tCreated atts_{0}.h".format(cc))
 
-    for module, atgroup in sorted(schema.attribute_group_structure.iteritems()):
+    for module, atgroup in sorted(schema.attribute_group_structure.items()):
         fullout = ""
         classes = ""
         methods = ""
@@ -127,7 +127,7 @@ def __create_att_classes(schema, outdir, includes_dir):
             # continue if we don't have any attribute groups in this module
             continue
 
-        for gp, atts in sorted(atgroup.iteritems()):
+        for gp, atts in sorted(atgroup.items()):
             if not atts:
                 continue
 
@@ -138,18 +138,17 @@ def __create_att_classes(schema, outdir, includes_dir):
                     ns, att = att.split("|")
 
         #fullout = CLASSES_HEAD_TEMPLATE.format(**tplvars)
-        fmh = open(Path(outdir, "atts_{0}.h".format(module.lower())), 'w')
-        fmh.write(fullout)
-        fmh.close()
-        lg.debug("\tCreated atts_{0}.h".format(module.lower()))
+        fmh = Path(outdir, f"atts_{module.lower()}.h")
+        fmh.write_text(fullout)
+        lg.debug(f"\tCreated atts_{module.lower()}.h")
 
     ###########################################################################
     # Classes enum
     ###########################################################################
-    fmi = open(Path(outdir, "att_classes.h".format(module.lower())), 'w')
+    fmi = open(Path(outdir, "att_classes.h"), 'w')
     # fmi.write(LICENSE)
     # fmi.write(ENUM_GRP_START)
     # fmi.write(enum)
     # fmi.write(ENUM_GRP_END)
     fmi.close()
-    lg.debug("\tCreated atts_{0}.cpp".format(module.lower()))
+    lg.debug(f"\tCreated atts_{module.lower()}.cpp")

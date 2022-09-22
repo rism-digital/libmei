@@ -1,1 +1,1 @@
-AVAILABLE_LANGS = ("cpp", "csharp", "java", "manuscript", "python", "vrv")
+AVAILABLE_LANGS = ("cpp", "csharp", "java", "manuscript", "python", "vrv", "vdoc")
