@@ -243,15 +243,15 @@ class MeiSchema(object):
         attdefident = attdef.get("ident")
         if "-" in attdefident:
             f, l = attdefident.split("-")
-            attdefident = "{0}{1}".format(f, l.title())
+            attdefident = f"{f}{l.title()}"
 
         if attdef.get("ns"):
-            attname = "{0}|{1}".format(attdef.get("ns"), attdefident)
+            attname = f"{attdef.get('ns')}|{attdefident}"
         elif ":" in attdefident:
             pfx, att = attdefident.split(":")
-            attname = "{0}|{1}".format(NAMESPACES[pfx], att)
+            attname = f"{NAMESPACES[pfx]}|{att}"
         else:
-            attname = "{0}".format(attdefident)
+            attname = f"{attdefident}"
 
         return attname
 
@@ -293,7 +293,7 @@ class MeiSchema(object):
             f"//tei:attDef[@ident='{att_name}']/tei:desc", namespaces=TEI_NS)
         if desc is not None:
             # strip extraneous whitespace
-            return re.sub('[\s\t]+', ' ', desc.xpath("string()"))
+            return re.sub("[\s\t]+", " ", desc.xpath("string()"))
         else:
             return ""
 
@@ -303,7 +303,7 @@ class MeiSchema(object):
             f"//tei:elementSpec[@ident='{elem_name}']/tei:desc", namespaces=TEI_NS)
         if desc is not None:
             # strip extraneous whitespace
-            return re.sub('[\s\t]+', ' ', desc.xpath("string()"))
+            return re.sub("[\s\t]+", " ", desc.xpath("string()"))
         else:
             return ""
 
@@ -343,7 +343,7 @@ if __name__ == "__main__":
     if args.showlang:
         print("Available Output Languages")
         for l in AVAILABLE_LANGS:
-            print("\t{0}".format(l))
+            print(f"\t{l}")
         sys.exit(0)
 
     compiled_odd = Path(args.compiled)

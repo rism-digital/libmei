@@ -78,9 +78,9 @@ def __create_python_classes(schema, outdir):
         }
         module_output = MODULE_TEMPLATE.format(**modstr)
 
-        fmi = Path(outdir, "{0}.py".format(module.lower()))
+        fmi = Path(outdir, f"{module.lower()}.py")
         fmi.write_text(module_output)
-        lg.debug("\tCreated {0}.py".format(module.lower()))
+        lg.debug(f"\tCreated {module.lower()}.py")
 
 
 def __create_init(schema, outdir):
@@ -90,7 +90,7 @@ def __create_init(schema, outdir):
     p = Path(outdir, "__init__.py")
     for module, elements in sorted(schema.element_structure.items()):
         a.append('"{0}"'.format(module.lower()))
-        m.append("from pymei.Modules.{0} import *\n".format(module.lower()))
+        m.append(f"from pymei.Modules.{module.lower()} import *\n")
     init_string = "__all__ = [{0}]\n\n".format(", ".join(a)) + "".join(m)
     p.write_text(init_string)
 
@@ -113,9 +113,9 @@ def parse_includes(file_dir, includes_dir: str):
 def __process_include(fname, includes, includes_dir: str):
     """Process the include file for our methods."""
     new_methods, includes_block = None, None
-    if "{0}.inc".format(fname) in includes:
-        lg.debug("\tProcessing include for {0}".format(fname))
-        includefile = Path(includes_dir, "{0}.inc".format(fname)).read_text()
+    if (fname + ".inc") in includes:
+        lg.debug(f"\tProcessing include for {fname}")
+        includefile = Path(includes_dir, {fname}).with_suffix(".inc").read_text()
         new_methods, includes_block = __parse_includefile(includefile)
         return (new_methods, includes_block)
     else:

@@ -514,22 +514,22 @@ def vrv_getattdefault(schema, module, gp, aname, includes_dir: str = ""):
     if attype == "int":
         if default == None:
             default = "VRV_UNSET"
-        return ("{0}".format(default), "", ["StrToInt", "IntToStr"])
+        return (default, "", ["StrToInt", "IntToStr"])
     elif attype == "char":
         if default == None:
             default = 0
-        return ("{0}".format(default), "", ["StrToInt", "IntToStr"])
+        return (default, "", ["StrToInt", "IntToStr"])
     elif attype == "double":
         if default == None:
             default = 0.0
-        return ("{0}".format(default), "", ["StrToDbl", "DblToStr"])
+        return (default, "", ["StrToDbl", "DblToStr"])
     elif attype == "std::string": 
         return ("\"\"", "", ["StrToStr", "StrToStr"])  
     else:
         if default == None:
             default = vrv_get_type_default(attype)
         cname = vrv_converter_cc(attype)
-        return ("{0}".format(default), "", ["StrTo{0}".format(cname), "{0}ToStr".format(cname)])
+        return (default, "", [f"StrTo{cname}", f"{cname}ToStr"])
 
 def create(schema, outdir, includes_dir = ""):
     lg.debug("Begin Verovio C++ Output ...")

@@ -288,13 +288,13 @@ def __create_mixin_classes(schema, outdir):
             classes += MIXIN_CLASS_IMPL_CONS_TEMPLATE.format(**clsubstr)
 
         tplvars = {
-            "moduleNameLower": "{0}mixins".format(module.lower()),
+            "moduleNameLower": f"{module.lower()}mixins",
             "elements": classes
         }
         fullout = CLASSES_IMPL_TEMPLATE.format(**tplvars)
-        fmi = Path(outdir, "{0}mixins.cpp".format(module.lower()))
+        fmi = Path(outdir, f"{module.lower()}mixins.cpp")
         fmi.write_text(fullout)
-        lg.debug("\tCreated {0}mixins.cpp".format(module.lower()))
+        lg.debug(f"\tCreated {module.lower()}mixins.cpp")
 
 
 def __create_element_classes(schema, outdir):
@@ -365,9 +365,9 @@ def __create_element_classes(schema, outdir):
             outvars["includes"] += "#include <string>\n"
 
         fullout = CLASSES_HEAD_TEMPLATE.format(**outvars)
-        fmh = Path(outdir, "{0}.h".format(module.lower()))
+        fmh = Path(outdir, f"{module.lower()}.h")
         fmh.write_text(fullout)
-        lg.debug("\tCreated {0}.h".format(module.lower()))
+        lg.debug(f"\tCreated {module.lower()}.h")
 
     # ###########################################################################
     # # Implementation
@@ -436,9 +436,9 @@ def __create_element_classes(schema, outdir):
         }
         fullout = CLASSES_IMPL_TEMPLATE.format(**implvars)
 
-        fmi = Path(outdir, "{0}.cpp".format(module.lower()))
+        fmi = Path(outdir, f"{module.lower()}.cpp")
         fmi.write_text(fullout)
-        lg.debug("\t Created {0}.cpp".format(module.lower()))
+        lg.debug(f"\t Created {module.lower()}.cpp")
 
 
 def parse_includes(file_dir, includes_dir: str):
@@ -460,7 +460,7 @@ def __process_include(fname, includes, includes_dir: str):
     new_methods, includes_block = None, None
     if "{0}.inc".format(fname) in includes:
         lg.debug("\tProcessing include for {0}".format(fname))
-        includefile = Path(includes_dir, "{0}.inc".format(fname)).read_text()
+        includefile = Path(includes_dir, fname).with_suffix(".inc").read_text()
         new_methods, includes_block = __parse_includefile(includefile)
         return (new_methods, includes_block)
     else:
