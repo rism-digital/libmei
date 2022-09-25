@@ -482,7 +482,8 @@ def vrv_getatttype(schema, module, gp, aname, includes_dir: str = ""):
     # First numbers
     el = schema.xpath("//tei:attDef[@ident=$name]/tei:datatype/rng:data/@type", name=aname, namespaces=TEI_RNG_NS)
     if el:
-        if el[0] == "nonNegativeInteger" or el[0] == "positiveInteger":
+        if el[0].endswith("nteger"):
+            # We unify "integer", "positiveInteger", and "nonNegativeInteger"
             return ("int", "")
         elif el[0] == "decimal":
             return ("double", "")
