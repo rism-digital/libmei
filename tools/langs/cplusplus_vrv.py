@@ -662,7 +662,6 @@ def __create_att_classes(schema, outdir, includes_dir):
             reads = ""
             writes = ""
             checkers = ""
-            prefix = ""
             setters += SETTERS_IMPL_TEMPLATE_GRP_START.format(**{
                                                               "attGroupNameUpper": schema.cc(schema.strpatt(gp)),
                                                               "attId": "ATT_{0}".format(schema.cc(schema.strpatt(gp)).upper()) })
@@ -682,6 +681,7 @@ def __create_att_classes(schema, outdir, includes_dir):
                     #nsDef = NAMESPACE_TEMPLATE.format(**nssubstr)
                     attrNs = "s, "
                 else:
+                    prefix = ""
                     nsDef = ""
                     attrNs = ""
                 atttype, atttypename = vrv_getatttype(schema.schema, module, gp, att, includes_dir)
