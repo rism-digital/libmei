@@ -67,8 +67,8 @@ CLASSES_HEAD_TEMPLATE = """{license}
 
 namespace mei {{
 {elements}
-}}
-#endif  // {moduleNameCaps}_H_
+}} // namespace mei
+#endif // {moduleNameCaps}_H_
 """
 
 ELEMENT_CLASS_HEAD_TEMPLATE = """
