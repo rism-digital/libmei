@@ -78,7 +78,7 @@ enum AttClassId {
 ENUM_GRP_END = """    ATT_CLASS_max
 };
 
-} // vrv namespace
+} // namespace vrv
 
 #endif // __VRV_ATT_CLASSES_H__
 """
@@ -99,7 +99,7 @@ namespace vrv {
 """
 
 TYPE_GRP_END = """
-} // vrv namespace
+} // namespace vrv
 
 #endif // __VRV_ATT_TYPES_H__
 """
@@ -150,7 +150,7 @@ CONVERTER_HEADER_TEMPLATE = """
 
 CONVERTER_HEADER_TEMPLATE_END = """};
 
-} // vrv namespace
+} // namespace vrv
 
 #endif // __VRV_ATT_CONVERTER_H__
 """
@@ -208,7 +208,7 @@ CONVERTER_IMPL_TEMPLATE_METHOD2_END = """
 """
 
 CONVERTER_IMPL_TEMPLATE_END = """
-} // vrv namespace
+} // namespace vrv
 """
 
 
@@ -263,7 +263,7 @@ GETTERS_IMPL_TEMPLATE_GRP_END = """    }}
 
 GETTERS_IMPL_TEMPLATE_END = """}}
 
-}} // vrv namespace
+}} // namespace vrv
 """
 
 NAMESPACE_TEMPLATE = """MeiNamespace *s = new MeiNamespace("{prefix}", "{href}");\n    """
@@ -305,7 +305,7 @@ namespace vrv {{
 
 {elements}
 
-}} // vrv namespace
+}} // namespace vrv
 
 #endif // __VRV_{moduleNameCaps}_H__
 """
