@@ -223,11 +223,6 @@ modules:
         att.timestamp.logical:
             tstamp:
                 default: -1.0
-        att.transposition:
-            trans.diat:
-                type: int
-            trans.semi:
-                type: int
 
     frettab:
         att.note.ges.tab:
