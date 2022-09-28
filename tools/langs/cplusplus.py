@@ -352,7 +352,7 @@ def __create_element_classes(schema, outdir):
 
         incl_output = ""
         incl_output += "#include \"meicommon.h\"\n"
-        for incl in includes:
+        for incl in sorted(includes):
             incl_output += "#include \"{0}mixins.h\"\n".format(incl.lower())
 
         outvars = {
