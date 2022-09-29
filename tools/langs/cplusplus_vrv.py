@@ -1,10 +1,9 @@
  # -- coding: utf-8 --
 
 import logging
-import os
 import re
-import sys
 import textwrap
+from pathlib import Path
 
 lg = logging.getLogger('schemaparser')
 
@@ -79,7 +78,7 @@ enum AttClassId {
 ENUM_GRP_END = """    ATT_CLASS_max
 };
 
-} // vrv namespace
+} // namespace vrv
 
 #endif // __VRV_ATT_CLASSES_H__
 """
@@ -100,7 +99,7 @@ namespace vrv {
 """
 
 TYPE_GRP_END = """
-} // vrv namespace
+} // namespace vrv
 
 #endif // __VRV_ATT_TYPES_H__
 """
@@ -151,7 +150,7 @@ CONVERTER_HEADER_TEMPLATE = """
 
 CONVERTER_HEADER_TEMPLATE_END = """};
 
-} // vrv namespace
+} // namespace vrv
 
 #endif // __VRV_ATT_CONVERTER_H__
 """
@@ -209,7 +208,7 @@ CONVERTER_IMPL_TEMPLATE_METHOD2_END = """
 """
 
 CONVERTER_IMPL_TEMPLATE_END = """
-} // vrv namespace
+} // namespace vrv
 """
 
 
@@ -264,7 +263,7 @@ GETTERS_IMPL_TEMPLATE_GRP_END = """    }}
 
 GETTERS_IMPL_TEMPLATE_END = """}}
 
-}} // vrv namespace
+}} // namespace vrv
 """
 
 NAMESPACE_TEMPLATE = """MeiNamespace *s = new MeiNamespace("{prefix}", "{href}");\n    """
@@ -306,7 +305,7 @@ namespace vrv {{
 
 {elements}
 
-}} // vrv namespace
+}} // namespace vrv
 
 #endif // __VRV_{moduleNameCaps}_H__
 """
@@ -409,22 +408,19 @@ def vrv_converter_cc(name):
     return l[0].upper() + l[1:] + r
 
 # globals
-TEI_NS = {"tei": "http://www.tei-c.org/ns/1.0", "rng": "http://relaxng.org/ns/structure/1.0"}
+TEI_RNG_NS = {"tei": "http://www.tei-c.org/ns/1.0",
+              "rng": "http://relaxng.org/ns/structure/1.0"}
 
-def vrv_load_config(includes_dir):
-    """ Load the vrv attribute overrides into CONFIG."""
+def vrv_load_config(includes_dir: str):
+    """Load the vrv attribute overrides into CONFIG."""
     global CONFIG
-    
-    if not includes_dir:
-        return
         
-    config = os.path.join(includes_dir, "config.yml")
-    if not os.path.isfile(config):
+    config = Path(includes_dir, "config.yml")
+    if not config.exists():
         return
     
-    f = open(config, "r")
+    f = config.open("r")
     CONFIG = yaml.load(f, Loader=yaml.FullLoader)
-    f.close()
     
 def vrv_get_att_config(module, gp, att):
     if not module in CONFIG["modules"] or not gp in CONFIG["modules"][module]:
@@ -449,7 +445,7 @@ def vrv_is_alternate_type(type):
     return True
 
 def vrv_get_att_config_type(module, gp, att):
-    """ Get the att type."""
+    """Get the att type."""
     att_config = vrv_get_att_config(module, gp, att)
     if att_config is None or "type" not in att_config:
         return None, "" 
@@ -457,7 +453,7 @@ def vrv_get_att_config_type(module, gp, att):
     return (att, "")
     
 def vrv_get_att_config_default(module, gp, att):
-    """ Get the att default value."""
+    """Get the att default value."""
     att_config = vrv_get_att_config(module, gp, att)
     # nothing in the module/att
     if att_config is None or "default" not in att_config:
@@ -473,8 +469,8 @@ def vrv_getformattedtype(type):
 def vrv_getformattedvallist(att, vallist):
     return "{0}_{1}".format(vrv_member_cc(att.replace("att.","")), vallist.upper().replace(".","").replace(":",""))
 
-def vrv_getatttype(schema, module, gp, aname, includes_dir = ""):   
-    """ returns the attribut type for element name, or string if not detectable."""
+def vrv_getatttype(schema, module, gp, aname, includes_dir: str = ""):   
+    """Returns the attribute type for element name, or string if not detectable."""
     
     # Look up if there is an override for this type in the current module, and return it
     # Note that we do not honor pseudo-hungarian notation
@@ -484,33 +480,34 @@ def vrv_getatttype(schema, module, gp, aname, includes_dir = ""):
     
     # No override, get it from the schema
     # First numbers
-    el = schema.xpath("//tei:attDef[@ident=$name]/tei:datatype/rng:data/@type", name=aname, namespaces=TEI_NS)
+    el = schema.xpath("//tei:attDef[@ident=$name]/tei:datatype/rng:data/@type", name=aname, namespaces=TEI_RNG_NS)
     if el:
-        if el[0] == "nonNegativeInteger" or el[0] == "positiveInteger":
+        if el[0].endswith("nteger"):
+            # We unify "integer", "positiveInteger", and "nonNegativeInteger"
             return ("int", "")
         elif el[0] == "decimal":
             return ("double", "")
     # The data types
-    ref = schema.xpath("//tei:classSpec[@ident=$gp]//tei:attDef[@ident=$name]/tei:datatype/rng:ref/@name", gp=gp, name=aname, namespaces=TEI_NS)
+    ref = schema.xpath("//tei:classSpec[@ident=$gp]//tei:attDef[@ident=$name]/tei:datatype/rng:ref/@name", gp=gp, name=aname, namespaces=TEI_RNG_NS)
     if ref:
         return (vrv_getformattedtype("{0}".format(ref[0])), "")
     # Finally from val lists
-    vl = schema.xpath("//tei:classSpec[@ident=$gp]//tei:attDef[@ident=$name]/tei:valList[@type=\"closed\"]", gp=gp, name=aname, namespaces=TEI_NS)
+    vl = schema.xpath("//tei:classSpec[@ident=$gp]//tei:attDef[@ident=$name]/tei:valList[@type=\"closed\"]", gp=gp, name=aname, namespaces=TEI_RNG_NS)
     if vl:
-        element = vl[0].xpath("./ancestor::tei:classSpec", namespaces=TEI_NS)
-        attName = vl[0].xpath("./parent::tei:attDef/@ident", namespaces=TEI_NS)
+        element = vl[0].xpath("./ancestor::tei:classSpec", namespaces=TEI_RNG_NS)
+        attName = vl[0].xpath("./parent::tei:attDef/@ident", namespaces=TEI_RNG_NS)
         if element:
             return(vrv_getformattedvallist(element[0].get("ident"),attName[0]), "")
             #data_list = "{0}.{1}".format(element[0].get("ident"),attName[0])
         #elif attName:
-        #    elName = vl[0].xpath("./ancestor::tei:elementSpec/@ident", namespaces=TEI_NS)
+        #    elName = vl[0].xpath("./ancestor::tei:elementSpec/@ident", namespaces=TEI_RNG_NS)
         #    lg.debug("VALLIST {0} --- {1}".format(elName[0],attName[0]))
     
     # Otherwise as string
     return ("std::string", "")
 
-def vrv_getattdefault(schema, module, gp, aname, includes_dir = ""):        
-    """ returns the attribute default value for element name, or string if not detectable."""
+def vrv_getattdefault(schema, module, gp, aname, includes_dir: str = ""):        
+    """Returns the attribute default value for element name, or string if not detectable."""
     
     attype, hungarian = vrv_getatttype(schema, module, gp, aname, includes_dir)
     default = vrv_get_att_config_default(module, gp, aname)
@@ -518,25 +515,25 @@ def vrv_getattdefault(schema, module, gp, aname, includes_dir = ""):
     if attype == "int":
         if default == None:
             default = "VRV_UNSET"
-        return ("{0}".format(default), "", ["StrToInt", "IntToStr"])
+        return (default, "", ["StrToInt", "IntToStr"])
     elif attype == "char":
         if default == None:
             default = 0
-        return ("{0}".format(default), "", ["StrToInt", "IntToStr"])
+        return (default, "", ["StrToInt", "IntToStr"])
     elif attype == "double":
         if default == None:
             default = 0.0
-        return ("{0}".format(default), "", ["StrToDbl", "DblToStr"])
+        return (default, "", ["StrToDbl", "DblToStr"])
     elif attype == "std::string": 
         return ("\"\"", "", ["StrToStr", "StrToStr"])  
     else:
         if default == None:
             default = vrv_get_type_default(attype)
         cname = vrv_converter_cc(attype)
-        return ("{0}".format(default), "", ["StrTo{0}".format(cname), "{0}ToStr".format(cname)])
+        return (default, "", [f"StrTo{cname}", f"{cname}ToStr"])
 
 def create(schema, outdir, includes_dir = ""):
-    lg.debug("Begin Verovio C++ Output ... ")
+    lg.debug("Begin Verovio C++ Output ...")
     
     vrv_load_config(includes_dir)
     __create_att_classes(schema, outdir, includes_dir)
@@ -544,15 +541,12 @@ def create(schema, outdir, includes_dir = ""):
     lg.debug("Success!")
 
 def __get_docstr(text, indent=0):
-    """ Format a docstring. Take the first sentence (. followed by a space)
+    """
+        Format a docstring. Take the first sentence (. followed by a space)
         and use it for the brief. Then put the rest of the text after a blank
         line if there is text there
     """
-    # string handling is handled differently in Python 3+
-    if sys.version_info >= (3, 0):
-        text = text.strip()
-    else:
-        text = text.strip().encode("utf-8")
+    text = text.strip()
     dotpos = text.find(". ")
     if dotpos > 0:
         brief = text[:dotpos+1]
@@ -608,7 +602,7 @@ def __create_att_classes(schema, outdir, includes_dir):
                 if len(att.split("|")) > 1:
                     ns,att = att.split("|")
                 atttype, atttypename = vrv_getatttype(schema.schema, module, gp, att, includes_dir)
-                docstr = __get_docstr(schema.getattdocs(att), indent=4)
+                docstr = __get_docstr(schema.get_att_desc(att), indent=4)
                 substrings = {
                     "attNameUpper": schema.cc(schema.strpatt(att)),
                     "attNameLower": att,
@@ -641,9 +635,8 @@ def __create_att_classes(schema, outdir, includes_dir):
         }
         
         fullout = CLASSES_HEAD_TEMPLATE.format(**tplvars)
-        fmh = open(os.path.join(outdir, "atts_{0}.h".format(module.lower())), 'w')
-        fmh.write(fullout)
-        fmh.close()
+        fmh = Path(outdir, "atts_{0}.h".format(module.lower()))
+        fmh.write_text(fullout)
         lg.debug("\tCreated atts_{0}.h".format(module.lower()))
         
         
@@ -669,7 +662,6 @@ def __create_att_classes(schema, outdir, includes_dir):
             reads = ""
             writes = ""
             checkers = ""
-            prefix = ""
             setters += SETTERS_IMPL_TEMPLATE_GRP_START.format(**{
                                                               "attGroupNameUpper": schema.cc(schema.strpatt(gp)),
                                                               "attId": "ATT_{0}".format(schema.cc(schema.strpatt(gp)).upper()) })
@@ -689,6 +681,7 @@ def __create_att_classes(schema, outdir, includes_dir):
                     #nsDef = NAMESPACE_TEMPLATE.format(**nssubstr)
                     attrNs = "s, "
                 else:
+                    prefix = ""
                     nsDef = ""
                     attrNs = ""
                 atttype, atttypename = vrv_getatttype(schema.schema, module, gp, att, includes_dir)
@@ -738,7 +731,7 @@ def __create_att_classes(schema, outdir, includes_dir):
             "elements": classes.strip()
         }
         fullout = CLASSES_IMPL_TEMPLATE.format(**tplvars)
-        fmi = open(os.path.join(outdir, "atts_{0}.cpp".format(module.lower())), 'w')
+        fmi = open(Path(outdir, "atts_{0}.cpp".format(module.lower())), "w")
         fmi.write(fullout)
         fmi.write(SETTERS_IMPL_TEMPLATE_START.format(**tplvars))
         fmi.write(setters)
@@ -753,21 +746,21 @@ def __create_att_classes(schema, outdir, includes_dir):
     ########################################################################### 
     # Classes enum
     ###########################################################################
-    fmi = open(os.path.join(outdir, "attclasses.h".format(module.lower())), 'w')
-    fmi.write(LICENSE)
-    fmi.write(ENUM_GRP_START)
-    fmi.write(enum)
-    fmi.write(ENUM_GRP_END)
-    fmi.close()
+    attclasses = open(Path(outdir, "attclasses.h"), "w")
+    attclasses.write(LICENSE)
+    attclasses.write(ENUM_GRP_START)
+    attclasses.write(enum)
+    attclasses.write(ENUM_GRP_END)
+    attclasses.close()
     lg.debug("\tCreated attclasses.h")
     
     lg.debug("Writing data types and lists")
     ########################################################################### 
-    # Classes enum
+    # Types enum
     ###########################################################################
-    fmi = open(os.path.join(outdir, "atttypes.h".format(module.lower())), 'w')
-    fmi.write(LICENSE)
-    fmi.write(TYPE_GRP_START)
+    atttypes = open(Path(outdir, "atttypes.h"), "w")
+    atttypes.write(LICENSE)
+    atttypes.write(TYPE_GRP_START)
     
     for data_type, values in sorted(schema.data_types.items()):
         if vrv_is_excluded_type(data_type) == True:
@@ -798,7 +791,7 @@ def __create_att_classes(schema, outdir, includes_dir):
             "test": "test"
         }
         vstr += TYPE_END.format(**tpsubstr)
-        fmi.write(vstr)
+        atttypes.write(vstr)
         
     for list_type, values in sorted(schema.data_lists.items()):
         if vrv_is_excluded_type(list_type) == True:
@@ -825,21 +818,21 @@ def __create_att_classes(schema, outdir, includes_dir):
             "val_prefix": val_prefix
         }
         vstr += TYPE_END.format(**tpsubstr)
-        fmi.write(vstr)
+        atttypes.write(vstr)
 
-    fmi.write(TYPE_GRP_END)
+    atttypes.write(TYPE_GRP_END)
     
-    fmi.close()
-    lg.debug("\tCreated atttypes.h".format(module.lower()))
+    atttypes.close()
+    lg.debug("\tCreated atttypes.h")
     
     lg.debug("Writing libmei att converter class")
     ########################################################################### 
     # Classes enum
     ###########################################################################
-    fmi = open(os.path.join(outdir, "attconverter.h".format(module.lower())), 'w')
+    fmi = open(Path(outdir, "attconverter.h"), "w")
     fmi.write(LICENSE)
     fmi.write(CONVERTER_HEADER_TEMPLATE_START)
-    fmi_cpp = open(os.path.join(outdir, "attconverter.cpp".format(module.lower())), 'w')
+    fmi_cpp = open(Path(outdir, "attconverter.cpp"), "w")
     fmi_cpp.write(LICENSE)
     fmi_cpp.write(CONVERTER_IMPL_TEMPLATE_START)
     
@@ -919,32 +912,27 @@ def __create_att_classes(schema, outdir, includes_dir):
     fmi.close()
     fmi_cpp.write(CONVERTER_IMPL_TEMPLATE_END)
     fmi_cpp.close()
-    lg.debug("\tCreated attconverter.h/cpp".format(module.lower()))
+    lg.debug("\tCreated attconverter.h/cpp")
 
-def parse_includes(file_dir, includes_dir):
+def parse_includes(file_dir, includes_dir: str):
+    """Parse includes."""
     lg.debug("Parsing includes")
-
     # get the files in the includes directory
-    includes = [f for f in os.listdir(includes_dir) if not f.startswith(".") and f.endswith(".inc")]
-    # currently unused, see below comment in __copy_codefile
-    # copies = [f for f in os.listdir(includes_dir) if f.endswith(".copy")]
+    includes = [f for f in Path(includes_dir).iterdir()
+                if not f.name.startswith(".")]
 
-    for dp,dn,fn in os.walk(file_dir):
-        for f in fn:
-            if f.startswith("."):
-                continue
-            methods, inc = __process_include(f, includes, includes_dir)
-            if methods:
-                __parse_codefile(methods, inc, dp, f)
+    for f in Path(file_dir).iterdir():
+        if f.name.startswith("."):
+            continue
+        methods, inc = __process_include(f, includes, includes_dir)
+        if methods:
+            __parse_codefile(methods, inc, f.parent, f)
 
-def __process_include(fname, includes, includes_dir):
-    name,ext = os.path.splitext(fname)
+def __process_include(fname, includes, includes_dir: str):
     new_methods, includes_block = None, None
     if "{0}.inc".format(fname) in includes:
         lg.debug("\tProcessing include for {0}".format(fname))
-        f = open(os.path.join(includes_dir, "{0}.inc".format(fname)), 'r')
-        includefile = f.read()
-        f.close()
+        includefile = Path(includes_dir, "{0}.inc".format(fname)).read_text()
         new_methods, includes_block = __parse_includefile(includefile)
         return (new_methods, includes_block)
     else:
@@ -963,9 +951,8 @@ def __parse_includefile(contents):
     return (ret, inc)
 
 def __parse_codefile(methods, includes, directory, codefile):
-    f = open(os.path.join(directory, codefile), 'r')
-    contents = f.readlines()
-    f.close()
+    f = Path(directory, codefile)
+    contents = f.read_text()
     regmatch = re.compile(r"/\* include <(?P<elementName>[^>]+)> \*/")
     incmatch = re.compile(r"/\* #include_block \*/")
     for i,line in enumerate(contents):
@@ -979,10 +966,7 @@ def __parse_codefile(methods, includes, directory, codefile):
             if match.group("elementName") in methods.keys():
                 contents[i] = methods[match.group("elementName")].lstrip("\n")
     
-    f = open(os.path.join(directory, codefile), 'w')
-    f.writelines(contents)
-    f.close()
-    
+    f.write_text(contents)
     
 def __copy_codefile(directory, codefile):  
     # att.h, att_defs.h and att.cpp are required.

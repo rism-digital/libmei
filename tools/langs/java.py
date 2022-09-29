@@ -1,10 +1,10 @@
-import os
-import codecs
-import re
 import logging
+import re
+from pathlib import Path
+
 lg = logging.getLogger('schemaparser')
 
-LANG_NAME="Java"
+LANG_NAME = "Java"
 
 MODULE_TEMPLATE = """{license}
 
@@ -50,6 +50,7 @@ LICENSE = """/*
 
 AUTHORS = "Andrew Hankinson, Alastair Porter, and Others"
 
+
 def create(schema, outdir):
     lg.debug("Begin Java Output...")
 
@@ -57,14 +58,15 @@ def create(schema, outdir):
 
     lg.debug("Success!")
 
+
 def __create_java_classes(schema, outdir):
     lg.debug("Creating Python Modules")
 
-    for module, elements in sorted(schema.element_structure.iteritems()):
+    for module, elements in sorted(schema.element_structure.items()):
         if not elements:
             continue
 
-        for element, atgroups in sorted(elements.iteritems()):
+        for element, atgroups in sorted(elements.items()):
             class_name = capitalize_first_letter(element)
             # Generate the class
             methstr = {
@@ -82,22 +84,22 @@ def __create_java_classes(schema, outdir):
 
             # Save to a file
             file_name = "{0}.java".format(class_name)
-            path = os.path.join(outdir, module.lower())
+            path = Path(outdir, module.lower())
             # Make directory if necessary
-            if not os.path.exists(path):
-                os.makedirs(path)
-            fmi = open(os.path.join(path, file_name), "w")
+            path.mkdir(parents=True, exist_ok=True)
+            fmi = open(Path(path, file_name), "w")
             fmi.write(module_output)
             fmi.close()
             lg.debug("\tCreated {0}".format(file_name, class_name))
 
+
 def __parse_codefile(methods, includes, directory, codefile):
-    f = open(os.path.join(directory, codefile), 'r')
-    contents = f.readlines()
-    f.close()
-    regmatch = re.compile(r"[\s]+# <(?P<elementName>[^>]+)>", re.MULTILINE|re.DOTALL)
+    f = Path(directory, codefile)
+    contents = f.read_text()
+    regmatch = re.compile(
+        r"[\s]+# <(?P<elementName>[^>]+)>", re.MULTILINE | re.DOTALL)
     incmatch = re.compile(r"/\* #include_block \*/")
-    for i,line in enumerate(contents):
+    for i, line in enumerate(contents):
         imatch = re.match(incmatch, line)
         if imatch:
             if includes:
@@ -105,17 +107,17 @@ def __parse_codefile(methods, includes, directory, codefile):
 
         match = re.match(regmatch, line)
         if match:
-            if match.group("elementName") in methods.keys():
-                contents[i] = methods[match.group("elementName")].lstrip("\n") + "\n"
+            if match.group("elementName") in list(methods.keys()):
+                contents[i] = methods[match.group(
+                    "elementName")].lstrip("\n") + "\n"
 
-    f = open(os.path.join(directory, codefile), 'w')
-    f.writelines(contents)
-    f.close()
+    f.write_text(contents)
 
-def capitalize_first_letter(text):
+
+def capitalize_first_letter(string: str) -> str:
     """
     Given a string, capitalize the first letter.
     """
-    chars = list(text.strip())
+    chars = list(string.strip())
     chars[0] = chars[0].upper()
     return "".join(chars)
