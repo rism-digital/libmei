@@ -9,6 +9,7 @@ excludes:
     data.DURATION.gestural,
     data.HEXNUM,
     data.KEYSIGNATURE,
+    data.MEASUREMENTTYPOGRAPHYSIGNED,
     data.MODUSMAIOR,
     data.MODUSMINOR,
     data.OCTAVE.DIS,
@@ -76,6 +77,10 @@ mapped:
         std::string
     data.MEASUREBEATOFFSET:
         data_MEASUREBEAT
+    data.MEASUREMENTTYPOGRAPHYSIGNED:
+        double
+    data.MEASUREMENTTYPOGRAPHYUNSIGNED:
+        double
     data.MIDIBPM:
         double
     data.MIDIVALUE_PERCENT:
@@ -132,9 +137,13 @@ defaults:
         data_LINEWIDTH()
     data_MEASUREBEAT:
         std::make_pair(-1, -1.0)
-    data_MEASUREMENTABS:
+    data_MEASUREMENTSIGNED:
         VRV_UNSET
-    data_MEASUREMENTREL:
+    data_MEASUREMENTUNSIGNED:
+        VRV_UNSET
+    data_MEASUREMENTTYPOGRAPHYSIGNED:
+        VRV_UNSET
+    data_MEASUREMENTTYPOGRAPHYUNSIGNED:
         VRV_UNSET
     data_METERCOUNT_pair:
         std::pair<std::vector<int>, MeterCountSign>()
