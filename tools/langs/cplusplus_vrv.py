@@ -98,8 +98,7 @@ namespace vrv {
 
 """
 
-TYPE_GRP_END = """
-} // namespace vrv
+TYPE_GRP_END = """} // namespace vrv
 
 #endif // __VRV_ATT_TYPES_H__
 """
@@ -353,9 +352,7 @@ Att{attGroupNameUpper}::Att{attGroupNameUpper}() : Att()
     Reset{attGroupNameUpper}();
 }}
 
-Att{attGroupNameUpper}::~Att{attGroupNameUpper}()
-{{
-}}
+Att{attGroupNameUpper}::~Att{attGroupNameUpper}() {{}}
 
 void Att{attGroupNameUpper}::Reset{attGroupNameUpper}()
 {{
