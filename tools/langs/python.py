@@ -10,11 +10,11 @@ MODULE_TEMPLATE = """
 {license}
 
 from pymei import MeiElement
-
 {classes}
 """
 
 MODULE_CLASS_TEMPLATE = """
+
 class {className}_(MeiElement):
     def __init__(self):
         MeiElement.__init__(self, "{className}")
