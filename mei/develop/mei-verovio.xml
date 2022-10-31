@@ -336,7 +336,7 @@
 						<memberOf key="model.eventLike"/>
 					</classes>
 					<content>
-						<rng:empty/>
+						<empty/>
 					</content>
 				</elementSpec>
 				
@@ -352,7 +352,7 @@
 						<memberOf key="model.eventLike"/>
 					</classes>
 					<content>
-						<rng:empty/>
+						<empty/>
 					</content>
 					<constraintSpec ident="check_milestoneEnd" scheme="isoschematron">
 						<constraint>
@@ -463,7 +463,7 @@
 						<attDef ident="surface" usage="opt">
 							<desc xml:lang="en">contains a reference to a surface element</desc>
 							<datatype>
-								<rng:ref name="data.URI"/>
+								<dataRef key="data.URI"/>
 							</datatype>
 						</attDef>
 					</attList>
@@ -558,13 +558,13 @@
 						<attDef ident="tab.course" usage="opt" mode="add">
 							<desc xml:lang="en">Records which course is to be played.</desc>
 							<datatype>
-								<rng:ref name="data.COURSENUMBER"/>
+								<dataRef key="data.COURSENUMBER"/>
 							</datatype>
 						</attDef>
 						<attDef ident="tab.fret" usage="opt" mode="add">
 							<desc xml:lang="en">Records which course is to be played.</desc>
 							<datatype>
-								<rng:ref name="data.FRETNUMBER"/>
+								<dataRef key="data.FRETNUMBER"/>
 							</datatype>
 						</attDef>
 					</attList>
@@ -574,7 +574,7 @@
 						<attDef ident="tuning.standard" usage="opt" mode="add">
 							<desc xml:lang="en">Indicates a tuning standard for the course.</desc>
 							<datatype>
-								<rng:ref name="data.COURSETUNING"/>
+								<dataRef key="data.COURSETUNING"/>
 							</datatype>
 						</attDef>
 					</attList>
