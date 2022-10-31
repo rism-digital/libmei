@@ -476,8 +476,11 @@ def vrv_getatttype(schema, module, gp, aname, includes_dir: str = ""):
         return (attype, hungarian)
     
     # No override, get it from the schema
+    definition=schema.xpath("//tei:classSpec[@ident=$gp]/tei:attList/tei:attDef[@ident=$name]", gp=gp, name=aname, namespaces=TEI_RNG_NS)
+    if not len(definition):
+        return ("std::string", "")
     # First numbers
-    el = schema.xpath("//tei:attDef[@ident=$name]/tei:datatype/rng:data/@type", name=aname, namespaces=TEI_RNG_NS)
+    el = definition[0].xpath("tei:datatype/rng:data/@type|tei:datatype/tei:dataRef/@name", name=aname, namespaces=TEI_RNG_NS)
     if el:
         if el[0].endswith("nteger"):
             # We unify "integer", "positiveInteger", and "nonNegativeInteger"
@@ -485,14 +488,14 @@ def vrv_getatttype(schema, module, gp, aname, includes_dir: str = ""):
         elif el[0] == "decimal":
             return ("double", "")
     # The data types
-    ref = schema.xpath("//tei:classSpec[@ident=$gp]//tei:attDef[@ident=$name]/tei:datatype/rng:ref/@name", gp=gp, name=aname, namespaces=TEI_RNG_NS)
+    ref = definition[0].xpath("tei:datatype/rng:ref/@name|tei:datatype/tei:dataRef/@key", gp=gp, name=aname, namespaces=TEI_RNG_NS)
     if ref:
         return (vrv_getformattedtype("{0}".format(ref[0])), "")
     # Finally from val lists
-    vl = schema.xpath("//tei:classSpec[@ident=$gp]//tei:attDef[@ident=$name]/tei:valList[@type=\"closed\"]", gp=gp, name=aname, namespaces=TEI_RNG_NS)
+    vl = definition[0].find("tei:valList[@type=\"closed\"]", namespaces=TEI_RNG_NS)
     if vl:
-        element = vl[0].xpath("./ancestor::tei:classSpec", namespaces=TEI_RNG_NS)
-        attName = vl[0].xpath("./parent::tei:attDef/@ident", namespaces=TEI_RNG_NS)
+        element = vl.xpath("./ancestor::tei:classSpec", namespaces=TEI_RNG_NS)
+        attName = vl.xpath("./parent::tei:attDef/@ident", namespaces=TEI_RNG_NS)
         if element:
             return(vrv_getformattedvallist(element[0].get("ident"),attName[0]), "")
             #data_list = "{0}.{1}".format(element[0].get("ident"),attName[0])
