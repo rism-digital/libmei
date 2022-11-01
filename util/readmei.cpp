@@ -18,19 +18,19 @@
 #include <mei/xmlexport.h>
 #include <mei/xmlimport.h>
 
+using std::cerr;
 using std::cout;
 using std::endl;
-using std::cerr;
 using std::string;
 
-using mei::XMLImportResult;
-using mei::documentToFile;
 using mei::documentFromFile;
+using mei::documentToFile;
+using mei::MEI_STRICT_IMPORT;
+using mei::MeiAttribute;
 using mei::MeiDocument;
 using mei::MeiElement;
-using mei::MeiAttribute;
-using mei::MEI_STRICT_IMPORT;
 using mei::Note;
+using mei::XMLImportResult;
 
 int main(int argc, char **argv) {
     if (argc < 3) {
@@ -38,9 +38,9 @@ int main(int argc, char **argv) {
         cerr << "       Use this program on beethoven.mei" << endl;
         return 1;
     }
-    
+
     XMLImportResult res = documentFromFile(string(argv[1]), MEI_STRICT_IMPORT);
-    MeiDocument* doc = res.getMeiDocument();
+    MeiDocument *doc = res.getMeiDocument();
 
     // Find an element
     MeiElement *note1 = doc->getElementById("d1e111");
