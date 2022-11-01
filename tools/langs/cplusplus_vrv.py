@@ -480,7 +480,7 @@ def vrv_getatttype(schema, module, gp, aname, includes_dir: str = ""):
     if not len(definition):
         return ("std::string", "")
     # First numbers
-    el = definition[0].xpath("tei:datatype/rng:data/@type|tei:datatype/tei:dataRef/@name", name=aname, namespaces=TEI_RNG_NS)
+    el = definition[0].xpath("tei:datatype/tei:dataRef/@name|tei:datatype/rng:data/@type", name=aname, namespaces=TEI_RNG_NS)
     if el:
         if el[0].endswith("nteger"):
             # We unify "integer", "positiveInteger", and "nonNegativeInteger"
@@ -488,7 +488,7 @@ def vrv_getatttype(schema, module, gp, aname, includes_dir: str = ""):
         elif el[0] == "decimal":
             return ("double", "")
     # The data types
-    ref = definition[0].xpath("tei:datatype/rng:ref/@name|tei:datatype/tei:dataRef/@key", gp=gp, name=aname, namespaces=TEI_RNG_NS)
+    ref = definition[0].xpath("tei:datatype/tei:dataRef/@key|tei:datatype/rng:ref/@name", gp=gp, name=aname, namespaces=TEI_RNG_NS)
     if ref:
         return (vrv_getformattedtype("{0}".format(ref[0])), "")
     # Finally from val lists
