@@ -490,13 +490,11 @@ def vrv_getatttype(schema, module, gp, aname, includes_dir: str = ""):
         return (attype, hungarian)
 
     # No override, get it from the schema
-    definition = schema.xpath(
-        "//tei:classSpec[@ident=$gp]/tei:attList/tei:attDef[@ident=$name]", gp=gp, name=aname, namespaces=TEI_RNG_NS)
+    definition = schema.xpath("//tei:classSpec[@ident=$gp]/tei:attList/tei:attDef[@ident=$name]", gp=gp, name=aname, namespaces=TEI_RNG_NS)
     if not len(definition):
         return ("std::string", "")
     # First numbers
-    el = definition[0].xpath(
-        "tei:datatype/tei:dataRef/@name|tei:datatype/rng:data/@type", name=aname, namespaces=TEI_RNG_NS)
+    el = definition[0].xpath("tei:datatype/tei:dataRef/@name|tei:datatype/rng:data/@type", name=aname, namespaces=TEI_RNG_NS)
     if el:
         if el[0].endswith("nteger"):
             # We unify "integer", "positiveInteger", and "nonNegativeInteger"
@@ -504,13 +502,11 @@ def vrv_getatttype(schema, module, gp, aname, includes_dir: str = ""):
         elif el[0] == "decimal":
             return ("double", "")
     # The data types
-    ref = definition[0].xpath(
-        "tei:datatype/tei:dataRef/@key|tei:datatype/rng:ref/@name", gp=gp, name=aname, namespaces=TEI_RNG_NS)
+    ref = definition[0].xpath("tei:datatype/tei:dataRef/@key|tei:datatype/rng:ref/@name", gp=gp, name=aname, namespaces=TEI_RNG_NS)
     if ref:
         return (vrv_getformattedtype("{0}".format(ref[0])), "")
     # Finally from val lists
-    vl = definition[0].find(
-        "tei:valList[@type=\"closed\"]", namespaces=TEI_RNG_NS)
+    vl = definition[0].find("tei:valList[@type=\"closed\"]", namespaces=TEI_RNG_NS)
     if vl:
         element = vl.xpath("./ancestor::tei:classSpec", namespaces=TEI_RNG_NS)
         attName = vl.xpath("./parent::tei:attDef/@ident",
@@ -624,8 +620,7 @@ def __create_att_classes(schema, outdir, includes_dir):
             for att in atts:
                 if len(att.split("|")) > 1:
                     ns, att = att.split("|")
-                atttype, atttypename = vrv_getatttype(
-                    schema.schema, module, gp, att, includes_dir)
+                atttype, atttypename = vrv_getatttype(schema.schema, module, gp, att, includes_dir)
                 docstr = __get_docstr(schema.get_att_desc(att), indent=4)
                 substrings = {
                     "attNameUpper": schema.cc(schema.strpatt(att)),
@@ -639,8 +634,7 @@ def __create_att_classes(schema, outdir, includes_dir):
                     methods += "//\n"
                 methods += METHODS_HEADER_TEMPLATE.format(**substrings)
                 if (vrv_is_alternate_type(atttype)):
-                    methods += METHODS_HEADER_TEMPLATE_ALTERNATE.format(
-                        **substrings)
+                    methods += METHODS_HEADER_TEMPLATE_ALTERNATE.format(**substrings)
                 members += MEMBERS_HEADER_TEMPLATE.format(**substrings)
 
             clsubstr = {
@@ -650,8 +644,7 @@ def __create_att_classes(schema, outdir, includes_dir):
                 "attNameLower": "att{0}".format(att)
             }
             classes += MIXIN_CLASS_HEAD_TEMPLATE.format(**clsubstr)
-            enum += "    ATT_{0},\n".format(
-                schema.cc(schema.strpatt(gp)).upper())
+            enum += "    ATT_{0},\n".format(schema.cc(schema.strpatt(gp)).upper())
 
         tplvars = {
             "includes": "#include <string>",
@@ -709,10 +702,8 @@ def __create_att_classes(schema, outdir, includes_dir):
                     prefix = ""
                     nsDef = ""
                     attrNs = ""
-                atttype, atttypename = vrv_getatttype(
-                    schema.schema, module, gp, att, includes_dir)
-                attdefault, atttypename, converters = vrv_getattdefault(
-                    schema.schema, module, gp, att, includes_dir)
+                atttype, atttypename = vrv_getatttype(schema.schema, module, gp, att, includes_dir)
+                attdefault, atttypename, converters = vrv_getattdefault(schema.schema, module, gp, att, includes_dir)
 
                 attsubstr = {
                     "className": "{0}MixIn".format(schema.cc(schema.strpatt(gp))),
@@ -733,8 +724,7 @@ def __create_att_classes(schema, outdir, includes_dir):
                 reads += READS_IMPL_TEMPLATE.format(**attsubstr)
                 writes += WRITES_IMPL_TEMPLATE.format(**attsubstr)
                 if (vrv_is_alternate_type(atttype)):
-                    checkers += CHECKERS_IMPL_TEMPLATE_ALTERNATE.format(
-                        **attsubstr)
+                    checkers += CHECKERS_IMPL_TEMPLATE_ALTERNATE.format(**attsubstr)
                 else:
                     checkers += CHECKERS_IMPL_TEMPLATE.format(**attsubstr)
                 setters += SETTERS_IMPL_TEMPLATE.format(**attsubstr)
@@ -828,8 +818,7 @@ def __create_att_classes(schema, outdir, includes_dir):
 
         vstr = ""
 
-        val_prefix = vrv_getformattedvallist(
-            list_type.rsplit('@')[0], list_type.rsplit('@')[1])
+        val_prefix = vrv_getformattedvallist(list_type.rsplit('@')[0], list_type.rsplit('@')[1])
         tpsubstr = {
             "meitype": list_type,
             "vrvtype": val_prefix,
@@ -908,8 +897,7 @@ def __create_att_classes(schema, outdir, includes_dir):
             lg.debug("Skipping {0}".format(list_type))
             continue
 
-        val_prefix = vrv_getformattedvallist(
-            list_type.rsplit('@')[0], list_type.rsplit('@')[1])
+        val_prefix = vrv_getformattedvallist(list_type.rsplit('@')[0], list_type.rsplit('@')[1])
         vrvtype = val_prefix
         vrvfname = vrv_converter_cc(vrvtype)
         tpsubstr = {
@@ -975,13 +963,11 @@ def __parse_includefile(contents):
     # parse the include file for our methods.
     ret = {}
     inc = []
-    reg = re.compile(
-        r"/\* <(?P<elementName>[^>]+)> \*/(.+?)/\* </(?P=elementName)> \*/", re.MULTILINE | re.DOTALL)
+    reg = re.compile(r"/\* <(?P<elementName>[^>]+)> \*/(.+?)/\* </(?P=elementName)> \*/", re.MULTILINE | re.DOTALL)
     ret = dict(re.findall(reg, contents))
 
     # grab the include for the includes...
-    reginc = re.compile(
-        r"/\* #include_block \*/(.+?)/\* #include_block \*/", re.MULTILINE | re.DOTALL)
+    reginc = re.compile(r"/\* #include_block \*/(.+?)/\* #include_block \*/", re.MULTILINE | re.DOTALL)
     inc = re.findall(reginc, contents)
     return (ret, inc)
 
