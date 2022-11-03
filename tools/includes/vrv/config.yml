@@ -38,7 +38,7 @@ mapped:
     data.BEAT:
         double
     data.BEND.AMOUNT:
-        std::string
+        double
     data.COLOR:
         std::string
     data.CONFIDENCE:
@@ -189,8 +189,13 @@ modules:
                 type: data_ARTICULATION_List
 
     mensural:
+        att.plica.vis:
+            len:
+                type: double
+                default: -1.0
         att.stem.vis:
             len:
+                type: double
                 default: -1.0
 
     shared:

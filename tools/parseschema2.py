@@ -151,7 +151,7 @@ class MeiSchema(object):
             #lg.debug("TYPE - {0}".format(ct.get("ident")))
             data_type = ct.get("ident")
             self.data_types[data_type] = []
-            subtypes = [m for m in ct.xpath(
+            subtypes = [m for m in ct.findall(
                 ".//tei:alternate/tei:macroRef", namespaces=TEI_RNG_NS)]
             for st in subtypes:
                 #lg.debug("SUBTYPE - {0}".format(st.get("name")))
@@ -191,8 +191,8 @@ class MeiSchema(object):
             #lg.debug("TYPE - {0}".format(t.get("ident")))
             data_type = t.get("ident")
             self.data_types[data_type] = []
-            values = t.xpath(".//tei:valList/tei:valItem",
-                             namespaces=TEI_RNG_NS)
+            values = t.findall(".//tei:valList/tei:valItem",
+                               namespaces=TEI_RNG_NS)
             for v in values:
                 # lg.debug("\t{0}".format(v.get("ident")))
                 type_value = v.get("ident")
