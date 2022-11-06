@@ -145,11 +145,11 @@
 				<elementSpec ident="page" module="MEI.pageBased" mode="add">
 					<desc xml:lang="en">A page in a page-base encoding</desc>
 					<classes>
+						<memberOf key="att.pages"/>
 						<!-- was: att.scoreDef.vis -->
 						<memberOf key="att.common"/>
-						<memberOf key="att.facsimile"/>
-						<!-- <memberOf key="att.pageRef"/> -->
-						<memberOf key="att.pages"/>
+						<memberOf key="att.pageRef"/>
+						<memberOf key="att.surface"/>
 						<memberOf key="model.pageLike"/>
 					</classes>
 					<content>
@@ -456,7 +456,19 @@
 				
 				
 				<!-- todos down here -->
-
+				
+				<classSpec ident="att.surface" module="MEI.pageBased" type="atts" mode="add">
+					<desc xml:lang="en">This attribute is used to point to a surface.</desc>
+					<attList>
+						<attDef ident="surface" usage="opt">
+							<desc xml:lang="en">contains a reference to a surface element</desc>
+							<datatype>
+								<dataRef key="data.URI"/>
+							</datatype>
+						</attDef>
+					</attList>
+				</classSpec>
+			  
 			  <!-- ****************************************************************** -->
 				<!-- Tablature MEI -->
 			  <!-- ****************************************************************** -->
