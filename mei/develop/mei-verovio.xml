@@ -84,47 +84,47 @@
 				<moduleRef key="MEI.frettab"/>
 
 				<classSpec ident="att.meiVersion" module="MEI.shared" type="atts" mode="replace">
-                    <desc xml:lang="en">Attributes that record the version of MEI supported.</desc>
-                    <attList>
-                        <attDef ident="meiversion" usage="req">
-                            <desc xml:lang="en">Specifies a generic MEI version label.</desc>
+					<desc xml:lang="en">Attributes that record the version of MEI supported.</desc>
+					<attList>
+						<attDef ident="meiversion" usage="req">
+							<desc xml:lang="en">Specifies a generic MEI version label.</desc>
 							<defaultVal>5.0.0-dev</defaultVal>
 							<valList type="closed">
-							  <valItem ident="2013">
-								<desc xml:lang="en">MEI 2013</desc>
-							  </valItem>
-							  <valItem ident="3.0.0">
-								<desc xml:lang="en">MEI 3.0.0</desc>
-							  </valItem>
-							  <valItem ident="4.0.0">
-								<desc xml:lang="en">MEI 4.0.0</desc>
-							  </valItem>
-							  <valItem ident="4.0.1">
-								<desc xml:lang="en">MEI 4.0.1</desc>
-							  </valItem>
-							  <valItem ident="5.0.0-dev+basic">
-								<desc xml:lang="en">MEI basic</desc>
-							  </valItem>
-							  <valItem ident="5.0.0-dev">
-								<desc xml:lang="en">Development version of MEI 5.0.0</desc>
-							  </valItem>
+								<valItem ident="2013">
+									<desc xml:lang="en">MEI 2013</desc>
+								</valItem>
+								<valItem ident="3.0.0">
+									<desc xml:lang="en">MEI 3.0.0</desc>
+								</valItem>
+								<valItem ident="4.0.0">
+									<desc xml:lang="en">MEI 4.0.0</desc>
+								</valItem>
+								<valItem ident="4.0.1">
+									<desc xml:lang="en">MEI 4.0.1</desc>
+								</valItem>
+								<valItem ident="5.0.0-dev+basic">
+									<desc xml:lang="en">MEI basic</desc>
+								</valItem>
+								<valItem ident="5.0.0-dev">
+									<desc xml:lang="en">Development version of MEI 5.0.0</desc>
+								</valItem>
 							</valList>
 						</attDef>
-                    </attList>
-                </classSpec>
-		  
-			   <!-- ****************************************************************** -->
+					</attList>
+				</classSpec>
+
+				<!-- ****************************************************************** -->
 				<!-- Page-based MEI -->
-			   <!-- ****************************************************************** -->
-						   
+				<!-- ****************************************************************** -->
+
 				<moduleSpec ident="MEI.pageBased" mode="add">
 					<desc/>
 				</moduleSpec>
-				
+
 				<classSpec ident="model.pagesLike" type="model" module="MEI.pageBased" mode="add">
 					<desc xml:lang="en">Collects pagesLike elements.</desc>
 				</classSpec>
-				
+
 				<elementSpec ident="pages" module="MEI.pageBased" mode="add">
 					<desc xml:lang="en">A set of pages in a page-based encoding</desc>
 					<classes>
@@ -137,19 +137,19 @@
 						</rng:zeroOrMore>
 					</content>
 				</elementSpec>
-				
+
 				<classSpec ident="model.pageLike" type="model" module="MEI.pageBased" mode="add">
 					<desc xml:lang="en">Collects pageLike elements.</desc>
 				</classSpec>
-				
+
 				<elementSpec ident="page" module="MEI.pageBased" mode="add">
 					<desc xml:lang="en">A page in a page-base encoding</desc>
 					<classes>
-						<memberOf key="att.pages"/>
-						<!-- was: att.scoreDef.vis -->
 						<memberOf key="att.common"/>
-						<memberOf key="att.pageRef"/>
-						<memberOf key="att.surface"/>
+						<memberOf key="att.dimensions"/>
+						<!--<memberOf key="att.pageRef"/>-->
+						<memberOf key="att.facsimile"/>
+						<memberOf key="att.margins"/>
 						<memberOf key="model.pageLike"/>
 					</classes>
 					<content>
@@ -165,7 +165,7 @@
 						</rng:zeroOrMore>
 					</content>
 				</elementSpec>
-				
+
 				<!-- remove att.pages and att.systems from att.scoreDef.vis, 
 					as they go on other elements now -->
 				<!--<classSpec ident="att.scoreDef.vis" module="MEI.visual" type="atts" mode="change">
@@ -175,7 +175,7 @@
 					<memberOf key="att.systems" mode="delete"/>
 					</classes>
 					</classSpec>-->
-				
+
 				<elementSpec ident="body" module="MEI.shared" mode="change">
 					<content>
 						<rng:oneOrMore>
@@ -193,13 +193,13 @@
 						<sch:assert role="warning" test="@*[starts-with(local-name(),'system.')]">System-related attributes should go on a system element.</sch:assert>                                
 						</sch:rule>
 						</constraint>
-						</constraintSpec>       --> 
+						</constraintSpec>       -->
 				</elementSpec>
-				
+
 				<classSpec ident="model.systemLike" type="model" module="MEI.pageBased" mode="add">
 					<desc xml:lang="en">Collects systemLike elements.</desc>
 				</classSpec>
-				
+
 				<elementSpec ident="system" module="MEI.pageBased" mode="add">
 					<desc xml:lang="en">A system in a page-based encoding</desc>
 					<classes>
@@ -226,11 +226,11 @@
 						</rng:zeroOrMore>
 					</content>
 				</elementSpec>
-				
+
 				<classSpec ident="model.secbLike" type="model" module="MEI.pageBased" mode="add">
 					<desc xml:lang="en">Collects secbLike (section beginning) elements.</desc>
 				</classSpec>
-				
+
 				<!-- because the hierarchy is flipped, &lt;section&gt; has to become a milestone -->
 				<elementSpec ident="secb" module="MEI.pageBased" mode="add">
 					<gloss xml:lang="en">section beginning</gloss>
@@ -243,11 +243,11 @@
 						<rng:empty/>
 					</content>
 				</elementSpec>
-				
+
 				<classSpec ident="model.mdivbLike" type="model" module="MEI.pageBased" mode="add">
 					<desc xml:lang="en">Collects mdivbLike (mdiv beginning) elements.</desc>
 				</classSpec>
-				
+
 				<elementSpec ident="mdivb" module="MEI.pageBased" mode="add">
 					<gloss xml:lang="en">mdiv beginning</gloss>
 					<desc xml:lang="en">A milestone element indicating the start of a new mdiv in page-based MEI.</desc>
@@ -259,11 +259,11 @@
 						<rng:empty/>
 					</content>
 				</elementSpec>
-				
+
 				<classSpec ident="model.scorebLike" type="model" module="MEI.pageBased" mode="add">
 					<desc xml:lang="en">Collects scorebLike (score beginning) elements.</desc>
 				</classSpec>
-				
+
 				<elementSpec ident="scoreb" module="MEI.pageBased" mode="add">
 					<gloss xml:lang="en">score beginning</gloss>
 					<desc xml:lang="en">A milestone element indicating the start of a new score in page-based MEI.</desc>
@@ -280,11 +280,11 @@
 						<p>This element is necessary to allow round-tripping between page-based and score-based (regular) MEI.</p>
 					</remarks>
 				</elementSpec>
-				
+
 				<classSpec ident="model.partsbLike" type="model" module="MEI.pageBased" mode="add">
 					<desc xml:lang="en">Collects partsbLike (parts beginning) elements.</desc>
 				</classSpec>
-				
+
 				<elementSpec ident="partsb" module="MEI.pageBased" mode="add">
 					<gloss xml:lang="en">parts beginning</gloss>
 					<desc xml:lang="en">A milestone element indicating the start of new parts in page-based MEI.</desc>
@@ -299,11 +299,11 @@
 						<p>This element is necessary to allow round-tripping between page-based and score-based (regular) MEI.</p>
 					</remarks>
 				</elementSpec>
-				
+
 				<classSpec ident="model.partbLike" type="model" module="MEI.pageBased" mode="add">
 					<desc xml:lang="en">Collects partbLike (part beginning) elements.</desc>
 				</classSpec>
-				
+
 				<elementSpec ident="partb" module="MEI.pageBased" mode="add">
 					<gloss xml:lang="en">part beginning</gloss>
 					<desc xml:lang="en">A milestone element indicating the start of a new part in page-based MEI.</desc>
@@ -320,11 +320,11 @@
 						<p>This element is necessary to allow round-tripping between page-based and score-based (regular) MEI.</p>
 					</remarks>
 				</elementSpec>
-				
+
 				<classSpec ident="model.milestoneLike" type="model" module="MEI.ptrref" mode="add">
 					<desc xml:lang="en">Collects milestone like elements.</desc>
 				</classSpec>
-				
+
 				<elementSpec ident="milestone" module="MEI.ptrref" mode="add">
 					<gloss xml:lang="en">milestone</gloss>
 					<desc xml:lang="en">A generic milestone element that can be used as anchor in an MEI file.</desc>
@@ -339,7 +339,7 @@
 						<empty/>
 					</content>
 				</elementSpec>
-				
+
 				<elementSpec ident="milestoneEnd" module="MEI.ptrref" mode="add">
 					<gloss xml:lang="en">milestone end</gloss>
 					<desc xml:lang="en">A milestone element that can be used to indicate the end of an arbitrary feature in MEI.</desc>
@@ -357,15 +357,15 @@
 					<constraintSpec ident="check_milestoneEnd" scheme="isoschematron">
 						<constraint>
 							<sch:rule context="mei:milestoneEnd">
-								<sch:assert role="error" test="exists(@startid)">milestoneEnd needs a @startid attribute.</sch:assert>                                                                
+								<sch:assert role="error" test="exists(@startid)">milestoneEnd needs a @startid attribute.</sch:assert>
 							</sch:rule>
 						</constraint>
-					</constraintSpec>        
+					</constraintSpec>
 					<remarks>
 						<p>The @startid attribute should be used to point to the element starting the feature that is ended by an milestoneEnd.</p>
 					</remarks>
 				</elementSpec>
-				
+
 				<classSpec ident="att.coord.x1" module="MEI.shared" type="atts">
 					<desc xml:lang="en">Attributes that record the x coordinate of the left side of a feature.</desc>
 					<attList>
@@ -418,7 +418,7 @@
 						</attDef>
 					</attList>
 				</classSpec>
-				
+
 				<classSpec ident="att.coord.lr" module="MEI.shared" type="atts">
 					<desc xml:lang="en">Attributes for left/right coordinates.</desc>
 					<classes>
@@ -426,25 +426,25 @@
 						<memberOf key="att.coord.x2"/>
 					</classes>
 				</classSpec>
-				
+
 				<elementSpec ident="measure" module="MEI.cmn" mode="change">
 					<classes mode="change">
 						<memberOf key="att.coord.lr" mode="add"/>
 					</classes>
 				</elementSpec>
-				
+
 				<elementSpec ident="staff" module="MEI.shared" mode="change">
 					<classes mode="change">
 						<memberOf key="att.coord.y1" mode="add"/>
 					</classes>
 				</elementSpec>
-				
+
 				<classSpec ident="att.xy" module="MEI.shared" type="atts" mode="change">
 					<classes mode="change">
 						<memberOf key="att.coord.x1"/>
 					</classes>
 				</classSpec>
-				
+
 				<!-- Making att.facsimile a member of att.coordinated -->
 				<!-- is this necessary? -->
 				<!--<classSpec ident="att.facsimile" module="MEI.facsimile" type="atts" mode="change">
@@ -453,10 +453,40 @@
 					<memberOf key="att.coordinated" mode="add"/>
 					</classes>
 					</classSpec>-->
-				
-				
+
+
 				<!-- todos down here -->
-				
+
+				<classSpec ident="att.margins" module="MEI.pageBased" type="atts" mode="add">
+					<desc xml:lang="en">Attribute that define margins of a page.</desc>
+					<attList org="group">
+						<attDef ident="topmar" usage="opt">
+							<desc>Indicates the amount of whitespace at the top of a page.</desc>
+							<datatype maxOccurs="1" minOccurs="1">
+								<rng:ref name="data.MEASUREMENTABS"/>
+							</datatype>
+						</attDef>
+						<attDef ident="botmar" usage="opt">
+							<desc>Indicates the amount of whitespace at the bottom of a page.</desc>
+							<datatype maxOccurs="1" minOccurs="1">
+								<rng:ref name="data.MEASUREMENTABS"/>
+							</datatype>
+						</attDef>
+						<attDef ident="leftmar" usage="opt">
+							<desc>Indicates the amount of whitespace at the left side of a page.</desc>
+							<datatype maxOccurs="1" minOccurs="1">
+								<rng:ref name="data.MEASUREMENTABS"/>
+							</datatype>
+						</attDef>
+						<attDef ident="rightmar" usage="opt">
+							<desc>Indicates the amount of whitespace at the right side of a page.</desc>
+							<datatype maxOccurs="1" minOccurs="1">
+								<rng:ref name="data.MEASUREMENTABS"/>
+							</datatype>
+						</attDef>
+					</attList>
+				</classSpec>
+
 				<classSpec ident="att.surface" module="MEI.pageBased" type="atts" mode="add">
 					<desc xml:lang="en">This attribute is used to point to a surface.</desc>
 					<attList>
@@ -468,11 +498,11 @@
 						</attDef>
 					</attList>
 				</classSpec>
-			  
-			  <!-- ****************************************************************** -->
+
+				<!-- ****************************************************************** -->
 				<!-- Tablature MEI -->
-			  <!-- ****************************************************************** -->
-			   
+				<!-- ****************************************************************** -->
+
 				<moduleSpec ident="MEI.frettab" mode="add">
 					<desc/>
 				</moduleSpec>
@@ -485,32 +515,32 @@
 				<dataSpec ident="data.COURSETUNING" module="MEI.frettab">
 					<desc xml:lang="en">Standard course tunings.</desc>
 					<content>
-					   <valList type="semi">
-					      <valItem ident="guitar.standard">
-					         <desc xml:lang="en">Standard tuning for current guitars. The courses are tuned to E2 A2 D3 G3 B3 E4.</desc>
-					      </valItem>
-					      <valItem ident="guitar.drop.D">
-					         <desc xml:lang="en">Drop D tuning for guitars. The lowest course is tuned down to D, while all other courses are kept to their regular pitches. D2 A2 D3 G3 B3 E4.</desc>
-					      </valItem>
-					      <valItem ident="guitar.open.D">
-					         <desc xml:lang="en">Open D tuning for guitars. D2 A2 D3 F3s A3 D4.</desc>
-					      </valItem>
-					      <valItem ident="guitar.open.G">
-					         <desc xml:lang="en">Open G tuning for guitars. D2 G2 D2 G2 B3 D4.</desc>
-					      </valItem>
-					      <valItem ident="guitar.open.A">
-					         <desc xml:lang="en">Open A tuning for guitars. E2 A2 E3 A3 C4s E4.</desc>
-					      </valItem>
-					      <valItem ident="lute.renaissance.6">
-					         <desc xml:lang="en">Renaissance tuning for lutes with 10 strings on 6 courses. G2G3 C3C4 F3F4 A4A4 D4 G4.</desc>
-					      </valItem>
-					      <valItem ident="lute.baroque.d.major">
-					         <desc xml:lang="en">Baroque tuning for lutes with 6 stable courses, and additional bass courses tuned to the key of D Major.</desc>
-					      </valItem>
-					   	<valItem ident="lute.baroque.d.minor">
-					   		<desc xml:lang="en">Baroque tuning for lutes with 6 stable courses, and additional bass courses tuned to the key of D minor.</desc>
-					   	</valItem>
-					   </valList>
+						<valList type="semi">
+							<valItem ident="guitar.standard">
+								<desc xml:lang="en">Standard tuning for current guitars. The courses are tuned to E2 A2 D3 G3 B3 E4.</desc>
+							</valItem>
+							<valItem ident="guitar.drop.D">
+								<desc xml:lang="en">Drop D tuning for guitars. The lowest course is tuned down to D, while all other courses are kept to their regular pitches. D2 A2 D3 G3 B3 E4.</desc>
+							</valItem>
+							<valItem ident="guitar.open.D">
+								<desc xml:lang="en">Open D tuning for guitars. D2 A2 D3 F3s A3 D4.</desc>
+							</valItem>
+							<valItem ident="guitar.open.G">
+								<desc xml:lang="en">Open G tuning for guitars. D2 G2 D2 G2 B3 D4.</desc>
+							</valItem>
+							<valItem ident="guitar.open.A">
+								<desc xml:lang="en">Open A tuning for guitars. E2 A2 E3 A3 C4s E4.</desc>
+							</valItem>
+							<valItem ident="lute.renaissance.6">
+								<desc xml:lang="en">Renaissance tuning for lutes with 10 strings on 6 courses. G2G3 C3C4 F3F4 A4A4 D4 G4.</desc>
+							</valItem>
+							<valItem ident="lute.baroque.d.major">
+								<desc xml:lang="en">Baroque tuning for lutes with 6 stable courses, and additional bass courses tuned to the key of D Major.</desc>
+							</valItem>
+							<valItem ident="lute.baroque.d.minor">
+								<desc xml:lang="en">Baroque tuning for lutes with 6 stable courses, and additional bass courses tuned to the key of D minor.</desc>
+							</valItem>
+						</valList>
 					</content>
 				</dataSpec>
 				<dataSpec ident="data.NOTATIONTYPE" module="MEI" mode="replace">
@@ -552,7 +582,7 @@
 						</valList>
 					</content>
 				</dataSpec>
-				
+
 				<classSpec ident="att.note.ges.tab" module="MEI.frettab" type="atts" mode="add">
 					<attList>
 						<attDef ident="tab.course" usage="opt" mode="add">
