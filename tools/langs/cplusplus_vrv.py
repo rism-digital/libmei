@@ -507,7 +507,7 @@ def vrv_getatttype(schema, module, gp, aname, includes_dir: str = ""):
         return (vrv_getformattedtype("{0}".format(ref[0])), "")
     # Finally from val lists
     vl = definition[0].find("tei:valList[@type=\"closed\"]", namespaces=TEI_RNG_NS)
-    if vl:
+    if vl is not None:
         element = vl.xpath("./ancestor::tei:classSpec", namespaces=TEI_RNG_NS)
         attName = vl.xpath("./parent::tei:attDef/@ident",
                            namespaces=TEI_RNG_NS)
