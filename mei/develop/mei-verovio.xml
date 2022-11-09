@@ -150,9 +150,9 @@
 					<classes>
 						<memberOf key="att.common"/>
 						<memberOf key="att.dimensions"/>
-						<!--<memberOf key="att.pageRef"/>-->
 						<memberOf key="att.facsimile"/>
 						<memberOf key="att.margins"/>
+						<!--<memberOf key="att.pageRef"/>-->
 						<memberOf key="model.pageLike"/>
 					</classes>
 					<content>
@@ -464,27 +464,31 @@
 					<desc xml:lang="en">Attribute that define margins of a page.</desc>
 					<attList org="group">
 						<attDef ident="topmar" usage="opt">
-							<desc>Indicates the amount of whitespace at the top of a page.</desc>
+							<gloss xml:lang="en">top margin</gloss>
+							<desc xml:lang="en">Indicates the amount of whitespace at the top of a page.</desc>
 							<datatype maxOccurs="1" minOccurs="1">
-								<rng:ref name="data.MEASUREMENTABS"/>
+								<dataRef key="data.MEASUREMENTUNSIGNED"/>
 							</datatype>
 						</attDef>
 						<attDef ident="botmar" usage="opt">
-							<desc>Indicates the amount of whitespace at the bottom of a page.</desc>
+							<gloss xml:lang="en">bottom margin</gloss>
+							<desc xml:lang="en">Indicates the amount of whitespace at the bottom of a page.</desc>
 							<datatype maxOccurs="1" minOccurs="1">
-								<rng:ref name="data.MEASUREMENTABS"/>
+								<dataRef key="data.MEASUREMENTUNSIGNED"/>
 							</datatype>
 						</attDef>
 						<attDef ident="leftmar" usage="opt">
-							<desc>Indicates the amount of whitespace at the left side of a page.</desc>
+							<gloss xml:lang="en">left margin</gloss>
+							<desc xml:lang="en">Indicates the amount of whitespace at the left side of a page.</desc>
 							<datatype maxOccurs="1" minOccurs="1">
-								<rng:ref name="data.MEASUREMENTABS"/>
+								<dataRef key="data.MEASUREMENTUNSIGNED"/>
 							</datatype>
 						</attDef>
 						<attDef ident="rightmar" usage="opt">
-							<desc>Indicates the amount of whitespace at the right side of a page.</desc>
+							<gloss xml:lang="en">right margin</gloss>
+							<desc xml:lang="en">Indicates the amount of whitespace at the right side of a page.</desc>
 							<datatype maxOccurs="1" minOccurs="1">
-								<rng:ref name="data.MEASUREMENTABS"/>
+								<dataRef key="data.MEASUREMENTUNSIGNED"/>
 							</datatype>
 						</attDef>
 					</attList>

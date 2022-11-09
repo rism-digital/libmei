@@ -19,23 +19,26 @@
 			</sourceDesc>
 		</fileDesc>
 		<revisionDesc>
-			<change n="5" when="2022-10-26">
-				<desc xml:lang="en">Moved to PureODD</desc>
+			<change n="5" when="2022-11-08" resp="#KR">
+				<desc xml:lang="en">Added att.margins.</desc>
+			</change>
+			<change n="5" when="2022-10-26" resp="#KR">
+				<desc xml:lang="en">Moved to PureODD.</desc>
 			</change>
 			<change n="4" when="2022-07-15">
-				<desc xml:lang="en">Add all supported versions of MEI</desc>
+				<desc xml:lang="en">Add all supported versions of MEI.</desc>
 			</change>
 			<change n="4" when="2021-03-30">
-				<desc xml:lang="en">Include tablature preliminary proposal</desc>
+				<desc xml:lang="en">Include tablature preliminary proposal.</desc>
 			</change>
 			<change n="3" when="2013-11-08">
-				<desc xml:lang="en">Changing to /measure/staff organisation; adding /pages container in /mdiv; adding /page@position; changing scb to secb; </desc>
+				<desc xml:lang="en">Changing to /measure/staff organisation; adding /pages container in /mdiv; adding /page@position; changing scb to secb.</desc>
 			</change>
 			<change n="2" when="2013-09-08">
-				<desc xml:lang="en">Adding /staff/measure organisation and other fixes</desc>
+				<desc xml:lang="en">Adding /staff/measure organisation and other fixes.</desc>
 			</change>
 			<change n="2" when="2013-09-02">
-				<desc xml:lang="en">Fixing naming according to MEI convention and other small fixes</desc>
+				<desc xml:lang="en">Fixing naming according to MEI convention and other small fixes.</desc>
 			</change>
 			<change n="1" when="2013-08-29">
 				<desc xml:lang="en">Initial setup of the customization.</desc>
@@ -13224,34 +13227,34 @@
       </attDef>
     </attList>
   </classSpec><classSpec ident="att.meiVersion" module="MEI.shared" type="atts" mode="replace">
-                    <desc xml:lang="en">Attributes that record the version of MEI supported.</desc>
-                    <attList>
-                        <attDef ident="meiversion" usage="req">
-                            <desc xml:lang="en">Specifies a generic MEI version label.</desc>
+					<desc xml:lang="en">Attributes that record the version of MEI supported.</desc>
+					<attList>
+						<attDef ident="meiversion" usage="req">
+							<desc xml:lang="en">Specifies a generic MEI version label.</desc>
 							<defaultVal>5.0.0-dev</defaultVal>
 							<valList type="closed">
-							  <valItem ident="2013">
-								<desc xml:lang="en">MEI 2013</desc>
-							  </valItem>
-							  <valItem ident="3.0.0">
-								<desc xml:lang="en">MEI 3.0.0</desc>
-							  </valItem>
-							  <valItem ident="4.0.0">
-								<desc xml:lang="en">MEI 4.0.0</desc>
-							  </valItem>
-							  <valItem ident="4.0.1">
-								<desc xml:lang="en">MEI 4.0.1</desc>
-							  </valItem>
-							  <valItem ident="5.0.0-dev+basic">
-								<desc xml:lang="en">MEI basic</desc>
-							  </valItem>
-							  <valItem ident="5.0.0-dev">
-								<desc xml:lang="en">Development version of MEI 5.0.0</desc>
-							  </valItem>
+								<valItem ident="2013">
+									<desc xml:lang="en">MEI 2013</desc>
+								</valItem>
+								<valItem ident="3.0.0">
+									<desc xml:lang="en">MEI 3.0.0</desc>
+								</valItem>
+								<valItem ident="4.0.0">
+									<desc xml:lang="en">MEI 4.0.0</desc>
+								</valItem>
+								<valItem ident="4.0.1">
+									<desc xml:lang="en">MEI 4.0.1</desc>
+								</valItem>
+								<valItem ident="5.0.0-dev+basic">
+									<desc xml:lang="en">MEI basic</desc>
+								</valItem>
+								<valItem ident="5.0.0-dev">
+									<desc xml:lang="en">Development version of MEI 5.0.0</desc>
+								</valItem>
 							</valList>
 						</attDef>
-                    </attList>
-                </classSpec><classSpec rend="add" ident="att.mensur.log" module="MEI.shared" type="atts">
+					</attList>
+				</classSpec><classSpec rend="add" ident="att.mensur.log" module="MEI.shared" type="atts">
     <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">Logical domain attributes.</desc>
     <classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <memberOf key="att.duration.ratio"/>
@@ -20086,11 +20089,11 @@
 					</content></elementSpec><classSpec rend="add" predeclare="true" ident="model.pageLike" type="model" module="MEI.pageBased" mode="add">
 					<desc xml:lang="en">Collects pageLike elements.</desc>
 				</classSpec><elementSpec rend="add" ident="page" module="MEI.pageBased" mode="add"><desc xml:lang="en">A page in a page-base encoding</desc><classes>
-						
 						<memberOf key="att.common"/>
+						<memberOf key="att.dimensions"/>
 						<memberOf key="att.facsimile"/>
+						<memberOf key="att.margins"/>
 						
-						<memberOf key="att.pages"/>
 						<memberOf key="model.pageLike"/>
 					</classes><content>
 						<zeroOrMore xmlns="http://relaxng.org/ns/structure/1.0"><choice><ref name="model.systemLike"/><ref name="model.milestoneLike"/><ref name="model.secbLike"/><ref name="model.mdivbLike"/><ref name="model.scoreLike"/><ref name="model.partsLike"/></choice></zeroOrMore>
@@ -20161,7 +20164,7 @@
 					</content><constraintSpec ident="check_milestoneEnd" scheme="isoschematron">
 						<constraint>
 							<sch:rule context="mei:milestoneEnd">
-								<sch:assert role="error" test="exists(@startid)">milestoneEnd needs a @startid attribute.</sch:assert>                                                                
+								<sch:assert role="error" test="exists(@startid)">milestoneEnd needs a @startid attribute.</sch:assert>
 							</sch:rule>
 						</constraint>
 					</constraintSpec><remarks>
@@ -20208,6 +20211,38 @@
 						<memberOf key="att.coord.x1"/>
 						<memberOf key="att.coord.x2"/>
 					</classes>
+				</classSpec><classSpec rend="add" ident="att.margins" module="MEI.pageBased" type="atts" mode="add">
+					<desc xml:lang="en">Attribute that define margins of a page.</desc>
+					<attList org="group">
+						<attDef ident="topmar" usage="opt">
+							<gloss xml:lang="en">top margin</gloss>
+							<desc xml:lang="en">Indicates the amount of whitespace at the top of a page.</desc>
+							<datatype maxOccurs="1" minOccurs="1">
+								<dataRef key="data.MEASUREMENTUNSIGNED"/>
+							</datatype>
+						</attDef>
+						<attDef ident="botmar" usage="opt">
+							<gloss xml:lang="en">bottom margin</gloss>
+							<desc xml:lang="en">Indicates the amount of whitespace at the bottom of a page.</desc>
+							<datatype maxOccurs="1" minOccurs="1">
+								<dataRef key="data.MEASUREMENTUNSIGNED"/>
+							</datatype>
+						</attDef>
+						<attDef ident="leftmar" usage="opt">
+							<gloss xml:lang="en">left margin</gloss>
+							<desc xml:lang="en">Indicates the amount of whitespace at the left side of a page.</desc>
+							<datatype maxOccurs="1" minOccurs="1">
+								<dataRef key="data.MEASUREMENTUNSIGNED"/>
+							</datatype>
+						</attDef>
+						<attDef ident="rightmar" usage="opt">
+							<gloss xml:lang="en">right margin</gloss>
+							<desc xml:lang="en">Indicates the amount of whitespace at the right side of a page.</desc>
+							<datatype maxOccurs="1" minOccurs="1">
+								<dataRef key="data.MEASUREMENTUNSIGNED"/>
+							</datatype>
+						</attDef>
+					</attList>
 				</classSpec><moduleSpec ident="MEI.frettab" mode="add">
 					<desc/>
 				</moduleSpec><dataSpec rend="add" ident="data.COURSENUMBER" module="MEI.frettab" mode="add">
@@ -20218,32 +20253,32 @@
 				</dataSpec><dataSpec rend="add" ident="data.COURSETUNING" module="MEI.frettab">
 					<desc xml:lang="en">Standard course tunings.</desc>
 					<content>
-					   <valList type="semi">
-					      <valItem ident="guitar.standard">
-					         <desc xml:lang="en">Standard tuning for current guitars. The courses are tuned to E2 A2 D3 G3 B3 E4.</desc>
-					      </valItem>
-					      <valItem ident="guitar.drop.D">
-					         <desc xml:lang="en">Drop D tuning for guitars. The lowest course is tuned down to D, while all other courses are kept to their regular pitches. D2 A2 D3 G3 B3 E4.</desc>
-					      </valItem>
-					      <valItem ident="guitar.open.D">
-					         <desc xml:lang="en">Open D tuning for guitars. D2 A2 D3 F3s A3 D4.</desc>
-					      </valItem>
-					      <valItem ident="guitar.open.G">
-					         <desc xml:lang="en">Open G tuning for guitars. D2 G2 D2 G2 B3 D4.</desc>
-					      </valItem>
-					      <valItem ident="guitar.open.A">
-					         <desc xml:lang="en">Open A tuning for guitars. E2 A2 E3 A3 C4s E4.</desc>
-					      </valItem>
-					      <valItem ident="lute.renaissance.6">
-					         <desc xml:lang="en">Renaissance tuning for lutes with 10 strings on 6 courses. G2G3 C3C4 F3F4 A4A4 D4 G4.</desc>
-					      </valItem>
-					      <valItem ident="lute.baroque.d.major">
-					         <desc xml:lang="en">Baroque tuning for lutes with 6 stable courses, and additional bass courses tuned to the key of D Major.</desc>
-					      </valItem>
-					   	<valItem ident="lute.baroque.d.minor">
-					   		<desc xml:lang="en">Baroque tuning for lutes with 6 stable courses, and additional bass courses tuned to the key of D minor.</desc>
-					   	</valItem>
-					   </valList>
+						<valList type="semi">
+							<valItem ident="guitar.standard">
+								<desc xml:lang="en">Standard tuning for current guitars. The courses are tuned to E2 A2 D3 G3 B3 E4.</desc>
+							</valItem>
+							<valItem ident="guitar.drop.D">
+								<desc xml:lang="en">Drop D tuning for guitars. The lowest course is tuned down to D, while all other courses are kept to their regular pitches. D2 A2 D3 G3 B3 E4.</desc>
+							</valItem>
+							<valItem ident="guitar.open.D">
+								<desc xml:lang="en">Open D tuning for guitars. D2 A2 D3 F3s A3 D4.</desc>
+							</valItem>
+							<valItem ident="guitar.open.G">
+								<desc xml:lang="en">Open G tuning for guitars. D2 G2 D2 G2 B3 D4.</desc>
+							</valItem>
+							<valItem ident="guitar.open.A">
+								<desc xml:lang="en">Open A tuning for guitars. E2 A2 E3 A3 C4s E4.</desc>
+							</valItem>
+							<valItem ident="lute.renaissance.6">
+								<desc xml:lang="en">Renaissance tuning for lutes with 10 strings on 6 courses. G2G3 C3C4 F3F4 A4A4 D4 G4.</desc>
+							</valItem>
+							<valItem ident="lute.baroque.d.major">
+								<desc xml:lang="en">Baroque tuning for lutes with 6 stable courses, and additional bass courses tuned to the key of D Major.</desc>
+							</valItem>
+							<valItem ident="lute.baroque.d.minor">
+								<desc xml:lang="en">Baroque tuning for lutes with 6 stable courses, and additional bass courses tuned to the key of D minor.</desc>
+							</valItem>
+						</valList>
 					</content>
 				</dataSpec><classSpec rend="add" ident="att.note.ges.tab" module="MEI.frettab" type="atts" mode="add">
 					<attList>
