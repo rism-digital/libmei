@@ -84,7 +84,7 @@ ENUM_GRP_END = """    ATT_CLASS_max
 """
 
 #
-# These templates the type definintions
+# These templates generate the type definitions
 #
 
 TYPE_GRP_START = """
@@ -212,7 +212,7 @@ CONVERTER_IMPL_TEMPLATE_END = """
 
 
 #
-# These templates generate a module level static method for setting attribute on an unspcified Object
+# These templates generate a module level static method for setting attribute on an unspecified Object
 #
 
 SETTERS_IMPL_TEMPLATE_START = """bool Att::Set{moduleNameCap}(Object *element, const std::string &attrType, const std::string &attrValue)
@@ -240,7 +240,7 @@ SETTERS_IMPL_TEMPLATE_END = """
 """
 
 #
-# These templates generate a module level static method for getting attributes of an unspcified Object
+# These templates generate a module level static method for getting attributes of an unspecified Object
 #
 
 GETTERS_IMPL_TEMPLATE_START = """void Att::Get{moduleNameCap}(const Object *element, ArrayOfStrAttr *attributes)
@@ -507,7 +507,7 @@ def vrv_getatttype(schema, module, gp, aname, includes_dir: str = ""):
         return (vrv_getformattedtype("{0}".format(ref[0])), "")
     # Finally from val lists
     vl = definition[0].find("tei:valList[@type=\"closed\"]", namespaces=TEI_RNG_NS)
-    if vl:
+    if vl is not None:
         element = vl.xpath("./ancestor::tei:classSpec", namespaces=TEI_RNG_NS)
         attName = vl.xpath("./parent::tei:attDef/@ident",
                            namespaces=TEI_RNG_NS)
