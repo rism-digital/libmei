@@ -184,7 +184,7 @@ modules:
                 default: 0
 
     gestural:
-        att.articulation.gestural:
+        att.articulation.ges:
             artic.ges:
                 type: data_ARTICULATION_List
 
@@ -234,7 +234,7 @@ modules:
             stem.len:
                 type: double
                 default: -1.0
-        att.timestamp.logical:
+        att.timestamp.log:
             tstamp:
                 default: -1.0
 
