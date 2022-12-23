@@ -403,7 +403,7 @@
           <desc xml:lang="en">Dotted line (SMuFL E037).</desc>
         </valItem>
         <valItem ident="dbl">
-          <desc xml:lang="en">Double barline (SMuFL E031 and Unicode 1D101).</desc>
+          <desc xml:lang="en">Double bar line (SMuFL E031 and Unicode 1D101).</desc>
         </valItem>
         <valItem ident="dbldashed">
           <desc xml:lang="en">Double dashed line.</desc>
@@ -412,16 +412,16 @@
           <desc xml:lang="en">Double dotted line.</desc>
         </valItem>
         <valItem ident="dblheavy">
-          <desc xml:lang="en">Heavy double barline (SMuFL E035).</desc>
+          <desc xml:lang="en">Heavy double bar line (SMuFL E035).</desc>
         </valItem> 
         <valItem ident="dblsegno">
           <desc xml:lang="en">Segno serpent with vertical lines (SMuFL E04B).</desc>
         </valItem> 
         <valItem ident="end">
-          <desc xml:lang="en">End barline (SMuFL E032 and Unicode 1D102).</desc>
+          <desc xml:lang="en">End bar line (SMuFL E032 and Unicode 1D102).</desc>
         </valItem>
         <valItem ident="heavy">
-          <desc xml:lang="en">Heavy barline (SMuFL E034).</desc>
+          <desc xml:lang="en">Heavy bar line (SMuFL E034).</desc>
         </valItem> 
         <valItem ident="invis">
           <desc xml:lang="en">Bar line not rendered.</desc>
@@ -439,7 +439,7 @@
           <desc xml:lang="en">Segno serpent.</desc>
         </valItem>
         <valItem ident="single">
-          <desc xml:lang="en">Single barline (SMuFL E030 and Unicode 1D100).</desc>
+          <desc xml:lang="en">Single bar line (SMuFL E030 and Unicode 1D100).</desc>
         </valItem>
       </valList>
     </content>
@@ -1685,12 +1685,12 @@
     </content>
   </macroSpec><macroSpec rend="add" ident="data.MEASUREBEAT" module="MEI" type="dt">
     <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">A count of measures plus a beat location, <abbr>i.e.</abbr>, [0-9]+m *\+ *[0-9]+(\.?[0-9]*)?. The
-      measure count is the number of barlines crossed by the event, while the beat location is a
+      measure count is the number of bar lines crossed by the event, while the beat location is a
       timestamp expressed as a beat with an optional fractional part. For example, "1m+3.5"
       indicates a point in the next measure on the second half of beat 3. The measure number must be
       in the range of 0 to the number of remaining measures, while the beat number must be in the
       range from 0 to the numerator of the time signature plus 1. For example, in 6/8 the beat
-      number must be within the range from 0 (the left barline) to 7 (the right barline). A value
+      number must be within the range from 0 (the left bar line) to 7 (the right bar line). A value
       with a measure number of "0", such as "0m+2", indicates a point within the current
       measure.</desc>
     <content xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
@@ -1700,14 +1700,14 @@
     </content>
   </macroSpec><macroSpec rend="add" ident="data.MEASUREBEATOFFSET" module="MEI" type="dt">
     <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">A count of measures plus a beat location, <abbr>i.e.</abbr>, (\+|-)?[0-9]+m\+[0-9]+(\.?[0-9]*)?. The
-      measure count is the number of barlines crossed by the event, while the beat location is a
+      measure count is the number of bar lines crossed by the event, while the beat location is a
       timestamp expressed as a beat with an optional fractional part. The measure number must be in
       the range of preceding measures to the number of remaining measures. A value with a positive
       measure number, such as "1m+3", indicates a point in the following measure, while a value with
       a negative measure number, such as "-1m+3", marks a point in the preceding measure. The beat
       number must be in the range from 0 to the numerator of the time signature plus 1. For example,
-      in 6/8 the beat number must be within the range from 0 (the left barline) to 7 (the right
-      barline). A value with a measure number of "0", such as "0m+2", indicates a point within the
+      in 6/8 the beat number must be within the range from 0 (the left bar line) to 7 (the right
+      bar line). A value with a measure number of "0", such as "0m+2", indicates a point within the
       current measure.</desc>
     <content xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <rng:data type="token">
@@ -6481,7 +6481,7 @@
       <p>The model of this element is based on the <ref target="https://tei-c.org/release/doc/tei-p5-doc/en/html/ref-handShift.html">handShift</ref> element of the Text Encoding Initiative (TEI).</p>
     </remarks></elementSpec><elementSpec rend="add" ident="metaMark" module="MEI.edittrans"><desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">A graphical or textual statement with additional / explanatory information about the
       musical text. The textual consequences of this intervention are encoded independently via
-      other means; that is, with elements such as &lt;add&gt;, &lt;del&gt;, etc.</desc><classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
+      other means; that is, with elements such as <gi scheme="MEI">add</gi>, <gi scheme="MEI">del</gi>, etc.</desc><classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <memberOf key="att.common"/>
       <memberOf key="att.facsimile"/>
       <memberOf key="att.lang"/>
@@ -6753,9 +6753,9 @@
     <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">Attributes that associate a feature corresponding with all or part of an image.</desc>
     <attList xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <attDef ident="facs" usage="opt">
-        <desc xml:lang="en">Permits the current element to reference a facsimile surface or image zone which
-          corresponds to it.</desc>
-        <datatype maxOccurs="unbounded">
+        <gloss versionDate="2022-10-18" xml:lang="en">facsimile</gloss>
+        <desc versionDate="2022-10-18" xml:lang="en">Points to one or more images, portions of an image, or surfaces which correspond to the current element.</desc>
+        <datatype minOccurs="1" maxOccurs="unbounded">
           <ref xmlns="http://relaxng.org/ns/structure/1.0" name="data.URI"/>
         </datatype>
         <constraintSpec ident="check_facsTarget" scheme="isoschematron">
@@ -6807,7 +6807,7 @@
         occurring on this surface.</p>
     </remarks><remarks xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">
       <p>The model of this element is based on the <ref target="https://tei-c.org/release/doc/tei-p5-doc/en/html/ref-surface.html">surface</ref> element of the Text Encoding Initiative (TEI).</p>
-    </remarks></elementSpec><elementSpec rend="add" ident="zone" module="MEI.facsimile"><desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">Defines an area of interest within a surface or graphic file.</desc><classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
+    </remarks></elementSpec><elementSpec rend="add" ident="zone" module="MEI.facsimile"><desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">Defines an area of interest within a <gi scheme="MEI">surface</gi> or graphic file.</desc><classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <memberOf key="att.common"/>
       <memberOf key="att.coordinated"/>
       <memberOf key="att.dataPointing"/>
@@ -8218,6 +8218,60 @@
         </datatype>
       </attDef>
     </attList>
+  </classSpec><classSpec rend="add" ident="att.perfRes" module="MEI.header" type="atts">
+    <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">Attributes that define the characteristics and components of the performance resource.</desc>
+    <classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
+      <memberOf key="att.perfRes.basic"/>
+      <memberOf key="att.transposition"/>
+    </classes>
+    <attList xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
+      <attDef ident="solo" usage="opt">
+        <desc xml:lang="en">Use this attribute to identify the performance resource as a soloist especially in an accompanied work, such as a concerto or vocal solo.</desc>
+        <datatype>
+          <ref xmlns="http://relaxng.org/ns/structure/1.0" name="data.BOOLEAN"/>
+        </datatype>
+      </attDef>
+    </attList>
+  </classSpec><classSpec rend="add" ident="att.perfRes.basic" module="MEI.header" type="atts">
+    <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">Attributes that define the characteristics and components of the performance resource or a performance resource list.</desc>
+    <classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
+      <memberOf key="att.adlibitum"/>
+    </classes>
+    <attList xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
+      <attDef ident="count" usage="opt">
+        <desc xml:lang="en">Indicates the number of performers.</desc>
+        <datatype>
+          <rng:data type="positiveInteger"/>
+        </datatype>
+      </attDef>
+    </attList>
+  </classSpec><classSpec rend="add" ident="att.adlibitum" module="MEI.header" type="atts">
+    <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">Attributes that describe a performance resource as ad libitum (optional).</desc>
+    <attList xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
+      <attDef ident="adlib" usage="opt">
+        <desc xml:lang="en">Marks a performance resource as ad libitum (optional).</desc>
+        <datatype>
+          <ref xmlns="http://relaxng.org/ns/structure/1.0" name="data.BOOLEAN"/>
+        </datatype>
+      </attDef>
+    </attList>
+    <remarks xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">
+      <p>The technical term “ad libitum” has several meanings depending on the context in which it occurs:</p>
+      <p>
+        <list type="gloss">
+          <head>Meanings of ad libitum</head>
+          <label>1</label>
+          <item>indicates an optional performance resource (instrumental or vocal part or group),</item>
+          <label>2</label>
+          <item>marks a passage to be played freely or free in time,</item>
+          <label>3</label>
+          <item>requests or invites to improvise a passage of music,</item>
+          <label>4</label>
+          <item>indicates that the number repetitions can be set individually or spontaneously.</item>
+        </list>
+      </p>
+      <p>Currently only the use within a performance resource (case 1) is supported.</p>
+    </remarks>
   </classSpec><classSpec rend="add" ident="att.recordType" type="atts" module="MEI.header">
     <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">Attributes that define the characteristics and components of the bibliographic
       description.</desc>
@@ -9331,34 +9385,24 @@
       <memberOf key="att.bibl"/>
       <memberOf key="att.edit"/>
       <memberOf key="att.lang"/>
+      <memberOf key="att.perfRes"/>
     </classes><content xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <zeroOrMore xmlns="http://relaxng.org/ns/structure/1.0"><choice><rng:text xmlns="http://www.tei-c.org/ns/1.0"/><ref name="model.textPhraseLike.limited"/><ref name="perfRes"/></choice></zeroOrMore>
-    </content><attList><attDef xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" ident="count" usage="opt">
-        <desc xml:lang="en">Indicates the number of performers.</desc>
-        <datatype>
-          <rng:data type="positiveInteger"/>
-        </datatype>
-      </attDef><attDef xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" ident="solo" usage="opt">
-        <desc xml:lang="en">Marks this instrument or vocal part as a soloist. Do not use this attribute for a solo
-          instrument which is not accompanied.</desc>
-        <datatype>
-          <ref xmlns="http://relaxng.org/ns/structure/1.0" name="data.BOOLEAN"/>
-        </datatype>
-      </attDef></attList></elementSpec><elementSpec rend="add" ident="perfResList" module="MEI.header"><desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">Several instrumental or vocal resources treated as a group.</desc><classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
+    </content><remarks xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">
+      <p>In the context of a performance resource the attribute <att>adlib</att> marks a resource as optional.</p>
+    </remarks><remarks xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">
+      <p>To indicate the tuning of an instrument, the attribute <att>trans.diat</att> can be used.</p>
+    </remarks></elementSpec><elementSpec rend="add" ident="perfResList" module="MEI.header"><desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">Several instrumental or vocal resources treated as a group.</desc><classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <memberOf key="att.common"/>
       <memberOf key="att.authorized"/>
       <memberOf key="att.bibl"/>
       <memberOf key="att.edit"/>
       <memberOf key="att.lang"/>
+      <memberOf key="att.perfRes.basic"/>
     </classes><content xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <zeroOrMore xmlns="http://relaxng.org/ns/structure/1.0"><ref name="model.headLike"/></zeroOrMore>
       <zeroOrMore xmlns="http://relaxng.org/ns/structure/1.0"><choice><ref name="annot"/><ref name="perfRes"/><ref name="perfResList"/></choice></zeroOrMore>
-    </content><attList><attDef xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" ident="count" usage="opt">
-        <desc xml:lang="en">Indicates the number of performers.</desc>
-        <datatype>
-          <rng:data type="positiveInteger"/>
-        </datatype>
-      </attDef></attList><remarks xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">
+    </content><remarks xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">
       <p>The function of instrumentalists or vocalists is represented by the choice of <gi scheme="MEI">perfRes</gi> and <gi scheme="MEI">perfResList</gi> child elements. Arrangements
         are coded for the medium of the work being described, not for the original medium.</p>
     </remarks></elementSpec><elementSpec rend="add" ident="physDesc" module="MEI.header"><gloss xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2022-05-18" xml:lang="en">physical description</gloss><desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">Container for information about the appearance, construction, or
@@ -11849,7 +11893,7 @@
     <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">Attributes that capture the placement of bar lines.</desc>
     <attList xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <attDef ident="bar.len" usage="opt">
-        <desc xml:lang="en">States the length of barlines in virtual units. The value must be greater than 0 and
+        <desc xml:lang="en">States the length of bar lines in virtual units. The value must be greater than 0 and
           is typically equal to 2 times (the number of staff lines - 1); <abbr>e.g.</abbr>, a value of <val>8</val> for a
           5-line staff.</desc>
         <datatype>
@@ -13295,7 +13339,7 @@
         <desc xml:lang="en">Indicates whether or not a bar line is "controlling"; that is, if it indicates a point
           of alignment across all the parts. Bar lines within a score are usually controlling; that
           is, they "line up". Bar lines within parts may or may not be controlling. When applied to
-          <gi scheme="MEI">measure</gi>, this attribute indicates the nature of the right barline
+          <gi scheme="MEI">measure</gi>, this attribute indicates the nature of the right bar line
           but not the left.</desc>
         <datatype>
           <ref xmlns="http://relaxng.org/ns/structure/1.0" name="data.BOOLEAN"/>
@@ -15034,7 +15078,7 @@
     </attList>
     <remarks xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">
       <p>The width attribute may be used to capture measure width data for interchange with music
-        printing systems that utilize this information for printing. On &lt;barLine&gt; the width
+        printing systems that utilize this information for printing. On <gi scheme="MEI">barLine</gi> the width
         attribute captures the width of the preceding measure.</p>
     </remarks>
   </classSpec><classSpec rend="add" ident="att.xy" module="MEI.shared" type="atts"><desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">Output coordinate attributes. Some elements may have their exact rendered *output*
@@ -15536,7 +15580,7 @@
       <p>This element is provided for repertoires, such as mensural notation, that lack measures.
         Because the <gi scheme="MEI">barLine</gi> element’s attributes, from which the logical and
         visual characteristics of the bar line can be discerned, largely duplicate those of measure,
-        the use of barLine is not necessary within <gi scheme="MEI">measure</gi> elements in
+        the use of <gi scheme="MEI">barLine</gi> is not necessary within <gi scheme="MEI">measure</gi> elements in
         CMN.</p>
     </remarks></elementSpec><elementSpec rend="add" ident="bibl" module="MEI.shared"><gloss xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2022-05-18" xml:lang="en">bibliographic reference</gloss><desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">Provides a loosely-structured bibliographic citation in which
       the sub-components may or may not be explicitly marked.</desc><classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
@@ -17505,7 +17549,6 @@
       "cantabile", "Moderato", "♩=60", "Moderato ♩ =60").</desc><classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <memberOf key="att.common"/>
       <memberOf key="att.bibl"/>
-      <memberOf key="att.extender"/>
       <memberOf key="att.facsimile"/>
       <memberOf key="att.lang"/>
       <memberOf key="att.tempo.log"/>
@@ -18416,7 +18459,7 @@
     </classes>
     <attList xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
       <attDef ident="len" usage="opt">
-        <desc xml:lang="en">States the length of barlines in virtual units. The value must be greater than 0 and
+        <desc xml:lang="en">States the length of bar lines in virtual units. The value must be greater than 0 and
           is typically equal to 2 times (the number of staff lines - 1); <abbr>e.g.</abbr>, a value of <val>8</val> for a
           5-line staff.</desc>
         <datatype>
@@ -19964,6 +20007,7 @@
   </classSpec><classSpec rend="add" ident="att.tempo.vis" module="MEI.visual" type="atts">
     <desc xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">Visual domain attributes.</desc>
     <classes xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
+      <memberOf key="att.extender"/>
       <memberOf key="att.placementRelStaff"/>
       <memberOf key="att.verticalGroup"/>
       <memberOf key="att.visualOffset"/>
