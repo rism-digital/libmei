@@ -1,6 +1,9 @@
 LibMEI
 ------
 
+**Remark:** this repository is no longer used for Verovio developments. The code has been refactored and moved to the Verovio [repository](https://github.com/rism-digital/verovio). 
+
+
 [![Build Status](https://travis-ci.org/DDMAL/libmei.png?branch=master)](https://travis-ci.org/DDMAL/libmei)
 
 LibMEI is a C++ library for reading and writing [MEI](http://music-encoding.org) files
